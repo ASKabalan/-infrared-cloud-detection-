@@ -23,16 +23,20 @@ def generate_mask(filename, a_log = 100000, contrast = 0.9, display = False, ret
     # Compute threshold with Otsu method
     threshold = skimage.filters.threshold_otsu(image_stretch)
     binary_mask = image_stretch > threshold
+    binary_mask = np.array(binary_mask, dtype=np.int16)
     
     if write_to_fits == True:
         
         try:
-            mask_hdu = fits.ImageHDU(binary_mask.astype(int))
+            mask_hdu = fits.ImageHDU(binary_mask)
             fits_file.append(mask_hdu)
             fits_file[1].header['IMGTYPE'] = 'GROUND-TRUTH'
             fits_file.writeto('MASKED_SUBSET/'+Path(filename).name.replace('_flux.fits', '_masked.fits'), overwrite=True)
+            fits_file.close()
+            del fits_file
         except:
-            print(filename)
+            pass
+            #print(filename)
         
     if display == True:
         print("Found automatic threshold t = {}.".format(threshold))
