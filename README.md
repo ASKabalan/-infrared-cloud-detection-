@@ -5,6 +5,9 @@ Two models need to be implemented :
 1. **Classification** : detect if the image contains cloud or not
 2. **Segmentation** : if cloud(s), detect the structure onto the image
 
+***CIRRUS*: Cloud Infrared Recognition & Reconstruction via UNET System**
+
+
 ## Process
 
 ### Classification
