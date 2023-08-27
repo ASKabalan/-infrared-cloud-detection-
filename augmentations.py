@@ -47,3 +47,12 @@ def random_augmentation(image, mask):
     chosen_function = np.random.choice(augmentation_functions)
     augmented_image, augmented_mask = chosen_function(image, mask)
     return augmented_image, augmented_mask
+
+
+def random_augment(img_mask):
+    
+    img , mask = img_mask
+    aug_image, aug_mask = random_augmentation(img,mask)
+    aug_fit = (aug_image, aug_mask)
+
+    return aug_fit
