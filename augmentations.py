@@ -3,7 +3,6 @@ from scipy import ndimage
 
 def zoom(image, mask, zoom_range=(1, 3)):
     zoom_factor = np.random.uniform(*zoom_range)
-    print(zoom_factor)
     new_size = np.round(np.array(image.shape) * zoom_factor).astype(int)
     zoomed_image = ndimage.zoom(image, zoom_factor, order=1)
     zoomed_mask = ndimage.zoom(mask, zoom_factor, order=0)
