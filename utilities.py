@@ -75,6 +75,11 @@ def plot_image_pred(cloud_image, binary_mask, y_pred , predmask_cmap='grayscale'
     plt.show()
 
 
+def rebin(arr, new_shape):
+    shape = (new_shape[0], arr.shape[0] // new_shape[0],
+    new_shape[1], arr.shape[1] // new_shape[1])
+    return arr.reshape(shape).mean(-1).mean(1)
+
 # Copy to another folder
 """
 import os

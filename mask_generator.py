@@ -7,12 +7,14 @@ from mpl_toolkits.axes_grid1 import make_axes_locatable
 from pathlib import Path
 from astropy.io import fits
 
+
 DR = 2**14
-def generate_mask(filename, a_log = 100000, contrast = 0.9, display = False, return_mask = False, write_to_fits = False):
+def generate_mask(filename, bin = (128, 160) , a_log = 100000, contrast = 0.9, display = False, return_mask = False, write_to_fits = False):
     
     fits_file = fits.open(name=filename)
     image = fits_file[0].data
-    
+    image = rebin(image,(bin,bin))
+    fits_file[0].data = image
     # Normalize image by camera internal bit-depth of 14bits
     image_div = image/DR
     image_linearized = np.log((DR/image) - 1)
