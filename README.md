@@ -1,12 +1,13 @@
-# Infrared cloud detection
+# **CIRRUS**: Cloud Infrared Recognition & Reconstruction via UNET System**
 
-Design ML model to detect cloud images and structure on sky infrared images for the StarDICE experiment.
-Two models need to be implemented :
-1. **Classification** : detect if the image contains cloud or not
-2. **Segmentation** : if cloud(s), detect the structure onto the image
+Deep-learning architecture classify and identify cloud structure on sky infrared images. Standard Convolutional Neural Network (CNN) distinguishes clear sky images from cloud images. An UNet-based segmentation model detects cloud structure onto pre-identified cloudy images and outputs a probabilistic map for each pixel.
 
-***CIRRUS*: Cloud Infrared Recognition & Reconstruction via UNET System**
+## Tasks
 
+- Mettre les données sur Renater
+- Implémenter optimisation des hyperparamètres avec Optuna
+- Appliquer ces augmentations sur données synthétiques sans nuages : zoom, flip, rotate, shear AVANT de mettre les bruits
+- Appliquer l'effet de Narcissus
 
 ## Process
 
@@ -20,23 +21,14 @@ Two models need to be implemented :
 5. Split les données en train + test + validation
 6. Entraîner le modèle UNet
 
-## Tasks
-
-- Mettre les données sur Renater
-- Appliquer les augmentations de façon random sur les images
-- Implémenter optimisation des hyperparamètres avec Optuna
-- Enlever les images contenant le "toit"
-
-
 ## Notes
 
-- Réseau UNet
+- UNet segmentation
 - x = image, y = mask (ground truth)
-- optimizer : adaptive moment (ADAM)
-- loss: binary cross-entropy (binary car True ou False)
-- csklearn metrics permet d'avoir le accuracy, recall, etc.
-- union over intersection comme métrique (cf. A. Boucaud) -> voir fonction wassim
-
+- Optimizer : adaptive moment (ADAM)
+- Loss: binary cross-entropy (binary car True ou False)
+- sklearn metrics permet d'avoir le accuracy, recall, etc.
+- union over intersection comme métrique pour le U-Net(cf. A. Boucaud) -> voir fonction wassim
 
 ## References
 
