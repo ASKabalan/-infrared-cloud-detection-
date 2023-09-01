@@ -1,7 +1,7 @@
 # Fdb version 3
-["pdflatex"] 1693487963 "/home/sommer/Documents/IR/CLOUD_DETECTION/infrared-cloud-detection/paper/template.tex" "template.pdf" "template" 1693487964
+["pdflatex"] 1693587381 "/home/sommer/Documents/IR/CLOUD_DETECTION/infrared-cloud-detection/paper/template.tex" "template.pdf" "template" 1693587382
   "/etc/texmf/web2c/texmf.cnf" 1673281250 475 c0e671620eb5563b2130f56340a5fde8 ""
-  "/home/sommer/Documents/IR/CLOUD_DETECTION/infrared-cloud-detection/paper/template.tex" 1693487962 53211 8231b65244dd05684a56db55dc1bfa51 ""
+  "/home/sommer/Documents/IR/CLOUD_DETECTION/infrared-cloud-detection/paper/template.tex" 1693587379 53230 80848eee893a70712884311d33874501 ""
   "/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc" 1165713224 4850 80dc9bab7f31fb78a000ccfed0e27cab ""
   "/usr/share/texlive/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/adobe/palatino/pplb7t.tfm" 1136768653 1616 371d1ee60c04b008c8fd760060cd34f1 ""
@@ -268,9 +268,9 @@
   "figures/FLOWCHARTS_DL_IR.pdf" 1693400993 385286 2a37b5f58d56194bc7117172a2d549f3 ""
   "figures/calibrated_sky_image.jpg" 1680509176 134319 6a841e8b4271d4c03dbc5638031e66f1 ""
   "figures/infrared_instrument.jpg" 1686064421 2275749 4ab6381c420491f4a6f4dfbcc51422b9 ""
-  "template.aux" 1693487964 10451 96808fb5582e13592c2e7bd24115e1a3 "pdflatex"
-  "template.out" 1693487964 3479 e496e005642997a8dc1a10e379b1ac2a "pdflatex"
-  "template.tex" 1693487962 53211 8231b65244dd05684a56db55dc1bfa51 ""
+  "template.aux" 1693587382 10470 e1ce19a4a04daf143fd43b857768f512 "pdflatex"
+  "template.out" 1693587382 3580 0796e1e9d10746fa693eaea8598406c2 "pdflatex"
+  "template.tex" 1693587379 53230 80848eee893a70712884311d33874501 ""
   (generated)
   "template.aux"
   "template.log"

@@ -9,11 +9,11 @@ from astropy.io import fits
 
 
 DR = 2**14
-def generate_mask(filename, bin = (128, 160) , a_log = 100000, contrast = 0.9, display = False, return_mask = False, write_to_fits = False):
+def generate_mask(filename, bin_size = (128, 160) , a_log = 100000, contrast = 0.9, display = False, return_mask = False, write_to_fits = False):
     
     fits_file = fits.open(name=filename)
     image = fits_file[0].data
-    image = rebin(image,(bin,bin))
+    image = rebin(image, bin_size)
     fits_file[0].data = image
     # Normalize image by camera internal bit-depth of 14bits
     image_div = image/DR
@@ -23,9 +23,10 @@ def generate_mask(filename, bin = (128, 160) , a_log = 100000, contrast = 0.9, d
     image_stretch = stretch(image_div)
     
     # Compute threshold with Otsu method
+    # https://datacarpentry.org/image-processing/07-thresholding.html
     threshold = skimage.filters.threshold_otsu(image_stretch)
     binary_mask = image_stretch > threshold
-    binary_mask = np.array(binary_mask, dtype=np.int16)
+    binary_mask = np.array(binary_mask, dtype=np.int8)
     
     if write_to_fits == True:
         
@@ -66,8 +67,6 @@ def generate_mask(filename, bin = (128, 160) , a_log = 100000, contrast = 0.9, d
         
         plt.tight_layout()
         plt.show()
-        
-        return fig
     
     if return_mask == True:
         return binary_mask

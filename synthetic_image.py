@@ -5,6 +5,10 @@ from astropy import visualization as aviz
 from astropy.nddata.blocks import block_reduce
 from scipy.ndimage import gaussian_filter
 import os
+from augmentations import rotate, shear, zoom
+import random
+from pathlib import Path
+from astropy.io import fits
 
 # Set up the random number generator, allowing a seed to be set from the environment
 seed = os.getenv('GUIDE_RANDOM_SEED', None)
@@ -72,7 +76,7 @@ def bias(image, value, realistic=False, number_of_colums = 5):
         
         # We want a random-looking variation in the bias, but unlike the readnoise the bias should 
         # *not* change from image to image, so we make sure to always generate the same "random" numbers.
-        rng = np.random.RandomState(seed=8392)  # 20180520
+        rng = np.random.RandomState(seed=np.random.randint(0, 1000))  # 20180520
         columns = rng.randint(0, shape[1], size=number_of_colums)
         # This adds a little random-looking noise into the data.
         col_pattern = rng.randint(0, int(0.1 * value), size=shape[0])
@@ -81,7 +85,7 @@ def bias(image, value, realistic=False, number_of_colums = 5):
         for c in columns:
             bias_im[:, c] = value + np.random.normal(np.zeros(col_pattern.shape), col_pattern) 
 
-        rng = np.random.RandomState(seed=8393)  # 20180520
+        rng = np.random.RandomState(seed=np.random.randint(0, 1000))  # 20180520
         columns = rng.randint(0, shape[1], size=number_of_colums)
         # This adds a little random-looking noise into the data.
         col_pattern = rng.randint(0, int(0.1 * value), size=shape[0])
@@ -112,9 +116,10 @@ def sky_background(image, sky_counts, gain=1):
     sky_im = noise_rng.poisson(sky_counts * gain, size=image.shape) / gain
     return sky_im
 
-def simulate_clear_sky_image(start=1000, stop=400, width=640, height=512, is_horizontal=True, bias_level=300, read_noise_level = 5, bad_pixel_columns = 50, sky_noise_level = 10, return_original = True):
+
+def simulate_clear_sky_image(start=1000, stop=400, width=640, height=512, is_horizontal=True, bias_level=300, read_noise_level = 5, fpn_level = 5, bad_pixel_columns = 50, sky_noise_level = 10, return_original = True, augment_synthetic = True, apply_narcissus_effect = True, radius=160, center_x=320, center_y=256, smoothness=80, nar_intensity=0.025, seed = None, write_to_fits = False, index = 0):
     """
-    Simulate an infrared clear sky image
+    Simulate an infrared clear sky image with realistic noise
 
     Parameters
     ----------
@@ -132,19 +137,52 @@ def simulate_clear_sky_image(start=1000, stop=400, width=640, height=512, is_hor
         Offset ground level of image
     read_noise_level: float
         Amount of read noise, in ADU (estimated to be ~ 5 with FFC)
+    fpn_level: float
+        Amount of Fixed Pattern Noise (FPN) to add
     bad_pixel_columns: int
         Number of bad behaving pixel columns in the image (~50)
-    sky_noise_level : float
+    sky_noise_level: float
         The target value for the number of counts from the sky.
-    return_original:
+    return_original: bool
         If True, returns both synthetic and noisy images
+    augment_synthetic: bool
+        If True, apply one random augmentation to the synthetic image
+    apply_narcissus_effect: bool
+        If True, apply the Narcissus effect (e.g own camera reflection)
+    radius (int):
+        Radius of the circular mask.
+    center_x (int):
+        X-coordinate of the circle center.
+    center_y (int):
+        Y-coordinate of the circle center.
+    smoothness (int):
+        Smoothness factor for mask edges.
+    nar_intensity (float):
+        Intensity of the narcissus effect.
+
+    seed: int
+        Seed for random noise generation (optional).
 
     Returns
     -------
     np.array or tuple
     """
 
+    start_stop = [(i, int(i+50)) for i in range(100, 1000)]
+    start_stop = np.random.normal(start_stop, 20)
+    start, stop = random.choice(start_stop)
+
     synthetic_image = get_gradient_2d(start=start, stop=stop, width=width, height=height, is_horizontal=is_horizontal)
+
+    # Alterations : zoom, rotate, shear, flip
+    if augment_synthetic == True:
+        synthetic_image, _ = zoom(synthetic_image, synthetic_image, zoom_range=(1, 2))
+        synthetic_image, _ = rotate(synthetic_image, synthetic_image, angle_range=(-45, 45))
+        synthetic_image, _ = shear(synthetic_image, synthetic_image, shear_range=(-0.2, 0.2))
+        # Random flip
+        flip = True
+        if flip and random.choice([True, False]):
+            augmented_image = np.fliplr(synthetic_image)
 
     noise_im = synthetic_image + read_noise(synthetic_image, read_noise_level)
 
@@ -154,10 +192,53 @@ def simulate_clear_sky_image(start=1000, stop=400, width=640, height=512, is_hor
     sky_only = sky_background(synthetic_image, sky_noise_level)
     noisy_synthetic_image = bias_noise_im + sky_only
 
+    if seed is not None:
+        np.random.seed(seed)
+
+    # Generate random FPN pattern with values between -intensity and +intensity
+    fpn_pattern = np.random.uniform(low=-fpn_level, high=fpn_level, size=sky_only.shape)
+
+    # Add the FPN pattern to the simulated image
+    noisy_synthetic_image += fpn_pattern
+
+    if apply_narcissus_effect == True:
+        noisy_synthetic_image = narcissus_effect(noisy_synthetic_image, radius = radius, center_x = center_x, center_y = center_y, smoothness = smoothness, intensity = nar_intensity)
+
     if return_original == True:
         return synthetic_image, noisy_synthetic_image
     else:
-        return noisy_synthetic_image
+        if write_to_fits == True:
+            noisy_synthetic_image = np.array(noisy_synthetic_image, dtype=np.int16)
+
+            d_header = {'START': start,
+                        'STOP': stop,
+                        'WIDTH': width,
+                        'HEIGHT': height,
+                        'HORIZ': is_horizontal,
+                        'BIASLVL': bias_level,
+                        'READLVL': read_noise_level,
+                        'FPNLVL': fpn_level,
+                        'BADPXCOL': bad_pixel_columns,
+                        'SKYNOISE': sky_noise_level,
+                        'AUGMENT': augment_synthetic,
+                        'NARCIS': apply_narcissus_effect,
+                        'RADIUS': radius,
+                        'CENTER_X': center_x,
+                        'CENTER_Y': center_y,
+                        'SMOOTH': smoothness,
+                        'NARINT': nar_intensity,
+                        'INDEX': index}
+
+            hdu = fits.PrimaryHDU(noisy_synthetic_image)
+            hdul = fits.HDUList([hdu])
+            hdul[0].header['IMGTYPE'] = 'SIMCLEAR'
+            hdul[0].header.extend(d_header.items())
+            hdul.writeto('SIM_CLEAR/{}_ADU_synthetic_sim.fits'.format(index), overwrite=True)
+            hdul.close()
+            del hdul
+            return True
+        else:
+            return noisy_synthetic_image
 
 def plot_synthetic_noisy_images(syn, noisy, cmap='gray'):
     fig, axes = plt.subplots(1, 2, figsize=(7, 4), dpi=150)
@@ -180,7 +261,7 @@ def plot_synthetic_noisy_images(syn, noisy, cmap='gray'):
     plt.tight_layout()
     plt.show()
 
-def apply_narcissus_effect(image, radius=160, center_x=320, center_y=256, smoothness=80, intensity=0.025):
+def narcissus_effect(image, radius=160, center_x=320, center_y=256, smoothness=80, intensity=0.025):
     """
     Applies the narcissus effect to an image.
 

@@ -1,4 +1,7 @@
-# **CIRRUS**: Cloud Infrared Recognition & Reconstruction via UNET System**
+# **CIRRUS**: Cloud Infrared Recognition & Reconstruction via UNET System
+
+Alternative title : **Single channel infrared sky image classification and probablistic segmentation of cloud structure with deep-learning / CNN and U-Net architectures**
+
 
 Deep-learning architecture classify and identify cloud structure on sky infrared images. Standard Convolutional Neural Network (CNN) distinguishes clear sky images from cloud images. An UNet-based segmentation model detects cloud structure onto pre-identified cloudy images and outputs a probabilistic map for each pixel.
 
@@ -6,8 +9,6 @@ Deep-learning architecture classify and identify cloud structure on sky infrared
 
 - Mettre les données sur Renater
 - Implémenter optimisation des hyperparamètres avec Optuna
-- Appliquer ces augmentations sur données synthétiques sans nuages : zoom, flip, rotate, shear AVANT de mettre les bruits
-- Appliquer l'effet de Narcissus
 
 ## Process
 
