@@ -1,0 +1,322 @@
+\begin{thebibliography}{10}
+
+\bibitem{liou1992radiation}
+Kuo-Nan Liou.
+\newblock {\em Radiation and cloud processes in the atmosphere. Theory,
+  observation, and modeling}.
+\newblock New York, NY (United States); Oxford University Press, 1992.
+
+\bibitem{hu2004application}
+Yongxiang Hu, Bruce~A Wielicki, Ping Yang, Paul~W Stackhouse, Bin Lin, and
+  David~F Young.
+\newblock Application of deep convective cloud albedo observation to
+  satellite-based study of the terrestrial atmosphere: Monitoring the stability
+  of spaceborne measurements and assessing absorption anomaly.
+\newblock {\em IEEE Transactions on Geoscience and Remote Sensing},
+  42(11):2594--2599, 2004.
+
+\bibitem{petzold2015global}
+Andreas Petzold, Valerie Thouret, Christoph Gerbig, Andreas Zahn, Carl~AM
+  Brenninkmeijer, Martin Gallagher, Markus Hermann, Marc Pontaud, Helmut
+  Ziereis, Damien Boulanger, et~al.
+\newblock Global-scale atmosphere monitoring by in-service aircraft--current
+  achievements and future prospects of the european research infrastructure
+  iagos.
+\newblock {\em Tellus B: Chemical and Physical Meteorology}, 67(1):28452, 2015.
+
+\bibitem{paczynski2000monitoring}
+Bohdan Paczy{\'n}ski.
+\newblock Monitoring all sky for variability1.
+\newblock {\em Publications of the Astronomical Society of the Pacific},
+  112(776):1281, 2000.
+
+\bibitem{mandat2014all}
+Dusan Mandat, Miroslav Pech, Miroslav Hrabovsky, Petr Schovanek, Miroslav
+  Palatka, Petr Travnicek, Michael Prouza, and Jan Ebr.
+\newblock All sky camera instrument for night sky monitoring.
+\newblock {\em arXiv preprint arXiv:1402.4762}, 2014.
+
+\bibitem{Szejwach1982}
+Gerard Szejwach.
+\newblock Determination of semi-transparent cirrus cloud temperature from
+  infrared radiances: Application to meteosat.
+\newblock {\em Journal of Applied Meteorology and Climatology}, 21(3):384 --
+  393, 1982.
+
+\bibitem{Shaw_2013}
+Joseph~A Shaw and Paul~W Nugent.
+\newblock Physics principles in radiometric infrared imaging of clouds in the
+  atmosphere.
+\newblock {\em European Journal of Physics}, 34(6):S111--S121, oct 2013.
+
+\bibitem{liandrat2017cloud}
+Olivier Liandrat, Sylvain Cros, Antonin Braun, Laurent Saint-Antonin, Jacques
+  Decroix, and Nicolas Schmutz.
+\newblock Cloud cover forecast from a ground-based all sky infrared thermal
+  camera.
+\newblock In {\em Remote Sensing of Clouds and the Atmosphere XXII}, volume
+  10424, pages 19--31. SPIE, 2017.
+
+\bibitem{lopez2017contribution}
+Teodolina Lopez, Rapha{\"e}l Antoine, David Baratoux, and Michel Rabinowicz.
+\newblock Contribution of thermal infrared images on the understanding of the
+  subsurface/atmosphere exchanges on earth.
+\newblock In {\em EGU General Assembly Conference Abstracts}, page 11811, 2017.
+
+\bibitem{Klebe2014}
+D.~I. Klebe, R.~D. Blatherwick, and V.~R. Morris.
+\newblock Ground-based all-sky mid-infrared and visible imagery for purposes of
+  characterizing cloud properties.
+\newblock {\em Atmospheric Measurement Techniques}, 7(2):637--645, 2014.
+
+\bibitem{nikolenko2021infrared}
+IV~Nikolenko and IA~Maslov.
+\newblock Infrared (thermal) camera for monitoring the state of the atmosphere
+  above the sea horizon of the simeiz observatory inasan.
+\newblock {\em INASAN Science Reports}, 6:85--87, 2021.
+
+\bibitem{Houghton1972}
+J.~T. {Houghton} and A.~C.~L. {Lee}.
+\newblock {Atmospheric Transmission in the 10-12 {\textmu}m Window}.
+\newblock {\em Nature Physical Science}, 238(86):117--118, August 1972.
+
+\bibitem{ICI}
+B.~Thurairajah and J.A. Shaw.
+\newblock Cloud statistics measured with the infrared cloud imager (ici).
+\newblock {\em IEEE Transactions on Geoscience and Remote Sensing},
+  43(9):2000--2007, 2005.
+
+\bibitem{Sharma_2015}
+T~K Sharma, Padmakar Parihar, and P~M~M Kemkar.
+\newblock All sky scanning cloud monitor for nlot site survey.
+\newblock {\em Journal of Physics: Conference Series}, 595(1):012032, mar 2015.
+
+\bibitem{rs13091852}
+Yiren Wang, Dong Liu, Wanyi Xie, Ming Yang, Zhenyu Gao, Xinfeng Ling, Yong
+  Huang, Congcong Li, Yong Liu, and Yingwei Xia.
+\newblock Day and night clouds detection using a thermal-infrared all-sky-view
+  camera.
+\newblock {\em Remote Sensing}, 13(9), 2021.
+
+\bibitem{Klebe2012}
+Dimitri Klebe, Jacques Sebag, Ronald~D. Blatherwick, and Peter~C. Zimmer.
+\newblock All-sky mid-infrared imagery to characterize sky conditions and
+  improve astronomical observational performance.
+\newblock {\em Publications of the Astronomical Society of the Pacific},
+  124(922):1309, nov 2012.
+
+\bibitem{stardice1}
+Marc {Betoule}, Sarah {Antier}, Emmanuel {Bertin}, Pierre {{\'E}ric Blanc},
+  S{\'e}bastien {Bongard}, Johann {Cohen Tanugi}, Sylvie {Dagoret-Campagne},
+  Fabrice {Feinstein}, Delphine {Hardin}, Claire {Juramy}, Laurent {Le
+  Guillou}, Auguste {Le Van Suu}, Marc {Moniez}, J{\'e}r{\'e}my {Neveu},
+  {\'E}ric {Nuss}, Bertrand {Plez}, Nicolas {Regnault}, Eduardo {Sepulveda},
+  K{\'e}lian {Sommer}, Thierry {Souverin}, and Xiao~Feng {Wang}.
+\newblock {StarDICE I: sensor calibration bench and absolute photometric
+  calibration of a Sony IMX411 sensor}.
+\newblock {\em arXiv e-prints}, page arXiv:2211.04913, November 2022.
+
+\bibitem{Bohlin2014}
+R.~C. Bohlin.
+\newblock {HUBBLE} {SPACE} {TELESCOPECALSPEC} {FLUX} {STANDARDS}: {SIRIUS}
+  ({AND} {VEGA}).
+\newblock {\em The Astronomical Journal}, 147(6):127, April 2014.
+
+\bibitem{dev2019cloudsegnet}
+Soumyabrata Dev, Atul Nautiyal, Yee~Hui Lee, and Stefan Winkler.
+\newblock Cloudsegnet: A deep network for nychthemeron cloud image
+  segmentation.
+\newblock {\em IEEE Geoscience and Remote Sensing Letters}, 16(12):1814--1818,
+  2019.
+
+\bibitem{CloudUNet}
+Chaojun Shi, Yatong Zhou, Bo~Qiu, Dongjiao Guo, and Mengci Li.
+\newblock Cloudu-net: A deep convolutional neural network architecture for
+  daytime and nighttime cloud images’ segmentation.
+\newblock {\em IEEE Geoscience and Remote Sensing Letters}, 18(10):1688--1692,
+  2021.
+
+\bibitem{CloudUNetv2}
+Chaojun Shi, Yatong Zhou, and Bo~Qiu.
+\newblock Cloudu-netv2: A cloud segmentation method for ground-based cloud
+  images based on deep learning.
+\newblock {\em Neural Processing Letters}, 53(4):2715--2728, 2021.
+
+\bibitem{SegCloud}
+W.~Xie, D.~Liu, M.~Yang, S.~Chen, B.~Wang, Z.~Wang, Y.~Xia, Y.~Liu, Y.~Wang,
+  and C.~Zhang.
+\newblock Segcloud: a novel cloud image segmentation model using a deep
+  convolutional neural network for ground-based all-sky-view camera
+  observation.
+\newblock {\em Atmospheric Measurement Techniques}, 13(4):1953--1961, 2020.
+
+\bibitem{TransCloudSeg}
+Shuang Liu, Jiafeng Zhang, Zhong Zhang, Xiaozhong Cao, and Tariq~S. Durrani.
+\newblock Transcloudseg: Ground-based cloud image segmentation with
+  transformer.
+\newblock {\em IEEE Journal of Selected Topics in Applied Earth Observations
+  and Remote Sensing}, 15:6121--6132, 2022.
+
+\bibitem{CloudDeepLabV3}
+Sheng Li, Min Wang, Jia Wu, Shuo Sun, and Zhihao Zhuang.
+\newblock Clouddeeplabv3+: a lightweight ground-based cloud segmentation method
+  based on multi-scale feature aggregation and multi-level attention feature
+  enhancement.
+\newblock {\em International Journal of Remote Sensing}, 44(15):4836--4856,
+  2023.
+
+\bibitem{makwana2022aclnet}
+Dhruv Makwana, Subhrajit Nag, Onkar Susladkar, Gayatri Deshmukh, Sai~Chandra
+  Teja~R, Sparsh Mittal, and C~Krishna Mohan.
+\newblock Aclnet: an attention and clustering-based cloud segmentation network.
+\newblock {\em Remote Sensing Letters}, 13(9):865--875, 2022.
+
+\bibitem{DeepCloud}
+Liang Ye, Zhiguo Cao, and Yang Xiao.
+\newblock Deepcloud: Ground-based cloud image categorization using deep
+  convolutional features.
+\newblock {\em IEEE Transactions on Geoscience and Remote Sensing},
+  55(10):5729--5740, 2017.
+
+\bibitem{shi2022cloudraednet}
+Chaojun Shi, Yatong Zhou, and Bo~Qiu.
+\newblock Cloudraednet: residual attention-based encoder--decoder network for
+  ground-based cloud images segmentation in nychthemeron.
+\newblock {\em International Journal of Remote Sensing}, 43(6):2059--2075,
+  2022.
+
+\bibitem{DMNet}
+Chao Zhao, Xiang Zhang, Hangzai Luo, Sheng Zhong, Lei Tang, Jinye Peng, and
+  Jianping Fan.
+\newblock Detail-aware multiscale context fusion network for cloud detection.
+\newblock {\em IEEE Geoscience and Remote Sensing Letters}, 19:1--5, 2022.
+
+\bibitem{DPNet}
+Zhong Zhang, Shuzhen Yang, Shuang Liu, Xiaozhong Cao, and Tariq~S. Durrani.
+\newblock Ground-based remote sensing cloud detection using dual pyramid
+  network and encoder–decoder constraint.
+\newblock {\em IEEE Transactions on Geoscience and Remote Sensing}, 60:1--10,
+  2022.
+
+\bibitem{kanu2020cloudx}
+Sumit Kanu, Rohit Khoja, Shyam Lal, BS~Raghavendra, and CS~Asha.
+\newblock Cloudx-net: A robust encoder-decoder architecture for cloud detection
+  from satellite remote sensing images.
+\newblock {\em Remote Sensing Applications: Society and Environment},
+  20:100417, 2020.
+
+\bibitem{chen2023novel}
+Liangyu Chen, Jun Pan, and Zhuoer Zhang.
+\newblock A novel cloud detection method based on segmentation prior and
+  multiple features for sentinel-2 images.
+\newblock {\em International Journal of Remote Sensing}, 44(16):5101--5120,
+  2023.
+
+\bibitem{oshea2015introduction}
+Keiron O'Shea and Ryan Nash.
+\newblock An introduction to convolutional neural networks, 2015.
+
+\bibitem{badrinarayanan2017segnet}
+Vijay Badrinarayanan, Alex Kendall, and Roberto Cipolla.
+\newblock Segnet: A deep convolutional encoder-decoder architecture for image
+  segmentation.
+\newblock {\em IEEE transactions on pattern analysis and machine intelligence},
+  39(12):2481--2495, 2017.
+
+\bibitem{Alzubaidi2021ReviewOD}
+Laith Alzubaidi, Jinglan Zhang, Amjad~J. Humaidi, Ayad~Q. Al-Dujaili, Ye~Duan,
+  Omran Al-Shamma, Jos{\'e}~I. Santamar{\'i}a, Mohammed~Abdulraheem Fadhel,
+  Muthana Al-Amidie, and Laith Farhan.
+\newblock Review of deep learning: concepts, cnn architectures, challenges,
+  applications, future directions.
+\newblock {\em Journal of Big Data}, 8, 2021.
+
+\bibitem{RetrievingCloudCharacteristicsfromGroundBasedDaytimeColorAllSkyImages}
+C.~N. Long, J.~M. Sabburg, J.~Calbó, and D.~Pagès.
+\newblock Retrieving cloud characteristics from ground-based daytime color
+  all-sky images.
+\newblock {\em Journal of Atmospheric and Oceanic Technology}, 23(5):633 --
+  652, 2006.
+
+\bibitem{rs12111902}
+Lukáš Krauz, Petr Janout, Martin Blažek, and Petr Páta.
+\newblock Assessing cloud segmentation in the chromacity diagram of all-sky
+  images.
+\newblock {\em Remote Sensing}, 12(11), 2020.
+
+\bibitem{ASC2}
+Tao Fa, Wanyi Xie, Wang Yiren, and Yingwei Xia.
+\newblock Development of an all-sky imaging system for cloud cover assessment.
+\newblock {\em Applied Optics}, 58:5516, 07 2019.
+
+\bibitem{amt-15-3629-2022}
+X.~Li, B.~Wang, B.~Qiu, and C.~Wu.
+\newblock An all-sky camera image classification method using cloud cover
+  features.
+\newblock {\em Atmospheric Measurement Techniques}, 15(11):3629--3639, 2022.
+
+\bibitem{McCallumCRF}
+Andrew McCallum.
+\newblock Efficiently inducing features of conditional random fields.
+\newblock {\em arXiv preprint arXiv:1212.2504}, 2012.
+
+\bibitem{UNET}
+Olaf Ronneberger, Philipp Fischer, and Thomas Brox.
+\newblock U-net: Convolutional networks for biomedical image segmentation.
+\newblock {\em arXiv preprint arXiv:1505.04597}, 2015.
+
+\bibitem{ADAM}
+Diederik~P Kingma and Jimmy Ba.
+\newblock Adam: A method for stochastic optimization.
+\newblock {\em arXiv preprint arXiv:1412.6980}, 2014.
+
+\bibitem{RADAM}
+Liyuan Liu, Haoming Jiang, Pengcheng He, Weizhu Chen, Xiaodong Liu, Jianfeng
+  Gao, and Jiawei Han.
+\newblock On the variance of the adaptive learning rate and beyond.
+\newblock {\em arXiv preprint arXiv:1908.03265}, 2019.
+
+\bibitem{TRANSFORMER}
+Ashish Vaswani, Noam Shazeer, Niki Parmar, Jakob Uszkoreit, Llion Jones,
+  Aidan~N. Gomez, Lukasz Kaiser, and Illia Polosukhin.
+\newblock Attention is all you need, 2023.
+
+\bibitem{ATROUS}
+Liang-Chieh Chen, George Papandreou, Iasonas Kokkinos, Kevin Murphy, and
+  Alan~L. Yuille.
+\newblock Deeplab: Semantic image segmentation with deep convolutional nets,
+  atrous convolution, and fully connected crfs.
+\newblock 2017.
+
+\bibitem{GAM}
+Yichao Liu, Zongru Shao, and Nico Hoffmann.
+\newblock Global attention mechanism: Retain information to enhance
+  channel-spatial interactions.
+\newblock 2021.
+
+\bibitem{MACNN}
+Zhong Zhang, Shuzhen Yang, Shuang Liu, Baihua Xiao, and Xiaozhong Cao.
+\newblock Ground-based cloud detection using multiscale attention convolutional
+  neural network.
+\newblock {\em IEEE Geoscience and Remote Sensing Letters}, 19:1--5, 2022.
+
+\bibitem{CloudClassificationBasedonStructureFeaturesofInfraredImages}
+Lei Liu, Xuejin Sun, Feng Chen, Shijun Zhao, and Taichang Gao.
+\newblock Cloud classification based on structure features of infrared images.
+\newblock {\em Journal of Atmospheric and Oceanic Technology}, 28(3):410 --
+  417, 2011.
+
+\bibitem{SUN2011278}
+Xuejin Sun, Lei Liu, and Shijun Zhao.
+\newblock Whole sky infrared remote sensing of cloud.
+\newblock {\em Procedia Earth and Planetary Science}, 2:278--283, 2011.
+\newblock The Second International Conference on Mining Engineering and
+  Metallurgical Technology (MEMT 2011).
+
+\bibitem{amt-11-5351-2018}
+Q.~Luo, Y.~Meng, L.~Liu, X.~Zhao, and Z.~Zhou.
+\newblock Cloud classification of ground-based infrared images combining
+  manifold and texture features.
+\newblock {\em Atmospheric Measurement Techniques}, 11(9):5351--5361, 2018.
+
+\end{thebibliography}
