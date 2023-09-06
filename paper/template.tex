@@ -22,6 +22,8 @@
     citecolor={red!50!black},
     urlcolor={red!80!black}
 }
+%\usepackage[switch]{lineno}
+%\usepackage{siunitx,etoolbox}
 %% Journal abbreviations (please use the same for preprints and final revised papers)
 
 
@@ -259,7 +261,8 @@ Ground-truth masks identifying cloud structure on cloud images were manually cre
     \label{fig:cloud_images_ground_truth}
 \end{figure}
 
-Furthermore, we performed multiple random augmentations (e.g, flip, shear, rotate, shift and zoom) on each original image to double the size of each dataset. All augmented images are produced through the random sequential applications of these five distinct operations to initial images. After the selection and augmentation procedures, we conducted a visual examination of all the created sky/cloud images to ensure that they appear realistic. Since all the parameters in the image augmentation process undergo controlled adjustments, our generated images closely mirror authentic sky/cloud scenes.
+Furthermore, we performed multiple random augmentations (e.g, flip, shear, rotate, shift and zoom) on each original image to double the size of each dataset. All augmented images are produced through the random sequential applications of these five distinct operations to initial images.
+These operations are executed with a random varying degree of intensity contained in specific ranges. Random rotations are applied within an amplitude ranging from -45 to +45 degrees. Shear is introduced with a random magnitude ranging from -0.2 to +0.2. Shifting operations are carried out with a maximum ratio of 10\% in both width and height directions to avoid generation of unrealistic symmetric structures. Zoom operation is applied within the range of 1 to 1.8. No other transformation such as histogram equalization or contrast enhancment is applied to prevent any bias or alteration in the segmentation performance. After the selection and augmentation procedures, we conducted a visual examination of all the created sky/cloud images to ensure that they appear realistic. Since all the parameters in the image augmentation process undergo controlled adjustments, our generated images closely mirror authentic sky/cloud scenes.
 
 Datasets are for both models are splitted into training, testing and validation subsets with ratio of in the ratio of 70\%, 20\% and 10\% respectively.
 
@@ -340,7 +343,7 @@ The binary classifier is located after the decoder network to achieve final imag
 
 \subsection{Image segmentation}
 
-For cloud structure identification, the U-Net architecture is adopted owing to its effifiency in semantic segmentation tasks. The U-Net model comprises an encoder and a decoder, facilitating the capturing of context-rich features and precise delineation of cloud structures. The encoder integrates convolutional and max-pooling layers to progressively downsample the input image, thereby capturing high-level features. These features are then decoded using up-convolutions and skip connections, enabling the reconstruction of the segmented cloud structures. Figure \ref{fig:schematics_segmentation_model} shows the architecture of the model.
+For cloud structure identification, the U-Net architecture is adopted owing to its effifiency in semantic segmentation tasks. The U-Net model comprises an encoder and a decoder, facilitating the capturing of context-rich features and precise delineation of cloud structures. The encoder integrates convolutional and max-pooling layers to progressively downsample the input image, thereby capturing high-level features. These features are then decoded using up-convolutions and skip connections, enabling the reconstruction of the segmented cloud structures. Figure \ref{fig:schematics_segmentation_model} shows the architecture of the model and Figure \ref{fig:sample_segmentation} illustrates some examples of infrared cloud images and their corresponding ground-truth masks and predictions. 
 
 \begin{figure*}[t]
     \centering
@@ -348,25 +351,24 @@ For cloud structure identification, the U-Net architecture is adopted owing to i
     \begin{subfigure}{\textwidth}
         \centering
         \includegraphics[width=1.0\linewidth]{figures/test_dl_15epochs.png}
-        \label{fig:sub1}
+        %\label{fig:sub1}
     \end{subfigure}
     
     \begin{subfigure}{\textwidth}
         \centering
         \includegraphics[width=1.0\linewidth]{figures/test_dl_15epochs2.png}
-        \label{fig:sub2}
+        %\label{fig:sub2}
     \end{subfigure}
     
     \begin{subfigure}{\textwidth}
         \centering
         \includegraphics[width=1.0\linewidth]{figures/test_dl_15epochs3.png}
-        \label{fig:sub3}
+        %\label{fig:sub3}
     \end{subfigure}
 
-    \caption{Overall caption for the figure containing three plots.}
-    \label{fig:all}
+    \caption{Sample of input images (left), associated ground-truth binary masks (center) and probabilistic map predictions (right) of IRIS-CloudDeep segmentation model.}
+    \label{fig:sample_segmentation}
 \end{figure*}
-
 
 \begin{figure*}[t]
 	\includegraphics[width=\hsize]{figures/schematics_segmentation_model.png}
@@ -378,7 +380,7 @@ For cloud structure identification, the U-Net architecture is adopted owing to i
 
 \subsubsection{Encoder block}
 
-The encoder block of CIRRUS identification model consists of four convolution layers and four max-pooling layers. We feed a normalized and binned 4x4 radiometrically calibrated image of a fixed input size (160 × 128 pixels) into the model.
+The encoder block of IRIS-CloudDeep segmentation model consists of four convolution layers and four max-pooling layers. We feed a normalized and binned 4x4 radiometrically calibrated image of a fixed input size (160 × 128 pixels) into the model.
 The initial convolutional layer applies a set of learnable filters to the input image, extracting low-level features. Additional convolutional layers increase the complexity of learned features by applying convolutions to the feature map generated by the previous layer, creating a hierarchy of increasingly abstract features. After a set of convolutional layers, a max-pooling layer is applied to downsample the feature map. Max-pooling helps to reduce the spatial dimensions of the feature map while retaining the most salient information.
 
 \subsubsection{Decoder block}
@@ -393,19 +395,20 @@ The output the classifier is a boolean representing whether the image contains c
 \subsection{Training procedure and implementation details}
 
 %\subsubsection{Loss function}
-The CNN classifier is trained on the dataset containing both cloudy and clear images. The U-Net model is trained on cloudy image only which is the labeled datasets containing infrared images with pixel-wise cloud structure annotations (ground-truth masks). The loss function employed for training is the binary cross-entropy, which quantifies the difference between predicted probabilities and actual binary class labels for each instance in the dataset. Mathematically, given an instance's true binary label $y$ (0 or 1) and the predicted probability $p$ of it belonging to class 1, the binary cross-entropy loss $\mathcal{L}$ is calculated as:
+The CNN classifier is trained on the dataset containing both cloudy and synthetic clear sky images. The U-Net model is trained on cloudy images only which is the labeled dataset containing infrared images with pixel-wise cloud structure annotations (ground-truth masks). The loss function employed for training is the binary cross-entropy, which quantifies the difference between predicted probabilities and actual binary class labels for each instance in the dataset. Mathematically, given an instance's true binary label $y$ (0 or 1) and the predicted probability $p$ of it belonging to class 1, the binary cross-entropy loss $\mathcal{L}$ is calculated as:
 \begin{equation}
 	\mathcal{L} = -\frac{1}{N}\sum_i y_i\cdot\log\left(f_w(x_i)\right) + (1-y_i)\cdot\log\left(1-f_w(x_i)\right)
 \end{equation}
 where $\mathcal{L}$ is the binary cross-entropy loss. $N$ is the total number of instances in the dataset, $i$ index represents an individual instance, $y_{i}$ is the $i$-th true binary label (0 or 1) and $f_w(x_i)$ is the predicted probability that belongs to class 1, based on the model with parameters $w$. The goal of training is to minimize this loss function by adjusting the model parameters weights $w$ to better align the predicted probabilities $f_w(x_i)$ with the true labels $y_{i}$.
 
-Both architectures are implemented in \textsc{Python} with the \textsc{keras}\footnote{\url{https://keras.io}} \citep{Keras} subpackage of \textsc{TensorFlow}\footnote{\url{https://www.tensorflow.org}} framework \citep{TensorFlow}. IRIS-CloudDeep is trained on the GPU cluster infrastructure of the MESO@LR\footnote{\url{https://meso-lr.umontpellier.fr/}} high-performance computing center. Images are normalized and binned into a fixed 160 $\times$ 128 resolution format to speed up computations and to capture the global trend. Models are trained over 500 and 1000 epochs respectively using the ADAM optimizer \citep{ADAM}. We use batch of 16 images with dynamic learning rate of 0.001 that decreases through the training epochs. Hyperparameters are fine tuned with the \textsc{optuna}\footnote{\url{https://optuna.org/}} hyperparameter optimization framework \citep{Optuna} using the sampling strategy algorithm.
+Both architectures are implemented in \textsc{Python} with the \textsc{keras}\footnote{\url{https://keras.io}} \citep{Keras} subpackage of \textsc{TensorFlow}\footnote{\url{https://www.tensorflow.org}} framework \citep{TensorFlow}. IRIS-CloudDeep is trained on the GPU cluster infrastructure of the MESO@LR\footnote{\url{https://meso-lr.umontpellier.fr/}} high-performance computing center. Images are normalized and binned into a fixed 160 $\times$ 128 resolution format to speed up computations and to capture the global trend. Models are trained over 500 and 1000 epochs respectively using the ADAM optimizer \citep{ADAM}. We set the batch size to 16 images with a dynamic learning rate initial value of $\lambda$ = 0.001 that decreases through the training epochs following the relation : $\lambda(\text{epoch}) = 0.001 \cdot 0.5^{\left\lfloor \frac{\text{epoch}}{10} \right\rfloor}
+$. We also set an earlystopping watchdogs that interrupts the training if the loss value doesn't decrease below a certain threshold after 15 epochs.  Hyperparameters are fine tuned with the \textsc{optuna}\footnote{\url{https://optuna.org/}} hyperparameter optimization framework \citep{Optuna} using the sampling strategy algorithm.
 
 \section{Experiments}
 
 \subsection{Performance metrics}
 
-In order to evaluate the performance of the proposed models, we adopt six metrics: precision (P), accuracy (A), recall (R), F1-score (F1), intersection over union (IoU) and error rate (ER) between the ground-truths and the predictions. These are defined in the following equations,
+In order to evaluate the performance of the proposed models, we adopt six metrics: precision (P), accuracy (A), recall (R), F1-score (F1), intersection over union (IoU) and error rate (ER) between the ground-truths and the predictions. For the segmentation model, accuracy and interesection over union are averaged over the pixels to get the mean pixel accuracy (mA) and the mean intersection over union (mIoU). All of these parameters are defined in the following equations,
 \begin{equation}
     P = \frac{TP}{TP + FP}
 \end{equation}
@@ -425,15 +428,70 @@ In order to evaluate the performance of the proposed models, we adopt six metric
     ER = \frac{FP + FN}{TP + TN + FP + FN}
 \end{equation}
 with True Positives (TP) the number of correctly classified positive instances; False Positives (FP) the number of negative instances that were incorrectly classified as positive; False Negatives (FN) the number of positive instances that were incorrectly classified as negative; True Negatives (TN) the number of correctly classified negative instances.
-    
 
 \subsection{Framework effectiveness}
+
+\textcolor{red}{The trend of binary cross-entropy loss for training and testing sets are shown in Fig. 2. We observe that the loss saturates after
+a few thousand iterations, and the model exhibits comparable
+loss performance for both training and testing sets. We choose
+the CloudSegNet model with the lowest validation loss for our
+subsequent experiments.As discussed above, the output of CloudSegNet is a prob-ability mask, wherein each pixel indicates the degree of belongingness to the cloud category. Since the ground-truth maps are binary in nature, it is necessary to convert the probabilistic output into binary maps as well. We employ a Receiver Operating Curve (ROC) technique to understand the impact of the threshold on the performance. We vary the threshold from 0 to 1 in steps of 0.01, and record the False Positive Rate (FPR) and True Positive Rate (TPR) of cloud detection. Figure 3 shows the resulting ROC curve. The area under the ROC curve (AUC) is 0.97, indicating the competitive performance of CloudSegNet. The ROC curve provides an opportunity to choose a threshold, based on the trade-off between FPR and TPR. In our experiments, we choose the threshold of 0.5 to convert the probabilistic map into a binary sky/cloud image, which is very close to equal true and false positive rates. Of course, this threshold can be further adjusted by the user, based on the specific requirements for TPR and/or FPR. Figure 4 shows some sample outputs of our proposed approach. Visual inspection of additional images from our SWINySeg dataset confirms that CloudSegNet can successfully identify cloud pixels from nychthemeron images.}
+
+\begin{figure}[t]
+	\includegraphics[width=\hsize]{figures/loss_trend.png}
+	\caption{Training and testing losses of IRIS-CloudDeep models over
+    epochs. The dashed curve is for training whereas the continuous curve is for testing. Blue and red curves denote the classifier and segmentation models respectively.}
+    \label{fig:loss_trend}
+\end{figure}
+
+\textcolor{red}{Table 1 reports that SegCloud achieves a high average ac-
+curacy of 96.24\%, which further objectively proves its effec-
+tiveness. Moreover, SegCloud performs well on whole-sky
+images with different cloud cover conditions and achieves
+96.98\% accuracy on clear-sky images, 95.2\% accuracy on
+partial-cloud images, and 99.44\% near-perfect accuracy on overcast-sky images. These experimental results show that
+the SegCloud is effective and accurate for cloud segmenta-
+tion and can provide a reference for future cloud segmenta-
+tion research.}
+
+\begin{table*}[t]
+\begin{center}
+    \caption{Evaluation metrics for comparison of segmentation models performances on the self-capture testing set. Best values are denoted in bold font. (P = precision, mPA = mean pixel accuracy, R = recall, F1 = F1-score, mIoU= mean intersection over union, ER = error-rate)}
+    \begin{tabular}{c c c c c c c} 
+    \tophline \hline
+     Model & P [\%] & mPA [\%] & R & F1 [\%] & mIoU [\%] & ER [\%] \\ [1.0ex]
+     \hline
+     SegNet & XXXX & XXXX & XXXX & XXXX & XXXX & XXXX \\ [1.0ex]
+     CloudDeepLabV3+ & XXXX & XXXX & XXXX & XXXX & XXXX & XXXX \\ [1.0ex]
+     CloudSegNet & XXXX & XXXX & XXXX & XXXX & XXXX & XXXX \\ [1.0ex]
+     CloudUNet & XXXX & XXXX & XXXX & XXXX & XXXX & XXXX \\ [1.0ex]
+     CloudUNetv2 & XXXX & XXXX & XXXX & XXXX & XXXX & XXXX \\ [1.0ex]
+     PSPNet & XXXX & XXXX & XXXX & XXXX & XXXX & XXXX \\ [1.0ex]
+     DeepCloud & XXXX & XXXX & XXXX & XXXX & XXXX & XXXX \\ [1.0ex]
+     TransCloudSeg & XXXX & XXXX & XXXX & XXXX & XXXX & XXXX \\ [1.0ex]
+     \textbf{IRIS-CloudDeep} & XXXX & XXXX & XXXX & XXXX & XXXX & XXXX \\
+     \hline
+    \end{tabular}
+    \belowtable{}
+    \end{center}
+\end{table*}
 
 \subsubsection{Classifier}
 
 \subsubsection{Segmentation}
 
-\subsection{Comparison with other methods}
+\subsection{Comparison of segmentation model performance with other methods}
+
+\begin{figure}[t]
+	\includegraphics[width=\hsize]{figures/roc_curve.png}
+	\caption{ROC curve comparison of different segmentation models. The AUC value represents the area under the curve.}
+    \label{fig:roc_curve}
+\end{figure}
+
+\textbf{Insist on the non-feasibility to compare to traditional methods properly as they rely on color information from red and blue channels.}
+
+\textcolor{red}{To accurately measure the segmentation performance of the CloudDeepLabV3+ on the ground-based cloud image, this study is compared with other models (CloudSegNet, U-Net (Ronneberger, Fischer, and Brox 2015), PSPNet (Zhao et al. 2017), SegCloud, CloudU-Net, CloudU-Netv2 and DeepLabV3+) on the SWINySEG dataset, as shown in Table 6.
+The indicators of CloudSegNet are the worst, with Accuracy, mPA, F1-Score, and mIoU failing to reach 90\%, and Error Rate exceeding 10\%. U-Net, PSPNet, SegCloud, and DeepLabV3+ have similar segmentation data, and mIoU is 90\%, approximately. The segmentation data indicators of CloudU-Net and CloudU-Netv2 are better. Accuracy, mPA, and F1-Score all exceed 96\%, and mIoU reaches 92.90\% and 93.42\%, respectively. The CloudDeepLabV3+ proposed in this study has the best effect, and the five evaluation metrics are superior to other models. The key mIoU is 0.88\% higher than the state-of-the-art cloud segmentation method CloudU-Netv2. In addition, other indicators are about 0.42\% higher than CloudU-Netv2, and the error rate is reduced by 0.49\%. Figure 10 shows the segmentation results of different models in the form of histograms. We choose the parameters such as floating point operations (FLOPs), training time, and testing time to evaluate the computational complexity of different models. As shown in Table 7, the state-of-the-art cloud segmentation CloudU-Netv2 spends more time than CloudDeepLabV3+, and the parameters and FLOPs are much more. Compared with other models, our model has a lower computational complexity and has more advantages. Therefore, CloudDeepLabV3+ is the optimal choice for cloud image segmentation. It provides a substantial performance improvement and achieves excellent and more competitive cloud image segmentation results with less model complexity.}
 
 We use this augmented composite datasets of 10,000 images respectively to train the classifier and identifer. Random sampling is applied on each composite dataset, and standard train-test-validation split is perormed . Figure \ref{} depicts trends for the binary cross-entropy losses for training and testing subsets with various hyperparameters. \textsc{Optuna} framework allows ease of hyperparameters optimization. We observe that the loss saturates after a few hundred iterations for all attempts, and the model exhibits comparable loss performance for both training and testing sets. We select the model and layer parameters with the lowest validation loss for our subsequent experiments.
 
@@ -448,38 +506,132 @@ very high, with a value of 98.5. For classificatoin, the model reaches high perf
 
 \subsection{Evaluating segmentation model onto other datasets}
 
+\textcolor{red}{Strong generalization ability and robustness are also quite
+indispensable attributes of a state-of-the-art model. Therefore,
+The Cirrus Cumulus Stratus Nimbus (CCSN) data set and the
+UTILITY data set were put into the TL-DeepLabV3+. A few
+samples of segmentation results were visualized in Fig. 4. The
+results show that most of the clouds in the images can be
+accurately recognized by the model, such as the first column
+and second column in Fig. 4(a) and (b). Especially the picture
+in the fourth column of Fig. 4 obtains nearly perfect perfor-
+mance. The high-accuracy prediction results can be processed
+to the cloud masks of these nonannotated data sets, increasing
+the amount of labeled cloud segmentation data sets. For those
+images that contain elements other than clouds or sky [left
+three columns in Fig. 4(a)], the model keeps a relatively
+accurate recognition rate for the parts of cloud and sky.
+However, the other elements such as mountains and vegetation
+are obviously misjudged by the model because the GBCS data
+set only includes sky and clouds, and the model does not learn
+the features of other elements. The image in the third column
+of Fig. 4(c) has the worst performance in these samples. It may
+be because this image is a nighttime cloud image with bad
+illumination, which is not contained in the GBCS data set.
+Thus, it is indispensable to add cloud images under diverse
+light conditions in future data sets. Overall, the performance
+on other data sets proves the excellent generalization ability
+and robustness of TL-DeepLabV3+.}
+
+\begin{table*}[t]
+    \begin{center}
+        \caption{Evaluation metrics for the proposed segmentation model on publicly available state-of-the-art datasets. Note that RGB color images are transformed into gray-scale images as IRIS-CloudDeep segmentation model is optimized for this type of data. Best values are denoted in bold font. (P = precision, mPA = mean pixel accuracy, R = recall, F1 = F1-score, mIoU= mean intersection over union, ER = error-rate)}
+        \begin{tabular}{c c c c c c c} 
+        \tophline \hline
+         Dataset & P [\%] & mPA [\%] & R & F1 [\%] & mIoU [\%] & ER [\%] \\ [1.0ex]
+         \hline
+         SWIMSEG & XXXX & XXXX & XXXX & XXXX & XXXX & XXXX \\ [1.0ex]
+         SWINSEG & XXXX & XXXX & XXXX & XXXX & XXXX & XXXX \\ [1.0ex]
+         SWINySEG & XXXX & XXXX & XXXX & XXXX & XXXX & XXXX \\ [1.0ex]
+         WSISEG & XXXX & XXXX & XXXX & XXXX & XXXX & XXXX \\ [1.0ex]
+         HYTA & XXXX & XXXX & XXXX & XXXX & XXXX & XXXX \\ [1.0ex]
+         TLCDD & XXXX & XXXX & XXXX & XXXX & XXXX & XXXX \\ [1.0ex]
+         \textbf{Paper dataset} & XXXX & XXXX & XXXX & XXXX & XXXX & XXXX \\
+         \hline
+        \end{tabular}
+        \belowtable{}
+        \end{center}
+    \end{table*}
+
 \subsection{Comparison to Otsu method}
+
+\textcolor{red}{The Otsu algorithm has poor
+performance in segmenting whole-sky images because it re-
+quires pixels of the same class to have a similar gray value,
+but clouds exhibit the opposite behavior. The R/B threshold
+method has more accurate segmenting results compared with
+the Otsu algorithm. However, segmenting accuracy is poor
+especially for circumsolar areas (Fig. 4a, b and c) because
+circumsolar areas often have texture and intensity similar to
+the clouds due to the forward scattering of visible light by
+aerosols/haze and dynamic range limitation of the detectors
+of the sky imager (Long and Charles, 2010). Thus, traditional
+methods merely utilize low-level vision cues to segment im-
+ages and tend to result in misclassification once the boundary
+between clouds and sky is unclear. However, SegCloud per-
+forms excellent segmentation compared with the two other
+conventional methods and exhibits segmentation advantages
+in the area near the sun. SegCloud learns from the given cal-
+ibration database and constantly mines deep cloud features.
+Thus, it has improved capability to identify circumsolar ar-
+eas, although these pixels have textures and intensities that
+are similar to those of clouds.
+The average segmentation accuracy of the three algorithms
+is also calculated on the test dataset to verify the performance
+of the SegCloud objectively. Table 1 shows that SegCloud
+obtains higher average accuracy than the two other methods
+do and achieves better segmentation performance for clear-
+sky, partial-cloud, or overcast-sky images. Although Seg-
+Cloud shows advantages in whole-sky image segmentation,
+some misidentification remains due to decreased recognition
+for extremely thin clouds, which should be investigated in
+the future.}
 
 \subsection{Future perspectives}
 
 \conclusions  %% \conclusions[modified heading if necessary]
-TEXT
+
+In this paper, we proposed IRIS-CloudDeep, a deep-learning framework for classification and segmentation of LWIR
+ground-based thermal images. As far as we know, it is the framework that attempts to apply two sequential models for complementary tasks on single-channel gray-scaled infrared images. Specifically, we presented the CNN-based classifier and the U-Net based segmentation model tailored to extract cloud structures on pre-identified cloud images. Extensive experimental results on a combination of self-acquired data and transformed publicly available datasets have demonstrated
+the effectiveness and performances of the proposed framework. We successfully increased the size of training, testing and validation subsets with random application of augmentation methods. We developed an accurate simulation tool to produce realistic clear sky images. In the future, additional data will be collected by the infrared instrument, capturing various weather conditions. The framework may be re-trained on heavier datasets that will probably increase its accuracy.  Furthermore, if enough data is collected with many different cloud categories, we will be able to modify the segmentation model to perform cloud typology. Finally, the current trained model is expected to process data in real-time for the StarDICE experiment in order to: (i) give live alerts to remote observers in the case of cloud detection; (ii) set a flag in CCD images for quality sorting in post-processing.
+
 
 %% The following commands are for the statements about the availability of data sets and/or software code corresponding to the manuscript.
 %% It is strongly recommended to make use of these sections in case data sets and/or software code have been part of your research the article is based on.
 
-\codeavailability{TEXT} %% use this section when having only software code available
 
 
-\dataavailability{TEXT} %% use this section when having only data sets available
 
 
-\codedataavailability{TEXT} %% use this section when having data sets and software code available
+%\codeavailability{TEXT} %% use this section when having only software code available
+
+%\dataavailability{} %% use this section when having only data sets available
+
+\codedataavailability{The code is freely available online at \url{https://github.com/kelian98/IRIS-CloudDeep}. The datasets will be made available from authors Kélian Sommer (kelian.sommer@umontpellier.fr) and corresponding author Wassim Kabalan (wassim.kabalan@apc.in2p3.fr) upon request.} %% use this section when having data sets and software code available
+
+\authorcontribution{KS conceived the instrument, collected data and pre-process the dataset by creating ground truths masks for segmentation and producing realistic synthetic data for classification. WK, RB and KS designed the framework. WK and RB performed the experiments. KS wrote the paper and collected relevant literature. WK and RB revised the manuscript; AB, JCT and BP proposed constructive suggestions on the revision of the article.} %% this section is mandatory
+
+\competinginterests{The authors declare that they have no conflict of interest.} %% this section is mandatory even if you declare that no competing interests are present
+
+%\disclaimer{TEXT} %% optional section
+
+\begin{acknowledgements}
+This work has been realized with the support of MESO@LR-Platform at the University of Montpellier.
+\end{acknowledgements}
 
 
-\sampleavailability{TEXT} %% use this section when having geoscientific samples available
+%sampleavailability{TEXT} %% use this section when having geoscientific samples available
+
+%\videosupplement{TEXT} %% use this section when having video supplements available
 
 
-\videosupplement{TEXT} %% use this section when having video supplements available
+%\appendix
+%\section{}    %% Appendix A
+
+%\subsection{}     %% Appendix A1, A2, etc.
 
 
-\appendix
-\section{}    %% Appendix A
-
-\subsection{}     %% Appendix A1, A2, etc.
-
-
-\noappendix       %% use this to mark the end of the appendix section. Otherwise the figures might be numbered incorrectly (e.g. 10 instead of 1).
+%\noappendix       %% use this to mark the end of the appendix section. Otherwise the figures might be numbered incorrectly (e.g. 10 instead of 1).
 
 %% Regarding figures and tables in appendices, the following two options are possible depending on your general handling of figures and tables in the manuscript environment:
 
@@ -497,15 +649,7 @@ TEXT
 
 
 
-\authorcontribution{TEXT} %% this section is mandatory
 
-\competinginterests{TEXT} %% this section is mandatory even if you declare that no competing interests are present
-
-\disclaimer{TEXT} %% optional section
-
-\begin{acknowledgements}
-This work has been realized with the support of MESO@LR-Platform at the University of Montpellier.
-\end{acknowledgements}
 
 
 
