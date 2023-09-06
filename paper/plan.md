@@ -1,5 +1,7 @@
 ## **TITLE(s)** ideas
 
+Long-wave infrared sky images classification and probabilistic segmentation of cloud structures with deep-learning
+
 New infrared sky image classification and cloud segmentation using deep-learning framework for ground-based radiometric camera observation
 
 IRIS-CloudDeep: Infrared Radiometric Image classification and Segmentation of CLOUD structure using Deep-learning framework for ground-based radiometric camera observation
@@ -17,63 +19,41 @@ IRIS-CloudNet: Infrared Radiometric Image classification and Segmentation of CLO
 - what we do regarding this manner in the StarDICE experiment
 - plan announcement + List of paper main contributions as in DEEPCLOUD.pdf
 
-*Figure 1 : same as TransCloudSeg Figure 1 OR same as in DEEPCLOUD.pdf Figure 1.*
-
 ### 2. BACKGROUND
 #### 	2.1 Motivation
 
 - StarDICE experiment
-     *Figure 2 schematics of StarDICE experiment used in the poster for MORIOND*
+     <u>*Figure 1 schematics of StarDICE experiment used in the poster for MORIOND*</u>
 - importance of good data
-     => infrared monitoring of the atmosphere : flag observations
+     <u>=> infrared monitoring of the atmosphere : flag observations</u>
 
 #### 	2.2 Related work
-
-##### 		2.2.1 Ground-Based sky/cloud monitoring
-    	2.2.1 Ground-Based Cloud Image Segmentation
-
-​		*Full page width Table same as Table 1 in ACLNet.pdf*
 
 ### 3. EXPERIMENTAL SETUP AND DATASET
 
 #### 	3.1 Infrared thermal imaging system
 
-  - *Figure 3 Same as Figure 1 of REFERENCE_PAPER_AMT.*
+  - <u>*Figure 2 Same as Figure 1 of REFERENCE_PAPER_AMT.*</u>
 
 #### 	3.2 Dataset and pre-processing
 
-##### 		3.2.1 Data description
-
    - inspired from 2. of REFERENCE_PAPER_AMT
 
-   - *Figure 4 same as Fig. 8 of TransCloudSeg but add clear sky image line and synthetic clear sky image line.*
+   - <u>*Figure 3 same as Fig. 8 of TransCloudSeg but add clear sky image line and synthetic clear sky image line.*</u>
 
-   - *Table same as EVALUATION.pdf Tab. 2 Overview of the collected image data set but add synthetic images and one row for clear and  a second for cloud*
-
+   - <u>*Table same as EVALUATION.pdf Tab. 2 Overview of the collected image data set but add synthetic images and one row for clear and  a second for cloud*</u>
         - inspire from 3.1 of EVALUATION.pdf
         
-
-    ##### 3.1.2 Ground-truth masks
-    
-    ##### 3.1.3 Synthetic images
-    
-    ##### 3.1.4 Augmentations
 
 ### 4. IMAGE CLASSIFICATION AND CLOUD STRUCTURE DETECTION FRAMEWORK FOR INFRARED SKY IMAGES
 
 #### 	4.1 Overall framework of XXXX
 
-- *Figure 5 : same as Figure 2 TransCloudSeg OR same as Figure 2 in CLOUDEEPLAPV3.pdf*
+<u>*Figure 4 : same as TransCloudSeg Figure 1 OR same as in DEEPCLOUD.pdf Figure 1.*</u>
 
 #### 	4.2 CNN architecture for image classifier
 
-- *Figure 6 : same as Figure 3 of REFERENCE_PAPER_AMT.*
-
-##### 		4.2.1 Encoder
-
-##### 		4.2.2 Decoder
-
-##### 		4.2.3 Softmax classifier
+- *Figure 5 : same as Figure 3 of REFERENCE_PAPER_AMT.*
 
 #### 	4.3 U-Net model architecture for cloud segmentation
 

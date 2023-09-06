@@ -1,0 +1,567 @@
+\begin{thebibliography}{89}
+\providecommand{\natexlab}[1]{#1}
+\providecommand{\url}[1]{{\tt #1}}
+\providecommand{\urlprefix}{URL }
+\expandafter\ifx\csname urlstyle\endcsname\relax
+  \providecommand{\doi}[1]{https://doi.org/\discretionary{}{}{}#1}\else
+  \providecommand{\doi}{https://doi.org/\discretionary{}{}{}\begingroup
+  \urlstyle{rm}\Url}\fi
+
+\bibitem[{Abadi et~al.(2015)Abadi, Agarwal, Barham, Brevdo, Chen, Citro,
+  Corrado, Davis, Dean, Devin, Ghemawat, Goodfellow, Harp, Irving, Isard, Jia,
+  Jozefowicz, Kaiser, Kudlur, Levenberg, Man\'{e}, Monga, Moore, Murray, Olah,
+  Schuster, Shlens, Steiner, Sutskever, Talwar, Tucker, Vanhoucke, Vasudevan,
+  Vi\'{e}gas, Vinyals, Warden, Wattenberg, Wicke, Yu, and Zheng}]{TensorFlow}
+Abadi, M., Agarwal, A., Barham, P., Brevdo, E., Chen, Z., Citro, C., Corrado,
+  G.~S., Davis, A., Dean, J., Devin, M., Ghemawat, S., Goodfellow, I., Harp,
+  A., Irving, G., Isard, M., Jia, Y., Jozefowicz, R., Kaiser, L., Kudlur, M.,
+  Levenberg, J., Man\'{e}, D., Monga, R., Moore, S., Murray, D., Olah, C.,
+  Schuster, M., Shlens, J., Steiner, B., Sutskever, I., Talwar, K., Tucker, P.,
+  Vanhoucke, V., Vasudevan, V., Vi\'{e}gas, F., Vinyals, O., Warden, P.,
+  Wattenberg, M., Wicke, M., Yu, Y., and Zheng, X.: {TensorFlow}: Large-Scale
+  Machine Learning on Heterogeneous Systems,
+  \urlprefix\url{https://www.tensorflow.org/}, software available from
+  tensorflow.org, 2015.
+
+\bibitem[{Agarap(2018)}]{agarap2018deep}
+Agarap, A.~F.: Deep learning using rectified linear units (relu), arXiv
+  preprint arXiv:1803.08375, 2018.
+
+\bibitem[{Akiba et~al.(2019)Akiba, Sano, Yanase, Ohta, and Koyama}]{Optuna}
+Akiba, T., Sano, S., Yanase, T., Ohta, T., and Koyama, M.: Optuna: A
+  Next-generation Hyperparameter Optimization Framework, in: Proceedings of the
+  25th {ACM} {SIGKDD} International Conference on Knowledge Discovery and Data
+  Mining, 2019.
+
+\bibitem[{Alzubaidi et~al.(2021)Alzubaidi, Zhang, Humaidi, Al-Dujaili, Duan,
+  Al-Shamma, Santamar{\'i}a, Fadhel, Al-Amidie, and
+  Farhan}]{Alzubaidi2021ReviewOD}
+Alzubaidi, L., Zhang, J., Humaidi, A.~J., Al-Dujaili, A.~Q., Duan, Y.,
+  Al-Shamma, O., Santamar{\'i}a, J.~I., Fadhel, M.~A., Al-Amidie, M., and
+  Farhan, L.: Review of deep learning: concepts, CNN architectures, challenges,
+  applications, future directions, Journal of Big Data, 8,
+  \urlprefix\url{https://api.semanticscholar.org/CorpusID:232434552}, 2021.
+
+\bibitem[{Badrinarayanan et~al.(2017)Badrinarayanan, Kendall, and
+  Cipolla}]{badrinarayanan2017segnet}
+Badrinarayanan, V., Kendall, A., and Cipolla, R.: Segnet: A deep convolutional
+  encoder-decoder architecture for image segmentation, IEEE transactions on
+  pattern analysis and machine intelligence, 39, 2481--2495, 2017.
+
+\bibitem[{{Betoule} et~al.(2022){Betoule}, {Antier}, {Bertin}, {{\'E}ric
+  Blanc}, {Bongard}, {Cohen Tanugi}, {Dagoret-Campagne}, {Feinstein}, {Hardin},
+  {Juramy}, {Le Guillou}, {Le Van Suu}, {Moniez}, {Neveu}, {Nuss}, {Plez},
+  {Regnault}, {Sepulveda}, {Sommer}, {Souverin}, and {Wang}}]{stardice1}
+{Betoule}, M., {Antier}, S., {Bertin}, E., {{\'E}ric Blanc}, P., {Bongard}, S.,
+  {Cohen Tanugi}, J., {Dagoret-Campagne}, S., {Feinstein}, F., {Hardin}, D.,
+  {Juramy}, C., {Le Guillou}, L., {Le Van Suu}, A., {Moniez}, M., {Neveu}, J.,
+  {Nuss}, {\'E}., {Plez}, B., {Regnault}, N., {Sepulveda}, E., {Sommer}, K.,
+  {Souverin}, T., and {Wang}, X.~F.: {StarDICE I: sensor calibration bench and
+  absolute photometric calibration of a Sony IMX411 sensor}, arXiv e-prints,
+  arXiv:2211.04913, \doi{10.48550/arXiv.2211.04913}, 2022.
+
+\bibitem[{Bjorck et~al.(2018)Bjorck, Gomes, Selman, and
+  Weinberger}]{bjorck2018understanding}
+Bjorck, N., Gomes, C.~P., Selman, B., and Weinberger, K.~Q.: Understanding
+  batch normalization, Advances in neural information processing systems, 31,
+  2018.
+
+\bibitem[{Boers et~al.(2006)Boers, Acarreta, and Gras}]{boers2006satellite}
+Boers, R., Acarreta, J.~R., and Gras, J.~L.: Satellite monitoring of the first
+  indirect aerosol effect: Retrieval of the droplet concentration of water
+  clouds, Journal of Geophysical Research: Atmospheres, 111, 2006.
+
+\bibitem[{Bohlin(2014)}]{Bohlin2014}
+Bohlin, R.~C.: {HUBBLE} {SPACE} {TELESCOPECALSPEC} {FLUX} {STANDARDS}: {SIRIUS}
+  ({AND} {VEGA}), The Astronomical Journal, 147, 127,
+  \doi{10.1088/0004-6256/147/6/127}, 2014.
+
+\bibitem[{Bohlin et~al.(2020)Bohlin, Hubeny, and Rauch}]{Bohlin2020}
+Bohlin, R.~C., Hubeny, I., and Rauch, T.: New Grids of Pure-hydrogen White
+  Dwarf {NLTE} Model Atmospheres and the {HST}/{STIS} Flux Calibration, The
+  Astronomical Journal, 160, 21, \doi{10.3847/1538-3881/ab94b4}, 2020.
+
+\bibitem[{Bower et~al.(2000)Bower, Choularton, Gallagher, Beswick, Flynn,
+  Allen, Davison, James, Robertson, Harrison et~al.}]{bower2000ace}
+Bower, K., Choularton, T., Gallagher, M., Beswick, K., Flynn, M., Allen, A.,
+  Davison, B., James, J., Robertson, L., Harrison, R., et~al.: ACE-2 HILLCLOUD.
+  An overview of the ACE-2 ground-based cloud experiment, Tellus B, 52,
+  750--778, 2000.
+
+\bibitem[{Burke et~al.(2010)Burke, Axelrod, Blondin, Claver, Željko Ivezić,
+  Jones, Saha, Smith, Smith, and Stubbs}]{Burke2010}
+Burke, D.~L., Axelrod, T., Blondin, S., Claver, C., Željko Ivezić, Jones, L.,
+  Saha, A., Smith, A., Smith, R.~C., and Stubbs, C.~W.: PRECISION DETERMINATION
+  OF ATMOSPHERIC EXTINCTION AT OPTICAL AND NEAR-INFRARED WAVELENGTHS, The
+  Astrophysical Journal, 720, 811, \doi{10.1088/0004-637X/720/1/811}, 2010.
+
+\bibitem[{Burke et~al.(2013)Burke, Saha, Claver, Axelrod, Claver, DePoy,
+  Ivezi{\'{c}}, Jones, Smith, and Stubbs}]{Burke2014}
+Burke, D.~L., Saha, A., Claver, J., Axelrod, T., Claver, C., DePoy, D.,
+  Ivezi{\'{c}}, {\v{Z} }., Jones, L., Smith, R.~C., and Stubbs, C.~W.:
+  {ALL}-{WEATHER} {CALIBRATION} {OF} {WIDE}-{FIELD} {OPTICAL} {AND} {NIR}
+  {SURVEYS}, The Astronomical Journal, 147, 19,
+  \doi{10.1088/0004-6256/147/1/19}, 2013.
+
+\bibitem[{Burke et~al.(2017)Burke, Rykoff, Allam, Annis, Bechtol, Bernstein,
+  Drlica-Wagner, Finley, Gruendl, James, Kent, Kessler, Kuhlmann, Lasker, Li,
+  Scolnic, Smith, Tucker, Wester, Yanny, Abbott, Abdalla, Benoit-L{\'{e} }vy,
+  Bertin, Rosell, Kind, Carretero, Cunha, D'Andrea, da~Costa, Desai, Diehl,
+  Doel, Estrada, Garc{\'{\i}}a-Bellido, Gruen, Gutierrez, Honscheid, Kuehn,
+  Kuropatkin, Maia, March, Marshall, Melchior, Menanteau, Miquel, Plazas, Sako,
+  Sanchez, Scarpine, Schindler, Sevilla-Noarbe, Smith, Smith, Soares-Santos,
+  Sobreira, Suchyta, Tarle, and and}]{Burke2017}
+Burke, D.~L., Rykoff, E.~S., Allam, S., Annis, J., Bechtol, K., Bernstein,
+  G.~M., Drlica-Wagner, A., Finley, D.~A., Gruendl, R.~A., James, D.~J., Kent,
+  S., Kessler, R., Kuhlmann, S., Lasker, J., Li, T.~S., Scolnic, D., Smith, J.,
+  Tucker, D.~L., Wester, W., Yanny, B., Abbott, T. M.~C., Abdalla, F.~B.,
+  Benoit-L{\'{e} }vy, A., Bertin, E., Rosell, A.~C., Kind, M.~C., Carretero,
+  J., Cunha, C.~E., D'Andrea, C.~B., da~Costa, L.~N., Desai, S., Diehl, H.~T.,
+  Doel, P., Estrada, J., Garc{\'{\i}}a-Bellido, J., Gruen, D., Gutierrez, G.,
+  Honscheid, K., Kuehn, K., Kuropatkin, N., Maia, M. A.~G., March, M.,
+  Marshall, J.~L., Melchior, P., Menanteau, F., Miquel, R., Plazas, A.~A.,
+  Sako, M., Sanchez, E., Scarpine, V., Schindler, R., Sevilla-Noarbe, I.,
+  Smith, M., Smith, R.~C., Soares-Santos, M., Sobreira, F., Suchyta, E., Tarle,
+  G., and and, A. R.~W.: Forward Global Photometric Calibration of the Dark
+  Energy Survey, The Astronomical Journal, 155, 41,
+  \doi{10.3847/1538-3881/aa9f22}, 2017.
+
+\bibitem[{Canziani et~al.(2016)Canziani, Paszke, and
+  Culurciello}]{canziani2016analysis}
+Canziani, A., Paszke, A., and Culurciello, E.: An analysis of deep neural
+  network models for practical applications, arXiv preprint arXiv:1605.07678,
+  2016.
+
+\bibitem[{Chen et~al.(2023)Chen, Pan, and Zhang}]{chen2023novel}
+Chen, L., Pan, J., and Zhang, Z.: A novel cloud detection method based on
+  segmentation prior and multiple features for Sentinel-2 images, International
+  Journal of Remote Sensing, 44, 5101--5120, 2023.
+
+\bibitem[{Chen et~al.(2017)Chen, Papandreou, Kokkinos, Murphy, and
+  Yuille}]{ATROUS}
+Chen, L.-C., Papandreou, G., Kokkinos, I., Murphy, K., and Yuille, A.~L.:
+  DeepLab: Semantic Image Segmentation with Deep Convolutional Nets, Atrous
+  Convolution, and Fully Connected CRFs, 2017.
+
+\bibitem[{Chollet et~al.(2015)}]{Keras}
+Chollet, F. et~al.: Keras, \url{https://keras.io}, 2015.
+
+\bibitem[{Dev et~al.(2019)Dev, Nautiyal, Lee, and Winkler}]{dev2019cloudsegnet}
+Dev, S., Nautiyal, A., Lee, Y.~H., and Winkler, S.: CloudSegNet: A deep network
+  for nychthemeron cloud image segmentation, IEEE Geoscience and Remote Sensing
+  Letters, 16, 1814--1818, 2019.
+
+\bibitem[{Fa et~al.(2019)Fa, Xie, Yiren, and Xia}]{ASC2}
+Fa, T., Xie, W., Yiren, W., and Xia, Y.: Development of an all-sky imaging
+  system for cloud cover assessment, Applied Optics, 58, 5516,
+  \doi{10.1364/AO.58.005516}, 2019.
+
+\bibitem[{Gallo et~al.(1993)Gallo, Willits, Lubke, and Thiede}]{gallo1993low}
+Gallo, M.~A., Willits, D.~S., Lubke, R.~A., and Thiede, E.~C.: Low-cost
+  uncooled IR sensor for battlefield surveillance, in: Infrared Technology XIX,
+  vol. 2020, pp. 351--362, SPIE, 1993.
+
+\bibitem[{Geer et~al.(2017)Geer, Baordo, Bormann, Chambon, English, Kazumori,
+  Lawrence, Lean, Lonitz, and Lupu}]{geer2017growing}
+Geer, A., Baordo, F., Bormann, N., Chambon, P., English, S., Kazumori, M.,
+  Lawrence, H., Lean, P., Lonitz, K., and Lupu, C.: The growing impact of
+  satellite observations sensitive to humidity, cloud and precipitation,
+  Quarterly Journal of the Royal Meteorological Society, 143, 3189--3206, 2017.
+
+\bibitem[{{Houghton} and {Lee}(1972)}]{Houghton1972}
+{Houghton}, J.~T. and {Lee}, A.~C.~L.: {Atmospheric Transmission in the 10-12
+  {\textmu}m Window}, Nature Physical Science, 238, 117--118,
+  \doi{10.1038/physci238117a0}, 1972.
+
+\bibitem[{Hu et~al.(2004)Hu, Wielicki, Yang, Stackhouse, Lin, and
+  Young}]{hu2004application}
+Hu, Y., Wielicki, B.~A., Yang, P., Stackhouse, P.~W., Lin, B., and Young,
+  D.~F.: Application of deep convective cloud albedo observation to
+  satellite-based study of the terrestrial atmosphere: Monitoring the stability
+  of spaceborne measurements and assessing absorption anomaly, IEEE
+  Transactions on Geoscience and Remote Sensing, 42, 2594--2599, 2004.
+
+\bibitem[{Ioffe and Szegedy(2015)}]{ioffe2015batch}
+Ioffe, S. and Szegedy, C.: Batch Normalization: Accelerating Deep Network
+  Training by Reducing Internal Covariate Shift, 2015.
+
+\bibitem[{Kanu et~al.(2020)Kanu, Khoja, Lal, Raghavendra, and
+  Asha}]{kanu2020cloudx}
+Kanu, S., Khoja, R., Lal, S., Raghavendra, B., and Asha, C.: CloudX-net: A
+  robust encoder-decoder architecture for cloud detection from satellite remote
+  sensing images, Remote Sensing Applications: Society and Environment, 20,
+  100\,417, 2020.
+
+\bibitem[{Kim et~al.(2018)Kim, Lee, and Im}]{kim2018deep}
+Kim, M., Lee, J., and Im, J.: Deep learning-based monitoring of overshooting
+  cloud tops from geostationary satellite data, GIScience \& Remote Sensing,
+  55, 763--792, 2018.
+
+\bibitem[{Kimata(2018)}]{Kimata2018}
+Kimata, M.: Uncooled infrared focal plane arrays, IEEJ Transactions on
+  Electrical and Electronic Engineering, 13, 4--12,
+  \doi{https://doi.org/10.1002/tee.22563}, 2018.
+
+\bibitem[{Kingma and Ba(2014)}]{ADAM}
+Kingma, D.~P. and Ba, J.: Adam: A method for stochastic optimization, arXiv
+  preprint arXiv:1412.6980, 2014.
+
+\bibitem[{Klebe et~al.(2012)Klebe, Sebag, Blatherwick, and Zimmer}]{Klebe2012}
+Klebe, D., Sebag, J., Blatherwick, R.~D., and Zimmer, P.~C.: All-Sky
+  Mid-Infrared Imagery to Characterize Sky Conditions and Improve Astronomical
+  Observational Performance, Publications of the Astronomical Society of the
+  Pacific, 124, 1309, \doi{10.1086/668866}, 2012.
+
+\bibitem[{Klebe et~al.(2014)Klebe, Blatherwick, and Morris}]{Klebe2014}
+Klebe, D.~I., Blatherwick, R.~D., and Morris, V.~R.: Ground-based all-sky
+  mid-infrared and visible imagery for purposes of characterizing cloud
+  properties, Atmospheric Measurement Techniques, 7, 637--645,
+  \doi{10.5194/amt-7-637-2014}, 2014.
+
+\bibitem[{Krauz et~al.(2020)Krauz, Janout, Blažek, and Páta}]{rs12111902}
+Krauz, L., Janout, P., Blažek, M., and Páta, P.: Assessing Cloud Segmentation
+  in the Chromacity Diagram of All-Sky Images, Remote Sensing, 12,
+  \doi{10.3390/rs12111902}, 2020.
+
+\bibitem[{Krizhevsky et~al.(2012)Krizhevsky, Sutskever, and
+  Hinton}]{Krizhevsky2012}
+Krizhevsky, A., Sutskever, I., and Hinton, G.~E.: ImageNet Classification with
+  Deep Convolutional Neural Networks, in: Advances in Neural Information
+  Processing Systems, edited by Pereira, F., Burges, C., Bottou, L., and
+  Weinberger, K., vol.~25, Curran Associates, Inc.,
+  \urlprefix\url{https://proceedings.neurips.cc/paper_files/paper/2012/file/c399862d3b9d6b76c8436e924a68c45b-Paper.pdf},
+  2012.
+
+\bibitem[{Larason and Houston(2008)}]{Larason2008}
+Larason, T. and Houston, J.: Spectroradiometric Detector Measurements:
+  Ultraviolet, Visible, and Near Infrared Detectors for Spectral Power,
+  \urlprefix\url{https://tsapps.nist.gov/publication/get_pdf.cfm?pub_id=841061},
+  2008.
+
+\bibitem[{LeCun et~al.(1995)LeCun, Bengio et~al.}]{lecun1995convolutional}
+LeCun, Y., Bengio, Y., et~al.: Convolutional networks for images, speech, and
+  time series, The handbook of brain theory and neural networks, 3361, 1995,
+  1995.
+
+\bibitem[{Li et~al.(2023)Li, Wang, Wu, Sun, and Zhuang}]{CloudDeepLabV3}
+Li, S., Wang, M., Wu, J., Sun, S., and Zhuang, Z.: CloudDeepLabV3+: a
+  lightweight ground-based cloud segmentation method based on multi-scale
+  feature aggregation and multi-level attention feature enhancement,
+  International Journal of Remote Sensing, 44, 4836--4856,
+  \doi{10.1080/01431161.2023.2240034}, 2023.
+
+\bibitem[{Li et~al.(2016)Li, DePoy, Marshall, Tucker, Kessler, Annis,
+  Bernstein, Boada, Burke, Finley, James, Kent, Lin, Marriner, Mondrik,
+  Nagasawa, Rykoff, Scolnic, Walker, Wester, Abbott, Allam, Benoit-L{\'{e} }vy,
+  Bertin, Brooks, Capozzi, Rosell, Kind, Carretero, Crocce, Cunha, D'Andrea,
+  da~Costa, Desai, Diehl, Doel, Flaugher, Fosalba, Frieman, Gaztanaga,
+  Goldstein, Gruen, Gruendl, Gutierrez, Honscheid, Kuehn, Kuropatkin, Maia,
+  Melchior, Miller, Miquel, Mohr, Neilsen, Nichol, Nord, Ogando, Plazas, Romer,
+  Roodman, Sako, Sanchez, Scarpine, Schubnell, Sevilla-Noarbe, Smith,
+  Soares-Santos, Sobreira, Suchyta, Tarle, Thomas, and and}]{Li2016}
+Li, T.~S., DePoy, D.~L., Marshall, J.~L., Tucker, D., Kessler, R., Annis, J.,
+  Bernstein, G.~M., Boada, S., Burke, D.~L., Finley, D.~A., James, D.~J., Kent,
+  S., Lin, H., Marriner, J., Mondrik, N., Nagasawa, D., Rykoff, E.~S., Scolnic,
+  D., Walker, A.~R., Wester, W., Abbott, T. M.~C., Allam, S., Benoit-L{\'{e}
+  }vy, A., Bertin, E., Brooks, D., Capozzi, D., Rosell, A.~C., Kind, M.~C.,
+  Carretero, J., Crocce, M., Cunha, C.~E., D'Andrea, C.~B., da~Costa, L.~N.,
+  Desai, S., Diehl, H.~T., Doel, P., Flaugher, B., Fosalba, P., Frieman, J.,
+  Gaztanaga, E., Goldstein, D.~A., Gruen, D., Gruendl, R.~A., Gutierrez, G.,
+  Honscheid, K., Kuehn, K., Kuropatkin, N., Maia, M. A.~G., Melchior, P.,
+  Miller, C.~J., Miquel, R., Mohr, J.~J., Neilsen, E., Nichol, R.~C., Nord, B.,
+  Ogando, R., Plazas, A.~A., Romer, A.~K., Roodman, A., Sako, M., Sanchez, E.,
+  Scarpine, V., Schubnell, M., Sevilla-Noarbe, I., Smith, R.~C., Soares-Santos,
+  M., Sobreira, F., Suchyta, E., Tarle, G., Thomas, D., and and, V.~V.:
+  {ASSESSMENT} {OF} {SYSTEMATIC} {CHROMATIC} {ERRORS} {THAT} {IMPACT}
+  {SUB}-1{\%} {PHOTOMETRIC} {PRECISION} {IN} {LARGE}-{AREA} {SKY} {SURVEYS},
+  The Astronomical Journal, 151, 157, \doi{10.3847/0004-6256/151/6/157}, 2016.
+
+\bibitem[{Li et~al.(2022)Li, Wang, Qiu, and Wu}]{amt-15-3629-2022}
+Li, X., Wang, B., Qiu, B., and Wu, C.: An all-sky camera image classification
+  method using cloud cover features, Atmospheric Measurement Techniques, 15,
+  3629--3639, \doi{10.5194/amt-15-3629-2022}, 2022.
+
+\bibitem[{Liandrat et~al.(2017{\natexlab{a}})Liandrat, Cros, Braun,
+  Saint-Antonin, Decroix, and Schmutz}]{Liandrat2017}
+Liandrat, O., Cros, S., Braun, A., Saint-Antonin, L., Decroix, J., and Schmutz,
+  N.: Cloud cover forecast from a ground-based all sky infrared thermal camera,
+  p.~10, \doi{10.1117/12.2278636}, 2017{\natexlab{a}}.
+
+\bibitem[{Liandrat et~al.(2017{\natexlab{b}})Liandrat, Cros, Braun,
+  Saint-Antonin, Decroix, and Schmutz}]{liandrat2017cloud}
+Liandrat, O., Cros, S., Braun, A., Saint-Antonin, L., Decroix, J., and Schmutz,
+  N.: Cloud cover forecast from a ground-based all sky infrared thermal camera,
+  in: Remote Sensing of Clouds and the Atmosphere XXII, vol. 10424, pp. 19--31,
+  SPIE, 2017{\natexlab{b}}.
+
+\bibitem[{Liou(1992)}]{liou1992radiation}
+Liou, K.-N.: Radiation and cloud processes in the atmosphere. Theory,
+  observation, and modeling, New York, NY (United States); Oxford University
+  Press, 1992.
+
+\bibitem[{Liu et~al.(2011)Liu, Sun, Chen, Zhao, and Gao}]{Liu2021}
+Liu, L., Sun, X., Chen, F., Zhao, S., and Gao, T.: Cloud Classification Based
+  on Structure Features of Infrared Images, Journal of Atmospheric and Oceanic
+  Technology, 28, 410 -- 417, \doi{https://doi.org/10.1175/2010JTECHA1385.1},
+  2011.
+
+\bibitem[{Liu et~al.(2019)Liu, Jiang, He, Chen, Liu, Gao, and Han}]{RADAM}
+Liu, L., Jiang, H., He, P., Chen, W., Liu, X., Gao, J., and Han, J.: On the
+  variance of the adaptive learning rate and beyond, arXiv preprint
+  arXiv:1908.03265, 2019.
+
+\bibitem[{Liu et~al.(2022)Liu, Zhang, Zhang, Cao, and Durrani}]{TransCloudSeg}
+Liu, S., Zhang, J., Zhang, Z., Cao, X., and Durrani, T.~S.: TransCloudSeg:
+  Ground-Based Cloud Image Segmentation With Transformer, IEEE Journal of
+  Selected Topics in Applied Earth Observations and Remote Sensing, 15,
+  6121--6132, \doi{10.1109/JSTARS.2022.3194316}, 2022.
+
+\bibitem[{Liu et~al.(2021)Liu, Shao, and Hoffmann}]{GAM}
+Liu, Y., Shao, Z., and Hoffmann, N.: Global Attention Mechanism: Retain
+  Information to Enhance Channel-Spatial Interactions, 2021.
+
+\bibitem[{Long et~al.(2006)Long, Sabburg, Calbó, and Pagès}]{Long2006}
+Long, C.~N., Sabburg, J.~M., Calbó, J., and Pagès, D.: Retrieving Cloud
+  Characteristics from Ground-Based Daytime Color All-Sky Images, Journal of
+  Atmospheric and Oceanic Technology, 23, 633 -- 652,
+  \doi{https://doi.org/10.1175/JTECH1875.1}, 2006.
+
+\bibitem[{Lopez et~al.(2017)Lopez, Antoine, Baratoux, and
+  Rabinowicz}]{lopez2017contribution}
+Lopez, T., Antoine, R., Baratoux, D., and Rabinowicz, M.: Contribution of
+  thermal infrared images on the understanding of the subsurface/atmosphere
+  exchanges on Earth., in: EGU General Assembly Conference Abstracts, p. 11811,
+  2017.
+
+\bibitem[{Luo et~al.(2018)Luo, Meng, Liu, Zhao, and Zhou}]{amt-11-5351-2018}
+Luo, Q., Meng, Y., Liu, L., Zhao, X., and Zhou, Z.: Cloud classification of
+  ground-based infrared images combining manifold and texture features,
+  Atmospheric Measurement Techniques, 11, 5351--5361,
+  \doi{10.5194/amt-11-5351-2018}, 2018.
+
+\bibitem[{Makwana et~al.(2022)Makwana, Nag, Susladkar, Deshmukh, Teja~R,
+  Mittal, and Mohan}]{makwana2022aclnet}
+Makwana, D., Nag, S., Susladkar, O., Deshmukh, G., Teja~R, S.~C., Mittal, S.,
+  and Mohan, C.~K.: ACLNet: an attention and clustering-based cloud
+  segmentation network, Remote Sensing Letters, 13, 865--875, 2022.
+
+\bibitem[{Mandat et~al.(2014)Mandat, Pech, Hrabovsky, Schovanek, Palatka,
+  Travnicek, Prouza, and Ebr}]{mandat2014all}
+Mandat, D., Pech, M., Hrabovsky, M., Schovanek, P., Palatka, M., Travnicek, P.,
+  Prouza, M., and Ebr, J.: All Sky Camera instrument for night sky monitoring,
+  arXiv preprint arXiv:1402.4762, 2014.
+
+\bibitem[{Martin(2008)}]{martin2008satellite}
+Martin, R.~V.: Satellite remote sensing of surface air quality, Atmospheric
+  environment, 42, 7823--7843, 2008.
+
+\bibitem[{McCallum(2012)}]{McCallumCRF}
+McCallum, A.: Efficiently inducing features of conditional random fields, arXiv
+  preprint arXiv:1212.2504, 2012.
+
+\bibitem[{Mokhov and Schlesinger(1994)}]{mokhov1994analysis}
+Mokhov, I.~L. and Schlesinger, M.~E.: Analysis of global cloudiness: 2.
+  Comparison of ground-based and satellite-based cloud climatologies, Journal
+  of Geophysical Research: Atmospheres, 99, 17\,045--17\,065, 1994.
+
+\bibitem[{Nikolenko and Maslov(2021)}]{nikolenko2021infrared}
+Nikolenko, I. and Maslov, I.: Infrared (thermal) camera for monitoring the
+  state of the atmosphere above the sea horizon of the Simeiz Observatory
+  INASAN, INASAN Science Reports, 6, 85--87, 2021.
+
+\bibitem[{O'Shea and Nash(2015)}]{oshea2015introduction}
+O'Shea, K. and Nash, R.: An Introduction to Convolutional Neural Networks,
+  2015.
+
+\bibitem[{Paczy{\'n}ski(2000)}]{paczynski2000monitoring}
+Paczy{\'n}ski, B.: Monitoring All Sky for Variability1, Publications of the
+  Astronomical Society of the Pacific, 112, 1281, 2000.
+
+\bibitem[{Petzold et~al.(2015)Petzold, Thouret, Gerbig, Zahn, Brenninkmeijer,
+  Gallagher, Hermann, Pontaud, Ziereis, Boulanger et~al.}]{petzold2015global}
+Petzold, A., Thouret, V., Gerbig, C., Zahn, A., Brenninkmeijer, C.~A.,
+  Gallagher, M., Hermann, M., Pontaud, M., Ziereis, H., Boulanger, D., et~al.:
+  Global-scale atmosphere monitoring by in-service aircraft--current
+  achievements and future prospects of the European Research Infrastructure
+  IAGOS, Tellus B: Chemical and Physical Meteorology, 67, 28\,452, 2015.
+
+\bibitem[{Rogalski(2011)}]{Rogalski2011}
+Rogalski, A.: Recent progress in infrared detector technologies, Infrared
+  Physics {\&} Technology, 54, 136--154, \doi{10.1016/j.infrared.2010.12.003},
+  2011.
+
+\bibitem[{Rogalski and Chrzanowski(2014)}]{Rogalski2014}
+Rogalski, A. and Chrzanowski, K.: Infrared Devices And Techniques (Revision),
+  Metrology and Measurement Systems, 21, 565--618, \doi{10.2478/mms-2014-0057},
+  2014.
+
+\bibitem[{Ronneberger et~al.(2015)Ronneberger, Fischer, and Brox}]{UNET}
+Ronneberger, O., Fischer, P., and Brox, T.: U-Net: Convolutional Networks for
+  Biomedical Image Segmentation, arXiv preprint arXiv:1505.04597, 2015.
+
+\bibitem[{Roy et~al.(2017)Roy, Behera, and Srivastav}]{roy2017satellite}
+Roy, P., Behera, M., and Srivastav, S.: Satellite remote sensing: sensors,
+  applications and techniques, Proceedings of the National Academy of Sciences,
+  India Section A: Physical Sciences, 87, 465--472, 2017.
+
+\bibitem[{Schiffer and Rossow(1983)}]{schiffer1983international}
+Schiffer, R.~A. and Rossow, W.~B.: The International Satellite Cloud
+  Climatology Project (ISCCP): The first project of the world climate research
+  programme, Bulletin of the American Meteorological Society, 64, 779--784,
+  1983.
+
+\bibitem[{Schreiner et~al.(1993)Schreiner, Unger, Menzel, Ellrod, Strabala, and
+  Pellet}]{schreiner1993comparison}
+Schreiner, A.~J., Unger, D.~A., Menzel, W.~P., Ellrod, G.~P., Strabala, K.~I.,
+  and Pellet, J.~L.: A comparison of ground and satellite observations of cloud
+  cover, Bulletin of the American Meteorological Society, 74, 1851--1862, 1993.
+
+\bibitem[{Sebag et~al.(2010)Sebag, Andrew, Klebe, and Blatherwick}]{Klebe2010}
+Sebag, J., Andrew, J., Klebe, D., and Blatherwick, R.: LSST all-sky IR camera
+  cloud monitoring test results, Proceedings of SPIE - The International
+  Society for Optical Engineering, 7733, \doi{10.1117/12.856337}, 2010.
+
+\bibitem[{Sharma et~al.(2015)Sharma, Parihar, and Kemkar}]{Sharma2015}
+Sharma, T., Parihar, P., and Kemkar, M.: All sky scanning cloud monitor for
+  NLOT site survey, Journal of Physics: Conference Series, 595, 012\,032,
+  \doi{10.1088/1742-6596/595/1/012032}, 2015.
+
+\bibitem[{Shaw and Nugent(2013)}]{Shaw_2013}
+Shaw, J.~A. and Nugent, P.~W.: Physics principles in radiometric infrared
+  imaging of clouds in the atmosphere, European Journal of Physics, 34,
+  S111--S121, \doi{10.1088/0143-0807/34/6/s111}, 2013.
+
+\bibitem[{Shi et~al.(2021{\natexlab{a}})Shi, Zhou, and Qiu}]{CloudUNetv2}
+Shi, C., Zhou, Y., and Qiu, B.: CloudU-Netv2: A cloud segmentation method for
+  ground-based cloud images based on deep learning, Neural Processing Letters,
+  53, 2715--2728, 2021{\natexlab{a}}.
+
+\bibitem[{Shi et~al.(2021{\natexlab{b}})Shi, Zhou, Qiu, Guo, and
+  Li}]{CloudUNet}
+Shi, C., Zhou, Y., Qiu, B., Guo, D., and Li, M.: CloudU-Net: A Deep
+  Convolutional Neural Network Architecture for Daytime and Nighttime Cloud
+  Images’ Segmentation, IEEE Geoscience and Remote Sensing Letters, 18,
+  1688--1692, \doi{10.1109/LGRS.2020.3009227}, 2021{\natexlab{b}}.
+
+\bibitem[{Shi et~al.(2022)Shi, Zhou, and Qiu}]{shi2022cloudraednet}
+Shi, C., Zhou, Y., and Qiu, B.: CloudRaednet: residual attention-based
+  encoder--decoder network for ground-based cloud images segmentation in
+  nychthemeron, International Journal of Remote Sensing, 43, 2059--2075, 2022.
+
+\bibitem[{Simonyan and Zisserman(2015)}]{simonyan2015deep}
+Simonyan, K. and Zisserman, A.: Very Deep Convolutional Networks for
+  Large-Scale Image Recognition, 2015.
+
+\bibitem[{{Stubbs} and {Brown}(2015)}]{Stubbs2015}
+{Stubbs}, C.~W. and {Brown}, Y.~J.: {Precise astronomical flux calibration and
+  its impact on studying the nature of the dark energy}, Modern Physics Letters
+  A, 30, 1530030, \doi{10.1142/S021773231530030X}, 2015.
+
+\bibitem[{Stubbs and Tonry(2012)}]{stubbs2012addressing}
+Stubbs, C.~W. and Tonry, J.~L.: Addressing the Photometric Calibration
+  Challenge: Explicit Determination of the Instrumental Response and
+  Atmospheric Response Functions, and Tying it All Together, 2012.
+
+\bibitem[{Sun et~al.(2011)Sun, Liu, and Zhao}]{SUN2011278}
+Sun, X., Liu, L., and Zhao, S.: Whole Sky Infrared Remote Sensing of Cloud,
+  Procedia Earth and Planetary Science, 2, 278--283,
+  \doi{https://doi.org/10.1016/j.proeps.2011.09.044}, the Second International
+  Conference on Mining Engineering and Metallurgical Technology (MEMT 2011),
+  2011.
+
+\bibitem[{Sun et~al.(2008)Sun, Gao, Zhai, Zhao, and Lian}]{sun2008whole}
+Sun, X.-J., Gao, T.-C., Zhai, D.-L., Zhao, S.-J., and Lian, J.-G.: Whole sky
+  infrared cloud measuring system based on the uncooled infrared focal plane
+  array, 2008.
+
+\bibitem[{Szejwach(1982)}]{Szejwach1982}
+Szejwach, G.: Determination of Semi-Transparent Cirrus Cloud Temperature from
+  Infrared Radiances: Application to METEOSAT, Journal of Applied Meteorology
+  and Climatology, 21, 384 -- 393,
+  \doi{https://doi.org/10.1175/1520-0450(1982)021<0384:DOSTCC>2.0.CO;2}, 1982.
+
+\bibitem[{Thurairajah and Shaw(2005)}]{ICI}
+Thurairajah, B. and Shaw, J.: Cloud statistics measured with the infrared cloud
+  imager (ICI), IEEE Transactions on Geoscience and Remote Sensing, 43,
+  2000--2007, \doi{10.1109/TGRS.2005.853716}, 2005.
+
+\bibitem[{V{\'a}rnai and Marshak(2018)}]{varnai2018satellite}
+V{\'a}rnai, T. and Marshak, A.: Satellite observations of cloud-related
+  variations in aerosol properties, Atmosphere, 9, 430, 2018.
+
+\bibitem[{Vaswani et~al.(2023)Vaswani, Shazeer, Parmar, Uszkoreit, Jones,
+  Gomez, Kaiser, and Polosukhin}]{TRANSFORMER}
+Vaswani, A., Shazeer, N., Parmar, N., Uszkoreit, J., Jones, L., Gomez, A.~N.,
+  Kaiser, L., and Polosukhin, I.: Attention Is All You Need, 2023.
+
+\bibitem[{Wang et~al.(2021)Wang, Liu, Xie, Yang, Gao, Ling, Huang, Li, Liu, and
+  Xia}]{rs13091852}
+Wang, Y., Liu, D., Xie, W., Yang, M., Gao, Z., Ling, X., Huang, Y., Li, C.,
+  Liu, Y., and Xia, Y.: Day and Night Clouds Detection Using a Thermal-Infrared
+  All-Sky-View Camera, Remote Sensing, 13, \doi{10.3390/rs13091852}, 2021.
+
+\bibitem[{Wilczak et~al.(1996)Wilczak, Gossard, Neff, and
+  Eberhard}]{wilczak1996ground}
+Wilczak, J., Gossard, E., Neff, W., and Eberhard, W.: Ground-based remote
+  sensing of the atmospheric boundary layer: 25 years of progress,
+  Boundary-Layer Meteorology, 78, 321--349, 1996.
+
+\bibitem[{Xie et~al.(2020)Xie, Liu, Yang, Chen, Wang, Wang, Xia, Liu, Wang, and
+  Zhang}]{SegCloud}
+Xie, W., Liu, D., Yang, M., Chen, S., Wang, B., Wang, Z., Xia, Y., Liu, Y.,
+  Wang, Y., and Zhang, C.: SegCloud: a novel cloud image segmentation model
+  using a deep convolutional neural network for ground-based all-sky-view
+  camera observation, Atmospheric Measurement Techniques, 13, 1953--1961,
+  \doi{10.5194/amt-13-1953-2020}, 2020.
+
+\bibitem[{Yamashita and Yoshimura(2012)}]{yamashita2012ground}
+Yamashita, M. and Yoshimura, M.: Ground-based cloud observation for
+  satellite-based cloud discrimination and its validation, The International
+  Archives of the Photogrammetry, Remote Sensing and Spatial Information
+  Sciences, 39, 137--140, 2012.
+
+\bibitem[{Yang et~al.(2012)Yang, Lu, Ma, and Yao}]{Yang2012}
+Yang, J., Lu, W., Ma, Y., and Yao, W.: An Automated Cirrus Cloud Detection
+  Method for a Ground-Based Cloud Image, Journal of Atmospheric and Oceanic
+  Technology, 29, 527 -- 537, \doi{https://doi.org/10.1175/JTECH-D-11-00002.1},
+  2012.
+
+\bibitem[{Ye et~al.(2017)Ye, Cao, and Xiao}]{DeepCloud}
+Ye, L., Cao, Z., and Xiao, Y.: DeepCloud: Ground-Based Cloud Image
+  Categorization Using Deep Convolutional Features, IEEE Transactions on
+  Geoscience and Remote Sensing, 55, 5729--5740,
+  \doi{10.1109/TGRS.2017.2712809}, 2017.
+
+\bibitem[{Yoshimura and Yamashita(2013)}]{yoshimura2013contribution}
+Yoshimura, M. and Yamashita, M.: Contribution of ground-based cloud observation
+  to satellite-based cloud discrimination, Journal of Environmental Science and
+  Engineering. A, 2, 487, 2013.
+
+\bibitem[{Zhang et~al.(2022{\natexlab{a}})Zhang, Yang, Liu, Cao, and
+  Durrani}]{DPNet}
+Zhang, Z., Yang, S., Liu, S., Cao, X., and Durrani, T.~S.: Ground-Based Remote
+  Sensing Cloud Detection Using Dual Pyramid Network and Encoder–Decoder
+  Constraint, IEEE Transactions on Geoscience and Remote Sensing, 60, 1--10,
+  \doi{10.1109/TGRS.2022.3163917}, 2022{\natexlab{a}}.
+
+\bibitem[{Zhang et~al.(2022{\natexlab{b}})Zhang, Yang, Liu, Xiao, and
+  Cao}]{MACNN}
+Zhang, Z., Yang, S., Liu, S., Xiao, B., and Cao, X.: Ground-Based Cloud
+  Detection Using Multiscale Attention Convolutional Neural Network, IEEE
+  Geoscience and Remote Sensing Letters, 19, 1--5,
+  \doi{10.1109/LGRS.2021.3106337}, 2022{\natexlab{b}}.
+
+\bibitem[{Zhao et~al.(2022)Zhao, Zhang, Luo, Zhong, Tang, Peng, and
+  Fan}]{DMNet}
+Zhao, C., Zhang, X., Luo, H., Zhong, S., Tang, L., Peng, J., and Fan, J.:
+  Detail-Aware Multiscale Context Fusion Network for Cloud Detection, IEEE
+  Geoscience and Remote Sensing Letters, 19, 1--5,
+  \doi{10.1109/LGRS.2022.3207426}, 2022.
+
+\bibitem[{Zhou et~al.(2019)Zhou, Zhang, Li, Li, Feng, Jia, Lv, Tao, and
+  Guo}]{zhou2019cloud}
+Zhou, Q., Zhang, Y., Li, B., Li, L., Feng, J., Jia, S., Lv, S., Tao, F., and
+  Guo, J.: Cloud-base and cloud-top heights determined from a ground-based
+  cloud radar in Beijing, China, Atmospheric environment, 201, 381--390, 2019.
+
+\end{thebibliography}

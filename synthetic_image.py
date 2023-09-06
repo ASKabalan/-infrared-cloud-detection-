@@ -52,7 +52,7 @@ def read_noise(image, amount, gain=1):
     noise = noise_rng.normal(scale=amount/gain, size=shape)
     return noise
 
-def bias(image, value, realistic=False, number_of_colums = 5):
+def bias(image, value, realistic=False, col_values = 10, number_of_colums = 5):
     """
     Generate simulated bias image.
     
@@ -83,7 +83,7 @@ def bias(image, value, realistic=False, number_of_colums = 5):
         
         # Make the chosen columns a little brighter than the rest...
         for c in columns:
-            bias_im[:, c] = value + np.random.normal(np.zeros(col_pattern.shape), col_pattern) 
+            bias_im[:, c] = value + np.random.normal(np.zeros(col_pattern.shape), col_pattern) + col_values
 
         rng = np.random.RandomState(seed=np.random.randint(0, 1000))  # 20180520
         columns = rng.randint(0, shape[1], size=number_of_colums)
@@ -93,7 +93,7 @@ def bias(image, value, realistic=False, number_of_colums = 5):
         # Make the chosen columns a little brighter than the rest...
         for c in columns:
             #bias_im[:, c] = value - col_pattern
-            bias_im[:, c] = value + np.random.normal(np.zeros(col_pattern.shape), col_pattern)
+            bias_im[:, c] = value - np.random.normal(np.zeros(col_pattern.shape), col_pattern) - col_values
             
     return bias_im
 
@@ -117,7 +117,7 @@ def sky_background(image, sky_counts, gain=1):
     return sky_im
 
 
-def simulate_clear_sky_image(start=1000, stop=400, width=640, height=512, is_horizontal=True, bias_level=300, read_noise_level = 5, fpn_level = 5, bad_pixel_columns = 50, sky_noise_level = 10, return_original = True, augment_synthetic = True, apply_narcissus_effect = True, radius=160, center_x=320, center_y=256, smoothness=80, nar_intensity=0.025, seed = None, write_to_fits = False, index = 0):
+def simulate_clear_sky_image(start=1000, stop=400, width=640, height=512, is_horizontal=True, bias_level=300, read_noise_level = 5, fpn_level = 5, col_values = 10, bad_pixel_columns = 50, sky_noise_level = 10, return_original = True, augment_synthetic = True, apply_narcissus_effect = True, radius=160, center_x=320, center_y=256, smoothness=80, nar_intensity=0.025, seed = None, write_to_fits = False, index = 0):
     """
     Simulate an infrared clear sky image with realistic noise
 
@@ -186,7 +186,7 @@ def simulate_clear_sky_image(start=1000, stop=400, width=640, height=512, is_hor
 
     noise_im = synthetic_image + read_noise(synthetic_image, read_noise_level)
 
-    bias_only = bias(synthetic_image, bias_level, realistic=True, number_of_colums = bad_pixel_columns)
+    bias_only = bias(synthetic_image, bias_level, realistic=True, col_values=col_values, number_of_colums = bad_pixel_columns)
     bias_noise_im = noise_im + bias_only
 
     sky_only = sky_background(synthetic_image, sky_noise_level)
