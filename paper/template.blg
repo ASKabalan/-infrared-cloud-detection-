@@ -3,47 +3,49 @@ Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
 The top-level auxiliary file: template.aux
 The style file: copernicus.bst
 Database file #1: biblio.bib
+Warning--entry type for "SWINSEG" isn't style-file defined
+--line 3725 of file biblio.bib
 Warning--empty booktitle in Liandrat2017
 Warning--empty journal in sun2008whole
-You've used 89 entries,
+You've used 116 entries,
             2819 wiz_defined-function locations,
-            1592 strings with 32397 characters,
-and the built_in function-call counts, 89644 in all, are:
-= -- 8778
-> -- 5132
-< -- 34
-+ -- 2054
-- -- 1630
-* -- 6405
-:= -- 10091
-add.period$ -- 89
-call.type$ -- 89
-change.case$ -- 718
-chr.to.int$ -- 86
-cite$ -- 269
-duplicate$ -- 7920
-empty$ -- 4427
-format.name$ -- 1915
-if$ -- 17594
-int.to.chr$ -- 4
+            1764 strings with 39968 characters,
+and the built_in function-call counts, 119198 in all, are:
+= -- 11549
+> -- 7028
+< -- 49
++ -- 2783
+- -- 2239
+* -- 8584
+:= -- 13509
+add.period$ -- 116
+call.type$ -- 116
+change.case$ -- 972
+chr.to.int$ -- 112
+cite$ -- 350
+duplicate$ -- 10411
+empty$ -- 5838
+format.name$ -- 2605
+if$ -- 23415
+int.to.chr$ -- 5
 int.to.str$ -- 1
-missing$ -- 1122
-newline$ -- 276
-num.names$ -- 357
-pop$ -- 3911
+missing$ -- 1503
+newline$ -- 357
+num.names$ -- 465
+pop$ -- 5170
 preamble$ -- 1
-purify$ -- 716
+purify$ -- 970
 quote$ -- 0
-skip$ -- 4425
+skip$ -- 5857
 stack$ -- 0
-substring$ -- 2843
-swap$ -- 6530
-text.length$ -- 7
+substring$ -- 3687
+swap$ -- 8585
+text.length$ -- 16
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 798
+type$ -- 1041
 warning$ -- 2
-while$ -- 416
+while$ -- 550
 width$ -- 0
-write$ -- 1004
-(There were 2 warnings)
+write$ -- 1312
+(There were 3 warnings)

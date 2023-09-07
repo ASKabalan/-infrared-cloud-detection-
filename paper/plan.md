@@ -109,7 +109,7 @@ IRIS-CloudNet: Infrared Radiometric Image classification and Segmentation of CLO
 
 #### 	6.3 Future perspectives
 
-  - real-time data analysis module
+  - real-time data analysis module as in ACS.pdf
   - re-training on larger dataset
 
 ### 7. CONCLUSION
