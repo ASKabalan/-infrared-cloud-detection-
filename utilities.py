@@ -3,6 +3,10 @@ import numpy as np
 from mpl_toolkits.axes_grid1 import make_axes_locatable
 from astropy import visualization as aviz
 from astropy.nddata.blocks import block_reduce
+from sklearn.metrics import accuracy_score, precision_score, recall_score, roc_auc_score, roc_curve
+import matplotlib.pyplot as plt
+from keras.losses import BinaryCrossentropy
+from sklearn.metrics import roc_curve, auc
 
 def discrete_cmap(N, base_cmap=None):
     """Create an N-bin discrete colormap from the specified input map"""
@@ -16,10 +20,10 @@ def discrete_cmap(N, base_cmap=None):
     cmap_name = base.name + str(N)
     return base.from_list(cmap_name, color_list, N)
 
-def plot_image(data):
+def plot_image(data,figsize=(10, 4)):
     
     cloud_image, binary_mask = data
-    fig, axes = plt.subplots(1, 2, figsize=(10, 4))
+    fig, axes = plt.subplots(1, 2, figsize=figsize)
     N = 2
 
     ax1 = axes[0]
@@ -42,9 +46,9 @@ def plot_image(data):
     plt.tight_layout()
     plt.show()
 
-def plot_image_pred(cloud_image, binary_mask, y_pred , predmask_cmap='grayscale'):
+def plot_image_pred(cloud_image, binary_mask, y_pred , figsize=(8,4),predmask_cmap='grayscale'):
 
-    fig, axes = plt.subplots(1, 3, figsize=(10, 4))
+    fig, axes = plt.subplots(1, 3, figsize=figsize)
     N = 2
 
     ax1 = axes[0]
@@ -75,10 +79,28 @@ def plot_image_pred(cloud_image, binary_mask, y_pred , predmask_cmap='grayscale'
     plt.tight_layout()
     plt.show()
 
+from pathlib import Path
+from astropy.io import fits
+
+def rebin_fits(filename , bin = (128, 160)):
+    try: 
+        fits_file = fits.open(name=filename)
+        image = fits_file[0].data
+        image = rebin(image,bin)
+        fits_file[0].data = image
+
+        fits_file.writeto('BIN_SUBSET/'+Path(filename).name.replace('.fits', '_binned.fits'), overwrite=True)
+        fits_file.close()
+        del fits_file
+    except:
+        pass
+
 def rebin(arr, new_shape):
-    shape = (new_shape[0], arr.shape[0] // new_shape[0],
-    new_shape[1], arr.shape[1] // new_shape[1])
-    return arr.reshape(shape).mean(-1).mean(1)
+
+        shape = (new_shape[0], arr.shape[0] // new_shape[0],
+        new_shape[1], arr.shape[1] // new_shape[1])
+        return arr.reshape(shape).mean(-1).mean(1)
+
 
 def show_image(image,
                percl=99, percu=None, is_mask=False,
@@ -195,3 +217,54 @@ for plot in l_plots:
     pp.savefig(plot)
 pp.close()
 """
+
+def evaluate_model(y_true,y_pred_proba, threshhold = 0.5):
+    """
+    Evaluates the multi-output labels and prints mean accuracy, precision, recall, and plots mean AUC curve.
+    Also computes IOU metric.
+    
+    Args:
+    - y_true: Ground truth labels
+    - y_pred: Predicted labels
+    
+    """
+    
+    y_pred = (y_pred_proba > threshhold).astype(int)
+
+    # Flatten the arrays for pixel-wise operations
+    y_true_flat = y_true.ravel()
+    y_pred_flat = y_pred.ravel()
+
+    # Compute pixel-wise accuracy, precision, and recall
+    accuracy = np.mean(y_true_flat == y_pred_flat)
+    precision = np.sum(y_true_flat * y_pred_flat) / (np.sum(y_pred_flat) + 1e-10)
+    recall = np.sum(y_true_flat * y_pred_flat) / (np.sum(y_true_flat) + 1e-10)
+    
+    bce = BinaryCrossentropy()
+    loss = bce(y_true, y_pred_proba).numpy()
+        # Compute the IOU metric (Intersection Over Union)
+    intersection = np.sum(y_true_flat * y_pred_flat)
+    union = np.sum(y_true_flat) + np.sum(y_pred_flat) - intersection
+    iou = intersection / (union + 1e-10)
+    
+    
+    print(f"Mean Accuracy: {accuracy:.4f}")
+    print(f"Mean Precision: {precision:.4f}")
+    print(f"Mean Recall: {recall:.4f}")
+    print(f"BinaryCrossEntropy Loss: {loss:.4f}")
+    print(f"IOU: {iou:.4f}")
+    
+    # Compute pixel-wise FPR, TPR and thresholds
+    fpr, tpr, thresholds = roc_curve(y_true_flat, y_pred_flat)
+    auc_value = auc(fpr, tpr)
+    
+    # Plot the AUC curve
+    plt.figure(figsize=(10, 8))
+    plt.plot(fpr, tpr, label=f'Mean AUC: {auc_value:.4f}')
+    plt.plot([0, 1], [0, 1], 'r--')
+    plt.xlabel('False Positive Rate')
+    plt.ylabel('True Positive Rate')
+    plt.title('Receiver Operating Characteristic (ROC) Curve')
+    plt.legend(loc='best')
+    plt.show()
+
