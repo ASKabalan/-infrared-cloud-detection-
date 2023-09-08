@@ -5,47 +5,56 @@ The style file: copernicus.bst
 Database file #1: biblio.bib
 Warning--entry type for "SWINSEG" isn't style-file defined
 --line 3725 of file biblio.bib
+Warning--entry type for "Pandas" isn't style-file defined
+--line 4011 of file biblio.bib
+Warning--entry type for "Flax" isn't style-file defined
+--line 4022 of file biblio.bib
+Warning--entry type for "Jax" isn't style-file defined
+--line 4030 of file biblio.bib
+Warning--entry type for "opencv-python" isn't style-file defined
+--line 4121 of file biblio.bib
+Warning--empty title in Matplotlib
 Warning--empty booktitle in Liandrat2017
 Warning--empty journal in sun2008whole
-You've used 116 entries,
+You've used 131 entries,
             2819 wiz_defined-function locations,
-            1764 strings with 39968 characters,
-and the built_in function-call counts, 119198 in all, are:
-= -- 11549
-> -- 7028
-< -- 49
-+ -- 2783
-- -- 2239
-* -- 8584
-:= -- 13509
-add.period$ -- 116
-call.type$ -- 116
-change.case$ -- 972
-chr.to.int$ -- 112
-cite$ -- 350
-duplicate$ -- 10411
-empty$ -- 5838
-format.name$ -- 2605
-if$ -- 23415
-int.to.chr$ -- 5
+            1858 strings with 43800 characters,
+and the built_in function-call counts, 134138 in all, are:
+= -- 12882
+> -- 8064
+< -- 55
++ -- 3176
+- -- 2572
+* -- 9734
+:= -- 15321
+add.period$ -- 131
+call.type$ -- 131
+change.case$ -- 1113
+chr.to.int$ -- 126
+cite$ -- 396
+duplicate$ -- 11610
+empty$ -- 6542
+format.name$ -- 2979
+if$ -- 26307
+int.to.chr$ -- 6
 int.to.str$ -- 1
-missing$ -- 1503
-newline$ -- 357
-num.names$ -- 465
-pop$ -- 5170
+missing$ -- 1704
+newline$ -- 402
+num.names$ -- 525
+pop$ -- 5810
 preamble$ -- 1
-purify$ -- 970
+purify$ -- 1111
 quote$ -- 0
-skip$ -- 5857
+skip$ -- 6514
 stack$ -- 0
-substring$ -- 3687
-swap$ -- 8585
+substring$ -- 4085
+swap$ -- 9550
 text.length$ -- 16
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 1041
-warning$ -- 2
-while$ -- 550
+type$ -- 1176
+warning$ -- 3
+while$ -- 618
 width$ -- 0
-write$ -- 1312
-(There were 3 warnings)
+write$ -- 1477
+(There were 8 warnings)

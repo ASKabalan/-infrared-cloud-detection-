@@ -1,4 +1,4 @@
-\begin{thebibliography}{116}
+\begin{thebibliography}{131}
 \providecommand{\natexlab}[1]{#1}
 \providecommand{\url}[1]{{\tt #1}}
 \providecommand{\urlprefix}{URL }
@@ -56,6 +56,10 @@ Alzubaidi, L., Zhang, J., Humaidi, A.~J., Al-Dujaili, A.~Q., Duan, Y.,
 {Astropy Collaboration}, T.: Astropy: A community Python package for astronomy,
   Astronomy and Astrophysics, 558, A33, \doi{10.1051/0004-6361/201322068},
   2013.
+
+\bibitem[{{Astropy Collaboration}(2018)}]{Astropy2018}
+{Astropy Collaboration}, T.: Astropy: A community Python package for astronomy,
+  AJ, 156, 123, \doi{10.3847/1538-3881/aac387}, 2018.
 
 \bibitem[{Badrinarayanan et~al.(2017)Badrinarayanan, Kendall, and
   Cipolla}]{badrinarayanan2017segnet}
@@ -121,6 +125,16 @@ Bower, K., Choularton, T., Gallagher, M., Beswick, K., Flynn, M., Allen, A.,
   Davison, B., James, J., Robertson, L., Harrison, R., et~al.: ACE-2 HILLCLOUD.
   An overview of the ACE-2 ground-based cloud experiment, Tellus B, 52,
   750--778, 2000.
+
+\bibitem[{Bradbury et~al.(2018)Bradbury, Frostig, Hawkins, Johnson, Leary,
+  Maclaurin, Necula, Paszke, VanderPlas, Wanderman-Milne, and Zhang}]{Jax}
+Bradbury, J., Frostig, R., Hawkins, P., Johnson, M.~J., Leary, C., Maclaurin,
+  D., Necula, G., Paszke, A., VanderPlas, J., Wanderman-Milne, S., and Zhang,
+  Q.: JAX: composable transformations of Python+NumPy programs,
+  \urlprefix\url{http://github.com/google/jax}, 2018.
+
+\bibitem[{Bradski(2000)}]{OpenCV}
+Bradski, G.: {The OpenCV Library}, Dr. Dobb's Journal of Software Tools, 2000.
 
 \bibitem[{Brout et~al.(2022)Brout, Taylor, Scolnic, Wood, Rose, Vincenzi,
   Dwomoh, Lidman, Riess, Ali, Qu, and Dai}]{Brout2022}
@@ -238,6 +252,23 @@ Hack, E.~D., Pauliquevis, T., Barbosa, H. M.~J., Yamasoe, M.~A., Klebe, D., and
   infrared sky camera in subtropical South America, Atmospheric Measurement
   Techniques, 16, 1263--1278, \doi{10.5194/amt-16-1263-2023}, 2023.
 
+\bibitem[{Harris et~al.(2020)Harris, Millman, van~der Walt, Gommers, Virtanen,
+  Cournapeau, Wieser, Taylor, Berg, Smith, Kern, Picus, Hoyer, van Kerkwijk,
+  Brett, Haldane, del Rio, Wiebe, Peterson, Gerard-Marchant, Sheppard, Reddy,
+  Weckesser, Abbasi, Gohlke, and Oliphant}]{Numpy}
+Harris, C.~R., Millman, K.~J., van~der Walt, S.~J., Gommers, R., Virtanen, P.,
+  Cournapeau, D., Wieser, E., Taylor, J., Berg, S., Smith, N.~J., Kern, R.,
+  Picus, M., Hoyer, S., van Kerkwijk, M.~H., Brett, M., Haldane, A., del Rio,
+  J.~F., Wiebe, M., Peterson, P., Gerard-Marchant, P., Sheppard, K., Reddy, T.,
+  Weckesser, W., Abbasi, H., Gohlke, C., and Oliphant, T.~E.: Array programming
+  with NumPy, Nature, 585, 357--362, \doi{10.1038/s41586-020-2649-2}, 2020.
+
+\bibitem[{Heek et~al.(2023)Heek, Levskaya, Oliver, Ritter, Rondepierre,
+  Steiner, and van Zee}]{Flax}
+Heek, J., Levskaya, A., Oliver, A., Ritter, M., Rondepierre, B., Steiner, A.,
+  and van Zee, M.: Flax: A neural network library and ecosystem for JAX,
+  \urlprefix\url{http://github.com/google/flax}, 2023.
+
 \bibitem[{{Houghton} and {Lee}(1972)}]{Houghton1972}
 {Houghton}, J.~T. and {Lee}, A.~C.~L.: {Atmospheric Transmission in the 10-12
   {\textmu}m Window}, Nature Physical Science, 238, 117--118,
@@ -250,6 +281,9 @@ Hu, Y., Wielicki, B.~A., Yang, P., Stackhouse, P.~W., Lin, B., and Young,
   satellite-based study of the terrestrial atmosphere: Monitoring the stability
   of spaceborne measurements and assessing absorption anomaly, IEEE
   Transactions on Geoscience and Remote Sensing, 42, 2594--2599, 2004.
+
+\bibitem[{Hunter(2007)}]{Matplotlib}
+Hunter, J.~D.: CSE, 9, 90, \doi{10.1109/MCSE.2007.55}, 2007.
 
 \bibitem[{Ioffe and Szegedy(2015)}]{ioffe2015batch}
 Ioffe, S. and Szegedy, C.: Batch Normalization: Accelerating Deep Network
@@ -317,6 +351,11 @@ LeCun, Y., Bengio, Y., et~al.: Convolutional networks for images, speech, and
 Lewis, P.~M., Rogers, H., and Schindler, R.~H.: A radiometric all-sky infrared
   camera (RASICAM) for DES/CTIO, in: Ground-based and Airborne Instrumentation
   for Astronomy III, vol. 7735, pp. 1307--1318, SPIE, 2010.
+
+\bibitem[{Li et~al.(2020)Li, Liu, and Zhang}]{li2020deep}
+Li, M., Liu, S., and Zhang, Z.: Deep tensor fusion network for multimodal
+  ground-based cloud classification in weather station networks, Ad hoc
+  networks, 96, 101\,991, 2020.
 
 \bibitem[{Li et~al.(2011)Li, Lu, and Yang}]{HYTA}
 Li, Q., Lu, W., and Yang, J.: A Hybrid Thresholding Algorithm for Cloud
@@ -391,6 +430,11 @@ Liu, L., Jiang, H., He, P., Chen, W., Liu, X., Gao, J., and Han, J.: On the
   variance of the adaptive learning rate and beyond, arXiv preprint
   arXiv:1908.03265, 2019.
 
+\bibitem[{Liu et~al.(2018)Liu, Li, Zhang, Xiao, and Cao}]{liu2018multimodal}
+Liu, S., Li, M., Zhang, Z., Xiao, B., and Cao, X.: Multimodal ground-based
+  cloud classification using joint fusion convolutional neural network, Remote
+  Sensing, 10, 822, 2018.
+
 \bibitem[{Liu et~al.(2022)Liu, Zhang, Zhang, Cao, and Durrani}]{TransCloudSeg}
 Liu, S., Zhang, J., Zhang, Z., Cao, X., and Durrani, T.~S.: TransCloudSeg:
   Ground-Based Cloud Image Segmentation With Transformer, IEEE Journal of
@@ -432,6 +476,11 @@ Mandat, D., Pech, M., Hrabovsky, M., Schovanek, P., Palatka, M., Travnicek, P.,
   Prouza, M., and Ebr, J.: All Sky Camera instrument for night sky monitoring,
   arXiv preprint arXiv:1402.4762, 2014.
 
+\bibitem[{Manzo and Pellino(2021)}]{manzo2021voting}
+Manzo, M. and Pellino, S.: Voting in transfer learning system for ground-based
+  cloud classification, Machine Learning and Knowledge Extraction, 3, 542--553,
+  2021.
+
 \bibitem[{Martin(2008)}]{martin2008satellite}
 Martin, R.~V.: Satellite remote sensing of surface air quality, Atmospheric
   environment, 42, 7823--7843, 2008.
@@ -455,6 +504,10 @@ Nikolenko, I. and Maslov, I.: Infrared (thermal) camera for monitoring the
   state of the atmosphere above the sea horizon of the Simeiz Observatory
   INASAN, INASAN Science Reports, 6, 85--87, 2021.
 
+\bibitem[{Olli-Pekka and OpenCV(2016)}]{opencv-python}
+Olli-Pekka, H. and OpenCV, t.: {OpenCV Python packages},
+  \urlprefix\url{https://github.com/opencv/opencv-python}, 2016.
+
 \bibitem[{O'Shea and Nash(2015)}]{oshea2015introduction}
 O'Shea, K. and Nash, R.: An Introduction to Convolutional Neural Networks,
   2015.
@@ -462,6 +515,10 @@ O'Shea, K. and Nash, R.: An Introduction to Convolutional Neural Networks,
 \bibitem[{Paczy{\'n}ski(2000)}]{paczynski2000monitoring}
 Paczy{\'n}ski, B.: Monitoring All Sky for Variability1, Publications of the
   Astronomical Society of the Pacific, 112, 1281, 2000.
+
+\bibitem[{{Pandas Development Team}(2020)}]{Pandas}
+{Pandas Development Team}, T.: pandas-dev/pandas: Pandas,
+  \doi{10.5281/zenodo.3509134}, 2020.
 
 \bibitem[{Petzold et~al.(2015)Petzold, Thouret, Gerbig, Zahn, Brenninkmeijer,
   Gallagher, Hermann, Pontaud, Ziereis, Boulanger et~al.}]{petzold2015global}
@@ -668,11 +725,39 @@ V{\'a}rnai, T. and Marshak, A.: Satellite observations of cloud-related
 Vaswani, A., Shazeer, N., Parmar, N., Uszkoreit, J., Jones, L., Gomez, A.~N.,
   Kaiser, L., and Polosukhin, I.: Attention Is All You Need, 2023.
 
-\bibitem[{Wang et~al.(2021)Wang, Liu, Xie, Yang, Gao, Ling, Huang, Li, Liu, and
-  Xia}]{rs13091852}
+\bibitem[{Virtanen et~al.(2020)Virtanen, Gommers, Oliphant, Haberland, Reddy,
+  Cournapeau, Burovski, Peterson, Weckesser, Bright, {van der Walt}, Brett,
+  Wilson, Millman, Mayorov, Nelson, Jones, Kern, Larson, Carey, Polat, Feng,
+  Moore, {VanderPlas}, Laxalde, Perktold, Cimrman, Henriksen, Quintero, Harris,
+  Archibald, Ribeiro, Pedregosa, {van Mulbregt}, and {SciPy 1.0
+  Contributors}}]{scipy}
+Virtanen, P., Gommers, R., Oliphant, T.~E., Haberland, M., Reddy, T.,
+  Cournapeau, D., Burovski, E., Peterson, P., Weckesser, W., Bright, J., {van
+  der Walt}, S.~J., Brett, M., Wilson, J., Millman, K.~J., Mayorov, N., Nelson,
+  A. R.~J., Jones, E., Kern, R., Larson, E., Carey, C.~J., Polat, {\.I}., Feng,
+  Y., Moore, E.~W., {VanderPlas}, J., Laxalde, D., Perktold, J., Cimrman, R.,
+  Henriksen, I., Quintero, E.~A., Harris, C.~R., Archibald, A.~M., Ribeiro,
+  A.~H., Pedregosa, F., {van Mulbregt}, P., and {SciPy 1.0 Contributors}:
+  {{SciPy} 1.0: Fundamental Algorithms for Scientific Computing in Python},
+  Nature Methods, 17, 261--272, \doi{10.1038/s41592-019-0686-2}, 2020.
+
+\bibitem[{Wang et~al.(2021{\natexlab{a}})Wang, Zhuang, Wang, Zhou, and
+  Liu}]{Wang21}
+Wang, M., Zhuang, Z., Wang, K., Zhou, S., and Liu, Z.: Intelligent
+  classification of ground-based visible cloud images using a transfer
+  convolutional neural network and fine-tuning, Opt. Express, 29,
+  41\,176--41\,190, \doi{10.1364/OE.442455}, 2021{\natexlab{a}}.
+
+\bibitem[{Wang et~al.(2021{\natexlab{b}})Wang, Liu, Xie, Yang, Gao, Ling,
+  Huang, Li, Liu, and Xia}]{rs13091852}
 Wang, Y., Liu, D., Xie, W., Yang, M., Gao, Z., Ling, X., Huang, Y., Li, C.,
   Liu, Y., and Xia, Y.: Day and Night Clouds Detection Using a Thermal-Infrared
-  All-Sky-View Camera, Remote Sensing, 13, \doi{10.3390/rs13091852}, 2021.
+  All-Sky-View Camera, Remote Sensing, 13, \doi{10.3390/rs13091852},
+  2021{\natexlab{b}}.
+
+\bibitem[{Wei et~al.(2023)Wei, Zhu, Guo, and Ni}]{MMST}
+Wei, L., Zhu, T., Guo, Y., and Ni, C.: MMST: A Multi-Modal Ground-Based Cloud
+  Image Classification Method, Sensors, 23, \doi{10.3390/s23094222}, 2023.
 
 \bibitem[{Wilczak et~al.(1996)Wilczak, Gossard, Neff, and
   Eberhard}]{wilczak1996ground}
@@ -742,5 +827,11 @@ Zhao, C., Zhang, X., Luo, H., Zhong, S., Tang, L., Peng, J., and Fan, J.:
 Zhou, Q., Zhang, Y., Li, B., Li, L., Feng, J., Jia, S., Lv, S., Tao, F., and
   Guo, J.: Cloud-base and cloud-top heights determined from a ground-based
   cloud radar in Beijing, China, Atmospheric environment, 201, 381--390, 2019.
+
+\bibitem[{Zhou et~al.(2021)Zhou, Zhang, Xiao, Wang, Hong, Wu, and
+  Zhang}]{zhou2021novel}
+Zhou, Z., Zhang, F., Xiao, H., Wang, F., Hong, X., Wu, K., and Zhang, J.: A
+  novel ground-based cloud image segmentation method by using deep transfer
+  learning, IEEE Geoscience and Remote Sensing Letters, 19, 1--5, 2021.
 
 \end{thebibliography}
