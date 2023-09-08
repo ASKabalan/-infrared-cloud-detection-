@@ -385,7 +385,7 @@ The CNN classifier is trained on the dataset containing both cloudy and syntheti
 where $\mathcal{L}$ is the binary cross-entropy loss. $N$ is the total number of instances in the dataset, $i$ index represents an individual instance, $y_{i}$ is the $i$-th true binary label (0 or 1) and $f_w(x_i)$ is the predicted probability that belongs to class 1, based on the model with parameters $w$. The goal of training is to minimize this loss function by adjusting the model parameters weights $w$ to better align the predicted probabilities $f_w(x_i)$ with the true labels $y_{i}$.
 
 Both architectures are implemented in \textsc{Python} with the \textsc{keras} \citep{Keras} subpackage of \textsc{TensorFlow} framework \citep{TensorFlow} and \textsc{flax} \citep{Flax} neural network library of \textsc{jax} \citep{Jax}. IRIS-CloudDeep is trained on the GPU cluster infrastructure of the MESO@LR\footnote{\url{https://meso-lr.umontpellier.fr/}} high-performance computing center. Images are normalized and downsampled into a fixed 160 $\times$ 128 resolution format to speed up computations and to capture the global trend. Models are trained over 50 and 100 epochs respectively using the ADAM optimizer \citep{ADAM}. We set the batch size to 16 images with a dynamic learning rate initial value of $\lambda$ = 0.001 that decreases through the training epochs following the relation : $\lambda(\text{epoch}) = 0.001 \cdot 0.5^{\left\lfloor \frac{\text{epoch}}{10} \right\rfloor}
-$. We also set an earlystopping watchdogs that interrupts the training if the loss value doesn't decrease below a certain threshold after 15 epochs.  Hyperparameters are fine tuned with the \textsc{optuna}\footnote{\url{https://optuna.org/}} hyperparameter optimization framework \citep{Optuna} using the sampling strategy algorithm.
+$. We also set an earlystopping watchdogs that interrupts the training if the loss value doesn't decrease below a certain threshold after 15 epochs.  Hyperparameters are fine tuned with the \textsc{optuna} hyperparameters optimization framework \citep{Optuna} using the sampling strategy algorithm.
 
 \section{Experiments}
 \label{sec:experiments}
@@ -702,20 +702,20 @@ improve the performance of this model.}
 }
 
 
-\begin{table*}[t]
+\begin{table}[t]
     \begin{center}
-        \caption{Evaluation metrics for comparison of segmentation models performances on the self-capture testing set. Best values are denoted in bold font. (P = precision, mPA = mean pixel accuracy, R = recall, F1 = F1-score, mIoU= mean intersection over union, ER = error-rate)}
-        \begin{tabular}{c c c c c c c c c} 
+        \caption{Comparison of model size and computation speed for the same segmentation model implemented with \textsc{keras} and \textsc{flax}.}
+        \begin{tabular}{c c c} 
         \tophline \hline
-         Library & P [\%] & mPA [\%] & R & F1 [\%] & mIoU [\%] & ER [\%] & Run-time [s] & Size [MB]\\ [1.0ex]
+         Library & Run-time [s] & Size [MB]\\
          \hline
-         Keras & XXXX & XXXX & XXXX & XXXX & XXXX & XXXX & XXXX & 24 \\ [1.0ex]
-         Flax & XXXX & XXXX & XXXX & XXXX & XXXX & XXXX & XXXX & 14 \\ [1.0ex]
+         Keras & XXXX & 24 \\ [1.0ex]
+         Flax & XXXX & 14 \\ [1.0ex]
          \hline
         \end{tabular}
         \belowtable{}
         \end{center}
-    \end{table*}
+    \end{table}
     
 
 \subsection{Future perspectives}
