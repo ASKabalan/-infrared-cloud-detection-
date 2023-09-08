@@ -1,14 +1,14 @@
 # Fdb version 3
-["bibtex template"] 1694178720 "template.aux" "template.bbl" "template" 1694178841
+["bibtex template"] 1694186990 "template.aux" "template.bbl" "template" 1694186991
   "./copernicus.bst" 1647433060 39134 8a7ac2d830d122d08f069c4193c82e5a ""
-  "biblio.bib" 1694164346 167261 109719c8f305e5045192beacaa5b30f0 ""
-  "template.aux" 1694178840 58937 2a1464bf4ed8e85d7c7365c4f638c626 "pdflatex"
+  "biblio.bib" 1694183475 169025 cd13850a61a03161a771f02eab8759fe ""
+  "template.aux" 1694186991 62081 73783c72fb567aef5b46ee18623e8a6d "pdflatex"
   (generated)
   "template.bbl"
   "template.blg"
-["pdflatex"] 1694178840 "/home/sommer/Documents/IR/CLOUD_DETECTION/infrared-cloud-detection/paper/template.tex" "template.pdf" "template" 1694178841
+["pdflatex"] 1694186990 "/home/sommer/Documents/IR/CLOUD_DETECTION/infrared-cloud-detection/paper/template.tex" "template.pdf" "template" 1694186991
   "/etc/texmf/web2c/texmf.cnf" 1673281250 475 c0e671620eb5563b2130f56340a5fde8 ""
-  "/home/sommer/Documents/IR/CLOUD_DETECTION/infrared-cloud-detection/paper/template.tex" 1694178719 84229 9c90654533120d20f80d2a44af4cc0b2 ""
+  "/home/sommer/Documents/IR/CLOUD_DETECTION/infrared-cloud-detection/paper/template.tex" 1694186989 85744 256ad87612dceae201e7af14e3162b27 ""
   "/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc" 1165713224 4850 80dc9bab7f31fb78a000ccfed0e27cab ""
   "/usr/share/texlive/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/adobe/courier/pcrr8r.tfm" 1136768653 1292 bd42be2f344128bff6d35d98474adfe3 ""
@@ -54,6 +54,7 @@
   "/usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb" 1248133631 32569 5e5ddc8df908dea60932f3c484a54c0d ""
   "/usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy5.pfb" 1248133631 32915 7bf7720c61a5b3a7ff25b0964421c9b6 ""
   "/usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb" 1248133631 32587 1788b0c1c5b39540c96f5e42ccd6dae8 ""
+  "/usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy9.pfb" 1248133631 32442 c975af247b6702f7ca0c299af3616b80 ""
   "/usr/share/texlive/texmf-dist/fonts/type1/urw/courier/ucrr8a.pfb" 1136849748 45758 19968a0990191524e34e1994d4a31cb6 ""
   "/usr/share/texlive/texmf-dist/fonts/type1/urw/helvetic/uhvr8a.pfb" 1136849748 44648 23115b2a545ebfe2c526c3ca99db8b95 ""
   "/usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmb8a.pfb" 1136849748 44729 811d6c62865936705a31c797a1d5dada ""
@@ -201,14 +202,14 @@
   "figures/sample_sky_image.pdf" 1694178839 320310 ab347c68a8c5febf2af564da08b2f7ee ""
   "figures/schematics_segmentation_model.png" 1693994814 105925 b0dca422d0e14115c788e045412e6f6c ""
   "figures/schematics_stardice.png" 1673282399 386525 c209e029fbac2fac45875d4805a88892 ""
-  "figures/synthetic_clear_sky_image.pdf" 1694002723 3431668 4af26745840b39a65de9bfce99b62ade ""
+  "figures/synthetic_clear_sky_image.pdf" 1694182711 3232013 f8fdd71cf402095a82e225d924cd556a ""
   "figures/test_dl_15epochs.png" 1693259873 97950 005a01bfb02a93739846e716e86e51ac ""
   "figures/test_dl_15epochs2.png" 1693259975 114758 d21a93621a71f6a90421be80ff567458 ""
   "figures/test_dl_15epochs3.png" 1693260037 83776 fbfc2a7d394b0c88268e8a474c025388 ""
   "orcidlogo.pdf" 1694107867 1186 379ce59ea99fb3313849de510575cf8a ""
-  "template.aux" 1694178840 58937 2a1464bf4ed8e85d7c7365c4f638c626 "pdflatex"
-  "template.bbl" 1694178720 45534 e43615364af155d8513dea3f0666f629 "bibtex template"
-  "template.tex" 1694178719 84229 9c90654533120d20f80d2a44af4cc0b2 ""
+  "template.aux" 1694186991 62081 73783c72fb567aef5b46ee18623e8a6d "pdflatex"
+  "template.bbl" 1694186990 46730 7e908cfa5c75cfbbcffadfbb3c5c24d4 "bibtex template"
+  "template.tex" 1694186989 85744 256ad87612dceae201e7af14e3162b27 ""
   (generated)
   "template.aux"
   "template.log"

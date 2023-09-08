@@ -551,6 +551,7 @@
 \@LN{421}{4}
 \@LN{422}{4}
 \@LN{423}{4}
+\citation{perez2017effectiveness,8388338,yang2022image}
 \citation{lecun1995convolutional,Krizhevsky2012}
 \citation{UNET}
 \@LN@col{1}
@@ -591,20 +592,22 @@
 \@LN{451}{5}
 \@LN{452}{5}
 \@LN{453}{5}
+\@LN{454}{5}
+\@LN{455}{5}
 \@writefile{toc}{\contentsline {section}{\numberline {4}Methodology}{6}{section.4}\protected@file@percent }
 \newlabel{sec:framework}{{4}{6}{Methodology}{section.4}{}}
-\@LN{454}{5}
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.1}Overall framework of IRIS-CloudDeep}{6}{subsection.4.1}\protected@file@percent }
-\@LN{455}{5}
 \@LN{456}{5}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.1}Overall framework of IRIS-CloudDeep}{6}{subsection.4.1}\protected@file@percent }
 \@LN{457}{5}
 \@LN{458}{5}
 \@LN{459}{5}
 \@LN{460}{5}
 \@LN{461}{5}
 \@LN{462}{5}
+\citation{SHARMA2018377}
 \citation{simonyan2015deep}
 \citation{canziani2016analysis}
+\citation{ResNet}
 \citation{SegCloud}
 \citation{agarap2018deep}
 \citation{ioffe2015batch,bjorck2018understanding}
@@ -616,9 +619,9 @@
 \@LN{466}{6}
 \@LN{467}{6}
 \@LN{468}{6}
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.2}Image classification}{7}{subsection.4.2}\protected@file@percent }
 \@LN{469}{6}
 \@LN{470}{6}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.2}Image classification}{7}{subsection.4.2}\protected@file@percent }
 \@LN{471}{6}
 \@LN{472}{6}
 \@LN{473}{6}
@@ -656,13 +659,13 @@
 \@LN{505}{6}
 \@LN{506}{6}
 \@LN{507}{6}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {4.2.1}Encoder block}{7}{subsubsection.4.2.1}\protected@file@percent }
 \@LN{508}{6}
 \@LN{509}{6}
 \@LN{510}{6}
 \@LN{511}{6}
-\@LN{512}{6}
 \@LN@col{2}
+\@LN{512}{6}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {4.2.1}Encoder block}{7}{subsubsection.4.2.1}\protected@file@percent }
 \@LN{513}{6}
 \@LN{514}{6}
 \@LN{515}{6}
@@ -694,12 +697,12 @@
 \@LN{541}{6}
 \@LN{542}{6}
 \@LN{543}{6}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {4.2.2}Decoder block}{7}{subsubsection.4.2.2}\protected@file@percent }
 \@LN{544}{6}
 \@LN{545}{6}
 \@LN{546}{6}
 \@LN{547}{6}
 \@LN{548}{6}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {4.2.2}Decoder block}{7}{subsubsection.4.2.2}\protected@file@percent }
 \@LN{549}{6}
 \@LN{550}{6}
 \@LN{551}{6}
@@ -715,80 +718,73 @@
 \@LN{561}{6}
 \@LN{562}{6}
 \@LN{563}{6}
-\@LN{564}{6}
-\@LN{565}{6}
 \@writefile{lof}{\contentsline {figure}{\numberline {5}{\ignorespaces Schematic diagram of common-used deep-learning architectures (top) and this paper solution (bottom). The input image is a 160 × 128 radiometric grayscale image of the sky from the LWIR instrument. Classifier model output is a boolean.\relax }}{8}{figure.caption.6}\protected@file@percent }
 \newlabel{fig:architecture_schematic}{{5}{8}{Schematic diagram of common-used deep-learning architectures (top) and this paper solution (bottom). The input image is a 160 × 128 radiometric grayscale image of the sky from the LWIR instrument. Classifier model output is a boolean.\relax }{figure.caption.6}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {6}{\ignorespaces  Schematic diagram of the classifier model architecture. Boxes represent cross-sections of square feature maps. The networks contain an encoder network, a corresponding decoder network, and a final Softmax classifier. Each map's dimensions are indicated on its lower left, and its number of channels are indicated above it. Half-grey boxes represent maps for which half of their channels are copied. The input image is a 160 × 128 radiometrically calibrated grayscale image of the sky from the LWIR instrument. Classifier model output is a boolean. Arrows represent operations, specified by the legend-notably, blue arrows represent convolutions, while gray ones represent copying (skip connections). Tensor dimensions at the output of each block are specified.\relax }}{8}{figure.caption.7}\protected@file@percent }
-\newlabel{fig:schematics_classification_model}{{6}{8}{Schematic diagram of the classifier model architecture. Boxes represent cross-sections of square feature maps. The networks contain an encoder network, a corresponding decoder network, and a final Softmax classifier. Each map's dimensions are indicated on its lower left, and its number of channels are indicated above it. Half-grey boxes represent maps for which half of their channels are copied. The input image is a 160 × 128 radiometrically calibrated grayscale image of the sky from the LWIR instrument. Classifier model output is a boolean. Arrows represent operations, specified by the legend-notably, blue arrows represent convolutions, while gray ones represent copying (skip connections). Tensor dimensions at the output of each block are specified.\relax }{figure.caption.7}{}}
 \@LN@col{1}
+\@LN{564}{7}
+\@LN{565}{7}
 \@LN{566}{7}
 \@LN{567}{7}
-\@LN@col{2}
 \@LN{568}{7}
 \@LN{569}{7}
-\citation{Keras}
-\citation{TensorFlow}
-\citation{Flax}
-\citation{Jax}
-\citation{ADAM}
-\citation{Optuna}
+\@LN{570}{7}
+\@LN{571}{7}
+\@LN{572}{7}
+\@LN{573}{7}
+\@LN{574}{7}
+\@LN{575}{7}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {4.2.3}Binary classifier}{8}{subsubsection.4.2.3}\protected@file@percent }
+\@LN{576}{7}
+\@LN{577}{7}
+\@LN{578}{7}
+\@LN{579}{7}
+\@LN{580}{7}
+\@LN{581}{7}
+\@LN{582}{7}
+\@LN{583}{7}
+\@LN{584}{7}
+\@LN{585}{7}
+\@LN{586}{7}
+\@LN{587}{7}
+\@LN@col{2}
+\@LN{588}{7}
+\@LN{589}{7}
+\@LN{590}{7}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.3}Image segmentation}{8}{subsection.4.3}\protected@file@percent }
+\@LN{591}{7}
+\@LN{592}{7}
+\@LN{593}{7}
+\@LN{594}{7}
+\@LN{595}{7}
+\@LN{596}{7}
+\@LN{597}{7}
+\@LN{598}{7}
+\@LN{599}{7}
+\@LN{600}{7}
+\@LN{601}{7}
+\@LN{602}{7}
+\@LN{603}{7}
+\@LN{604}{7}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {4.3.1}Encoder block}{8}{subsubsection.4.3.1}\protected@file@percent }
+\@LN{605}{7}
+\@LN{606}{7}
+\@LN{607}{7}
+\@LN{608}{7}
+\@LN{609}{7}
+\@LN{610}{7}
+\@writefile{lof}{\contentsline {figure}{\numberline {6}{\ignorespaces  Schematic diagram of the classifier model architecture. Boxes represent cross-sections of square feature maps. The networks contain an encoder network, a corresponding decoder network, and a final Softmax classifier. Each map's dimensions are indicated on its lower left, and its number of channels are indicated above it. Half-grey boxes represent maps for which half of their channels are copied. The input image is a 160 × 128 radiometrically calibrated grayscale image of the sky from the LWIR instrument. Classifier model output is a boolean. Arrows represent operations, specified by the legend-notably, blue arrows represent convolutions, while gray ones represent copying (skip connections). Tensor dimensions at the output of each block are specified. VGG-8 architecture for CIFAR-10/SVHN: We implement a non-standard VGG-8 architecture (without Batch Normalization), which is similar to the standard VGG-11 [40] network but with five convolution layers instead of eight. Each convolution layer has 3 × 3 filters with padding 1 and stride 1. The convolution layer is followed by ReLU non-linearity and a max pooling layer with 2 × 2 filter, no padding and stride 2 resulting in a downsampling factor of 2. The convolution layers are followed by 3 fully connected layers of dimensions 128, 128 and 10. We use ReLU non-linearity after each fc layer except the final one. CNN architecture for CIFAR-10/SVHN: The network consists of three convolution layers with 3$\times $3 filters, 0 padding and stride 1. The convolution layers are followed by a ReLU non-linearity. We use max pooling in this work with a filter size of 2$\times $2, no padding and stride 2 which results in a downsampling of the features by a factor of 2. The three convolution layers have 6, 16 and 32 filters respectively. Finally, a Global Average Pooling (GAP) is applied and a fully connected (fc) outputs logits over the number of classes.\relax }}{9}{figure.caption.7}\protected@file@percent }
+\newlabel{fig:schematics_classification_model}{{6}{9}{Schematic diagram of the classifier model architecture. Boxes represent cross-sections of square feature maps. The networks contain an encoder network, a corresponding decoder network, and a final Softmax classifier. Each map's dimensions are indicated on its lower left, and its number of channels are indicated above it. Half-grey boxes represent maps for which half of their channels are copied. The input image is a 160 × 128 radiometrically calibrated grayscale image of the sky from the LWIR instrument. Classifier model output is a boolean. Arrows represent operations, specified by the legend-notably, blue arrows represent convolutions, while gray ones represent copying (skip connections). Tensor dimensions at the output of each block are specified. VGG-8 architecture for CIFAR-10/SVHN: We implement a non-standard VGG-8 architecture (without Batch Normalization), which is similar to the standard VGG-11 [40] network but with five convolution layers instead of eight. Each convolution layer has 3 × 3 filters with padding 1 and stride 1. The convolution layer is followed by ReLU non-linearity and a max pooling layer with 2 × 2 filter, no padding and stride 2 resulting in a downsampling factor of 2. The convolution layers are followed by 3 fully connected layers of dimensions 128, 128 and 10. We use ReLU non-linearity after each fc layer except the final one. CNN architecture for CIFAR-10/SVHN: The network consists of three convolution layers with 3$\times $3 filters, 0 padding and stride 1. The convolution layers are followed by a ReLU non-linearity. We use max pooling in this work with a filter size of 2$\times $2, no padding and stride 2 which results in a downsampling of the features by a factor of 2. The three convolution layers have 6, 16 and 32 filters respectively. Finally, a Global Average Pooling (GAP) is applied and a fully connected (fc) outputs logits over the number of classes.\relax }{figure.caption.7}{}}
 \@LN@col{1}
-\@LN{570}{8}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {4.2.3}Binary classifier}{9}{subsubsection.4.2.3}\protected@file@percent }
-\@LN{571}{8}
-\@LN{572}{8}
-\@LN{573}{8}
-\@LN{574}{8}
-\@LN{575}{8}
-\@LN{576}{8}
-\@LN{577}{8}
-\@LN{578}{8}
-\@LN{579}{8}
-\@LN{580}{8}
-\@LN{581}{8}
-\@LN{582}{8}
-\@LN{583}{8}
-\@LN{584}{8}
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.3}Image segmentation}{9}{subsection.4.3}\protected@file@percent }
-\@LN{585}{8}
-\@LN{586}{8}
-\@LN{587}{8}
-\@LN{588}{8}
-\@LN{589}{8}
-\@LN{590}{8}
-\@LN{591}{8}
-\@LN{592}{8}
-\@LN{593}{8}
-\@LN{594}{8}
-\@LN{595}{8}
-\@LN{596}{8}
-\@LN{597}{8}
-\@LN{598}{8}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {4.3.1}Encoder block}{9}{subsubsection.4.3.1}\protected@file@percent }
-\@LN{599}{8}
-\@LN{600}{8}
-\@LN{601}{8}
-\@LN{602}{8}
-\@LN{603}{8}
-\@LN{604}{8}
-\@LN{605}{8}
-\@LN{606}{8}
-\@LN{607}{8}
-\@LN{608}{8}
-\@LN{609}{8}
-\@LN{610}{8}
 \@LN{611}{8}
 \@LN{612}{8}
 \@LN{613}{8}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {4.3.2}Decoder block}{9}{subsubsection.4.3.2}\protected@file@percent }
 \@LN{614}{8}
 \@LN{615}{8}
 \@LN{616}{8}
 \@LN{617}{8}
 \@LN{618}{8}
-\@LN@col{2}
 \@LN{619}{8}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {4.3.2}Decoder block}{9}{subsubsection.4.3.2}\protected@file@percent }
 \@LN{620}{8}
 \@LN{621}{8}
 \@LN{622}{8}
@@ -799,51 +795,59 @@
 \@LN{627}{8}
 \@LN{628}{8}
 \@LN{629}{8}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {4.3.3}Model output}{9}{subsubsection.4.3.3}\protected@file@percent }
 \@LN{630}{8}
 \@LN{631}{8}
+\@LN@col{2}
 \@LN{632}{8}
 \@LN{633}{8}
 \@LN{634}{8}
 \@LN{635}{8}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {4.3.3}Model output}{9}{subsubsection.4.3.3}\protected@file@percent }
 \@LN{636}{8}
 \@LN{637}{8}
 \@LN{638}{8}
 \@LN{639}{8}
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.4}Training procedure and implementation details}{9}{subsection.4.4}\protected@file@percent }
 \@LN{640}{8}
 \@LN{641}{8}
 \@LN{642}{8}
 \@LN{643}{8}
 \@LN{644}{8}
 \@LN{645}{8}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.4}Training procedure and implementation details}{9}{subsection.4.4}\protected@file@percent }
 \@LN{646}{8}
 \@LN{647}{8}
 \@LN{648}{8}
 \@LN{649}{8}
 \@LN{650}{8}
 \@LN{651}{8}
-\@LN{652}{8}
-\@LN{653}{8}
-\@LN{654}{8}
-\@LN{655}{8}
-\@LN{656}{8}
-\@LN{657}{8}
-\@LN{658}{8}
-\@LN{659}{8}
-\@LN{660}{8}
-\@LN{661}{8}
-\@LN{662}{8}
-\@LN{663}{8}
-\@LN{664}{8}
-\@LN{665}{8}
-\@LN{666}{8}
+\citation{Keras}
+\citation{TensorFlow}
+\citation{Flax}
+\citation{Jax}
+\citation{ADAM}
+\citation{Optuna}
 \@writefile{lof}{\contentsline {figure}{\numberline {7}{\ignorespaces Sample of input images (left), associated ground-truth binary masks (center) and probabilistic map predictions (right) of IRIS-CloudDeep segmentation model.\relax }}{10}{figure.caption.8}\protected@file@percent }
 \newlabel{fig:sample_segmentation}{{7}{10}{Sample of input images (left), associated ground-truth binary masks (center) and probabilistic map predictions (right) of IRIS-CloudDeep segmentation model.\relax }{figure.caption.8}{}}
 \@LN@col{1}
+\@LN{652}{9}
+\@LN{653}{9}
+\@LN{654}{9}
+\@LN{655}{9}
+\@LN{656}{9}
+\@LN{657}{9}
+\@LN{658}{9}
+\@LN{659}{9}
+\@LN{660}{9}
+\@LN{661}{9}
+\@LN{662}{9}
+\@LN{663}{9}
+\@LN{664}{9}
+\@LN{665}{9}
+\@LN{666}{9}
 \@LN{667}{9}
 \@LN{668}{9}
 \@LN{669}{9}
+\@LN@col{2}
 \@LN{670}{9}
 \@LN{671}{9}
 \@LN{672}{9}
@@ -854,29 +858,28 @@
 \@LN{677}{9}
 \@LN{678}{9}
 \@LN{679}{9}
-\@writefile{toc}{\contentsline {section}{\numberline {5}Experiments}{10}{section.5}\protected@file@percent }
-\newlabel{sec:experiments}{{5}{10}{Experiments}{section.5}{}}
 \@LN{680}{9}
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.1}Performance metrics}{10}{subsection.5.1}\protected@file@percent }
 \@LN{681}{9}
 \@LN{682}{9}
-\@LN@col{2}
 \@LN{683}{9}
 \@LN{684}{9}
-\@LN{685}{9}
-\@LN{686}{9}
-\@LN{687}{9}
-\@LN{688}{9}
-\@LN{689}{9}
-\@LN{690}{9}
-\@LN{691}{9}
-\@LN{692}{9}
-\@LN{693}{9}
-\@LN{694}{9}
-\@LN{695}{9}
 \@writefile{lof}{\contentsline {figure}{\numberline {8}{\ignorespaces  Schematic diagram of U-Net based segmentation model architecture. Boxes represent cross-sections of square feature maps. The U-net model contains two parts: down-sampling (left half) and up-sampling (right half). After each convolutional layer, ReLU activation function (improves the computational speed of the training stage )and BN function were applied to effectively capture non-linearities in data and speedup the training Each map's dimensions are indicated on its lower left, and its number of channels are indicated above it. Half-grey boxes represent maps for which half of their channels are copied. The input image is a 160 × 128 radiometrically calibrated grayscale image of the sky from the LWIR instrument. The output image is a probabilistic mask prediction of pixels being cloudy or clear. Arrows represent operations, specified by the legend-notably, blue arrows represent convolutions, while gray ones represent copying (skip connections). Tensor dimensions at the output of each block are specified. Classifier model output is a boolean.\relax }}{11}{figure.caption.9}\protected@file@percent }
 \newlabel{fig:schematics_segmentation_model}{{8}{11}{Schematic diagram of U-Net based segmentation model architecture. Boxes represent cross-sections of square feature maps. The U-net model contains two parts: down-sampling (left half) and up-sampling (right half). After each convolutional layer, ReLU activation function (improves the computational speed of the training stage )and BN function were applied to effectively capture non-linearities in data and speedup the training Each map's dimensions are indicated on its lower left, and its number of channels are indicated above it. Half-grey boxes represent maps for which half of their channels are copied. The input image is a 160 × 128 radiometrically calibrated grayscale image of the sky from the LWIR instrument. The output image is a probabilistic mask prediction of pixels being cloudy or clear. Arrows represent operations, specified by the legend-notably, blue arrows represent convolutions, while gray ones represent copying (skip connections). Tensor dimensions at the output of each block are specified. Classifier model output is a boolean.\relax }{figure.caption.9}{}}
 \@LN@col{1}
+\@LN{685}{10}
+\@writefile{toc}{\contentsline {section}{\numberline {5}Experiments}{11}{section.5}\protected@file@percent }
+\newlabel{sec:experiments}{{5}{11}{Experiments}{section.5}{}}
+\@LN{686}{10}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.1}Performance metrics}{11}{subsection.5.1}\protected@file@percent }
+\@LN{687}{10}
+\@LN{688}{10}
+\@LN{689}{10}
+\@LN{690}{10}
+\@LN{691}{10}
+\@LN{692}{10}
+\@LN{693}{10}
+\@LN{694}{10}
+\@LN{695}{10}
 \@LN{696}{10}
 \@LN{697}{10}
 \@LN{698}{10}
@@ -885,59 +888,59 @@
 \@LN{701}{10}
 \@LN{702}{10}
 \@LN{703}{10}
+\@LN@col{2}
 \@LN{704}{10}
 \@LN{705}{10}
 \@LN{706}{10}
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.2}Results}{11}{subsection.5.2}\protected@file@percent }
 \@LN{707}{10}
 \@LN{708}{10}
 \@LN{709}{10}
 \@LN{710}{10}
 \@LN{711}{10}
 \@LN{712}{10}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.2}Results}{11}{subsection.5.2}\protected@file@percent }
 \@LN{713}{10}
 \@LN{714}{10}
 \@LN{715}{10}
 \@LN{716}{10}
-\@LN@col{2}
 \@LN{717}{10}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {5.2.1}Classifier}{11}{subsubsection.5.2.1}\protected@file@percent }
 \@LN{718}{10}
 \@LN{719}{10}
 \@LN{720}{10}
 \@LN{721}{10}
 \@LN{722}{10}
 \@LN{723}{10}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {5.2.1}Classifier}{11}{subsubsection.5.2.1}\protected@file@percent }
 \@LN{724}{10}
 \@LN{725}{10}
 \@LN{726}{10}
 \@LN{727}{10}
-\@LN{728}{10}
-\@LN{729}{10}
-\@LN{730}{10}
-\@LN{731}{10}
-\@LN{732}{10}
-\@LN{733}{10}
-\@LN{734}{10}
-\@LN{735}{10}
-\@LN{736}{10}
-\@LN{737}{10}
-\@LN{738}{10}
-\@LN{739}{10}
-\@LN{740}{10}
-\@LN{741}{10}
-\@LN{742}{10}
-\@LN{743}{10}
 \@writefile{lot}{\contentsline {table}{\numberline {2}{\ignorespaces Evaluation metrics for the proposed IRIS-CloudDeep framework. (P = precision, mPA = mean pixel accuracy, R = recall, F1 = F1-score, mIoU= mean intersection over union, ER = error-rate)\relax }}{12}{table.caption.10}\protected@file@percent }
 \@LN@col{1}
+\@LN{728}{11}
+\@LN{729}{11}
+\@LN{730}{11}
+\@LN{731}{11}
+\@LN{732}{11}
+\@LN{733}{11}
+\@LN{734}{11}
+\@LN{735}{11}
+\@LN{736}{11}
+\@LN{737}{11}
+\@LN{738}{11}
+\@LN{739}{11}
+\@LN{740}{11}
+\@LN{741}{11}
+\@LN{742}{11}
+\@LN{743}{11}
 \@LN{744}{11}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {5.2.2}Segmentation}{12}{subsubsection.5.2.2}\protected@file@percent }
 \@LN{745}{11}
 \@LN{746}{11}
 \@LN{747}{11}
 \@LN{748}{11}
 \@LN{749}{11}
 \@LN{750}{11}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {5.2.2}Segmentation}{12}{subsubsection.5.2.2}\protected@file@percent }
 \@LN{751}{11}
 \@LN{752}{11}
 \@LN{753}{11}
@@ -954,28 +957,28 @@
 \@LN{764}{11}
 \@LN{765}{11}
 \@LN{766}{11}
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.3}Framework effectiveness/performance}{12}{subsection.5.3}\protected@file@percent }
 \@LN{767}{11}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {5.3.1}Losses trend}{12}{subsubsection.5.3.1}\protected@file@percent }
 \@LN{768}{11}
 \@LN{769}{11}
+\@LN@col{2}
+\@writefile{lof}{\contentsline {figure}{\numberline {9}{\ignorespaces Training and testing losses of IRIS-CloudDeep models over epochs. The dashed curve is for training whereas the continuous curve is for testing. Blue and red curves denote the classifier and segmentation models respectively.\relax }}{12}{figure.caption.11}\protected@file@percent }
+\newlabel{fig:loss_trend}{{9}{12}{Training and testing losses of IRIS-CloudDeep models over epochs. The dashed curve is for training whereas the continuous curve is for testing. Blue and red curves denote the classifier and segmentation models respectively.\relax }{figure.caption.11}{}}
 \@LN{770}{11}
 \@LN{771}{11}
 \@LN{772}{11}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.3}Framework effectiveness/performance}{12}{subsection.5.3}\protected@file@percent }
 \@LN{773}{11}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {5.3.1}Losses trend}{12}{subsubsection.5.3.1}\protected@file@percent }
 \@LN{774}{11}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {5.3.2}Receiver Operating Curve (ROC)}{12}{subsubsection.5.3.2}\protected@file@percent }
 \@LN{775}{11}
 \@LN{776}{11}
 \@LN{777}{11}
 \@LN{778}{11}
 \@LN{779}{11}
 \@LN{780}{11}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {5.3.2}Receiver Operating Curve (ROC)}{12}{subsubsection.5.3.2}\protected@file@percent }
 \@LN{781}{11}
 \@LN{782}{11}
-\@LN@col{2}
-\@writefile{lof}{\contentsline {figure}{\numberline {9}{\ignorespaces Training and testing losses of IRIS-CloudDeep models over epochs. The dashed curve is for training whereas the continuous curve is for testing. Blue and red curves denote the classifier and segmentation models respectively.\relax }}{12}{figure.caption.11}\protected@file@percent }
-\newlabel{fig:loss_trend}{{9}{12}{Training and testing losses of IRIS-CloudDeep models over epochs. The dashed curve is for training whereas the continuous curve is for testing. Blue and red curves denote the classifier and segmentation models respectively.\relax }{figure.caption.11}{}}
 \@LN{783}{11}
 \@LN{784}{11}
 \@LN{785}{11}
@@ -983,35 +986,29 @@
 \@LN{787}{11}
 \@LN{788}{11}
 \@LN{789}{11}
-\@LN{790}{11}
-\@LN{791}{11}
-\@LN{792}{11}
-\@LN{793}{11}
-\@LN{794}{11}
-\@LN{795}{11}
-\@LN{796}{11}
-\@LN{797}{11}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {5.3.3}Confusion matrices}{12}{subsubsection.5.3.3}\protected@file@percent }
-\@LN{798}{11}
-\@LN{799}{11}
-\@LN{800}{11}
-\@LN{801}{11}
-\@LN{802}{11}
-\@LN{803}{11}
-\@LN{804}{11}
-\@LN{805}{11}
 \citation{SUN2011278,Liu2021,amt-11-5351-2018}
 \citation{liu2018multimodal,li2020deep,MMST}
 \citation{manzo2021voting,Wang21,zhou2021novel}
-\citation{dev2016colorbased}
-\citation{SWINSEG,dev2017nighttime}
-\citation{dev2019cloudsegnet}
-\citation{SegCloud}
-\citation{HYTA}
-\citation{OpenCV}
 \@LN@col{1}
 \@writefile{lof}{\contentsline {figure}{\numberline {10}{\ignorespaces ROC curve comparison of different segmentation models. The AUC value represents the area under the curve.\relax }}{13}{figure.caption.12}\protected@file@percent }
 \newlabel{fig:roc_curve}{{10}{13}{ROC curve comparison of different segmentation models. The AUC value represents the area under the curve.\relax }{figure.caption.12}{}}
+\@LN{790}{12}
+\@LN{791}{12}
+\@LN{792}{12}
+\@LN{793}{12}
+\@LN{794}{12}
+\@LN{795}{12}
+\@LN{796}{12}
+\@LN{797}{12}
+\@LN{798}{12}
+\@LN{799}{12}
+\@LN{800}{12}
+\@LN{801}{12}
+\@LN{802}{12}
+\@LN{803}{12}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {5.3.3}Confusion matrices}{13}{subsubsection.5.3.3}\protected@file@percent }
+\@LN{804}{12}
+\@LN{805}{12}
 \@LN{806}{12}
 \@LN{807}{12}
 \@LN{808}{12}
@@ -1029,6 +1026,9 @@
 \@LN{820}{12}
 \@LN{821}{12}
 \@LN{822}{12}
+\@LN@col{2}
+\@writefile{lof}{\contentsline {figure}{\numberline {11}{\ignorespaces  Confusion matrices for the methods considered in the framework. The normalized confusion matrix demonstrates the performance of the proposed model in classifying tiles containing obscurant clouds. The model tends to miss-classify tiles with tiles near the edge of the obscurant clouds since the human labels considered the edges clear although containing very light occlusion.\relax }}{13}{figure.caption.13}\protected@file@percent }
+\newlabel{fig:confusion_matrices}{{11}{13}{Confusion matrices for the methods considered in the framework. The normalized confusion matrix demonstrates the performance of the proposed model in classifying tiles containing obscurant clouds. The model tends to miss-classify tiles with tiles near the edge of the obscurant clouds since the human labels considered the edges clear although containing very light occlusion.\relax }{figure.caption.13}{}}
 \@LN{823}{12}
 \@LN{824}{12}
 \@LN{825}{12}
@@ -1047,9 +1047,6 @@
 \@LN{838}{12}
 \@LN{839}{12}
 \@LN{840}{12}
-\@LN@col{2}
-\@writefile{lof}{\contentsline {figure}{\numberline {11}{\ignorespaces  Confusion matrices for the methods considered in the framework. The normalized confusion matrix demonstrates the performance of the proposed model in classifying tiles containing obscurant clouds. The model tends to miss-classify tiles with tiles near the edge of the obscurant clouds since the human labels considered the edges clear although containing very light occlusion.\relax }}{13}{figure.caption.13}\protected@file@percent }
-\newlabel{fig:confusion_matrices}{{11}{13}{Confusion matrices for the methods considered in the framework. The normalized confusion matrix demonstrates the performance of the proposed model in classifying tiles containing obscurant clouds. The model tends to miss-classify tiles with tiles near the edge of the obscurant clouds since the human labels considered the edges clear although containing very light occlusion.\relax }{figure.caption.13}{}}
 \@LN{841}{12}
 \@LN{842}{12}
 \@LN{843}{12}
@@ -1058,47 +1055,53 @@
 \@LN{846}{12}
 \@LN{847}{12}
 \@LN{848}{12}
-\@writefile{toc}{\contentsline {section}{\numberline {6}Discussion}{13}{section.6}\protected@file@percent }
-\newlabel{sec:discussion}{{6}{13}{Discussion}{section.6}{}}
 \@LN{849}{12}
-\@writefile{toc}{\contentsline {subsection}{\numberline {6.1}Limited benchmarking comparison}{13}{subsection.6.1}\protected@file@percent }
 \@LN{850}{12}
 \@LN{851}{12}
 \@LN{852}{12}
 \@LN{853}{12}
-\@LN{854}{12}
-\@LN{855}{12}
-\@LN{856}{12}
-\@LN{857}{12}
-\@LN{858}{12}
-\@LN{859}{12}
-\@LN{860}{12}
-\@LN{861}{12}
-\@LN{862}{12}
-\@LN{863}{12}
-\@LN{864}{12}
-\@LN{865}{12}
-\@LN{866}{12}
-\@LN{867}{12}
-\@LN{868}{12}
-\@LN{869}{12}
-\@LN{870}{12}
-\@LN{871}{12}
-\@LN{872}{12}
+\citation{dev2016colorbased}
+\citation{SWINSEG,dev2017nighttime}
+\citation{dev2019cloudsegnet}
+\citation{SegCloud}
+\citation{HYTA}
+\citation{OpenCV}
 \@LN@col{1}
+\@LN{854}{13}
+\@writefile{toc}{\contentsline {section}{\numberline {6}Discussion}{14}{section.6}\protected@file@percent }
+\newlabel{sec:discussion}{{6}{14}{Discussion}{section.6}{}}
+\@LN{855}{13}
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.1}Limited benchmarking comparison}{14}{subsection.6.1}\protected@file@percent }
+\@LN{856}{13}
+\@LN{857}{13}
+\@LN{858}{13}
+\@LN{859}{13}
+\@LN{860}{13}
+\@LN{861}{13}
+\@LN{862}{13}
+\@LN{863}{13}
+\@LN{864}{13}
+\@LN{865}{13}
+\@LN{866}{13}
+\@LN{867}{13}
+\@LN{868}{13}
+\@LN{869}{13}
+\@LN{870}{13}
+\@LN{871}{13}
+\@LN{872}{13}
 \@LN{873}{13}
 \@LN{874}{13}
 \@LN{875}{13}
 \@LN{876}{13}
 \@LN{877}{13}
 \@LN{878}{13}
-\newlabel{eq:rgb_to_gray}{{8}{14}{Limited benchmarking comparison}{equation.6.8}{}}
 \@LN{879}{13}
 \@LN{880}{13}
 \@LN{881}{13}
 \@LN{882}{13}
 \@LN{883}{13}
 \@LN{884}{13}
+\newlabel{eq:rgb_to_gray}{{8}{14}{Limited benchmarking comparison}{equation.6.8}{}}
 \@LN{885}{13}
 \@LN{886}{13}
 \@LN{887}{13}
@@ -1114,13 +1117,14 @@
 \@LN{897}{13}
 \@LN{898}{13}
 \@LN{899}{13}
-\@writefile{toc}{\contentsline {subsection}{\numberline {6.2}Quality and quantity of training data}{14}{subsection.6.2}\protected@file@percent }
 \@LN{900}{13}
 \@LN{901}{13}
 \@LN{902}{13}
 \@LN{903}{13}
 \@LN{904}{13}
+\@LN@col{2}
 \@LN{905}{13}
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.2}Quality and quantity of training data}{14}{subsection.6.2}\protected@file@percent }
 \@LN{906}{13}
 \@LN{907}{13}
 \@LN{908}{13}
@@ -1140,7 +1144,6 @@
 \@LN{922}{13}
 \@LN{923}{13}
 \@LN{924}{13}
-\@LN@col{2}
 \@LN{925}{13}
 \@LN{926}{13}
 \@LN{927}{13}
@@ -1158,13 +1161,13 @@
 \@LN{939}{13}
 \@LN{940}{13}
 \@LN{941}{13}
-\@writefile{toc}{\contentsline {subsection}{\numberline {6.3}Analysis of training sample size effect}{14}{subsection.6.3}\protected@file@percent }
 \@LN{942}{13}
 \@LN{943}{13}
 \@LN{944}{13}
 \@LN{945}{13}
 \@LN{946}{13}
 \@LN{947}{13}
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.3}Analysis of training sample size effect}{14}{subsection.6.3}\protected@file@percent }
 \@LN{948}{13}
 \@LN{949}{13}
 \@LN{950}{13}
@@ -1174,46 +1177,47 @@
 \@LN{954}{13}
 \@LN{955}{13}
 \@LN{956}{13}
-\@LN{957}{13}
-\@LN{958}{13}
-\@LN{959}{13}
-\@LN{960}{13}
-\@LN{961}{13}
-\@LN{962}{13}
-\@LN{963}{13}
-\@LN{964}{13}
-\@LN{965}{13}
-\@LN{966}{13}
-\@LN{967}{13}
-\@LN{968}{13}
-\@LN{969}{13}
-\@LN{970}{13}
-\@LN{971}{13}
-\@LN{972}{13}
-\@writefile{toc}{\contentsline {subsection}{\numberline {6.4}Comparison of libraries: \textsc  {flax} vs \textsc  {keras}}{14}{subsection.6.4}\protected@file@percent }
-\@LN{973}{13}
-\@LN{974}{13}
-\@LN{975}{13}
 \@writefile{lot}{\contentsline {table}{\numberline {3}{\ignorespaces Evaluation metrics for the proposed segmentation model on publicly available state-of-the-art datasets. Note that RGB color images are transformed into gray-scale images as IRIS-CloudDeep segmentation model is optimized for this type of data. Best values are denoted in bold font. (P = precision, mPA = mean pixel accuracy, R = recall, F1 = F1-score, mIoU= mean intersection over union, ER = error-rate).\relax }}{15}{table.caption.14}\protected@file@percent }
 \newlabel{tab:datasets_comparison}{{3}{15}{Evaluation metrics for the proposed segmentation model on publicly available state-of-the-art datasets. Note that RGB color images are transformed into gray-scale images as IRIS-CloudDeep segmentation model is optimized for this type of data. Best values are denoted in bold font. (P = precision, mPA = mean pixel accuracy, R = recall, F1 = F1-score, mIoU= mean intersection over union, ER = error-rate).\relax }{table.caption.14}{}}
 \@LN@col{1}
-\@writefile{lot}{\contentsline {table}{\numberline {4}{\ignorespaces Comparison of model size and computation speed for the same segmentation model implemented with \textsc  {keras} and \textsc  {flax}.\relax }}{15}{table.caption.15}\protected@file@percent }
+\@LN{957}{14}
+\@LN{958}{14}
+\@LN{959}{14}
+\@LN{960}{14}
+\@LN{961}{14}
+\@LN{962}{14}
+\@LN{963}{14}
+\@LN{964}{14}
+\@LN{965}{14}
+\@LN{966}{14}
+\@LN{967}{14}
+\@LN{968}{14}
+\@LN{969}{14}
+\@LN{970}{14}
+\@LN{971}{14}
+\@LN{972}{14}
+\@LN{973}{14}
+\@LN{974}{14}
+\@LN{975}{14}
 \@LN{976}{14}
 \@LN{977}{14}
 \@LN{978}{14}
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.4}Comparison of libraries: \textsc  {flax} vs \textsc  {keras}}{15}{subsection.6.4}\protected@file@percent }
 \@LN{979}{14}
 \@LN{980}{14}
-\@writefile{toc}{\contentsline {subsection}{\numberline {6.5}Future perspectives}{15}{subsection.6.5}\protected@file@percent }
 \@LN{981}{14}
 \@LN{982}{14}
 \@LN{983}{14}
 \@LN{984}{14}
 \@LN{985}{14}
 \@LN{986}{14}
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.5}Future perspectives}{15}{subsection.6.5}\protected@file@percent }
 \@LN{987}{14}
 \@LN{988}{14}
 \@LN{989}{14}
 \@LN{990}{14}
+\@LN@col{2}
+\@writefile{lot}{\contentsline {table}{\numberline {4}{\ignorespaces Comparison of model size and computation speed for the same segmentation model implemented with \textsc  {keras} and \textsc  {flax}.\relax }}{15}{table.caption.15}\protected@file@percent }
 \@LN{991}{14}
 \@LN{992}{14}
 \@LN{993}{14}
@@ -1224,7 +1228,6 @@
 \@LN{998}{14}
 \@LN{999}{14}
 \@LN{1000}{14}
-\@LN@col{2}
 \@LN{1001}{14}
 \@LN{1002}{14}
 \@LN{1003}{14}
@@ -1233,33 +1236,11 @@
 \@LN{1006}{14}
 \@LN{1007}{14}
 \@LN{1008}{14}
-\@writefile{toc}{\contentsline {section}{\numberline {7}Conclusion}{15}{section.7}\protected@file@percent }
-\newlabel{sec:conclusion}{{7}{15}{Conclusion}{section.7}{}}
 \@LN{1009}{14}
 \@LN{1010}{14}
 \@LN{1011}{14}
 \@LN{1012}{14}
 \@LN{1013}{14}
-\@LN{1014}{14}
-\@LN{1015}{14}
-\@LN{1016}{14}
-\@LN{1017}{14}
-\@LN{1018}{14}
-\@LN{1019}{14}
-\@LN{1020}{14}
-\@LN{1021}{14}
-\@LN{1022}{14}
-\@LN{1023}{14}
-\@LN{1024}{14}
-\@LN{1025}{14}
-\@LN{1026}{14}
-\@LN{1027}{14}
-\@LN{1028}{14}
-\@LN{1029}{14}
-\@LN{1030}{14}
-\@LN{1031}{14}
-\@LN{1032}{14}
-\@LN{1033}{14}
 \citation{Astropy2013,Astropy2018}
 \citation{Flax}
 \citation{Jax}
@@ -1282,13 +1263,29 @@
 \bibcite{badrinarayanan2017segnet}{{9}{2017}{{Badrinarayanan et~al.}}{{Badrinarayanan, Kendall, and Cipolla}}}
 \bibcite{Betoule2013}{{10}{2013}{{Betoule et~al.}}{{Betoule, Marriner, Regnault, Cuillandre, Astier, Guy, Balland, Hage, Hardin, Kessler, Guillou, Mosher, Pain, Rocci, Sako, and Schahmaneche}}}
 \bibcite{stardice1}{{11}{2022}{{{Betoule} et~al.}}{{{Betoule}, {Antier}, {Bertin}, {{\'E}ric Blanc}, {Bongard}, {Cohen Tanugi}, {Dagoret-Campagne}, {Feinstein}, {Hardin}, {Juramy}, {Le Guillou}, {Le Van Suu}, {Moniez}, {Neveu}, {Nuss}, {Plez}, {Regnault}, {Sepulveda}, {Sommer}, {Souverin}, and {Wang}}}}
-\bibcite{bjorck2018understanding}{{12}{2018}{{Bjorck et~al.}}{{Bjorck, Gomes, Selman, and Weinberger}}}
-\bibcite{boers2006satellite}{{13}{2006}{{Boers et~al.}}{{Boers, Acarreta, and Gras}}}
-\bibcite{Bohlin2014}{{14}{2014}{{Bohlin}}{{}}}
-\bibcite{Bohlin2011}{{15}{2011}{{Bohlin et~al.}}{{Bohlin, Gordon, Rieke, Ardila, Carey, Deustua, Engelbracht, Ferguson, Flanagan, Kalirai, Meixner, Noriega-Crespo, Su, and Tremblay}}}
-\bibcite{Bohlin2020}{{16}{2020}{{Bohlin et~al.}}{{Bohlin, Hubeny, and Rauch}}}
-\bibcite{bower2000ace}{{17}{2000}{{Bower et~al.}}{{Bower, Choularton, Gallagher, Beswick, Flynn, Allen, Davison, James, Robertson, Harrison et~al.}}}
 \@LN@col{1}
+\@LN{1014}{15}
+\@writefile{toc}{\contentsline {section}{\numberline {7}Conclusion}{16}{section.7}\protected@file@percent }
+\newlabel{sec:conclusion}{{7}{16}{Conclusion}{section.7}{}}
+\@LN{1015}{15}
+\@LN{1016}{15}
+\@LN{1017}{15}
+\@LN{1018}{15}
+\@LN{1019}{15}
+\@LN{1020}{15}
+\@LN{1021}{15}
+\@LN{1022}{15}
+\@LN{1023}{15}
+\@LN{1024}{15}
+\@LN{1025}{15}
+\@LN{1026}{15}
+\@LN{1027}{15}
+\@LN{1028}{15}
+\@LN{1029}{15}
+\@LN{1030}{15}
+\@LN{1031}{15}
+\@LN{1032}{15}
+\@LN{1033}{15}
 \@LN{1034}{15}
 \@LN{1035}{15}
 \@LN{1036}{15}
@@ -1316,6 +1313,7 @@
 \@LN{1058}{15}
 \@LN{1059}{15}
 \@LN{1060}{15}
+\@LN@col{2}
 \@LN{1061}{15}
 \@LN{1062}{15}
 \@LN{1063}{15}
@@ -1337,7 +1335,6 @@
 \@LN{1079}{15}
 \@LN{1080}{15}
 \@LN{1081}{15}
-\@LN@col{2}
 \@LN{1082}{15}
 \@LN{1083}{15}
 \@LN{1084}{15}
@@ -1374,28 +1371,12 @@
 \@LN{1115}{15}
 \@LN{1116}{15}
 \@LN{1117}{15}
-\@LN{1118}{15}
-\@LN{1119}{15}
-\@LN{1120}{15}
-\@LN{1121}{15}
-\@LN{1122}{15}
-\@LN{1123}{15}
-\@LN{1124}{15}
-\@LN{1125}{15}
-\@LN{1126}{15}
-\@LN{1127}{15}
-\@LN{1128}{15}
-\@LN{1129}{15}
-\@LN{1130}{15}
-\@LN{1131}{15}
-\@LN{1132}{15}
-\@LN{1133}{15}
-\@LN{1134}{15}
-\@LN{1135}{15}
-\@LN{1136}{15}
-\@LN{1137}{15}
-\@LN{1138}{15}
-\@LN{1139}{15}
+\bibcite{bjorck2018understanding}{{12}{2018}{{Bjorck et~al.}}{{Bjorck, Gomes, Selman, and Weinberger}}}
+\bibcite{boers2006satellite}{{13}{2006}{{Boers et~al.}}{{Boers, Acarreta, and Gras}}}
+\bibcite{Bohlin2014}{{14}{2014}{{Bohlin}}{{}}}
+\bibcite{Bohlin2011}{{15}{2011}{{Bohlin et~al.}}{{Bohlin, Gordon, Rieke, Ardila, Carey, Deustua, Engelbracht, Ferguson, Flanagan, Kalirai, Meixner, Noriega-Crespo, Su, and Tremblay}}}
+\bibcite{Bohlin2020}{{16}{2020}{{Bohlin et~al.}}{{Bohlin, Hubeny, and Rauch}}}
+\bibcite{bower2000ace}{{17}{2000}{{Bower et~al.}}{{Bower, Choularton, Gallagher, Beswick, Flynn, Allen, Davison, James, Robertson, Harrison et~al.}}}
 \bibcite{Jax}{{18}{2018}{{Bradbury et~al.}}{{Bradbury, Frostig, Hawkins, Johnson, Leary, Maclaurin, Necula, Paszke, VanderPlas, Wanderman-Milne, and Zhang}}}
 \bibcite{OpenCV}{{19}{2000}{{Bradski}}{{}}}
 \bibcite{Brout2022}{{20}{2022}{{Brout et~al.}}{{Brout, Taylor, Scolnic, Wood, Rose, Vincenzi, Dwomoh, Lidman, Riess, Ali, Qu, and Dai}}}
@@ -1417,16 +1398,30 @@
 \bibcite{geer2017growing}{{36}{2017}{{Geer et~al.}}{{Geer, Baordo, Bormann, Chambon, English, Kazumori, Lawrence, Lean, Lonitz, and Lupu}}}
 \bibcite{Hack2023}{{37}{2023}{{Hack et~al.}}{{Hack, Pauliquevis, Barbosa, Yamasoe, Klebe, and Correia}}}
 \bibcite{Numpy}{{38}{2020}{{Harris et~al.}}{{Harris, Millman, van~der Walt, Gommers, Virtanen, Cournapeau, Wieser, Taylor, Berg, Smith, Kern, Picus, Hoyer, van Kerkwijk, Brett, Haldane, del Rio, Wiebe, Peterson, Gerard-Marchant, Sheppard, Reddy, Weckesser, Abbasi, Gohlke, and Oliphant}}}
-\bibcite{Flax}{{39}{2023}{{Heek et~al.}}{{Heek, Levskaya, Oliver, Ritter, Rondepierre, Steiner, and van Zee}}}
-\bibcite{Houghton1972}{{40}{1972}{{{Houghton} and {Lee}}}{{}}}
-\bibcite{hu2004application}{{41}{2004}{{Hu et~al.}}{{Hu, Wielicki, Yang, Stackhouse, Lin, and Young}}}
-\bibcite{Matplotlib}{{42}{2007}{{Hunter}}{{}}}
-\bibcite{ioffe2015batch}{{43}{2015}{{Ioffe and Szegedy}}{{}}}
-\bibcite{ishimwe2014applications}{{44}{2014}{{Ishimwe et~al.}}{{Ishimwe, Abutaleb, Ahmed et~al.}}}
-\bibcite{amt-15-1563-2022}{{45}{2022}{{Kelsey et~al.}}{{Kelsey, Riley, and Minschwaner}}}
-\bibcite{Kimata2018}{{46}{2018}{{Kimata}}{{}}}
-\bibcite{ADAM}{{47}{2014}{{Kingma and Ba}}{{}}}
+\bibcite{ResNet}{{39}{2015}{{He et~al.}}{{He, Zhang, Ren, and Sun}}}
 \@LN@col{1}
+\@LN{1118}{16}
+\@LN{1119}{16}
+\@LN{1120}{16}
+\@LN{1121}{16}
+\@LN{1122}{16}
+\@LN{1123}{16}
+\@LN{1124}{16}
+\@LN{1125}{16}
+\@LN{1126}{16}
+\@LN{1127}{16}
+\@LN{1128}{16}
+\@LN{1129}{16}
+\@LN{1130}{16}
+\@LN{1131}{16}
+\@LN{1132}{16}
+\@LN{1133}{16}
+\@LN{1134}{16}
+\@LN{1135}{16}
+\@LN{1136}{16}
+\@LN{1137}{16}
+\@LN{1138}{16}
+\@LN{1139}{16}
 \@LN{1140}{16}
 \@LN{1141}{16}
 \@LN{1142}{16}
@@ -1464,6 +1459,7 @@
 \@LN{1174}{16}
 \@LN{1175}{16}
 \@LN{1176}{16}
+\@LN@col{2}
 \@LN{1177}{16}
 \@LN{1178}{16}
 \@LN{1179}{16}
@@ -1485,7 +1481,6 @@
 \@LN{1195}{16}
 \@LN{1196}{16}
 \@LN{1197}{16}
-\@LN@col{2}
 \@LN{1198}{16}
 \@LN{1199}{16}
 \@LN{1200}{16}
@@ -1524,53 +1519,54 @@
 \@LN{1233}{16}
 \@LN{1234}{16}
 \@LN{1235}{16}
-\@LN{1236}{16}
-\@LN{1237}{16}
-\@LN{1238}{16}
-\@LN{1239}{16}
-\@LN{1240}{16}
-\@LN{1241}{16}
-\@LN{1242}{16}
-\@LN{1243}{16}
-\@LN{1244}{16}
-\@LN{1245}{16}
-\@LN{1246}{16}
-\@LN{1247}{16}
-\@LN{1248}{16}
-\@LN{1249}{16}
-\@LN{1250}{16}
-\@LN{1251}{16}
-\@LN{1252}{16}
-\@LN{1253}{16}
-\@LN{1254}{16}
-\@LN{1255}{16}
-\@LN{1256}{16}
-\bibcite{Klebe2012}{{48}{2012}{{Klebe et~al.}}{{Klebe, Sebag, Blatherwick, and Zimmer}}}
-\bibcite{Klebe2014}{{49}{2014}{{Klebe et~al.}}{{Klebe, Blatherwick, and Morris}}}
-\bibcite{rs12111902}{{50}{2020}{{Krauz et~al.}}{{Krauz, Janout, Blažek, and Páta}}}
-\bibcite{Krizhevsky2012}{{51}{2012}{{Krizhevsky et~al.}}{{Krizhevsky, Sutskever, and Hinton}}}
-\bibcite{Larason2008}{{52}{2008}{{Larason and Houston}}{{}}}
-\bibcite{lecun1995convolutional}{{53}{1995}{{LeCun et~al.}}{{LeCun, Bengio et~al.}}}
-\bibcite{lewis2010radiometric}{{54}{2010}{{Lewis et~al.}}{{Lewis, Rogers, and Schindler}}}
-\bibcite{li2020deep}{{55}{2020}{{Li et~al.}}{{Li, Liu, and Zhang}}}
-\bibcite{HYTA}{{56}{2011}{{Li et~al.}}{{Li, Lu, and Yang}}}
-\bibcite{CloudDeepLabV3}{{57}{2023}{{Li et~al.}}{{Li, Wang, Wu, Sun, and Zhuang}}}
-\bibcite{Li2016}{{58}{2016}{{Li et~al.}}{{Li, DePoy, Marshall, Tucker, Kessler, Annis, Bernstein, Boada, Burke, Finley, James, Kent, Lin, Marriner, Mondrik, Nagasawa, Rykoff, Scolnic, Walker, Wester, Abbott, Allam, Benoit-L{\'{e} }vy, Bertin, Brooks, Capozzi, Rosell, Kind, Carretero, Crocce, Cunha, D'Andrea, da~Costa, Desai, Diehl, Doel, Flaugher, Fosalba, Frieman, Gaztanaga, Goldstein, Gruen, Gruendl, Gutierrez, Honscheid, Kuehn, Kuropatkin, Maia, Melchior, Miller, Miquel, Mohr, Neilsen, Nichol, Nord, Ogando, Plazas, Romer, Roodman, Sako, Sanchez, Scarpine, Schubnell, Sevilla-Noarbe, Smith, Soares-Santos, Sobreira, Suchyta, Tarle, Thomas, and and}}}
-\bibcite{amt-15-3629-2022}{{59}{2022}{{Li et~al.}}{{Li, Wang, Qiu, and Wu}}}
-\bibcite{Liandrat2017}{{60}{2017{a}}{{Liandrat et~al.}}{{Liandrat, Cros, Braun, Saint-Antonin, Decroix, and Schmutz}}}
-\bibcite{liandrat2017cloud}{{61}{2017{b}}{{Liandrat et~al.}}{{Liandrat, Cros, Braun, Saint-Antonin, Decroix, and Schmutz}}}
-\bibcite{liou1992radiation}{{62}{1992}{{Liou}}{{}}}
-\bibcite{Liu2021}{{63}{2011}{{Liu et~al.}}{{Liu, Sun, Chen, Zhao, and Gao}}}
-\bibcite{RADAM}{{64}{2019}{{Liu et~al.}}{{Liu, Jiang, He, Chen, Liu, Gao, and Han}}}
-\bibcite{liu2018multimodal}{{65}{2018}{{Liu et~al.}}{{Liu, Li, Zhang, Xiao, and Cao}}}
-\bibcite{TransCloudSeg}{{66}{2022}{{Liu et~al.}}{{Liu, Zhang, Zhang, Cao, and Durrani}}}
-\bibcite{GAM}{{67}{2021}{{Liu et~al.}}{{Liu, Shao, and Hoffmann}}}
-\bibcite{Long2006}{{68}{2006}{{Long et~al.}}{{Long, Sabburg, Calbó, and Pagès}}}
-\bibcite{lopez2017contribution}{{69}{2017}{{Lopez et~al.}}{{Lopez, Antoine, Baratoux, and Rabinowicz}}}
-\bibcite{amt-11-5351-2018}{{70}{2018}{{Luo et~al.}}{{Luo, Meng, Liu, Zhao, and Zhou}}}
-\bibcite{makwana2022aclnet}{{71}{2022}{{Makwana et~al.}}{{Makwana, Nag, Susladkar, Deshmukh, Teja~R, Mittal, and Mohan}}}
-\bibcite{mandat2014all}{{72}{2014}{{Mandat et~al.}}{{Mandat, Pech, Hrabovsky, Schovanek, Palatka, Travnicek, Prouza, and Ebr}}}
+\bibcite{Flax}{{40}{2023}{{Heek et~al.}}{{Heek, Levskaya, Oliver, Ritter, Rondepierre, Steiner, and van Zee}}}
+\bibcite{Houghton1972}{{41}{1972}{{{Houghton} and {Lee}}}{{}}}
+\bibcite{hu2004application}{{42}{2004}{{Hu et~al.}}{{Hu, Wielicki, Yang, Stackhouse, Lin, and Young}}}
+\bibcite{Matplotlib}{{43}{2007}{{Hunter}}{{}}}
+\bibcite{ioffe2015batch}{{44}{2015}{{Ioffe and Szegedy}}{{}}}
+\bibcite{ishimwe2014applications}{{45}{2014}{{Ishimwe et~al.}}{{Ishimwe, Abutaleb, Ahmed et~al.}}}
+\bibcite{amt-15-1563-2022}{{46}{2022}{{Kelsey et~al.}}{{Kelsey, Riley, and Minschwaner}}}
+\bibcite{Kimata2018}{{47}{2018}{{Kimata}}{{}}}
+\bibcite{ADAM}{{48}{2014}{{Kingma and Ba}}{{}}}
+\bibcite{Klebe2012}{{49}{2012}{{Klebe et~al.}}{{Klebe, Sebag, Blatherwick, and Zimmer}}}
+\bibcite{Klebe2014}{{50}{2014}{{Klebe et~al.}}{{Klebe, Blatherwick, and Morris}}}
+\bibcite{rs12111902}{{51}{2020}{{Krauz et~al.}}{{Krauz, Janout, Blažek, and Páta}}}
+\bibcite{Krizhevsky2012}{{52}{2012}{{Krizhevsky et~al.}}{{Krizhevsky, Sutskever, and Hinton}}}
+\bibcite{Larason2008}{{53}{2008}{{Larason and Houston}}{{}}}
+\bibcite{lecun1995convolutional}{{54}{1995}{{LeCun et~al.}}{{LeCun, Bengio et~al.}}}
+\bibcite{lewis2010radiometric}{{55}{2010}{{Lewis et~al.}}{{Lewis, Rogers, and Schindler}}}
+\bibcite{li2020deep}{{56}{2020}{{Li et~al.}}{{Li, Liu, and Zhang}}}
+\bibcite{HYTA}{{57}{2011}{{Li et~al.}}{{Li, Lu, and Yang}}}
+\bibcite{CloudDeepLabV3}{{58}{2023}{{Li et~al.}}{{Li, Wang, Wu, Sun, and Zhuang}}}
+\bibcite{Li2016}{{59}{2016}{{Li et~al.}}{{Li, DePoy, Marshall, Tucker, Kessler, Annis, Bernstein, Boada, Burke, Finley, James, Kent, Lin, Marriner, Mondrik, Nagasawa, Rykoff, Scolnic, Walker, Wester, Abbott, Allam, Benoit-L{\'{e} }vy, Bertin, Brooks, Capozzi, Rosell, Kind, Carretero, Crocce, Cunha, D'Andrea, da~Costa, Desai, Diehl, Doel, Flaugher, Fosalba, Frieman, Gaztanaga, Goldstein, Gruen, Gruendl, Gutierrez, Honscheid, Kuehn, Kuropatkin, Maia, Melchior, Miller, Miquel, Mohr, Neilsen, Nichol, Nord, Ogando, Plazas, Romer, Roodman, Sako, Sanchez, Scarpine, Schubnell, Sevilla-Noarbe, Smith, Soares-Santos, Sobreira, Suchyta, Tarle, Thomas, and and}}}
+\bibcite{amt-15-3629-2022}{{60}{2022}{{Li et~al.}}{{Li, Wang, Qiu, and Wu}}}
+\bibcite{Liandrat2017}{{61}{2017{a}}{{Liandrat et~al.}}{{Liandrat, Cros, Braun, Saint-Antonin, Decroix, and Schmutz}}}
+\bibcite{liandrat2017cloud}{{62}{2017{b}}{{Liandrat et~al.}}{{Liandrat, Cros, Braun, Saint-Antonin, Decroix, and Schmutz}}}
+\bibcite{liou1992radiation}{{63}{1992}{{Liou}}{{}}}
+\bibcite{Liu2021}{{64}{2011}{{Liu et~al.}}{{Liu, Sun, Chen, Zhao, and Gao}}}
+\bibcite{RADAM}{{65}{2019}{{Liu et~al.}}{{Liu, Jiang, He, Chen, Liu, Gao, and Han}}}
 \@LN@col{1}
+\@LN{1236}{17}
+\@LN{1237}{17}
+\@LN{1238}{17}
+\@LN{1239}{17}
+\@LN{1240}{17}
+\@LN{1241}{17}
+\@LN{1242}{17}
+\@LN{1243}{17}
+\@LN{1244}{17}
+\@LN{1245}{17}
+\@LN{1246}{17}
+\@LN{1247}{17}
+\@LN{1248}{17}
+\@LN{1249}{17}
+\@LN{1250}{17}
+\@LN{1251}{17}
+\@LN{1252}{17}
+\@LN{1253}{17}
+\@LN{1254}{17}
+\@LN{1255}{17}
+\@LN{1256}{17}
 \@LN{1257}{17}
 \@LN{1258}{17}
 \@LN{1259}{17}
@@ -1608,6 +1604,7 @@
 \@LN{1291}{17}
 \@LN{1292}{17}
 \@LN{1293}{17}
+\@LN@col{2}
 \@LN{1294}{17}
 \@LN{1295}{17}
 \@LN{1296}{17}
@@ -1630,7 +1627,6 @@
 \@LN{1313}{17}
 \@LN{1314}{17}
 \@LN{1315}{17}
-\@LN@col{2}
 \@LN{1316}{17}
 \@LN{1317}{17}
 \@LN{1318}{17}
@@ -1666,59 +1662,61 @@
 \@LN{1348}{17}
 \@LN{1349}{17}
 \@LN{1350}{17}
-\@LN{1351}{17}
-\@LN{1352}{17}
-\@LN{1353}{17}
-\@LN{1354}{17}
-\@LN{1355}{17}
-\@LN{1356}{17}
-\@LN{1357}{17}
-\@LN{1358}{17}
-\@LN{1359}{17}
-\@LN{1360}{17}
-\@LN{1361}{17}
-\@LN{1362}{17}
-\@LN{1363}{17}
-\@LN{1364}{17}
-\@LN{1365}{17}
-\@LN{1366}{17}
-\@LN{1367}{17}
-\@LN{1368}{17}
-\@LN{1369}{17}
-\@LN{1370}{17}
-\@LN{1371}{17}
-\@LN{1372}{17}
-\@LN{1373}{17}
-\bibcite{manzo2021voting}{{73}{2021}{{Manzo and Pellino}}{{}}}
-\bibcite{martin2008satellite}{{74}{2008}{{Martin}}{{}}}
-\bibcite{McCallumCRF}{{75}{2012}{{McCallum}}{{}}}
-\bibcite{mokhov1994analysis}{{76}{1994}{{Mokhov and Schlesinger}}{{}}}
-\bibcite{Mommert2020}{{77}{2020}{{Mommert}}{{}}}
-\bibcite{nikolenko2021infrared}{{78}{2021}{{Nikolenko and Maslov}}{{}}}
-\bibcite{opencv-python}{{79}{2016}{{Olli-Pekka and OpenCV}}{{}}}
-\bibcite{oshea2015introduction}{{80}{2015}{{O'Shea and Nash}}{{}}}
-\bibcite{paczynski2000monitoring}{{81}{2000}{{Paczy{\'n}ski}}{{}}}
-\bibcite{Pandas}{{82}{2020}{{Pandas Development Team}}{{}}}
-\bibcite{petzold2015global}{{83}{2015}{{Petzold et~al.}}{{Petzold, Thouret, Gerbig, Zahn, Brenninkmeijer, Gallagher, Hermann, Pontaud, Ziereis, Boulanger et~al.}}}
-\bibcite{reil2014update}{{84}{2014}{{Reil et~al.}}{{Reil, Lewis, Schindler, and Zhang}}}
-\bibcite{ring2012infrared}{{85}{2012}{{Ring and Ammer}}{{}}}
-\bibcite{Rogalski2011}{{86}{2011}{{Rogalski}}{{}}}
-\bibcite{Rogalski2014}{{87}{2014}{{Rogalski and Chrzanowski}}{{}}}
-\bibcite{roman2022retrieval}{{88}{2022}{{Rom{\'a}n et~al.}}{{Rom{\'a}n, Antu{\~n}a-S{\'a}nchez, Cachorro, Toledano, Torres, Mateos, Fuertes, L{\'o}pez, Gonz{\'a}lez, Lapionok et~al.}}}
-\bibcite{UNET}{{89}{2015}{{Ronneberger et~al.}}{{Ronneberger, Fischer, and Brox}}}
-\bibcite{roy2017satellite}{{90}{2017}{{Roy et~al.}}{{Roy, Behera, and Srivastav}}}
-\bibcite{Rubin2015}{{91}{2015}{{Rubin et~al.}}{{Rubin, Aldering, Amanullah, Barbary, Dawson, Deustua, Faccioli, Fadeyev, Fakhouri, Fruchter, Gladders, de~Jong, Koekemoer, Krechmer, Lidman, Meyers, Nordin, Perlmutter, Ripoche, Schlegel, Spadafora, and Suzuki}}}
-\bibcite{rubin2022uniform}{{92}{2022}{{Rubin et~al.}}{{Rubin, Aldering, Antilogus, Aragon, Bailey, Baltay, Bongard, Boone, Buton, Copin, Dixon, Fouchez, Gangler, Gupta, Hayden, Hillebrandt, Kim, Kowalski, Kuesters, Leget, Mondon, Nordin, Pain, Pecontal, Pereira, Perlmutter, Ponder, Rabinowitz, Rigault, Runge, Saunders, Smadja, Suzuki, Tao, Taubenberger, Thomas, Vincenzi, and Factory}}}
-\bibcite{environsciproc2023026033}{{93}{2023}{{Salamalikis et~al.}}{{Salamalikis, Tzoumanikas, Argiriou, and Kazantzidis}}}
-\bibcite{schiffer1983international}{{94}{1983}{{Schiffer and Rossow}}{{}}}
-\bibcite{schreiner1993comparison}{{95}{1993}{{Schreiner et~al.}}{{Schreiner, Unger, Menzel, Ellrod, Strabala, and Pellet}}}
-\bibcite{Scolnic2015}{{96}{2015}{{Scolnic et~al.}}{{Scolnic, Casertano, Riess, Rest, Schlafly, Foley, Finkbeiner, Tang, Burgett, Chambers, Draper, Flewelling, Hodapp, Huber, Kaiser, Kudritzki, Magnier, Metcalfe, and Stubbs}}}
-\bibcite{Klebe2010}{{97}{2010}{{Sebag et~al.}}{{Sebag, Andrew, Klebe, and Blatherwick}}}
-\bibcite{Sharma2015}{{98}{2015}{{Sharma et~al.}}{{Sharma, Parihar, and Kemkar}}}
-\bibcite{Shaw_2013}{{99}{2013}{{Shaw and Nugent}}{{}}}
-\bibcite{CloudUNetv2}{{100}{2021{a}}{{Shi et~al.}}{{Shi, Zhou, and Qiu}}}
-\bibcite{CloudUNet}{{101}{2021{b}}{{Shi et~al.}}{{Shi, Zhou, Qiu, Guo, and Li}}}
+\bibcite{liu2018multimodal}{{66}{2018}{{Liu et~al.}}{{Liu, Li, Zhang, Xiao, and Cao}}}
+\bibcite{TransCloudSeg}{{67}{2022}{{Liu et~al.}}{{Liu, Zhang, Zhang, Cao, and Durrani}}}
+\bibcite{GAM}{{68}{2021}{{Liu et~al.}}{{Liu, Shao, and Hoffmann}}}
+\bibcite{Long2006}{{69}{2006}{{Long et~al.}}{{Long, Sabburg, Calbó, and Pagès}}}
+\bibcite{lopez2017contribution}{{70}{2017}{{Lopez et~al.}}{{Lopez, Antoine, Baratoux, and Rabinowicz}}}
+\bibcite{amt-11-5351-2018}{{71}{2018}{{Luo et~al.}}{{Luo, Meng, Liu, Zhao, and Zhou}}}
+\bibcite{makwana2022aclnet}{{72}{2022}{{Makwana et~al.}}{{Makwana, Nag, Susladkar, Deshmukh, Teja~R, Mittal, and Mohan}}}
+\bibcite{mandat2014all}{{73}{2014}{{Mandat et~al.}}{{Mandat, Pech, Hrabovsky, Schovanek, Palatka, Travnicek, Prouza, and Ebr}}}
+\bibcite{manzo2021voting}{{74}{2021}{{Manzo and Pellino}}{{}}}
+\bibcite{martin2008satellite}{{75}{2008}{{Martin}}{{}}}
+\bibcite{McCallumCRF}{{76}{2012}{{McCallum}}{{}}}
+\bibcite{8388338}{{77}{2018}{{Mikołajczyk and Grochowski}}{{}}}
+\bibcite{mokhov1994analysis}{{78}{1994}{{Mokhov and Schlesinger}}{{}}}
+\bibcite{Mommert2020}{{79}{2020}{{Mommert}}{{}}}
+\bibcite{nikolenko2021infrared}{{80}{2021}{{Nikolenko and Maslov}}{{}}}
+\bibcite{opencv-python}{{81}{2016}{{Olli-Pekka and OpenCV}}{{}}}
+\bibcite{oshea2015introduction}{{82}{2015}{{O'Shea and Nash}}{{}}}
+\bibcite{paczynski2000monitoring}{{83}{2000}{{Paczy{\'n}ski}}{{}}}
+\bibcite{Pandas}{{84}{2020}{{Pandas Development Team}}{{}}}
+\bibcite{perez2017effectiveness}{{85}{2017}{{Perez and Wang}}{{}}}
+\bibcite{petzold2015global}{{86}{2015}{{Petzold et~al.}}{{Petzold, Thouret, Gerbig, Zahn, Brenninkmeijer, Gallagher, Hermann, Pontaud, Ziereis, Boulanger et~al.}}}
+\bibcite{reil2014update}{{87}{2014}{{Reil et~al.}}{{Reil, Lewis, Schindler, and Zhang}}}
+\bibcite{ring2012infrared}{{88}{2012}{{Ring and Ammer}}{{}}}
+\bibcite{Rogalski2011}{{89}{2011}{{Rogalski}}{{}}}
+\bibcite{Rogalski2014}{{90}{2014}{{Rogalski and Chrzanowski}}{{}}}
+\bibcite{roman2022retrieval}{{91}{2022}{{Rom{\'a}n et~al.}}{{Rom{\'a}n, Antu{\~n}a-S{\'a}nchez, Cachorro, Toledano, Torres, Mateos, Fuertes, L{\'o}pez, Gonz{\'a}lez, Lapionok et~al.}}}
+\bibcite{UNET}{{92}{2015}{{Ronneberger et~al.}}{{Ronneberger, Fischer, and Brox}}}
+\bibcite{roy2017satellite}{{93}{2017}{{Roy et~al.}}{{Roy, Behera, and Srivastav}}}
+\bibcite{Rubin2015}{{94}{2015}{{Rubin et~al.}}{{Rubin, Aldering, Amanullah, Barbary, Dawson, Deustua, Faccioli, Fadeyev, Fakhouri, Fruchter, Gladders, de~Jong, Koekemoer, Krechmer, Lidman, Meyers, Nordin, Perlmutter, Ripoche, Schlegel, Spadafora, and Suzuki}}}
+\bibcite{rubin2022uniform}{{95}{2022}{{Rubin et~al.}}{{Rubin, Aldering, Antilogus, Aragon, Bailey, Baltay, Bongard, Boone, Buton, Copin, Dixon, Fouchez, Gangler, Gupta, Hayden, Hillebrandt, Kim, Kowalski, Kuesters, Leget, Mondon, Nordin, Pain, Pecontal, Pereira, Perlmutter, Ponder, Rabinowitz, Rigault, Runge, Saunders, Smadja, Suzuki, Tao, Taubenberger, Thomas, Vincenzi, and Factory}}}
+\bibcite{environsciproc2023026033}{{96}{2023}{{Salamalikis et~al.}}{{Salamalikis, Tzoumanikas, Argiriou, and Kazantzidis}}}
 \@LN@col{1}
+\@LN{1351}{18}
+\@LN{1352}{18}
+\@LN{1353}{18}
+\@LN{1354}{18}
+\@LN{1355}{18}
+\@LN{1356}{18}
+\@LN{1357}{18}
+\@LN{1358}{18}
+\@LN{1359}{18}
+\@LN{1360}{18}
+\@LN{1361}{18}
+\@LN{1362}{18}
+\@LN{1363}{18}
+\@LN{1364}{18}
+\@LN{1365}{18}
+\@LN{1366}{18}
+\@LN{1367}{18}
+\@LN{1368}{18}
+\@LN{1369}{18}
+\@LN{1370}{18}
+\@LN{1371}{18}
+\@LN{1372}{18}
+\@LN{1373}{18}
 \@LN{1374}{18}
 \@LN{1375}{18}
 \@LN{1376}{18}
@@ -1754,6 +1752,7 @@
 \@LN{1406}{18}
 \@LN{1407}{18}
 \@LN{1408}{18}
+\@LN@col{2}
 \@LN{1409}{18}
 \@LN{1410}{18}
 \@LN{1411}{18}
@@ -1778,7 +1777,6 @@
 \@LN{1430}{18}
 \@LN{1431}{18}
 \@LN{1432}{18}
-\@LN@col{2}
 \@LN{1433}{18}
 \@LN{1434}{18}
 \@LN{1435}{18}
@@ -1814,59 +1812,57 @@
 \@LN{1465}{18}
 \@LN{1466}{18}
 \@LN{1467}{18}
-\@LN{1468}{18}
-\@LN{1469}{18}
-\@LN{1470}{18}
-\@LN{1471}{18}
-\@LN{1472}{18}
-\@LN{1473}{18}
-\@LN{1474}{18}
-\@LN{1475}{18}
-\@LN{1476}{18}
-\@LN{1477}{18}
-\@LN{1478}{18}
-\@LN{1479}{18}
-\@LN{1480}{18}
-\@LN{1481}{18}
-\@LN{1482}{18}
-\@LN{1483}{18}
-\@LN{1484}{18}
-\@LN{1485}{18}
-\@LN{1486}{18}
-\@LN{1487}{18}
-\@LN{1488}{18}
-\@LN{1489}{18}
-\@LN{1490}{18}
-\bibcite{shi2022cloudraednet}{{102}{2022}{{Shi et~al.}}{{Shi, Zhou, and Qiu}}}
-\bibcite{simonyan2015deep}{{103}{2015}{{Simonyan and Zisserman}}{{}}}
-\bibcite{skidmore2008using}{{104}{2008}{{Skidmore et~al.}}{{Skidmore, Sch{\"o}ck, Magnier, Walker, Feldman, Riddle, Els, Travouillon, Bustos, Seguel et~al.}}}
-\bibcite{Smith2008}{{105}{2008}{{Smith and Toumi}}{{}}}
-\bibcite{Stubbs2015}{{106}{2015}{{{Stubbs} and {Brown}}}{{}}}
-\bibcite{stubbs2012addressing}{{107}{2012}{{Stubbs and Tonry}}{{}}}
-\bibcite{SUN2011278}{{108}{2011}{{Sun et~al.}}{{Sun, Liu, and Zhao}}}
-\bibcite{sun2008whole}{{109}{2008}{{Sun et~al.}}{{Sun, Gao, Zhai, Zhao, and Lian}}}
-\bibcite{Szejwach1982}{{110}{1982}{{Szejwach}}{{}}}
-\bibcite{ICI}{{111}{2005}{{Thurairajah and Shaw}}{{}}}
-\bibcite{tzoumanikas2016effect}{{112}{2016}{{Tzoumanikas et~al.}}{{Tzoumanikas, Nikitidou, Bais, and Kazantzidis}}}
-\bibcite{ugolnikov2017noctilucent}{{113}{2017}{{Ugolnikov et~al.}}{{Ugolnikov, Galkin, Pilgaev, and Roldugin}}}
-\bibcite{varnai2018satellite}{{114}{2018}{{V{\'a}rnai and Marshak}}{{}}}
-\bibcite{TRANSFORMER}{{115}{2023}{{Vaswani et~al.}}{{Vaswani, Shazeer, Parmar, Uszkoreit, Jones, Gomez, Kaiser, and Polosukhin}}}
-\bibcite{scipy}{{116}{2020}{{Virtanen et~al.}}{{Virtanen, Gommers, Oliphant, Haberland, Reddy, Cournapeau, Burovski, Peterson, Weckesser, Bright, {van der Walt}, Brett, Wilson, Millman, Mayorov, Nelson, Jones, Kern, Larson, Carey, Polat, Feng, Moore, {VanderPlas}, Laxalde, Perktold, Cimrman, Henriksen, Quintero, Harris, Archibald, Ribeiro, Pedregosa, {van Mulbregt}, and {SciPy 1.0 Contributors}}}}
-\bibcite{Wang21}{{117}{2021{a}}{{Wang et~al.}}{{Wang, Zhuang, Wang, Zhou, and Liu}}}
-\bibcite{rs13091852}{{118}{2021{b}}{{Wang et~al.}}{{Wang, Liu, Xie, Yang, Gao, Ling, Huang, Li, Liu, and Xia}}}
-\bibcite{MMST}{{119}{2023}{{Wei et~al.}}{{Wei, Zhu, Guo, and Ni}}}
-\bibcite{wilczak1996ground}{{120}{1996}{{Wilczak et~al.}}{{Wilczak, Gossard, Neff, and Eberhard}}}
-\bibcite{wong2009effective}{{121}{2009}{{Wong et~al.}}{{Wong, Tan, Loo, and Lim}}}
-\bibcite{SegCloud}{{122}{2020}{{Xie et~al.}}{{Xie, Liu, Yang, Chen, Wang, Wang, Xia, Liu, Wang, and Zhang}}}
-\bibcite{yamashita2012ground}{{123}{2012}{{Yamashita and Yoshimura}}{{}}}
-\bibcite{Yang2012}{{124}{2012}{{Yang et~al.}}{{Yang, Lu, Ma, and Yao}}}
-\bibcite{DeepCloud}{{125}{2017}{{Ye et~al.}}{{Ye, Cao, and Xiao}}}
-\bibcite{yoshimura2013contribution}{{126}{2013}{{Yoshimura and Yamashita}}{{}}}
-\bibcite{DPNet}{{127}{2022{a}}{{Zhang et~al.}}{{Zhang, Yang, Liu, Cao, and Durrani}}}
-\bibcite{MACNN}{{128}{2022{b}}{{Zhang et~al.}}{{Zhang, Yang, Liu, Xiao, and Cao}}}
-\bibcite{DMNet}{{129}{2022}{{Zhao et~al.}}{{Zhao, Zhang, Luo, Zhong, Tang, Peng, and Fan}}}
-\bibcite{zhou2019cloud}{{130}{2019}{{Zhou et~al.}}{{Zhou, Zhang, Li, Li, Feng, Jia, Lv, Tao, and Guo}}}
+\bibcite{schiffer1983international}{{97}{1983}{{Schiffer and Rossow}}{{}}}
+\bibcite{schreiner1993comparison}{{98}{1993}{{Schreiner et~al.}}{{Schreiner, Unger, Menzel, Ellrod, Strabala, and Pellet}}}
+\bibcite{Scolnic2015}{{99}{2015}{{Scolnic et~al.}}{{Scolnic, Casertano, Riess, Rest, Schlafly, Foley, Finkbeiner, Tang, Burgett, Chambers, Draper, Flewelling, Hodapp, Huber, Kaiser, Kudritzki, Magnier, Metcalfe, and Stubbs}}}
+\bibcite{Klebe2010}{{100}{2010}{{Sebag et~al.}}{{Sebag, Andrew, Klebe, and Blatherwick}}}
+\bibcite{SHARMA2018377}{{101}{2018}{{Sharma et~al.}}{{Sharma, Jain, and Mishra}}}
+\bibcite{Sharma2015}{{102}{2015}{{Sharma et~al.}}{{Sharma, Parihar, and Kemkar}}}
+\bibcite{Shaw_2013}{{103}{2013}{{Shaw and Nugent}}{{}}}
+\bibcite{CloudUNetv2}{{104}{2021{a}}{{Shi et~al.}}{{Shi, Zhou, and Qiu}}}
+\bibcite{CloudUNet}{{105}{2021{b}}{{Shi et~al.}}{{Shi, Zhou, Qiu, Guo, and Li}}}
+\bibcite{shi2022cloudraednet}{{106}{2022}{{Shi et~al.}}{{Shi, Zhou, and Qiu}}}
+\bibcite{simonyan2015deep}{{107}{2015}{{Simonyan and Zisserman}}{{}}}
+\bibcite{skidmore2008using}{{108}{2008}{{Skidmore et~al.}}{{Skidmore, Sch{\"o}ck, Magnier, Walker, Feldman, Riddle, Els, Travouillon, Bustos, Seguel et~al.}}}
+\bibcite{Smith2008}{{109}{2008}{{Smith and Toumi}}{{}}}
+\bibcite{Stubbs2015}{{110}{2015}{{{Stubbs} and {Brown}}}{{}}}
+\bibcite{stubbs2012addressing}{{111}{2012}{{Stubbs and Tonry}}{{}}}
+\bibcite{SUN2011278}{{112}{2011}{{Sun et~al.}}{{Sun, Liu, and Zhao}}}
+\bibcite{sun2008whole}{{113}{2008}{{Sun et~al.}}{{Sun, Gao, Zhai, Zhao, and Lian}}}
+\bibcite{Szejwach1982}{{114}{1982}{{Szejwach}}{{}}}
+\bibcite{ICI}{{115}{2005}{{Thurairajah and Shaw}}{{}}}
+\bibcite{tzoumanikas2016effect}{{116}{2016}{{Tzoumanikas et~al.}}{{Tzoumanikas, Nikitidou, Bais, and Kazantzidis}}}
+\bibcite{ugolnikov2017noctilucent}{{117}{2017}{{Ugolnikov et~al.}}{{Ugolnikov, Galkin, Pilgaev, and Roldugin}}}
+\bibcite{varnai2018satellite}{{118}{2018}{{V{\'a}rnai and Marshak}}{{}}}
+\bibcite{TRANSFORMER}{{119}{2023}{{Vaswani et~al.}}{{Vaswani, Shazeer, Parmar, Uszkoreit, Jones, Gomez, Kaiser, and Polosukhin}}}
+\bibcite{scipy}{{120}{2020}{{Virtanen et~al.}}{{Virtanen, Gommers, Oliphant, Haberland, Reddy, Cournapeau, Burovski, Peterson, Weckesser, Bright, {van der Walt}, Brett, Wilson, Millman, Mayorov, Nelson, Jones, Kern, Larson, Carey, Polat, Feng, Moore, {VanderPlas}, Laxalde, Perktold, Cimrman, Henriksen, Quintero, Harris, Archibald, Ribeiro, Pedregosa, {van Mulbregt}, and {SciPy 1.0 Contributors}}}}
+\bibcite{Wang21}{{121}{2021{a}}{{Wang et~al.}}{{Wang, Zhuang, Wang, Zhou, and Liu}}}
+\bibcite{rs13091852}{{122}{2021{b}}{{Wang et~al.}}{{Wang, Liu, Xie, Yang, Gao, Ling, Huang, Li, Liu, and Xia}}}
+\bibcite{MMST}{{123}{2023}{{Wei et~al.}}{{Wei, Zhu, Guo, and Ni}}}
 \@LN@col{1}
+\@LN{1468}{19}
+\@LN{1469}{19}
+\@LN{1470}{19}
+\@LN{1471}{19}
+\@LN{1472}{19}
+\@LN{1473}{19}
+\@LN{1474}{19}
+\@LN{1475}{19}
+\@LN{1476}{19}
+\@LN{1477}{19}
+\@LN{1478}{19}
+\@LN{1479}{19}
+\@LN{1480}{19}
+\@LN{1481}{19}
+\@LN{1482}{19}
+\@LN{1483}{19}
+\@LN{1484}{19}
+\@LN{1485}{19}
+\@LN{1486}{19}
+\@LN{1487}{19}
+\@LN{1488}{19}
+\@LN{1489}{19}
+\@LN{1490}{19}
 \@LN{1491}{19}
 \@LN{1492}{19}
 \@LN{1493}{19}
@@ -1902,6 +1898,7 @@
 \@LN{1523}{19}
 \@LN{1524}{19}
 \@LN{1525}{19}
+\@LN@col{2}
 \@LN{1526}{19}
 \@LN{1527}{19}
 \@LN{1528}{19}
@@ -1926,7 +1923,6 @@
 \@LN{1547}{19}
 \@LN{1548}{19}
 \@LN{1549}{19}
-\@LN@col{2}
 \@LN{1550}{19}
 \@LN{1551}{19}
 \@LN{1552}{19}
@@ -1961,33 +1957,45 @@
 \@LN{1581}{19}
 \@LN{1582}{19}
 \@LN{1583}{19}
-\@LN{1584}{19}
-\@LN{1585}{19}
-\@LN{1586}{19}
-\@LN{1587}{19}
-\@LN{1588}{19}
-\@LN{1589}{19}
-\@LN{1590}{19}
-\@LN{1591}{19}
-\@LN{1592}{19}
-\@LN{1593}{19}
-\@LN{1594}{19}
-\@LN{1595}{19}
-\@LN{1596}{19}
-\@LN{1597}{19}
-\@LN{1598}{19}
-\@LN{1599}{19}
-\@LN{1600}{19}
-\@LN{1601}{19}
-\@LN{1602}{19}
-\@LN{1603}{19}
-\@LN{1604}{19}
-\@LN{1605}{19}
-\@LN{1606}{19}
-\@LN{1607}{19}
-\@LN{1608}{19}
-\bibcite{zhou2021novel}{{131}{2021}{{Zhou et~al.}}{{Zhou, Zhang, Xiao, Wang, Hong, Wu, and Zhang}}}
+\bibcite{wilczak1996ground}{{124}{1996}{{Wilczak et~al.}}{{Wilczak, Gossard, Neff, and Eberhard}}}
+\bibcite{wong2009effective}{{125}{2009}{{Wong et~al.}}{{Wong, Tan, Loo, and Lim}}}
+\bibcite{SegCloud}{{126}{2020}{{Xie et~al.}}{{Xie, Liu, Yang, Chen, Wang, Wang, Xia, Liu, Wang, and Zhang}}}
+\bibcite{yamashita2012ground}{{127}{2012}{{Yamashita and Yoshimura}}{{}}}
+\bibcite{Yang2012}{{128}{2012}{{Yang et~al.}}{{Yang, Lu, Ma, and Yao}}}
+\bibcite{yang2022image}{{129}{2022}{{Yang et~al.}}{{Yang, Xiao, Zhang, Guo, Zhao, and Shen}}}
+\bibcite{DeepCloud}{{130}{2017}{{Ye et~al.}}{{Ye, Cao, and Xiao}}}
+\bibcite{yoshimura2013contribution}{{131}{2013}{{Yoshimura and Yamashita}}{{}}}
+\bibcite{DPNet}{{132}{2022{a}}{{Zhang et~al.}}{{Zhang, Yang, Liu, Cao, and Durrani}}}
+\bibcite{MACNN}{{133}{2022{b}}{{Zhang et~al.}}{{Zhang, Yang, Liu, Xiao, and Cao}}}
+\bibcite{DMNet}{{134}{2022}{{Zhao et~al.}}{{Zhao, Zhang, Luo, Zhong, Tang, Peng, and Fan}}}
+\bibcite{zhou2019cloud}{{135}{2019}{{Zhou et~al.}}{{Zhou, Zhang, Li, Li, Feng, Jia, Lv, Tao, and Guo}}}
+\bibcite{zhou2021novel}{{136}{2021}{{Zhou et~al.}}{{Zhou, Zhang, Xiao, Wang, Hong, Wu, and Zhang}}}
 \@LN@col{1}
+\@LN{1584}{20}
+\@LN{1585}{20}
+\@LN{1586}{20}
+\@LN{1587}{20}
+\@LN{1588}{20}
+\@LN{1589}{20}
+\@LN{1590}{20}
+\@LN{1591}{20}
+\@LN{1592}{20}
+\@LN{1593}{20}
+\@LN{1594}{20}
+\@LN{1595}{20}
+\@LN{1596}{20}
+\@LN{1597}{20}
+\@LN{1598}{20}
+\@LN{1599}{20}
+\@LN{1600}{20}
+\@LN{1601}{20}
+\@LN{1602}{20}
+\@LN{1603}{20}
+\@LN{1604}{20}
+\@LN{1605}{20}
+\@LN{1606}{20}
+\@LN{1607}{20}
+\@LN{1608}{20}
 \@LN{1609}{20}
 \@LN{1610}{20}
 \@LN{1611}{20}
@@ -1996,6 +2004,28 @@
 \@LN{1614}{20}
 \@LN{1615}{20}
 \@LN{1616}{20}
+\@LN{1617}{20}
+\@LN{1618}{20}
+\@LN{1619}{20}
+\@LN{1620}{20}
+\@LN{1621}{20}
+\@LN{1622}{20}
+\@LN{1623}{20}
+\@LN{1624}{20}
+\@LN{1625}{20}
+\@LN{1626}{20}
+\@LN{1627}{20}
+\@LN{1628}{20}
+\@LN{1629}{20}
+\@LN{1630}{20}
+\@LN{1631}{20}
+\@LN{1632}{20}
+\@LN{1633}{20}
+\@LN{1634}{20}
+\@LN{1635}{20}
+\@LN{1636}{20}
+\@LN{1637}{20}
+\@LN{1638}{20}
 \@LN@col{2}
 \newlabel{LastPage}{{}{21}{}{}{}}
 \gdef\svg@ink@ver@settings{{\m@ne }{inkscape}{\m@ne }}

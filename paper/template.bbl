@@ -1,4 +1,4 @@
-\begin{thebibliography}{131}
+\begin{thebibliography}{136}
 \providecommand{\natexlab}[1]{#1}
 \providecommand{\url}[1]{{\tt #1}}
 \providecommand{\urlprefix}{URL }
@@ -263,6 +263,10 @@ Harris, C.~R., Millman, K.~J., van~der Walt, S.~J., Gommers, R., Virtanen, P.,
   Weckesser, W., Abbasi, H., Gohlke, C., and Oliphant, T.~E.: Array programming
   with NumPy, Nature, 585, 357--362, \doi{10.1038/s41586-020-2649-2}, 2020.
 
+\bibitem[{He et~al.(2015)He, Zhang, Ren, and Sun}]{ResNet}
+He, K., Zhang, X., Ren, S., and Sun, J.: Deep Residual Learning for Image
+  Recognition, 2015.
+
 \bibitem[{Heek et~al.(2023)Heek, Levskaya, Oliver, Ritter, Rondepierre,
   Steiner, and van Zee}]{Flax}
 Heek, J., Levskaya, A., Oliver, A., Ritter, M., Rondepierre, B., Steiner, A.,
@@ -489,6 +493,12 @@ Martin, R.~V.: Satellite remote sensing of surface air quality, Atmospheric
 McCallum, A.: Efficiently inducing features of conditional random fields, arXiv
   preprint arXiv:1212.2504, 2012.
 
+\bibitem[{Mikołajczyk and Grochowski(2018)}]{8388338}
+Mikołajczyk, A. and Grochowski, M.: Data augmentation for improving deep
+  learning in image classification problem, in: 2018 International
+  Interdisciplinary PhD Workshop (IIPhDW), pp. 117--122,
+  \doi{10.1109/IIPHDW.2018.8388338}, 2018.
+
 \bibitem[{Mokhov and Schlesinger(1994)}]{mokhov1994analysis}
 Mokhov, I.~L. and Schlesinger, M.~E.: Analysis of global cloudiness: 2.
   Comparison of ground-based and satellite-based cloud climatologies, Journal
@@ -519,6 +529,10 @@ Paczy{\'n}ski, B.: Monitoring All Sky for Variability1, Publications of the
 \bibitem[{{Pandas Development Team}(2020)}]{Pandas}
 {Pandas Development Team}, T.: pandas-dev/pandas: Pandas,
   \doi{10.5281/zenodo.3509134}, 2020.
+
+\bibitem[{Perez and Wang(2017)}]{perez2017effectiveness}
+Perez, L. and Wang, J.: The Effectiveness of Data Augmentation in Image
+  Classification using Deep Learning, 2017.
 
 \bibitem[{Petzold et~al.(2015)Petzold, Thouret, Gerbig, Zahn, Brenninkmeijer,
   Gallagher, Hermann, Pontaud, Ziereis, Boulanger et~al.}]{petzold2015global}
@@ -625,6 +639,12 @@ Scolnic, D., Casertano, S., Riess, A., Rest, A., Schlafly, E., Foley, R.~J.,
 Sebag, J., Andrew, J., Klebe, D., and Blatherwick, R.: LSST all-sky IR camera
   cloud monitoring test results, Proceedings of SPIE - The International
   Society for Optical Engineering, 7733, \doi{10.1117/12.856337}, 2010.
+
+\bibitem[{Sharma et~al.(2018)Sharma, Jain, and Mishra}]{SHARMA2018377}
+Sharma, N., Jain, V., and Mishra, A.: An Analysis Of Convolutional Neural
+  Networks For Image Classification, Procedia Computer Science, 132, 377--384,
+  \doi{https://doi.org/10.1016/j.procs.2018.05.198}, international Conference
+  on Computational Intelligence and Data Science, 2018.
 
 \bibitem[{Sharma et~al.(2015)Sharma, Parihar, and Kemkar}]{Sharma2015}
 Sharma, T., Parihar, P., and Kemkar, M.: All sky scanning cloud monitor for
@@ -789,6 +809,11 @@ Yang, J., Lu, W., Ma, Y., and Yao, W.: An Automated Cirrus Cloud Detection
   Method for a Ground-Based Cloud Image, Journal of Atmospheric and Oceanic
   Technology, 29, 527 -- 537, \doi{https://doi.org/10.1175/JTECH-D-11-00002.1},
   2012.
+
+\bibitem[{Yang et~al.(2022)Yang, Xiao, Zhang, Guo, Zhao, and
+  Shen}]{yang2022image}
+Yang, S., Xiao, W., Zhang, M., Guo, S., Zhao, J., and Shen, F.: Image Data
+  Augmentation for Deep Learning: A Survey, 2022.
 
 \bibitem[{Ye et~al.(2017)Ye, Cao, and Xiao}]{DeepCloud}
 Ye, L., Cao, Z., and Xiao, Y.: DeepCloud: Ground-Based Cloud Image

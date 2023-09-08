@@ -16,45 +16,45 @@ Warning--entry type for "opencv-python" isn't style-file defined
 Warning--empty title in Matplotlib
 Warning--empty booktitle in Liandrat2017
 Warning--empty journal in sun2008whole
-You've used 131 entries,
+You've used 136 entries,
             2819 wiz_defined-function locations,
-            1858 strings with 43800 characters,
-and the built_in function-call counts, 134138 in all, are:
-= -- 12882
-> -- 8064
-< -- 55
-+ -- 3176
-- -- 2572
-* -- 9734
-:= -- 15321
-add.period$ -- 131
-call.type$ -- 131
-change.case$ -- 1113
-chr.to.int$ -- 126
-cite$ -- 396
-duplicate$ -- 11610
-empty$ -- 6542
-format.name$ -- 2979
-if$ -- 26307
+            1884 strings with 44776 characters,
+and the built_in function-call counts, 137728 in all, are:
+= -- 13231
+> -- 8232
+< -- 58
++ -- 3244
+- -- 2623
+* -- 9990
+:= -- 15728
+add.period$ -- 136
+call.type$ -- 136
+change.case$ -- 1141
+chr.to.int$ -- 131
+cite$ -- 411
+duplicate$ -- 11936
+empty$ -- 6746
+format.name$ -- 3049
+if$ -- 27022
 int.to.chr$ -- 6
 int.to.str$ -- 1
-missing$ -- 1704
-newline$ -- 402
-num.names$ -- 525
-pop$ -- 5810
+missing$ -- 1748
+newline$ -- 417
+num.names$ -- 545
+pop$ -- 5964
 preamble$ -- 1
-purify$ -- 1111
+purify$ -- 1138
 quote$ -- 0
-skip$ -- 6514
+skip$ -- 6699
 stack$ -- 0
-substring$ -- 4085
-swap$ -- 9550
-text.length$ -- 16
+substring$ -- 4193
+swap$ -- 9794
+text.length$ -- 17
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 1176
+type$ -- 1221
 warning$ -- 3
-while$ -- 618
+while$ -- 638
 width$ -- 0
-write$ -- 1477
+write$ -- 1529
 (There were 8 warnings)
