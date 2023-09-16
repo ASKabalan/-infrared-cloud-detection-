@@ -568,7 +568,7 @@ We use this augmented composite datasets of 10,000 images respectively to train 
 Comparing machine-learning models optimized for different types of input data can be meaningful in certain contexts, but it requires careful considerations. The most critical factor is the nature of the data. As state-of-the art models presented in Section \ref{sec:background} are optimized for different type of data (3-channels RGB images) and it may seem uncoherent to compare the performance with single-channel grayscale infrared images. Indeed, these data types have distinct characteristics, and models may perform differently based on these differences.
 Some models \cite{SUN2011278, Liu2021, amt-11-5351-2018} have been proposed to target infrared images with categorization tasks. Consider whether the models can be adapted or fine-tuned to work with both RGB and infrared data is challenging. This might involve multi-modal learning approaches \citep{liu2018multimodal, li2020deep, MMST} or transfer learning techniques \citep{manzo2021voting, Wang21, zhou2021novel} which are not the intended purpose of this work.
 
-Nevertheless, we attempt to evaluate the robustness of our segmentation model by testing its ability to generalize to other datasets including: SWIMSEG \citep{dev2016colorbased}, SWINSEG \citep{SWINSEG, dev2017nighttime}, SWINySEG \citep{dev2019cloudsegnet}, WSISEG \citep{SegCloud}, HYTA \citep{HYTA} and TLCDD. Images containing elements other than clouds or sky are cropped to prevent the model to learn unwanted features and avoid subsequent misinterpretations. We transform RGB images into gray-scaled images with \textsc{OpenCV} \citep{OpenCV} color conversion method \texttt{COLORR\textunderscore GB2GRAY} defined by the following equation,
+Nevertheless, we attempt to evaluate the robustness of our segmentation model by testing its ability to generalize to other datasets including: SWIMSEG \citep{dev2016colorbased}, SWINSEG \citep{SWINSEG, dev2017nighttime}, SWINySEG \citep{dev2019cloudsegnet}, WSISEG \citep{SegCloud}, HYTA \citep{HYTA} and TLCDD. Images containing elements other than clouds or sky are cropped to prevent the model to learn unwanted features and avoid subsequent misinterpretations. We transform RGB images into gray-scaled images with \textsc{OpenCV} \citep{OpenCV} color conversion method \texttt{COLOR\textunderscore RGB2GRAY} defined by the following equation,
 \begin{equation}
     \text{RGB} \rightarrow \: \text{Gray} = 0.299 \cdot \text{R} + 0.587 \cdot \text{G} + 0.114 \cdot \text{B}
     \label{eq:rgb_to_gray}
@@ -576,22 +576,8 @@ Nevertheless, we attempt to evaluate the robustness of our segmentation model by
 where R, G and B are respectively red, green and blue channels of the input color image.
 Metrics for each dataset are summarized in Table \ref{tab:datasets_comparison}.
 
-\textcolor{red}{A few samples of segmentation results were visualized in Fig. 4.
-The
-results show that most of the clouds in the images can be
-accurately recognized by the model, such as the first column
-and second column in Fig. 4(a) and (b). Especially the picture
-in the fourth column of Fig. 4 obtains nearly perfect perfor-
-mance. The high-accuracy prediction results can be processed
-to the cloud masks of these nonannotated data sets, increasing
-the amount of labeled cloud segmentation data sets. The image in the third column
-of Fig. 4(c) has the worst performance in these samples. It may
-be because this image is a nighttime cloud image with bad
-illumination, which is not contained in the GBCS data set.
-Thus, it is indispensable to add cloud images under diverse
-light conditions in future data sets. Overall, the performance
-on other data sets proves the excellent generalization ability
-and robustness of TL-DeepLabV3+.}
+Although results show that most cloud structures in the images can be
+accurately recognized by models, we find this method of transforming color images to grayscale not optimal. Due to Rayleigh scattering producing strong blue color channels \citep{bates1984rayleigh}, our framework is less efficient on the transformed publicly available datasets. Additional work may be needed to improve conversion of RGB color to grayscale images with similar contrast to infrared thermal images. Nevertheless, we confirm its ability to generalize on unseen data.
 
 \begin{table*}[t]
     \begin{center}
@@ -615,60 +601,16 @@ and robustness of TL-DeepLabV3+.}
     \end{table*}
 
 
-\subsection{Quality and quantity of training data}
+\subsection{Impact of training data quality and quantity}
 
-- small number of nights => less variety in cloud shapes, altitudes
+We investigate the impact of the training subset quality and quantity.
+It is often challenging to produce non-ambiguous ground-truth masks as it is subject to biases with manual work. As clouds can take on various forms in images, establishing a precise definition of cloud presence and differentiation from sky background is difficult. Machine learning model's susceptibility to cirrus clouds and those that are not completely opaque is greatly influenced by the quality of the training data. Contrary to \cite{Mommert2020}, we do not expect clouds to be entirely opaque. Indeed, as we image in LWIR band, the sensor is not susceptible to traditional visible spectrum phenomena such as air glow. This consideration is apparent in the false-positive (FP) rates of classifiers and segmentation models which sometimes indicates cloud presence where the expected airmass gradient is located.
+
+To evaluate the effect of the training set size, we train the exact same classifier and segmentation architectures while selecting different number of images. Results for different subset sizes are listed in Table \ref{}.
+
+Furthermore, small number of nights leads to less variety in cloud shapes and structures.
 
 \textcolor{red}{
-The training data sample should contain as little noise as
-possible in order to maximize the model performance.
-However, it is not always possible to provide unambiguous
-training data in the case of cloud identification, as it is a highly
-subjective process even for a human.
-Clouds have many different ways to manifest in all-sky
-camera images, making it nearly impossible to come up with a
-clear definition of what counts as a cloud and what not. Does
-thin cirrus count as a cloud? Do you consider a subregion to
-contain a cloud if it occupies less than 10% of that subregion’s
-area? Does haze on the horizon count as a cloud? There is no
-definitive answer to these questions, adding a significant
-amount of noise to the training data sample.
-The sensitivity of any machine-learning effort to cirrus and
-other not fully opaque clouds depends highly on the training
-data provided. Based on the goal set for this work—the
-implementation of a cloud warning system—we chose a rather
-conservative cloud definition in the sense that we expect a
-cloud to be fully opaque. While this definition is less prone to
-human subjectivity (leading to a more homogeneous training
-sample), it clearly creates a bias in the quantification of sky
-quality (e.g., cirrus is likely to be not detected as a cloud),
-which becomes apparent in the false-negative rates of both
-classifiers (see Section 5.1.1). A less conservative cloud
-definition can lead to a better detectability of cirrus, but might
-be susceptible to other phenomena like air glow and terrestrial
-light sources. Additional processing of the input data might be
-necessary to distinguish the latter two effects from cirrus, e.g.,
-by exploiting their static nature in the night sky. We leave such
-investigations for the future.
-Both of our models utilize regularization mechanisms to be
-able to generalize the training data and to cope with noise in the
-training data. However, this also means that the subjective
-uncertainty of humans is propagated into the models: if the
-presence of clouds in a given subregion is vague to a human, it
-will also be vague to the model trained on data labeled by a
-human. Any labeling efforts by humans should thus be as
-consistent as possible.
-We hence believe that the performance any model can
-achieve is mainly limited by the quality of the training data
-sample.}
-
-\subsection{Analysis of training sample size effect}
-
-\textcolor{red}{We investigate the impact of the training data sample size on
-the model performance by training the same models on random
-subsamples of the original training data sample. We use the
-same sets of hyperparameters presented in Section 4. Results
-for different subsample sizes are listed in Table 1.
 In the case of our ResNet approach, a steady rise of both
 accuracy and F1 score can be observed through all training
 sample sizes used in this analysis. The fact that neither metric
@@ -696,14 +638,7 @@ improve the performance of this model.}
 
 \subsection{Comparison of libraries: \textsc{flax} vs \textsc{keras}}
 
-\textcolor{red}{
-    - Cela va être plus rapide avec jax dans les mêmes conditions (batch identique, 
-    - Charger plus de données dans un batch est possible avec jax.
-    - TPU : conçu pour être sur des clusters; avec SPMD.
-    Tu peux charger 8x la taille originale. Entrainement sur tout le dataset en même temps.
-    Seul moins puissant que des A100 ou des RTX
-    - Batch size suffisamment gros pour apprendre correctement
-}
+When comparing training deep learning models with \textsc{keras} and \textsc{flax}, we observed notable distinctions in terms of speed and data loading capacity. Keras, being a high-level framework, offers a straightforward and user-friendly experience, but its training speed may be limited, particularly with larger datasets and batch sizes. In contrast, \textsc{flax}, with its low-level nature and support for hardware acceleration, demonstrated impressive speed improvements, especially when dealing with substantial datasets or larger batch sizes. The ability of \textsc{flax} to efficiently leverage hardware resources, coupled with its flexibility in managing data loading, enables smoother training on extensive datasets and better overall training. These factors make \textsc{flax} an appealing choice for tasks demanding scalability and computational efficiency. Table \ref{} depicts speed comparison and model size for the same segmentation model architecture. Results show a speed increase of XXX\% and smaller model disk size being XXX\% smaller than the \textsc{keras} trained model.
 
 
 \begin{table}[t]
@@ -724,37 +659,10 @@ improve the performance of this model.}
 
 \subsection{Future perspectives}
 
-Real-time data analysis module
-\textcolor{red}{C. Data Analysis Module
-As the control center of the ASC system, the data analysis mod-
-ule integrates communication control between modules. To re-
-duce the volume and weight of the ASC, an advanced reduced
-instruction set computer machine ARM-based lightweight
-computing platform is used. All data analyses are run on
-NVIDIA Jetson Tegra X1 with a Cortex-A57 CPU (4 cores
-@ 1.73 GHz) with 4 GB memory and an NVIDIA
-Maxwell GPU (256 CUDA cores @ 998 MHz) with 4 GB
-video memory. Therefore, the data analysis module of the
-ASC exhibits strong power for processing data, particularly im-
-ages that use the CNN model. In general, the functions of this
-module include the following aspects:
-(1) analyzing whole sky images obtained by the imaging
-system and deriving the corresponding cloud cover using a
-cloud detection algorithm;
-(2) controlling the working state of the fan and the heater in
-accordance with the feedback data from the temperature and
-humidity sensors to ensure the stability of the internal environ-
-ment; and
-(3) controlling the image acquisition frequency (every
-10 min) by controlling the working state of the camera and
-the chopper in the light cut module.
-In general, the data analysis module is small and convenient
-for system integration. It has powerful data processing ability
-such that all data processing can be completed in this module,
-and no additional processing software is required to be installed
-by the client.}
+The framework established in this paper is planned to be used in real-time with dedicated computing module. Functions of this
+module will include the following aspects: (i) classifying infrared sky images obtained by the imaging system in real-time, (ii) analyzing cloud-labeled sky images and deriving the corresponding cloud structure and cover using the segmentation algorithm; (iii) generating alerts/flag in accordance with the results; (iv) fully-autonomous processing.
 
-- Retrain on larger dataset
+Training on a larger dataset may be an additional step towards improving the accuracy and robustness of our framework. As next-year will bring large amount of data thanks to the telescope system remote operations capabilities, we have the potential to capture a broader range of sky atmospheric conditions, making our models more adept at handling real-world variations. However, it's crucial to maintain a balance between the model's complexity and the available computational resources, as larger datasets can lead to increased training times and resource demands. Additionally, staying vigilant for shifts in data distribution over time is essential to ensure that our models remain adaptive and responsive to evolving experimental conditions.
 
 \conclusions[Conclusion]%% \conclusions[modified heading if necessary]
 \label{sec:conclusion}
@@ -774,9 +682,9 @@ the effectiveness and performances of the proposed framework. We successfully in
 
 %\dataavailability{} %% use this section when having only data sets available
 
-\codedataavailability{The source code is freely available online at \url{https://github.com/kelian98/IRIS-CloudDeep}. The datasets and other supporting materials will be made available from authors Kélian Sommer (kelian.sommer@umontpellier.fr) and corresponding author Wassim Kabalan (wassim.kabalan@apc.in2p3.fr) upon request.} %% use this section when having data sets and software code available
+\codedataavailability{The source code is freely available online at \url{https://github.com/kelian98/IRIS-CloudDeep}. The datasets and other supporting materials will be made available from corresponding author Kélian Sommer (kelian.sommer@umontpellier.fr) upon request.} %% use this section when having data sets and software code available
 
-\authorcontribution{KS conceived the instrument, collected data, pre-processed the dataset, created ground truths masks for segmentation and realistic synthetic data for classification. WK, RB and KS designed the framework. WK and RB performed the experiments. KS wrote the paper and collected relevant literature. WK and RB revised the manuscript; AB, JCT and BP proposed constructive suggestions on the revision of the article.} %% this section is mandatory
+\authorcontribution{KS conceived the instrument, collected data, pre-processed the dataset, created ground truths masks for segmentation and realistic synthetic data for classification. WK, RB and KS designed the framework. WK and RB performed the experiments. KS wrote the paper and collected relevant literature. WK and RB revised the manuscript. AB, JCT and BP proposed constructive suggestions on the revision of the article.} %% this section is mandatory
 
 \competinginterests{The authors declare that they have no conflict of interest.} %% this section is mandatory even if you declare that no competing interests are present
 

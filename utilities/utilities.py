@@ -7,6 +7,8 @@ from sklearn.metrics import accuracy_score, precision_score, recall_score, roc_a
 import matplotlib.pyplot as plt
 from keras.losses import BinaryCrossentropy
 from sklearn.metrics import roc_curve, auc
+import cv2
+import os
 
 def discrete_cmap(N, base_cmap=None):
     """Create an N-bin discrete colormap from the specified input map"""
@@ -268,3 +270,28 @@ def evaluate_model(y_true,y_pred_proba, threshhold = 0.5):
     plt.legend(loc='best')
     plt.show()
 
+def rgb_to_gray(image_path, output_path):
+    # Read the input image in RGB format
+    image = cv2.imread(image_path, cv2.IMREAD_COLOR)
+
+    # Extract the filename from the existing file path.
+    # file_name = os.path.basename(image_path)
+
+    # Extract the filename and extension from the existing file path.
+    file_name, file_extension = os.path.splitext(os.path.basename(image_path))
+
+    # Construct the new filename with the suffix.
+    suffix = '_gray'
+    new_file_name = f"{file_name}{suffix}{file_extension}"
+
+    # Convert the RGB image to grayscale
+    gray_image = cv2.cvtColor(image, cv2.COLOR_RGB2GRAY)
+
+    new_file_path = os.path.join(output_path, new_file_name)
+    print(new_file_path)
+
+
+    # Save the grayscale image
+    cv2.imwrite(new_file_path, gray_image)
+
+    return gray_image

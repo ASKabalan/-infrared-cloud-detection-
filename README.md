@@ -15,8 +15,8 @@ Deep-learning architecture classify and identify cloud structure on sky infrared
 
 ### Kelian
 
-- Faire tourner keras sur le cluster avec un exemple standard + s'assurer de l'utilisation du GPU
-- Transférer le dataset de segmentation sur le cluster
+- ~~Faire tourner keras sur le cluster avec un exemple standard + s'assurer de l'utilisation du GPU~~
+- ~~Transférer le dataset de segmentation sur le cluster~~
 - Récupérer les données des datasets publics (SWINSEG, SWIMSEG...)
 - Transformer les datasets publics en noir et blanc avec opencv
 - Mettre en place le styling de plots pour le papier
