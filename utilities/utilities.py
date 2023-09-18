@@ -270,7 +270,7 @@ def evaluate_model(y_true,y_pred_proba, threshhold = 0.5):
     plt.legend(loc='best')
     plt.show()
 
-def rgb_to_gray(image_path, output_path):
+def rgb_to_gray(image_path, output_path, save_to_fits=True):
     # Read the input image in RGB format
     image = cv2.imread(image_path, cv2.IMREAD_COLOR)
 
@@ -288,10 +288,14 @@ def rgb_to_gray(image_path, output_path):
     gray_image = cv2.cvtColor(image, cv2.COLOR_RGB2GRAY)
 
     new_file_path = os.path.join(output_path, new_file_name)
-    print(new_file_path)
-
 
     # Save the grayscale image
-    cv2.imwrite(new_file_path, gray_image)
+    #cv2.imwrite(new_file_path, gray_image)
+    if save_to_fits:
+        hdu = fits.PrimaryHDU(gray_image)
+        hdu.scale('uint8')
+        hdul = fits.HDUList([hdu])
+        print(new_file_path.replace(file_extension, '.fits'))
+        hdul.writeto(new_file_path.replace(file_extension, '.fits'), overwrite=True)
 
     return gray_image
