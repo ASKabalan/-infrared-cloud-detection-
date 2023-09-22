@@ -134,7 +134,7 @@
 
 
 \begin{abstract}
-    Infrared thermal cameras offer reliable means of assessing atmospheric conditions by measuring the downard radiance from the sky, facilitating their usage in cloud monitoring endeavors. Precise identification and detection of clouds in images poses great challenges stemming from the indistinct boundaries inherent to cloud formations. Various methodologies for segmentation have been previously suggested. Most of them rely on color as the distinguishing criterion for cloud identification in the visible spectral domain and thus lack the ability to detect cloud structure on gray-scaled images with satfisactory accuracy. In this work, we propose a new complete deep-learning framework to perform image classification with  Convolutional Neural Networks (CNNs) and image segmentation by exploring the use of U-Net model. We demonstrate the effectiveness of this technique by conducting a series of tests and validations on self-captured infrared sky images and transformed publicly available datasets. Our findings reveal that the models can effectively differentiate between image types and accurately capture detailed cloud structure information, even when trained with a single binary ground-truth mask per input sample. We also compare our framework with other state-of-the-art machine-learning methods and conclude that it outperforms them when applied to infrared data. The classifier model achieves an impressive accuracy of 93\% in distinguishing between image types, while the segmentation model attains a mean pixel accuracy of 94\% on our own dataset. We emphasize that our framework exhibits strong viability and can be used for sustained all-sky ground-based cloud monitoring operations over extended durations.
+    Infrared thermal cameras offer reliable means of assessing atmospheric conditions by measuring the downard radiance from the sky, facilitating their usage in cloud monitoring endeavors. Precise identification and detection of clouds in images poses great challenges stemming from the indistinct boundaries inherent to cloud formations. Various methodologies for segmentation have been previously suggested. Most of them rely on color as the distinguishing criterion for cloud identification in the visible spectral domain and thus lack the ability to detect cloud structure on gray-scaled images with satfisactory accuracy. In this work, we propose a new complete deep-learning framework to perform image classification with  Convolutional Neural Networks (CNNs) and image segmentation by exploring the use of U-Net model. We demonstrate the effectiveness of this technique by conducting a series of tests and validations on self-captured infrared sky images and transformed publicly available datasets. Our findings reveal that the models can effectively differentiate between image types and accurately capture detailed cloud structure information, even when trained with a single binary ground-truth mask per input sample. We also compare our framework with other state-of-the-art machine-learning methods and conclude that it outperforms them when applied to infrared data. The classifier model achieves an impressive accuracy of 93\% in distinguishing between image types, while the segmentation model attains a mean pixel accuracy of 94\% on our own dataset. We emphasize that our framework exhibits strong viability and can be used for infrared thermal ground-based cloud monitoring operations over extended durations.
 \end{abstract}
 
 %\copyrightstatement{TEXT} %% This section is optional and can be used for copyright transfers.
@@ -174,6 +174,8 @@ The remainder of the paper is organized as follows. Some background about the sc
 \label{sec:background}
 
 \subsection{Motivation}
+
+\textcolor{orange}{KS : may need to shorten the motivation subsection to be more synthetic and straight to the point. Is it necessary to explain the StarDICE project principles ? Maybe not}
 
 StarDICE represents one of the initiatives focused on creating a measurement process that bridges the gap between laboratory flux standards (such as silicon photodiodes calibrated by NIST) and the stars found in the CALSPEC library of spectrophotometric references \citep{Bohlin2020}. Since type 1a supernovae and most astronomical  surveys rely on the calibration of these standard stars for their measurements \citep{Bohlin2011, Betoule2013, Rubin2015, Scolnic2015, Currie2020, Brout2022, rubin2022uniform}, successfully establishing this connection with high precision effectively addresses the calibration challenge associated with the Hubble diagram. The StarDICE proposal encompasses a five-step sequence, as illustrated in Figure \ref{fig:schematics_stardice}. This process hinges on the near-field calibration of an exceptionally dim light source, emitting less than 1 $\mu$W of optical power, and known for its stability. This calibrated light source, in turn, serves as a distant ($\sim$ 100 m) in-situ reference for a compact astronomical telescope.
 One of the largest remaining source of systematic uncertainty is Earth atmosphere transmission \citep{stubbs2012addressing, Stubbs2015, Li2016}. It is dependent on many environmental conditions and processes, including: absorption and scattering (Rayleigh) by molecular constituents (O2, O3, and other elements), absorption by precipitable water vapor (PWV), scattering (Mie) by optical wavelength sized aerosols particles, and shadowing by larger ice crystals and water droplets in clouds that is independent of wavelength (gray) \citep{Burke2010, Burke2017}. Current atmospheric transmission or extinction models do not integrate the possible impact of cloud. Indeed, formation of thin clouds through the condensation of water droplets and ice can result in clouds that are extremely faint and cannot be perceived in the visible spectrum with the naked eye. These clouds often exhibit complex spatial structures, as demonstrated in \citet{Burke2014}. The condensation process takes place along well-defined boundaries in temperature and pressure, which are influenced by the volume density of Precipitable Water Vapor (PWV). This phenomenon commonly categorizes observing conditions as either \textit{photometric} or \textit{non-photometric}.
@@ -217,7 +219,7 @@ The device is controlled and commanded via the ThermalCapture ThermalGrabber USB
         %\caption{Subfigure 2}
         %\label{fig:subfig2}
     \end{subfigure}
-    \caption{\textit{Top:} infrared instrument installed onto the equatorial table of the StarDICE experiment at Observatoire de Haute-Provence. \textit{Bottom:} sample of raw infrared thermal image.}
+    \caption{\textit{Top:} infrared instrument installed onto the equatorial table of the StarDICE experiment at Observatoire de Haute-Provence. \textit{Bottom:} sample of raw infrared thermal image in ADU.}
     \label{fig:infrared_system}
 \end{figure}
 
@@ -297,7 +299,7 @@ Figure \ref{fig:schematics_classification_model} depicts the schematic diagram o
 
 \begin{figure*}[t]
 	\includegraphics[width=\hsize]{figures/schematics_segmentation_model.png}
-	\caption{
+	\caption{\textcolor{orange}{Update this plot for the actual classifier architecture. Keep one of the following caption written here and rearrange it so that it matches the diagram.}
 		Schematic diagram of the classifier model architecture. Boxes represent cross-sections of square feature maps.  The networks contain an encoder network, a corresponding decoder network, and a final Softmax classifier. Each map's dimensions are indicated on its lower left, and its number of channels are indicated above it. Half-grey boxes represent maps for which half of their channels are copied. The input image is a 160 × 128 radiometrically calibrated grayscale image of the sky from the LWIR instrument. Classifier model output is a boolean. Arrows represent operations, specified by the legend-notably, blue arrows represent convolutions, while gray ones represent copying (skip connections). Tensor dimensions at the output of each block are specified.
         VGG-8 architecture for CIFAR-10/SVHN: We implement a non-standard VGG-8 architecture (without Batch Normalization), which is similar to the standard VGG-11 [40] network but with five convolution layers instead of eight. Each convolution layer has 3 × 3 filters with padding 1 and stride 1. The convolution layer is followed by ReLU non-linearity and a max pooling layer with 2 × 2 filter, no padding and stride 2 resulting in a downsampling factor of 2. The convolution layers are followed by 3 fully connected layers of dimensions 128, 128 and 10. We use ReLU non-linearity after each fc layer except the final one.
         CNN architecture for CIFAR-10/SVHN: The network consists of three convolution layers with 3$\times$3 filters, 0 padding and stride 1. The convolution layers are followed by a ReLU non-linearity. We use max pooling in this work with a filter size of 2$\times$2, no padding and stride 2 which results in a downsampling of the features by a factor of 2. The three convolution layers have 6, 16 and 32 filters respectively. Finally, a Global Average Pooling (GAP) is applied and a fully connected (fc) outputs logits over the number of classes.}
@@ -354,13 +356,13 @@ For cloud structure identification, the U-Net architecture is adopted owing to i
         %\label{fig:sub3}
     \end{subfigure}
 
-    \caption{Sample of input images (left), associated ground-truth binary masks (center) and probabilistic map predictions (right) of IRIS-CloudDeep segmentation model.}
+    \caption{Sample of input images (left), associated ground-truth binary masks (center) and probabilistic map predictions (right) of IRIS-CloudDeep segmentation model. \textcolor{orange}{Use other images to not be redundant with precent figures + only titles for the first row : cloud image \& ground-truth binary mask \& model prediction. Change the colormaps so that the left and right columns are not made from the same colors.}}
     \label{fig:sample_segmentation}
 \end{figure*}
 
 \begin{figure*}[t]
 	\includegraphics[width=\hsize]{figures/schematics_segmentation_model.png}
-	\caption{
+	\caption{\textcolor{orange}{Update this plot for the actual segmentation architecture. Keep one of the following caption written here and rearrange it so that it matches the diagram.}
 		Schematic diagram of U-Net based segmentation model architecture. Boxes represent cross-sections of square feature maps. The U-net model contains two parts: down-sampling (left half) and up-sampling (right half). After each convolutional layer, ReLU activation function (improves the computational speed of the training stage )and BN function were applied to effectively capture non-linearities in data and speedup the training
         Each map's dimensions are indicated on its lower left, and its number of channels are indicated above it. Half-grey boxes represent maps for which half of their channels are copied. The input image is a 160 × 128 radiometrically calibrated grayscale image of the sky from the LWIR instrument. The output image is a probabilistic mask prediction of pixels being cloudy or clear. Arrows represent operations, specified by the legend-notably, blue arrows represent convolutions, while gray ones represent copying (skip connections). Tensor dimensions at the output of each block are specified. Classifier model output is a boolean.}
     \label{fig:schematics_segmentation_model}
@@ -396,6 +398,8 @@ $. We also set an earlystopping watchdogs that interrupts the training if the lo
 
 \subsection{Performance metrics}
 
+\textcolor{orange}{KS : question to WK : do you see any other relevant performance metrics to add ?}
+
 In order to evaluate the performance of the proposed models, we adopt six metrics: precision (P), accuracy (A), recall (R), F1-score (F1), intersection over union (IoU) and error rate (ER) between the ground-truths and the predictions. For the segmentation model, accuracy and interesection over union are averaged over the pixels to get the mean pixel accuracy (mA) and the mean intersection over union (mIoU). All of these parameters are defined in the following equations,
 \begin{equation}
     P = \frac{TP}{TP + FP}
@@ -418,6 +422,8 @@ In order to evaluate the performance of the proposed models, we adopt six metric
 with True Positives (TP) the number of correctly classified positive instances; False Positives (FP) the number of negative instances that were incorrectly classified as positive; False Negatives (FN) the number of positive instances that were incorrectly classified as negative; True Negatives (TN) the number of correctly classified negative instances.
 
 \subsection{Results}
+
+\textcolor{orange}{KS: the text in red is copy-pasted from relevant articles to give some ideas for the writting of the associated sections. I took what I found to be the best written of all. We should present the results in a similar manner. }
 
 \textcolor{red}{Table 1 reports that SegCloud achieves a high average ac-
 curacy of 96.24\%, which further objectively proves its effec-
@@ -493,8 +499,8 @@ subsequent experiments.}
 
 \begin{figure}[t]
 	\includegraphics[width=\hsize]{figures/loss_trend.png}
-	\caption{Training and testing losses of IRIS-CloudDeep models over
-    epochs. The dashed curve is for training whereas the continuous curve is for testing. Blue and red curves denote the classifier and segmentation models respectively.}
+	\caption{\textcolor{orange}{Keep the caption but transform the plot following it : Training and testing losses of IRIS-CloudDeep models over
+    epochs. The dashed curve is for training whereas the continuous curve is for testing. Blue and red curves denote the classifier and segmentation models respectively.}}
     \label{fig:loss_trend}
 \end{figure}
 
@@ -505,7 +511,7 @@ subsequent experiments.}
 
 \begin{figure}[t]
 	\includegraphics[width=\hsize]{figures/roc_curve.png}
-	\caption{ROC curve comparison of different segmentation models. The AUC value represents the area under the curve.}
+	\caption{ROC curve comparison of different segmentation models. The AUC value represents the area under the curve. \textcolor{orange}{Update this plot for the classifier and segmentation algorithms. Use one color of choice for each. Be consistent with colors from the loss plot above.}}
     \label{fig:roc_curve}
 \end{figure}
 
@@ -552,7 +558,7 @@ clouds with high confidence.}
 
 \begin{figure}[t]
 	\includegraphics[width=\hsize]{figures/confusion_matrices.png}
-	\caption{ Confusion matrices for the methods considered in the framework. The normalized confusion matrix demonstrates the performance of the proposed model in classifying tiles containing obscurant clouds. The model tends to miss-classify tiles with tiles near the edge of the obscurant clouds since the human labels considered the edges clear although containing very light occlusion.}
+	\caption{ Confusion matrices for the methods considered in the framework. The normalized confusion matrix demonstrates the performance of the proposed model in classifying tiles containing obscurant clouds. The model tends to miss-classify tiles with tiles near the edge of the obscurant clouds since the human labels considered the edges clear although containing very light occlusion.\textcolor{orange}{Again update this plot. Also keep the same color fashion as the 2 previous plot for the classifier and segmentation models to not be confusing. Maybe red and blue will do the trick.}}
     \label{fig:confusion_matrices}
 \end{figure}
 
@@ -581,7 +587,7 @@ accurately recognized by models, we find this method of transforming color image
 
 \begin{table*}[t]
     \begin{center}
-        \caption{Evaluation metrics for the proposed segmentation model on publicly available state-of-the-art datasets. Note that RGB color images are transformed into gray-scale images as IRIS-CloudDeep segmentation model is optimized for this type of data. Best values are denoted in bold font. (P = precision, mPA = mean pixel accuracy, R = recall, F1 = F1-score, mIoU= mean intersection over union, ER = error-rate).}
+        \caption{Evaluation metrics for the proposed segmentation model on publicly available state-of-the-art datasets. Note that RGB color images are transformed into gray-scale images as IRIS-CloudDeep segmentation model is optimized for this type of data. Best values are denoted in bold font. (P = precision, mPA = mean pixel accuracy, R = recall, F1 = F1-score, mIoU= mean intersection over union, ER = error-rate). \textcolor{orange}{May need to get rid of WSISEG as images are all-sky and not cropped...}}
         \begin{tabular}{c c c c c c c} 
         \tophline \hline
          Dataset & P [\%] & mPA [\%] & R & F1 [\%] & mIoU [\%] & ER [\%] \\ [1.0ex]
@@ -669,7 +675,11 @@ Training on a larger dataset may be an additional step towards improving the acc
 
 In this paper, we proposed IRIS-CloudDeep, a deep-learning framework for classification and segmentation of LWIR
 ground-based thermal images. As far as we know, it is the framework that attempts to apply two sequential models for complementary tasks on single-channel gray-scaled infrared images. Specifically, we presented the CNN-based classifier and the U-Net based segmentation model tailored to extract cloud structures on pre-identified cloud images. Extensive experimental results on a combination of self-acquired data and transformed publicly available datasets have demonstrated
-the effectiveness and performances of the proposed framework. We successfully increased the size of training, testing and validation subsets with random application of augmentation methods. We developed an accurate simulation tool to produce realistic clear sky images. In the future, additional data will be collected by the infrared instrument, capturing various weather conditions. The framework may be re-trained on heavier datasets that will probably increase its accuracy.  Furthermore, if enough data is collected with many different cloud categories and proven-to-be accurate radiometric calibration, we will be able to expand the segmentation model to perform cloud typology through multi-label segmentation. Finally, the current trained model is expected to process data in real-time for the StarDICE experiment in order to: (i) give live alerts to remote observers in the case of cloud detection; (ii) set a flag in CCD images for quality sorting in post-processing.
+the effectiveness and performances of the proposed framework.
+
+\textcolor{orange}{Remind some key metrics of the classifier and segmentation algorithms}
+
+We successfully increased the size of training, testing and validation subsets with random application of augmentation methods. We developed an accurate simulation tool to produce realistic clear sky images. In the future, additional data will be collected by the infrared instrument, capturing various weather conditions. The framework may be re-trained on heavier datasets that will probably increase its accuracy.  Furthermore, if enough data is collected with many different cloud categories and proven-to-be accurate radiometric calibration, we will be able to expand the segmentation model to perform cloud typology through multi-label segmentation. Finally, the current trained model is expected to process data in real-time for the StarDICE experiment in order to: (i) give live alerts to remote observers in the case of cloud detection; (ii) set a flag in CCD images for quality sorting in post-processing.
 
 %% The following commands are for the statements about the availability of data sets and/or software code corresponding to the manuscript.
 %% It is strongly recommended to make use of these sections in case data sets and/or software code have been part of your research the article is based on.
@@ -684,14 +694,14 @@ the effectiveness and performances of the proposed framework. We successfully in
 
 \codedataavailability{The source code is freely available online at \url{https://github.com/kelian98/IRIS-CloudDeep}. The datasets and other supporting materials will be made available from corresponding author Kélian Sommer (kelian.sommer@umontpellier.fr) upon request.} %% use this section when having data sets and software code available
 
-\authorcontribution{KS conceived the instrument, collected data, pre-processed the dataset, created ground truths masks for segmentation and realistic synthetic data for classification. WK, RB and KS designed the framework. WK and RB performed the experiments. KS wrote the paper and collected relevant literature. WK and RB revised the manuscript. AB, JCT and BP proposed constructive suggestions on the revision of the article.} %% this section is mandatory
+\authorcontribution{KS conceived the instrument, collected data, pre-processed the dataset, created ground truths masks for segmentation and realistic synthetic data for classification. WK, RB and KS designed the framework. WK and RB performed the experiments. KS wrote the paper and collected relevant literature. WK and RB revised the manuscript. AB, JCT and BP proposed constructive suggestions on the revision of the article. } %% this section is mandatory
 
 \competinginterests{The authors declare that they have no conflict of interest.} %% this section is mandatory even if you declare that no competing interests are present
 
 %\disclaimer{TEXT} %% optional section
 
 \begin{acknowledgements}
-This work has been realized with the support of MESO@LR-Platform at the University of Montpellier. Some of the results in this paper have been derived using \textsc{astropy} \citep{Astropy2013, Astropy2018}, \textsc{flax} \citep{Flax}, \textsc{jax} \citep{Jax}, \textsc{keras} \citep{Keras}, \textsc{matplotlib} \citep{Matplotlib}, \textsc{numpy} \citep{Numpy}, \textsc{opencv-python} \citep{opencv-python}, \textsc{pandas} \citep{Pandas}, \textsc{scipy} \citep{scipy} and \textsc{tensorflow} \citep{TensorFlow}.
+This work has been realized with the support of MESO@LR-Platform at the University of Montpellier. Some of the results in this paper have been derived using \textsc{astropy} \citep{Astropy2013, Astropy2018}, \textsc{flax} \citep{Flax}, \textsc{jax} \citep{Jax}, \textsc{keras} \citep{Keras}, \textsc{matplotlib} \citep{Matplotlib}, \textsc{numpy} \citep{Numpy}, \textsc{opencv-python} \citep{opencv-python}, \textsc{pandas} \citep{Pandas}, \textsc{scipy} \citep{scipy} and \textsc{tensorflow} \citep{TensorFlow}. \textcolor{orange}{Add thanks for the people that revised the manuscript : JCT and AB; on the same model as \citet{stardice1} acknowledgements}
 \end{acknowledgements}
 
 

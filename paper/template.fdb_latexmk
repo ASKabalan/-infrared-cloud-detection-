@@ -1,14 +1,14 @@
 # Fdb version 3
-["bibtex template"] 1694883511 "template.aux" "template.bbl" "template" 1694883512
+["bibtex template"] 1695416172 "template.aux" "template.bbl" "template" 1695416229
   "./copernicus.bst" 1647433060 39134 8a7ac2d830d122d08f069c4193c82e5a ""
   "biblio.bib" 1694881110 169245 1817cdfe7c779cf44b47d4a68778974a ""
-  "template.aux" 1694883512 61657 0c8108480b16d75e4f11fc7f85c508ed "pdflatex"
+  "template.aux" 1695416228 64276 ac6b6014c5c6fe6a32809a38fd1a8ac2 "pdflatex"
   (generated)
   "template.bbl"
   "template.blg"
-["pdflatex"] 1694883511 "/home/sommer/Documents/IR/CLOUD_DETECTION/infrared-cloud-detection/paper/template.tex" "template.pdf" "template" 1694883512
+["pdflatex"] 1695416227 "/home/sommer/Documents/IR/CLOUD_DETECTION/infrared-cloud-detection/paper/template.tex" "template.pdf" "template" 1695416229
   "/etc/texmf/web2c/texmf.cnf" 1673281250 475 c0e671620eb5563b2130f56340a5fde8 ""
-  "/home/sommer/Documents/IR/CLOUD_DETECTION/infrared-cloud-detection/paper/template.tex" 1694883510 83998 ae8f7b60f9c531c9a1b15c7aaa82c9bb ""
+  "/home/sommer/Documents/IR/CLOUD_DETECTION/infrared-cloud-detection/paper/template.tex" 1695416227 85938 0fd542ab1a980ec31949cb5cb46fc1b7 ""
   "/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc" 1165713224 4850 80dc9bab7f31fb78a000ccfed0e27cab ""
   "/usr/share/texlive/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/adobe/courier/pcrr8r.tfm" 1136768653 1292 bd42be2f344128bff6d35d98474adfe3 ""
@@ -207,9 +207,9 @@
   "figures/test_dl_15epochs2.png" 1693259975 114758 d21a93621a71f6a90421be80ff567458 ""
   "figures/test_dl_15epochs3.png" 1693260037 83776 fbfc2a7d394b0c88268e8a474c025388 ""
   "orcidlogo.pdf" 1694107867 1186 379ce59ea99fb3313849de510575cf8a ""
-  "template.aux" 1694883512 61657 0c8108480b16d75e4f11fc7f85c508ed "pdflatex"
-  "template.bbl" 1694883511 46864 4219ed11a5fedc45429d71e80263ca03 "bibtex template"
-  "template.tex" 1694883510 83998 ae8f7b60f9c531c9a1b15c7aaa82c9bb ""
+  "template.aux" 1695416228 64276 ac6b6014c5c6fe6a32809a38fd1a8ac2 "pdflatex"
+  "template.bbl" 1695416172 46864 4219ed11a5fedc45429d71e80263ca03 "bibtex template"
+  "template.tex" 1695416227 85938 0fd542ab1a980ec31949cb5cb46fc1b7 ""
   (generated)
   "template.aux"
   "template.log"
