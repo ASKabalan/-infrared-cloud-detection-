@@ -6,12 +6,16 @@ Deep-learning architecture classify and identify cloud structure on sky infrared
 
 ### Wassim
 
-- Mettre le modèle Flax en propre et finir le markdown du notebook
-- Faire un script python pour creer un model et l'entrainer
-  - args : (Flax ou Keras) Dossier image, channel list, nombre epoch, batch_size, val_batch_size, aug_batch_size, (bool)evaluate,  output save model, output_save_image_prediction
-- Faire un script python inference 
-  - args : (Flax ou keras) chemin model, dossier_image_cible, batch_size, output_save_image_prediction
+- ~~Mettre le modèle Flax en propre et finir le markdown du notebook~~
+- ~~Faire un script python pour creer un model et l'entrainer~~
+  - ~~args : (Flax ou Keras) Dossier image, channel list, nombre epoch, batch_size, val_batch_size, aug_batch_size, (bool)evaluate,  output save model, output_save_image_prediction~~
+- ~~Faire un script python inference ~~
+  - ~~args : (Flax ou keras) chemin model, dossier_image_cible, batch_size, output_save_image_prediction~~
+- push les dataset IRIS/CIRRUS/SkyNet
+- finish preprocess des public datasets et push github 
+- verifier intro 
 - Faire un tikz de l'UNET et double CONV UNET pour le papier
+- mettre les resultat dans le papier
 
 ### Kelian
 
