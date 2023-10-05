@@ -10,7 +10,7 @@ from model import create_train_state, train_step, eval_step
 from CloudDataSetGen import load_dataset
 
 
-def TrainAndSave(input_folder_path, output_model_path, unet_conv=[64, 128, 256, 512],bottle_neck_conv = 1024, \
+def train_and_evaluate(input_folder_path, output_model_path, unet_conv=[64, 128, 256, 512],bottle_neck_conv = 1024, \
                 learning_rate=0.001, train_batch_size=64, aug_batch_size=64, val_batch_size=64,\
                 num_epochs=50, patience=10, verbose=1):
 
@@ -99,7 +99,7 @@ if __name__ == '__main__':
     parser.add_argument('--verbose', type=int, default=1, choices=[0, 1, 2], help='Verbosity level. 0: No logs, 1: Epoch logs, 2: Batch logs.')
     args = parser.parse_args()
 
-    TrainAndSave(
+    train_and_evaluate(
         input_folder_path=args.input_folder_path,
         output_model_path=args.output_model_path,
         unet_conv=args.unet_conv,

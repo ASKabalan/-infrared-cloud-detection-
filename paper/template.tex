@@ -286,6 +286,8 @@ In this section, we outline the architectural designs of two distinct deep-learn
 
 \subsection{Image classification}
 
+\textcolor{orange}{WK : review}
+
 For our image classification model, we employed a Convolutional Neural Network (CNN) architecture \citep{SHARMA2018377} derived from the VGG-16 network \citep{simonyan2015deep}, which has proven to be highly effective in image recognition tasks \citep{canziani2016analysis} without introducing much complexity as ResNets \citep{ResNet}. VGG-16 is a convolutional neural network that is 16 layers deep whereas ResNet generally have higher depths. This modified network was designed with the primary objective of distinguishing between images that contain clouds and those that do not and is similar to SegCloud \citep{SegCloud}.
 
 The VGG-16 architecture serves as the backbone of our model. It consists of a series of convolutional layers, followed by rectified linear unit (ReLU) activation \citep{agarap2018deep} and max-pooling operations. This configuration facilitates the extraction of hierarchical features that are important for accurate classification. We retained the convolutional layers and their weight parameters from the original VGG-16 model to benefit from the network's ability to capture intricate visual patterns.
@@ -679,6 +681,8 @@ ground-based thermal images. As far as we know, it is the framework that attempt
 the effectiveness and performances of the proposed framework.
 
 \textcolor{orange}{KS : Remind some key metrics of the classifier and segmentation algorithms}
+\textcolor{orange}{WK : Classifier => A P R F1 Loss}
+\textcolor{orange}{WK : Seg => A P R F1 IoU Loss}
 
 We successfully increased the size of training, testing and validation subsets with random application of augmentation methods. We developed an accurate simulation tool to produce realistic clear sky images. In the future, additional data will be collected by the infrared instrument, capturing various weather conditions. The framework may be re-trained on heavier datasets that will probably increase its accuracy.  Furthermore, if enough data is collected with many different cloud categories and proven-to-be accurate radiometric calibration, we will be able to expand the segmentation model to perform cloud typology through multi-label segmentation. Finally, the current trained model is expected to process data in real-time for the StarDICE experiment in order to: (i) give live alerts to remote observers in the case of cloud detection; (ii) set a flag in CCD images for quality sorting in post-processing.
 
