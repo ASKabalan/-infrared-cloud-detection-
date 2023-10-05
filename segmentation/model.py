@@ -131,7 +131,7 @@ def save_model(state, model_path,checkpoint):
 
     orbax_checkpointer.save(f"{model_path}/model_{checkpoint}", {'model': state}, save_args=save_args)
 
-def load_model(model_path,ModelClass):
+def load_model(model_path):
     """
     Load the Flax model using orbax.
 
@@ -146,6 +146,6 @@ def load_model(model_path,ModelClass):
     state = restored_data['model']
 
     model_config = state['model_config']
-    model_instance = ModelClass(**model_config)
+    model_instance = CIRRUS_Net(**model_config)
 
     return state , model_instance.apply

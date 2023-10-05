@@ -1,18 +1,18 @@
-This is BibTeX, Version 0.99d (TeX Live 2022/dev/Debian)
+This is BibTeX, Version 0.99d (TeX Live 2023)
 Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
 The top-level auxiliary file: template.aux
 The style file: copernicus.bst
 Database file #1: biblio.bib
 Warning--entry type for "SWINSEG" isn't style-file defined
---line 3725 of file biblio.bib
+--line 7449 of file biblio.bib
 Warning--entry type for "Pandas" isn't style-file defined
---line 4011 of file biblio.bib
+--line 8021 of file biblio.bib
 Warning--entry type for "Flax" isn't style-file defined
---line 4022 of file biblio.bib
+--line 8043 of file biblio.bib
 Warning--entry type for "Jax" isn't style-file defined
---line 4030 of file biblio.bib
+--line 8059 of file biblio.bib
 Warning--entry type for "opencv-python" isn't style-file defined
---line 4121 of file biblio.bib
+--line 8241 of file biblio.bib
 Warning--empty title in Matplotlib
 Warning--empty booktitle in Liandrat2017
 Warning--empty journal in sun2008whole

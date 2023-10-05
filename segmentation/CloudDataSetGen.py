@@ -74,7 +74,7 @@ class CloudImageDataGenerator(tf.keras.utils.Sequence):
         if self.shuffle:
             np.random.shuffle(self.indices)
 
-def load_dataset(input_folder_path, train_batch_size, aug_batch_size, val_batch_size):
+def load_dataset(input_folder_path, train_batch_size, aug_batch_size=0, val_batch_size=0):
     images_list = glob.glob(f'{input_folder_path}/*.fits')
     images_list = random.choices(images_list, k=len(images_list))
 
@@ -88,15 +88,3 @@ def load_dataset(input_folder_path, train_batch_size, aug_batch_size, val_batch_
     ds_val_gen = CloudImageDataGenerator(x_data=X_test, y_data=y_test, batch_size=val_batch_size, aug_batch_size=0, shuffle=False)
     
     return ds_train_gen, ds_val_gen
-
-def load_inference_ds(input_folder_path,batch_size):
-    images_list = glob.glob(f'{input_folder_path}/*.fits')
-    images_list = random.choices(images_list, k=len(images_list))
-
-    with parallel_backend('threading', n_jobs=num_cores):
-        l_fits = Parallel(verbose=0)(delayed(open_fits_with_mask)(filename=r) for r in images_list)
-    l_fits = np.array(l_fits)
-
-    ds_pred_gen = CloudImageDataGenerator(x_data=l_fits[:,0], y_data=None, batch_size=batch_size, aug_batch_size=0, shuffle=False)
-    
-    return ds_pred_gen

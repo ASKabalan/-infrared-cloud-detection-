@@ -4,45 +4,42 @@ import argparse
 import jax.numpy as jnp
 import matplotlib.pyplot as plt
 from model import CIRRUS_Net, load_model, predict
-from CloudDataSetGen import load_inference_ds
+from CloudDataSetGen import load_dataset
 from ..utilities import utilities as util
 import random
 
-def visualize_predictions(images, predictions, num_visualize=3):
-    for _ in range(3):
-        random_index = random.randint(0, len(images) - 1)
+def visualize_predictions(X_test, y_test,y_pred, num_visualize=3):
+    for _ in range(num_visualize):
+        random_index = random.randint(0, len(X_test) - 1)
         util.plot_image_pred(X_test[random_index], y_test[random_index], y_pred[random_index],predmask_cmap='jet')
 
-if __name__ == '__main__':
-    parser = argparse.ArgumentParser(description='Predict using the CIRRUS CloudSeg model.')
-    parser.add_argument('--model_path', type=str, required=True, help='Path to the saved model.')
-    parser.add_argument('--input_folder', type=str, required=True, help='Path to the input folder containing images for prediction.')
-    parser.add_argument('--num_visualize', type=int, default=3, help='Number of predictions to visualize.')
-    parser.add_argument('--output_folder', type=str, default=None, help='Path to save the prediction images. If not provided, images will not be saved.')
-    args = parser.parse_args()
+def load_model_predict(model_path,input_folder,batch_size=64,num_visualize=3,output_folder=None):
 
     # Load model
-    state,apply_fn = load_model(args.model_path,CIRRUS_Net)
+    state,apply_fn = load_model(model_path)
 
     # Load dataset (assuming you have a function to load only images without masks)
-    ds_inference = load_inference_ds(args.input_folder)
+    ds_inference , _ = load_dataset(input_folder,batch_size)
 
     # Predict
     # Evaluate the model
+    # Evaluate the model
     all_images = []
     all_predictions = []
-    for images in ds_inference:
-        batch_predictions = predict(state, images)
-        all_predictions.append(batch_predictions)
+    all_groudtruth = []
+    for batch in ds_inference:
+        images, masks = batch
+        batch_predictions = predict(state["params"],apply_fn, images)
+        all_images.append(batch_predictions)
+        all_predictions.append(images)
+        all_groudtruth.append(masks)
+
+    all_images = jnp.concatenate(all_images, axis=0)
+    x_img = all_images.squeeze(axis=-1)
     all_predictions = jnp.concatenate(all_predictions, axis=0)
     y_pred = all_predictions.squeeze(axis=-1)
-
+    all_groudtruth = jnp.concatenate(all_groudtruth, axis=0)
+    y_test = all_groudtruth.squeeze(axis=-1)
+    util.evaluate_model(y_test, y_pred)
+    visualize_predictions(x_img,y_test,y_pred,num_visualize)
     # Visualize
-    
-    if 
-    visualize_predictions(images, predictions, args.num_visualize)
-
-    # Save predictions if output_folder is provided
-    if args.output_folder:
-        for idx, pred in enumerate(predictions):
-            plt.imsave(f"{args.output_folder}/prediction_{idx}.png", pred.squeeze(), cmap='jet')
