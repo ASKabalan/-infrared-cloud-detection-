@@ -56,17 +56,18 @@ def rebin_samping(image, new_shape):
     """
     return resize(image, new_shape, anti_aliasing=True)
 
-def evaluate_model(y_true, y_pred_proba, threshhold=0.5):
+def evaluate_model(y_true, y_pred_proba, threshold=0.5, output_file=None, plot_file=None):
     """
-    Evaluates the performance of a model using various metrics and plots the ROC curve.
-    
-    Args:
-    - y_true (array): Ground truth labels.
-    - y_pred_proba (array): Predicted probabilities.
-    - threshhold (float): Threshold for classifying probabilities. Default is 0.5.
+        Evaluates the performance of a model using various metrics and plots the ROC curve.
+        
+        Args:
+        - y_true (array): Ground truth labels.
+        - y_pred_proba (array): Predicted probabilities.
+        - threshhold (float): Threshold for classifying probabilities. Default is 0.5.
     """
     
-    y_pred = (y_pred_proba > threshhold).astype(int)
+    y_pred = (y_pred_proba > threshold).astype(int)
+    y_true = (y_true > threshold).astype(int)
 
     # Flatten the arrays for pixel-wise operations
     y_true_flat = y_true.ravel()
@@ -93,17 +94,28 @@ def evaluate_model(y_true, y_pred_proba, threshhold=0.5):
     union = np.sum(y_true_flat) + np.sum(y_pred_flat) - intersection
     iou = intersection / (union + 1e-10)
     
-    print(f"Mean Accuracy: {accuracy:.4f}")
-    print(f"Mean Precision: {precision:.4f}")
-    print(f"Mean Recall: {recall:.4f}")
-    print(f"Mean F1 Score: {f1:.4f}")
-    print(f"Error Rate (ER): {ER:.4f}")
-    print(f"BinaryCrossEntropy Loss: {loss:.4f}")
-    print(f"IOU: {iou:.4f}")
-    
-    # Compute pixel-wise FPR, TPR and thresholds
+     # Prepare the evaluation results text
     fpr, tpr, thresholds = roc_curve(y_true_flat, y_pred_flat)
     auc_value = auc(fpr, tpr)
+    
+    results_text = (
+        f"Mean Accuracy: {accuracy:.4f}\n"
+        f"Mean Precision: {precision:.4f}\n"
+        f"Mean Recall: {recall:.4f}\n"
+        f"Mean F1 Score: {f1:.4f}\n"
+        f"Error Rate (ER): {ER:.4f}\n"
+        f"BinaryCrossEntropy Loss: {loss:.4f}\n"
+        f"IOU: {iou:.4f}\n"
+        f"Mean AUC: {auc_value:.4f}\n"
+    )
+
+    # Print the evaluation results
+    print(results_text)
+
+    # Save the evaluation results to a file
+    if output_file is not None:
+        with open(output_file, 'w') as file:
+            file.write(results_text)
     
     # Plot the AUC curve
     plt.figure(figsize=(10, 8))
@@ -113,7 +125,12 @@ def evaluate_model(y_true, y_pred_proba, threshhold=0.5):
     plt.ylabel('True Positive Rate')
     plt.title('Receiver Operating Characteristic (ROC) Curve')
     plt.legend(loc='best')
-    plt.show()
+    
+    # Save the ROC plot to a file
+    if plot_file is not None:
+        plt.savefig(plot_file)
+    else:
+        plt.show()
 
 def rgb_to_gray(image_path, output_path, save_to_fits=True):
     """
