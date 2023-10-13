@@ -6,3 +6,5 @@ Error Rate (ER): 0.0566
 BinaryCrossEntropy Loss: 0.1300
 IOU: 0.9402
 Mean AUC: 0.7547
+
+Trained on DS1 and DS2 data
