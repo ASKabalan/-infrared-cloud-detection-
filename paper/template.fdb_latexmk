@@ -1,16 +1,16 @@
 # Fdb version 4
-["bibtex template"] 1696497203 "template.aux" "template.bbl" "template" 1696497211 0
+["bibtex template"] 1697907776 "template.aux" "template.bbl" "template" 1697907784 0
   "./biblio.bib" 1696338360 173443 1817cdfe7c779cf44b47d4a68778974a ""
   "./copernicus.bst" 1694176978 39134 d750f475268de36ff6a4d702b3deba65 ""
-  "template.aux" 1696497208 64242 fe33b0dd84eabcb1788e470fbd07c051 "pdflatex"
+  "template.aux" 1697907782 64366 2c7cd03141e47151c633bd6d90331c01 "pdflatex"
   (generated)
   "template.bbl"
   "template.blg"
   (rewritten before read)
-["pdflatex"] 1696497204 "e:/Personal/cloud/infrared-cloud-detection/paper/template.tex" "template.pdf" "template" 1696497211 0
+["pdflatex"] 1697907777 "e:/Personal/cloud/infrared-cloud-detection/paper/template.tex" "template.pdf" "template" 1697907784 0
   "copernicus.cfg" 1694176978 53111 9a7d2b325854c7b0f2c019918c325296 ""
   "copernicus.cls" 1694176978 117604 caa4fbf226cdccb5f7a70bb67cc72c2c ""
-  "e:/Personal/cloud/infrared-cloud-detection/paper/template.tex" 1696497169 86055 3adb398c012b569d8e77ed96bf688dfa ""
+  "e:/Personal/cloud/infrared-cloud-detection/paper/template.tex" 1697907771 86738 5a77a5f0c9fe63964b130919b4b1b594 ""
   "e:/Projet/texlive/2023/texmf-dist/fonts/enc/dvips/base/8r.enc" 1690369896 4850 80dc9bab7f31fb78a000ccfed0e27cab ""
   "e:/Projet/texlive/2023/texmf-dist/fonts/map/fontname/texfonts.map" 1690370821 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "e:/Projet/texlive/2023/texmf-dist/fonts/tfm/adobe/courier/pcrr8r.tfm" 1690369255 1292 bd42be2f344128bff6d35d98474adfe3 ""
@@ -54,7 +54,6 @@
   "e:/Projet/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb" 1690367703 32762 7fee39e011c23b3589931effd97b9702 ""
   "e:/Projet/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb" 1690367703 33993 9b89b85fd2d9df0482bd47194d1d3bf3 ""
   "e:/Projet/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb" 1690367703 32569 5e5ddc8df908dea60932f3c484a54c0d ""
-  "e:/Projet/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy5.pfb" 1690367703 32915 7bf7720c61a5b3a7ff25b0964421c9b6 ""
   "e:/Projet/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb" 1690367703 32587 65067f817f408bc71a7312f3d9828a9b ""
   "e:/Projet/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy9.pfb" 1690367703 32442 c975af247b6702f7ca0c299af3616b80 ""
   "e:/Projet/texlive/2023/texmf-dist/fonts/type1/urw/courier/ucrr8a.pfb" 1690369255 45758 19968a0990191524e34e1994d4a31cb6 ""
@@ -209,9 +208,9 @@
   "figures/test_dl_15epochs2.png" 1694176978 114758 5124e2a2513d71e5b1c9d388bbc65a6b ""
   "figures/test_dl_15epochs3.png" 1694176978 83776 8d0f3159783fd04c7fd8052a37f621f1 ""
   "orcidlogo.pdf" 1694176979 1186 379ce59ea99fb3313849de510575cf8a ""
-  "template.aux" 1696497208 64242 fe33b0dd84eabcb1788e470fbd07c051 "pdflatex"
-  "template.bbl" 1696497204 45972 c771e2add1f6dc30a9a7f95123e78b98 "bibtex template"
-  "template.tex" 1696497169 86055 3adb398c012b569d8e77ed96bf688dfa ""
+  "template.aux" 1697907782 64366 2c7cd03141e47151c633bd6d90331c01 "pdflatex"
+  "template.bbl" 1697907777 45972 c771e2add1f6dc30a9a7f95123e78b98 "bibtex template"
+  "template.tex" 1697907771 86738 5a77a5f0c9fe63964b130919b4b1b594 ""
   (generated)
   "template.aux"
   "template.log"

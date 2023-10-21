@@ -990,7 +990,7 @@
 \@LN{795}{11}
 \@LN{796}{11}
 \@LN{797}{11}
-\@writefile{lot}{\contentsline {table}{\numberline {2}{\ignorespaces Evaluation metrics for the proposed IRIS-CloudDeep framework. (P = precision, mPA = mean pixel accuracy, R = recall, F1 = F1-score, mIoU= mean intersection over union, ER = error-rate)\relax }}{13}{table.caption.10}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {2}{\ignorespaces Evaluation metrics for the proposed IRIS-CloudDeep framework. (A = Accuracy, P = precision, R = Recall, F1 = F1-score, IoU= intersection over union, ER = error-rate, BC Loss = BinaryCrossEntropy Loss, AUC = Area under the curve)\relax }}{13}{table.caption.10}\protected@file@percent }
 \@LN@col{1}
 \@writefile{lof}{\contentsline {figure}{\numberline {10}{\ignorespaces ROC curve comparison of different segmentation models. The AUC value represents the area under the curve. \textcolor {orange}{Update this plot for the classifier and segmentation algorithms. Use one color of choice for each. Be consistent with colors from the loss plot above.}\relax }}{13}{figure.caption.12}\protected@file@percent }
 \newlabel{fig:roc_curve}{{10}{13}{ROC curve comparison of different segmentation models. The AUC value represents the area under the curve. \textcolor {orange}{Update this plot for the classifier and segmentation algorithms. Use one color of choice for each. Be consistent with colors from the loss plot above.}\relax }{figure.caption.12}{}}
@@ -1160,10 +1160,9 @@
 \@LN{939}{13}
 \@LN{940}{13}
 \@LN{941}{13}
-\@writefile{lot}{\contentsline {table}{\numberline {3}{\ignorespaces Evaluation metrics for the proposed segmentation model on publicly available state-of-the-art datasets. Note that RGB color images are transformed into gray-scale images as IRIS-CloudDeep segmentation model is optimized for this type of data. Best values are denoted in bold font. (P = precision, mPA = mean pixel accuracy, R = recall, F1 = F1-score, mIoU= mean intersection over union, ER = error-rate). \textcolor {orange}{May need to get rid of WSISEG as images are all-sky and not cropped...}\relax }}{15}{table.caption.14}\protected@file@percent }
-\newlabel{tab:datasets_comparison}{{3}{15}{Evaluation metrics for the proposed segmentation model on publicly available state-of-the-art datasets. Note that RGB color images are transformed into gray-scale images as IRIS-CloudDeep segmentation model is optimized for this type of data. Best values are denoted in bold font. (P = precision, mPA = mean pixel accuracy, R = recall, F1 = F1-score, mIoU= mean intersection over union, ER = error-rate). \textcolor {orange}{May need to get rid of WSISEG as images are all-sky and not cropped...}\relax }{table.caption.14}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {3}{\ignorespaces Evaluation metrics for the proposed segmentation model on publicly available state-of-the-art datasets. Note that RGB color images are transformed into gray-scale images as IRIS-CloudDeep segmentation model is optimized for this type of data. Best values are denoted in bold font. (A = Accuracy, P = Precision, R = Recall, F1 = F1-score, ER = Error Rate, BC Loss = BinaryCrossEntropy Loss, IoU = Intersection Over Union, AUC = Area Under the Curve, FL = Used LWIRISEG model FT = Finetuned from LWIRISEG mode, FS = Trained from Scratch).\relax }}{15}{table.caption.14}\protected@file@percent }
+\newlabel{tab:datasets_comparison}{{3}{15}{Evaluation metrics for the proposed segmentation model on publicly available state-of-the-art datasets. Note that RGB color images are transformed into gray-scale images as IRIS-CloudDeep segmentation model is optimized for this type of data. Best values are denoted in bold font. (A = Accuracy, P = Precision, R = Recall, F1 = F1-score, ER = Error Rate, BC Loss = BinaryCrossEntropy Loss, IoU = Intersection Over Union, AUC = Area Under the Curve, FL = Used LWIRISEG model FT = Finetuned from LWIRISEG mode, FS = Trained from Scratch).\relax }{table.caption.14}{}}
 \@LN@col{1}
-\@writefile{lot}{\contentsline {table}{\numberline {4}{\ignorespaces Comparison of model size and computation speed for the same segmentation model implemented with \textsc  {keras} and \textsc  {flax}.\relax }}{15}{table.caption.15}\protected@file@percent }
 \@LN{942}{14}
 \@LN{943}{14}
 \@LN{944}{14}
@@ -1186,7 +1185,6 @@
 \@LN{960}{14}
 \@LN{961}{14}
 \@LN{962}{14}
-\@LN@col{2}
 \@LN{963}{14}
 \@writefile{toc}{\contentsline {subsection}{\numberline {6.4}Future perspectives}{15}{subsection.6.4}\protected@file@percent }
 \@LN{964}{14}
@@ -1195,6 +1193,8 @@
 \@LN{967}{14}
 \@LN{968}{14}
 \@LN{969}{14}
+\@LN@col{2}
+\@writefile{lot}{\contentsline {table}{\numberline {4}{\ignorespaces Comparison of model size and computation speed for the same segmentation model implemented with \textsc  {keras} and \textsc  {flax}.\relax }}{15}{table.caption.15}\protected@file@percent }
 \@LN{970}{14}
 \@LN{971}{14}
 \@LN{972}{14}
@@ -1215,14 +1215,6 @@
 \newlabel{sec:conclusion}{{7}{15}{Conclusion}{section.7}{}}
 \@LN{986}{14}
 \@LN{987}{14}
-\@LN{988}{14}
-\@LN{989}{14}
-\@LN{990}{14}
-\@LN{991}{14}
-\@LN{992}{14}
-\@LN{993}{14}
-\@LN{994}{14}
-\@LN{995}{14}
 \citation{Astropy2013,Astropy2018}
 \citation{Flax}
 \citation{Jax}
@@ -1247,8 +1239,15 @@
 \bibcite{bates1984rayleigh}{{10}{1984}{{Bates}}{{}}}
 \bibcite{Betoule2013}{{11}{2013}{{Betoule et~al.}}{{Betoule, Marriner, Regnault, Cuillandre, Astier, Guy, Balland, Hage, Hardin, Kessler, Guillou, Mosher, Pain, Rocci, Sako, and Schahmaneche}}}
 \bibcite{stardice1}{{12}{2022}{{{Betoule} et~al.}}{{{Betoule}, {Antier}, {Bertin}, {{\'E}ric Blanc}, {Bongard}, {Cohen Tanugi}, {Dagoret-Campagne}, {Feinstein}, {Hardin}, {Juramy}, {Le Guillou}, {Le Van Suu}, {Moniez}, {Neveu}, {Nuss}, {Plez}, {Regnault}, {Sepulveda}, {Sommer}, {Souverin}, and {Wang}}}}
-\bibcite{bjorck2018understanding}{{13}{2018}{{Bjorck et~al.}}{{Bjorck, Gomes, Selman, and Weinberger}}}
 \@LN@col{1}
+\@LN{988}{15}
+\@LN{989}{15}
+\@LN{990}{15}
+\@LN{991}{15}
+\@LN{992}{15}
+\@LN{993}{15}
+\@LN{994}{15}
+\@LN{995}{15}
 \@LN{996}{15}
 \@LN{997}{15}
 \@LN{998}{15}
@@ -1289,13 +1288,13 @@
 \@LN{1033}{15}
 \@LN{1034}{15}
 \@LN{1035}{15}
+\@LN@col{2}
 \@LN{1036}{15}
 \@LN{1037}{15}
 \@LN{1038}{15}
 \@LN{1039}{15}
 \@LN{1040}{15}
 \@LN{1041}{15}
-\@LN@col{2}
 \@LN{1042}{15}
 \@LN{1043}{15}
 \@LN{1044}{15}
@@ -1347,12 +1346,7 @@
 \@LN{1090}{15}
 \@LN{1091}{15}
 \@LN{1092}{15}
-\@LN{1093}{15}
-\@LN{1094}{15}
-\@LN{1095}{15}
-\@LN{1096}{15}
-\@LN{1097}{15}
-\@LN{1098}{15}
+\bibcite{bjorck2018understanding}{{13}{2018}{{Bjorck et~al.}}{{Bjorck, Gomes, Selman, and Weinberger}}}
 \bibcite{boers2006satellite}{{14}{2006}{{Boers et~al.}}{{Boers, Acarreta, and Gras}}}
 \bibcite{Bohlin2014}{{15}{2014}{{Bohlin}}{{}}}
 \bibcite{Bohlin2011}{{16}{2011}{{Bohlin et~al.}}{{Bohlin, Gordon, Rieke, Ardila, Carey, Deustua, Engelbracht, Ferguson, Flanagan, Kalirai, Meixner, Noriega-Crespo, Su, and Tremblay}}}
@@ -1379,9 +1373,13 @@
 \bibcite{geer2017growing}{{37}{2017}{{Geer et~al.}}{{Geer, Baordo, Bormann, Chambon, English, Kazumori, Lawrence, Lean, Lonitz, and Lupu}}}
 \bibcite{Hack2023}{{38}{2023}{{Hack et~al.}}{{Hack, Pauliquevis, Barbosa, Yamasoe, Klebe, and Correia}}}
 \bibcite{Numpy}{{39}{2020}{{Harris et~al.}}{{Harris, Millman, van~der Walt, Gommers, Virtanen, Cournapeau, Wieser, Taylor, Berg, Smith, Kern, Picus, Hoyer, van Kerkwijk, Brett, Haldane, del Rio, Wiebe, Peterson, Gerard-Marchant, Sheppard, Reddy, Weckesser, Abbasi, Gohlke, and Oliphant}}}
-\bibcite{ResNet}{{40}{2015}{{He et~al.}}{{He, Zhang, Ren, and Sun}}}
-\bibcite{Flax}{{41}{2023}{{Heek et~al.}}{{Heek, Levskaya, Oliver, Ritter, Rondepierre, Steiner, and van Zee}}}
 \@LN@col{1}
+\@LN{1093}{16}
+\@LN{1094}{16}
+\@LN{1095}{16}
+\@LN{1096}{16}
+\@LN{1097}{16}
+\@LN{1098}{16}
 \@LN{1099}{16}
 \@LN{1100}{16}
 \@LN{1101}{16}
@@ -1435,13 +1433,13 @@
 \@LN{1149}{16}
 \@LN{1150}{16}
 \@LN{1151}{16}
+\@LN@col{2}
 \@LN{1152}{16}
 \@LN{1153}{16}
 \@LN{1154}{16}
 \@LN{1155}{16}
 \@LN{1156}{16}
 \@LN{1157}{16}
-\@LN@col{2}
 \@LN{1158}{16}
 \@LN{1159}{16}
 \@LN{1160}{16}
@@ -1495,11 +1493,8 @@
 \@LN{1208}{16}
 \@LN{1209}{16}
 \@LN{1210}{16}
-\@LN{1211}{16}
-\@LN{1212}{16}
-\@LN{1213}{16}
-\@LN{1214}{16}
-\@LN{1215}{16}
+\bibcite{ResNet}{{40}{2015}{{He et~al.}}{{He, Zhang, Ren, and Sun}}}
+\bibcite{Flax}{{41}{2023}{{Heek et~al.}}{{Heek, Levskaya, Oliver, Ritter, Rondepierre, Steiner, and van Zee}}}
 \bibcite{Houghton1972}{{42}{1972}{{{Houghton} and {Lee}}}{{}}}
 \bibcite{hu2004application}{{43}{2004}{{Hu et~al.}}{{Hu, Wielicki, Yang, Stackhouse, Lin, and Young}}}
 \bibcite{Matplotlib}{{44}{2007}{{Hunter}}{{}}}
@@ -1524,9 +1519,12 @@
 \bibcite{liandrat2017cloud}{{63}{2017{b}}{{Liandrat et~al.}}{{Liandrat, Cros, Braun, Saint-Antonin, Decroix, and Schmutz}}}
 \bibcite{liou1992radiation}{{64}{1992}{{Liou}}{{}}}
 \bibcite{Liu2021}{{65}{2011}{{Liu et~al.}}{{Liu, Sun, Chen, Zhao, and Gao}}}
-\bibcite{RADAM}{{66}{2019}{{Liu et~al.}}{{Liu, Jiang, He, Chen, Liu, Gao, and Han}}}
-\bibcite{liu2018multimodal}{{67}{2018}{{Liu et~al.}}{{Liu, Li, Zhang, Xiao, and Cao}}}
 \@LN@col{1}
+\@LN{1211}{17}
+\@LN{1212}{17}
+\@LN{1213}{17}
+\@LN{1214}{17}
+\@LN{1215}{17}
 \@LN{1216}{17}
 \@LN{1217}{17}
 \@LN{1218}{17}
@@ -1580,12 +1578,12 @@
 \@LN{1266}{17}
 \@LN{1267}{17}
 \@LN{1268}{17}
+\@LN@col{2}
 \@LN{1269}{17}
 \@LN{1270}{17}
 \@LN{1271}{17}
 \@LN{1272}{17}
 \@LN{1273}{17}
-\@LN@col{2}
 \@LN{1274}{17}
 \@LN{1275}{17}
 \@LN{1276}{17}
@@ -1639,11 +1637,8 @@
 \@LN{1324}{17}
 \@LN{1325}{17}
 \@LN{1326}{17}
-\@LN{1327}{17}
-\@LN{1328}{17}
-\@LN{1329}{17}
-\@LN{1330}{17}
-\@LN{1331}{17}
+\bibcite{RADAM}{{66}{2019}{{Liu et~al.}}{{Liu, Jiang, He, Chen, Liu, Gao, and Han}}}
+\bibcite{liu2018multimodal}{{67}{2018}{{Liu et~al.}}{{Liu, Li, Zhang, Xiao, and Cao}}}
 \bibcite{TransCloudSeg}{{68}{2022}{{Liu et~al.}}{{Liu, Zhang, Zhang, Cao, and Durrani}}}
 \bibcite{GAM}{{69}{2021}{{Liu et~al.}}{{Liu, Shao, and Hoffmann}}}
 \bibcite{Long2006}{{70}{2006}{{Long et~al.}}{{Long, Sabburg, Calbó, and Pagès}}}
@@ -1674,8 +1669,12 @@
 \bibcite{Rubin2015}{{95}{2015}{{Rubin et~al.}}{{Rubin, Aldering, Amanullah, Barbary, Dawson, Deustua, Faccioli, Fadeyev, Fakhouri, Fruchter, Gladders, de~Jong, Koekemoer, Krechmer, Lidman, Meyers, Nordin, Perlmutter, Ripoche, Schlegel, Spadafora, and Suzuki}}}
 \bibcite{rubin2022uniform}{{96}{2022}{{Rubin et~al.}}{{Rubin, Aldering, Antilogus, Aragon, Bailey, Baltay, Bongard, Boone, Buton, Copin, Dixon, Fouchez, Gangler, Gupta, Hayden, Hillebrandt, Kim, Kowalski, Kuesters, Leget, Mondon, Nordin, Pain, Pecontal, Pereira, Perlmutter, Ponder, Rabinowitz, Rigault, Runge, Saunders, Smadja, Suzuki, Tao, Taubenberger, Thomas, Vincenzi, and Factory}}}
 \bibcite{environsciproc2023026033}{{97}{2023}{{Salamalikis et~al.}}{{Salamalikis, Tzoumanikas, Argiriou, and Kazantzidis}}}
-\bibcite{schiffer1983international}{{98}{1983}{{Schiffer and Rossow}}{{}}}
 \@LN@col{1}
+\@LN{1327}{18}
+\@LN{1328}{18}
+\@LN{1329}{18}
+\@LN{1330}{18}
+\@LN{1331}{18}
 \@LN{1332}{18}
 \@LN{1333}{18}
 \@LN{1334}{18}
@@ -1729,13 +1728,13 @@
 \@LN{1382}{18}
 \@LN{1383}{18}
 \@LN{1384}{18}
+\@LN@col{2}
 \@LN{1385}{18}
 \@LN{1386}{18}
 \@LN{1387}{18}
 \@LN{1388}{18}
 \@LN{1389}{18}
 \@LN{1390}{18}
-\@LN@col{2}
 \@LN{1391}{18}
 \@LN{1392}{18}
 \@LN{1393}{18}
@@ -1789,12 +1788,7 @@
 \@LN{1441}{18}
 \@LN{1442}{18}
 \@LN{1443}{18}
-\@LN{1444}{18}
-\@LN{1445}{18}
-\@LN{1446}{18}
-\@LN{1447}{18}
-\@LN{1448}{18}
-\@LN{1449}{18}
+\bibcite{schiffer1983international}{{98}{1983}{{Schiffer and Rossow}}{{}}}
 \bibcite{schreiner1993comparison}{{99}{1993}{{Schreiner et~al.}}{{Schreiner, Unger, Menzel, Ellrod, Strabala, and Pellet}}}
 \bibcite{Scolnic2015}{{100}{2015}{{Scolnic et~al.}}{{Scolnic, Casertano, Riess, Rest, Schlafly, Foley, Finkbeiner, Tang, Burgett, Chambers, Draper, Flewelling, Hodapp, Huber, Kaiser, Kudritzki, Magnier, Metcalfe, and Stubbs}}}
 \bibcite{Klebe2010}{{101}{2010}{{Sebag et~al.}}{{Sebag, Andrew, Klebe, and Blatherwick}}}
@@ -1820,9 +1814,13 @@
 \bibcite{scipy}{{121}{2020}{{Virtanen et~al.}}{{Virtanen, Gommers, Oliphant, Haberland, Reddy, Cournapeau, Burovski, Peterson, Weckesser, Bright, {van der Walt}, Brett, Wilson, Millman, Mayorov, Nelson, Jones, Kern, Larson, Carey, Polat, Feng, Moore, {VanderPlas}, Laxalde, Perktold, Cimrman, Henriksen, Quintero, Harris, Archibald, Ribeiro, Pedregosa, {van Mulbregt}, and {SciPy 1.0 Contributors}}}}
 \bibcite{Wang21}{{122}{2021{a}}{{Wang et~al.}}{{Wang, Zhuang, Wang, Zhou, and Liu}}}
 \bibcite{rs13091852}{{123}{2021{b}}{{Wang et~al.}}{{Wang, Liu, Xie, Yang, Gao, Ling, Huang, Li, Liu, and Xia}}}
-\bibcite{MMST}{{124}{2023}{{Wei et~al.}}{{Wei, Zhu, Guo, and Ni}}}
-\bibcite{wilczak1996ground}{{125}{1996}{{Wilczak et~al.}}{{Wilczak, Gossard, Neff, and Eberhard}}}
 \@LN@col{1}
+\@LN{1444}{19}
+\@LN{1445}{19}
+\@LN{1446}{19}
+\@LN{1447}{19}
+\@LN{1448}{19}
+\@LN{1449}{19}
 \@LN{1450}{19}
 \@LN{1451}{19}
 \@LN{1452}{19}
@@ -1875,13 +1873,13 @@
 \@LN{1499}{19}
 \@LN{1500}{19}
 \@LN{1501}{19}
+\@LN@col{2}
 \@LN{1502}{19}
 \@LN{1503}{19}
 \@LN{1504}{19}
 \@LN{1505}{19}
 \@LN{1506}{19}
 \@LN{1507}{19}
-\@LN@col{2}
 \@LN{1508}{19}
 \@LN{1509}{19}
 \@LN{1510}{19}
@@ -1934,11 +1932,8 @@
 \@LN{1557}{19}
 \@LN{1558}{19}
 \@LN{1559}{19}
-\@LN{1560}{19}
-\@LN{1561}{19}
-\@LN{1562}{19}
-\@LN{1563}{19}
-\@LN{1564}{19}
+\bibcite{MMST}{{124}{2023}{{Wei et~al.}}{{Wei, Zhu, Guo, and Ni}}}
+\bibcite{wilczak1996ground}{{125}{1996}{{Wilczak et~al.}}{{Wilczak, Gossard, Neff, and Eberhard}}}
 \bibcite{wong2009effective}{{126}{2009}{{Wong et~al.}}{{Wong, Tan, Loo, and Lim}}}
 \bibcite{SegCloud}{{127}{2020}{{Xie et~al.}}{{Xie, Liu, Yang, Chen, Wang, Wang, Xia, Liu, Wang, and Zhang}}}
 \bibcite{yamashita2012ground}{{128}{2012}{{Yamashita and Yoshimura}}{{}}}
@@ -1952,6 +1947,11 @@
 \bibcite{zhou2019cloud}{{136}{2019}{{Zhou et~al.}}{{Zhou, Zhang, Li, Li, Feng, Jia, Lv, Tao, and Guo}}}
 \bibcite{zhou2021novel}{{137}{2021}{{Zhou et~al.}}{{Zhou, Zhang, Xiao, Wang, Hong, Wu, and Zhang}}}
 \@LN@col{1}
+\@LN{1560}{20}
+\@LN{1561}{20}
+\@LN{1562}{20}
+\@LN{1563}{20}
+\@LN{1564}{20}
 \@LN{1565}{20}
 \@LN{1566}{20}
 \@LN{1567}{20}
