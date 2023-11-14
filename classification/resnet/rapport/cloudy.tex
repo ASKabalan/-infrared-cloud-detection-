@@ -1,0 +1,139 @@
+\documentclass[a4paper,12pt]{article}
+
+\usepackage[left=1cm,right=1cm,top=1cm,bottom=1cm]{geometry}
+\usepackage[pdftex]{graphicx}
+\usepackage{amstext,amsmath,amssymb,amsfonts,multirow,colortbl,xspace,varioref,lmodern,hyperref,mathrsfs,wasysym,graphicx,appendix,lastpage,float,ifpdf,palatino}
+
+
+\begin{document}
+eeeeeeeeeeeeeeeet le machine learning ne marche PPPPPAAAAASSSS!! on peut faire du deep de bo-gosse! ALLEZ l'OM! PARI PARI ONT TEN KUL!
+
+R.Brunet, Aix-Marseille Univ, CNRS, CNES, LAM, Marseille, France
+
+
+\section{Introduction}
+\section{Introduction}
+\section{Introduction}
+\section{Introduction}
+\subsection{Introduction}
+WK : WIP
+RB : WideResNet / ResNeXt / ResNeSt je vais tout tester
+c’est rapide et on prendra the GOAT
+
+For our image classification model, we employed a Convolutional Neural Network (CNN) architecture (Sharma et al.,2018) derived from the ResNet network (He et al., 2015), which has proven to be highly effective in image recogni-ion tasks (Canziani et al., 2016).
+The ResNet model is very flexible and able to extract features effectively using the skip connection mechanism.
+This modified network was designed with the primary objective of distinguishing between images that contain clouds and those that do not, and shares the same principles as SegCloud (Xie et al., 2020).
+The ResNet architecture serves as the backbone of our model.
+It consists of a series of convolutional layers, each followed by a batch normalization operation and a rectified linear unit (ReLU) activation (Agarap, 2018).
+Unlike traditional networks, ResNet incorporates skip connections or shortcut connections, that bypass one or more layers during the forward pass.
+This configuration facilitates the training of very deep networks by alleviating the vanishing gradient problem, and enables the extraction of hierarchical features necessary for accurate classification.
+The output of our model is a single neuron with a sigmoid activation function, which means that the output of the model will be a value between 0 and 1.
+1 indicates absolute certainty that the image contains a cloud, and 0 indicates absolute certainty that there is no cloud.
+The model is trained on a comprehensive dataset encompassing both cloud and cloud-free infrared images, with corresponding ground truth labels.
+Figure 5 depicts the schematic diagram of the architecture.
+\subsection{Introduction}
+
+
+\section{Introduction}
+
+\subsection{Introduction}
+
+\subsection{Introduction}
+\subsection{Introduction}
+\subsubsection{Introduction}
+\subsubsection{Introduction}
+\subsubsection{Introduction}
+blabla
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.6\textwidth]{Images/para1.png}
+\end{figure}
+
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.6\textwidth]{Images/umap.png}
+\end{figure}
+
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.2\textwidth]{Images/model.png}
+\end{figure}
+
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.6\textwidth]{Images/para2.png}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.6\textwidth]{Images/pca.png}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.6\textwidth]{Images/pca2.png}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.6\textwidth]{Images/pca3.png}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.3\textwidth]{Images/resnets.pdf}
+\end{figure}
+
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.38\textwidth]{Images/MODEL1_ratio80_acc95_confusion_matrix.png} \qquad
+  \includegraphics[width=0.38\textwidth]{Images/MODEL1_ratio80_acc95_roc_plot.png}
+  \caption{model 1}
+  \label{Fig1}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.38\textwidth]{Images/MODEL2_ratio80_acc95_confusion_matrix.png} \qquad
+  \includegraphics[width=0.38\textwidth]{Images/MODEL2_ratio80_acc95_roc_plot.png}
+  \caption{model 2}
+  \label{Fig2}
+\end{figure}
+
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.38\textwidth]{Images/MODEL3_ratio80_acc95_confusion_matrix.png} \qquad
+  \includegraphics[width=0.38\textwidth]{Images/MODEL3_ratio80_acc95_roc_plot.png}
+  \caption{model3}
+  \label{Fig3}
+\end{figure}
+
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.38\textwidth]{Images/ResNetType1_batch32_epoch50_confusion_matrix.png} \qquad
+  \includegraphics[width=0.38\textwidth]{Images/ResNetType1_batch32_epoch50_loss_and_accuracy.png}
+  \caption{Modulus of the eigenvalues of the iteration matrix for the 
+  classical Schwarz method. Left: for $\omega=1$. Right: for $\omega=5$.}
+\end{figure}
+
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.38\textwidth]{Images/ResNetType1_batch32_epoch50_preds_roc_plot.png} \qquad
+  \includegraphics[width=0.38\textwidth]{Images/ResNetType1_batch32_epoch50_probs_roc_plot.png}
+  \caption{Modulus of the eigenvalues of the iteration matrix for the 
+  classical Schwarz method. Left: for $\omega=1$. Right: for $\omega=5$.}
+\end{figure}
+
+
+\end{document}
+
+
+
