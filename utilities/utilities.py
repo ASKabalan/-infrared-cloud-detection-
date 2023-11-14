@@ -28,6 +28,28 @@ def rebin_fits(filename, bin=(128, 160)):
         del fits_file
     except:
         print(f"Fail : {target_file}")
+        
+def save_image_pred(cloud_image, binary_mask, y_pred, output_path):
+    """
+    Save the three images (cloud_image, binary_mask, y_pred) to a FITS file.
+    
+    Parameters:
+    cloud_image (array-like): The first image data.
+    binary_mask (array-like): The second image data.
+    y_pred (array-like): The third image data.
+    output_path (str): The path where the FITS file will be saved.
+    """
+    # Create a PrimaryHDU object for each image
+    hdu1 = fits.PrimaryHDU(cloud_image)
+    hdu2 = fits.ImageHDU(binary_mask)
+    hdu3 = fits.ImageHDU(y_pred)
+
+    # Create an HDUList to hold them
+    hdulist = fits.HDUList([hdu1, hdu2, hdu3])
+
+    # Write to a new FITS file
+    hdulist.writeto(f'{output_path}.fits', overwrite=True)
+
 
 def rebin(arr, new_shape):
     """
