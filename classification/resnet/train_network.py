@@ -11,6 +11,7 @@ from model import (
     create_train_state,
     eval_function,
     load_model,
+    pred_function,
     save_model,
     update_model,
 )
@@ -30,27 +31,23 @@ from utils import (
 # USER PARAMETERS
 TYPE_RESNET, BATCH_SIZE, NB_EPOCHS, EARLY_STOPPING, TYPE_OPTIMIZER, DYNAMIC = get_user_data_network()
 NAME_DB, PATH_FOLDERS, DIRECTORIES, PERCENTAGE, NORMA = get_user_data_general()
-
 FOLDERS = get_folders(PATH_FOLDERS, NAME_DB, DIRECTORIES)
 FOLDER_DATABASE, FOLDER_PLOTS, FOLDER_MODELS = FOLDERS[0], FOLDERS[1], FOLDERS[2]
 case = f"ResNetType{TYPE_RESNET}_batch{str(BATCH_SIZE)}_epoch{str(NB_EPOCHS)}"
-print("case", case)
-path_image_files = sorted(FOLDER_DATABASE.glob("*.fits"))
-path_labels_files = sorted(FOLDER_DATABASE.glob("*.npy"))
 
 # CREATE DATASETS
+path_image_files = sorted(FOLDER_DATABASE.glob("*.fits"))
+path_labels_files = sorted(FOLDER_DATABASE.glob("*.npy"))
 training_images_files, training_labels_files, test_images_files, test_labels_files = chosen_datasets(
     PERCENTAGE, path_image_files, path_labels_files
 )
 MEAN_GLOBAL, STD_GLOBAL, MIN_GLOBAL, MAX_GLOBAL = get_statistics(training_images_files)
 
 # CONFIG
-NB_TRAIN_IMGS = len(training_images_files)
-NB_TEST_IMGS = len(test_images_files)
-NB_BATCH_TRAIN = NB_TRAIN_IMGS // BATCH_SIZE + 1
-NB_BATCH_TEST = NB_TEST_IMGS // BATCH_SIZE + 1
-print(f"TRAIN_IMGS {NB_TRAIN_IMGS} & NB CLEAR/CLOUD IMAGES", number_clear_cloud(training_labels_files))
-print(f"TEST_IMGS {NB_TEST_IMGS} & NB CLEAR/CLOUD IMAGES", number_clear_cloud(test_labels_files))
+NB_BATCH_TRAIN = len(training_images_files) // BATCH_SIZE + 1
+NB_BATCH_TEST = len(test_images_files) // BATCH_SIZE + 1
+print(f"TRAIN_IMGS {len(training_images_files)} & NB CLEAR/CLOUD IMAGES", number_clear_cloud(training_labels_files))
+print(f"TEST_IMGS {len(test_images_files)} & NB CLEAR/CLOUD IMAGES", number_clear_cloud(test_labels_files))
 print(f"PERCENTAGE train/test : {PERCENTAGE} & NB of BATCH_TRAIN {NB_BATCH_TRAIN} NB of BATCH_TEST {NB_BATCH_TEST}")
 
 # SPECIFICS NN
@@ -90,7 +87,6 @@ for epoch in range(NB_EPOCHS):
         data_loader_training.generate_batches(), total=NB_BATCH_TRAIN, desc=f"epoch {epoch+1}", disable=TQDM_DISABLE
     ):
         state, loss, accuracy = update_model(state, batch_images, batch_labels)
-
         list_losses.append(loss)
         list_accuracies.append(accuracy)
 
@@ -111,11 +107,8 @@ for epoch in range(NB_EPOCHS):
         list_test_accuracies.append(test_accuracies)
 
     # SAVE RES FOR PLOTS
-    avg_test_losses = jax.numpy.mean(jax.numpy.stack(list_test_losses))
-    avg_test_accuracies = jax.numpy.mean(jax.numpy.stack(list_test_accuracies))
-    list_avg_test_losses.append(avg_test_losses)
-    list_avg_test_accuracies.append(avg_test_accuracies)
-    print(f"loss : {avg_test_losses}  accuracy {avg_test_accuracies}")
+    list_avg_test_losses.append(jax.numpy.mean(jax.numpy.stack(list_test_losses)))
+    list_avg_test_accuracies.append(jax.numpy.mean(jax.numpy.stack(list_test_accuracies)))
 
     # Early-Stopping
     if avg_losses < BEST_LOSS:
@@ -129,22 +122,19 @@ for epoch in range(NB_EPOCHS):
             break
 
 # PLOTS
-list_predictions = []
+list_preds = []
 list_probs = []
-truth = []
+list_truths = []
 best_state_model = load_model(FOLDER_MODELS / case)
 for batch_images_test, batch_labels_test in tqdm(data_loader_test.generate_batches(), total=NB_BATCH_TEST):
-    logits = best_state_model.apply_fn(
-        {"params": state.params, "batch_stats": state.batch_stats}, batch_images_test, train=False
-    )
-    predictions = jax.numpy.round(jax.nn.sigmoid(logits)).astype(int)
-    list_predictions.append(predictions)
-    list_probs.append(jax.nn.sigmoid(logits))
-    truth.append(batch_labels_test)
+    batch_probs, batch_preds = pred_function(best_state_model, batch_images_test)
+    list_probs.append(batch_probs)
+    list_preds.append(batch_preds)
+    list_truths.append(batch_labels_test)
 
-concatenated_preds = jax.numpy.concatenate(list_predictions, axis=0)
+concatenated_preds = jax.numpy.concatenate(list_preds, axis=0)
 concatenated_probs = jax.numpy.concatenate(list_probs, axis=0)
-concatenated_truth = jax.numpy.concatenate(truth, axis=0)
+concatenated_truth = jax.numpy.concatenate(list_truths, axis=0)
 
 plot_confusion_matrix(concatenated_truth, concatenated_preds, FOLDER_PLOTS, case)
 roc_plots(concatenated_preds, concatenated_truth, FOLDER_PLOTS, case=f"{case}_preds")

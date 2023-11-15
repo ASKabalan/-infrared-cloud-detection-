@@ -68,16 +68,19 @@ def update_model(state, batches_images, batches_labels, reg_l2=False):
 
 @jax.jit
 def eval_function(state, batch_imgs_test, batch_labels):
-    logits = state.apply_fn(
-        {"params": state.params, "batch_stats": state.batch_stats},
-        batch_imgs_test,
-        train=False,
-    )
+    logits = state.apply_fn({"params": state.params, "batch_stats": state.batch_stats}, batch_imgs_test, train=False)
     loss = jax.numpy.mean(optax.sigmoid_binary_cross_entropy(logits=logits, labels=batch_labels))
     preds = jax.numpy.round(jax.nn.sigmoid(logits))
     accuracy = jax.numpy.mean(preds == batch_labels)
 
     return loss, accuracy
+
+
+@jax.jit
+def pred_function(state, batch_imgs_test):
+    logits = state.apply_fn({"params": state.params, "batch_stats": state.batch_stats}, batch_imgs_test, train=False)
+
+    return jax.nn.sigmoid(logits), jax.numpy.round(jax.nn.sigmoid(logits)).astype(int)
 
 
 # ---------------------------------------------------------------------------------------------------------------------

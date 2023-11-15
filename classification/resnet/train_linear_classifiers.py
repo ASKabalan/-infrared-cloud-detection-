@@ -16,16 +16,12 @@ from utils import get_folders, get_user_data_general, parallel_style_w_one_arg
 # ---------------------------------------------------------------------------------------------------------------------
 
 
-VERBOSE = 0
-MAX_ITER = 1000
-TOL = 1e-4
-RANDOM_STATE = 10  # int or None
 common_args = {
-    "verbose": VERBOSE,
-    "max_iter": MAX_ITER,
-    "tol": TOL,
+    "verbose": 0,
+    "max_iter": 1000,
+    "tol": 1e-4,
     "penalty": "l2",
-    "random_state": RANDOM_STATE,
+    "random_state": 10,  # int or None
     "shuffle": True,
     "learning_rate": "optimal",
     "early_stopping": True,
@@ -50,7 +46,6 @@ def train_and_eval_model(ongoing_model, x_train, x_test, y_train, y_test, plotsd
     )
     plot_confusion_matrix(y_test, predictions, plotsdir, f"{name}_acc{int(accuracy*100)}")
     roc_plots(predictions, y_test, plotsdir, f"{name}_acc{int(accuracy*100)}")
-    print("accuracy", accuracy)
 
 
 # ---------------------------------------------------------------------------------------------------------------------
@@ -59,7 +54,7 @@ def train_and_eval_model(ongoing_model, x_train, x_test, y_train, y_test, plotsd
 # USER DATA
 NAME_DB, PATH_FOLDERS, DIRECTORIES, PERCENTAGE_TRAIN, NORMA = get_user_data_general()
 FOLDERS = get_folders(PATH_FOLDERS, NAME_DB, DIRECTORIES)
-FOLDER_DATABASE = FOLDERS[0]
+FOLDER_DATABASE, FOLDER_PLOTS = FOLDERS[0], FOLDERS[1]
 path_image_files = sorted(FOLDER_DATABASE.glob("*.fits"))
 path_labels_files = sorted(FOLDER_DATABASE.glob("*.npy"))
 NB_IMGS = len(path_image_files)
@@ -94,7 +89,6 @@ reshaped_test_images_data = numpy.reshape(test_images_data, (numpy.shape(test_im
 del training_images_data, test_images_data
 
 # TRAINING
-FOLDER_PLOTS = FOLDERS[1]
 for num_model, model in enumerate(MODELS):
     case = f"MODEL{num_model+1}_ratio{int(PERCENTAGE_TRAIN*100)}"
     train_and_eval_model(

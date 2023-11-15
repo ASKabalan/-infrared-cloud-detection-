@@ -8,10 +8,10 @@
 \begin{document}
 eeeeeeeeeeeeeeeet le machine learning ne marche PPPPPAAAAASSSS!! on peut faire du deep de bo-gosse! ALLEZ l'OM! PARI PARI ONT TEN KUL!
 
-R.Brunet, Aix-Marseille Univ, CNRS, CNES, LAM, Marseille, France
-
 
 \section{Introduction}
+R.Brunet, Aix-Marseille Univ, CNRS, CNES, LAM, Marseille, France
+
 \section{Introduction}
 \section{Introduction}
 \section{Introduction}
@@ -34,10 +34,83 @@ Figure 5 depicts the schematic diagram of the architecture.
 \subsection{Introduction}
 
 
+This estimator implements regularized linear models with stochastic gradient descent (SGD) learning: the gradient of the loss is estimated each sample at a time and the model is updated along the way with a decreasing strength schedule (aka learning rate).
+SGD allows minibatch (online out-of-core) learning via the partial-fit method.
+For best results using the default learning rate schedule, the data should have zero mean and unit variance.
+
+This implementation works with data represented as dense or sparse arrays of floating point values for the features.
+The model it fits can be controlled with the loss parameter; by default, it fits a linear support vector machine (SVM).
+
+The regularizer is a penalty added to the loss function that shrinks model parameters towards the zero vector using either the squared euclidean norm L2 or the absolute norm L1 or a combination of both (Elastic Net). If the parameter update crosses the 0.0 value because of the regularizer, the update is truncated to 0.0 to allow for learning sparse models and achieve online feature selection.
+
+hinge gives a linear SVM.
+
+$log_loss$ gives logistic regression, a probabilistic classifier.
+
+perceptron is the linear loss used by the perceptron algorithm.
+
+Stochastic Gradient Descent (SGD) is a simple yet very efficient approach to fitting linear classifiers and regressors under convex loss functions such as (linear) Support Vector Machines and Logistic Regression.
+Even though SGD has been around in the machine learning community for a long time, it has received a considerable amount of attention just recently in the context of large-scale learning.
+
+SGD has been successfully applied to large scale and sparse machine learning problems often encountered in text classification and natural language processing.
+Given that the data is sparse, the classifiers in this module easily scale to problems with more than $10^5$ training examples and more than $10^5$ features.
+
+Strictly speaking, SGD is merely an optimization technique and does not correspond to a specific family of machine learning models.
+It is only a way to train a model.
+Often, an instance of SGDClassifier or SGDRegressor will have an equivalent estimator in the scikit-learn API, potentially using a different optimization technique.
+For example, using SGDClassifier($loss=log_loss$) results in logistic regression, i.e. a model equivalent to LogisticRegression which is fitted via SGD instead of being fitted by one of the other solvers in LogisticRegression.
+Similarly, SGDRegressor($loss='squared_error'$, penalty$='l2'$) and Ridge solve the same optimization problem, via different means.
+
+The advantages of Stochastic Gradient Descent are: Efficiency. Ease of implementation (lots of opportunities for code tuning).
+
+The disadvantages of Stochastic Gradient Descent include: SGD requires a number of hyperparameters such as the regularization parameter and the number of iterations. SGD is sensitive to feature scaling.
+
+
 \section{Introduction}
+Principal component analysis (PCA).
 
+Linear dimensionality reduction using Singular Value Decomposition of the data to project it to a lower dimensional space. The input data is centered but not scaled for each feature before applying the SVD.
+
+It uses the LAPACK implementation of the full SVD or a randomized truncated SVD by the method of Halko et al. 2009, depending on the shape of the input data and the number of components to extract.
+
+It can also use the scipy.sparse.linalg ARPACK implementation of the truncated SVD.
+
+Notice that this class does not support sparse input. See TruncatedSVD for an alternative with sparse data.
+
+PCA is used to decompose a multivariate dataset in a set of successive orthogonal components that explain a maximum amount of the variance. In scikit-learn, PCA is implemented as a transformer object that learns
+
+components in its fit method, and can be used on new data to project it on these components.
+
+PCA centers but does not scale the input data for each feature before applying the SVD. The optional parameter whiten=True makes it possible to project the data onto the singular space while scaling each component to unit variance. This is often useful if the models down-stream make strong assumptions on the isotropy of the signal: this is for example the case for Support Vector Machines with the RBF kernel and the K-Means clustering algorithm.
+
+The PCA object also provides a probabilistic interpretation of the PCA that can give a likelihood of data based on the amount of variance it explains. As such it implements a score method that can be used in cross-validation:
 \subsection{Introduction}
+UMAP: Uniform Manifold
+Approximation and Projection for
+Dimension Reduction
 
+"UMAP: Uniform Manifold Approximation and Projection for Dimension Reduction" is a machine learning technique for dimensionality reduction. It's particularly effective at preserving both the global and local structure of the data, making it useful for visualization, noise reduction, and feature selection in datasets with many dimensions (high-dimensional data). Let's break down its components:
+
+Uniform Manifold Approximation:
+Manifold: In the context of data science, a manifold is a concept borrowed from mathematics. It refers to a space (not necessarily physical) where locally, the data points resemble a Euclidean space (like lines, planes, etc.). For instance, the Earth's surface is a 2D manifold: locally, it looks flat (like a plane), but globally, it's curved (like a sphere).
+
+Uniform Approximation: UMAP assumes that the data lies on a uniform manifold. It tries to learn the manifold's structure by approximating how points are uniformly distributed on it. This involves understanding how the points in high-dimensional space are connected, which can be thought of as creating a network or graph of these points.
+
+Projection for Dimension Reduction:
+Projection: This is the process of mapping data from a higher-dimensional space to a lower-dimensional space. The goal is to retain as much of the meaningful structure (such as clusters or groups) of the high-dimensional data as possible.
+
+Dimension Reduction: This is the main objective of UMAP. It reduces the number of dimensions (variables) needed to represent the data while trying to preserve its essential structure. This makes it easier to visualize, analyze, and process the data, especially when dealing with complex datasets like images or genetic information.
+
+Key Features and Uses:
+Local and Global Structure Preservation: UMAP is particularly noted for its ability to preserve both local and global structures. This means it maintains the relationships and patterns both among close data points (local) and in the overall dataset (global).
+
+Flexibility and Speed: UMAP is often faster than other dimensionality reduction methods like t-SNE and is flexible enough to be applied to a variety of datasets.
+
+Visualization: One common use of UMAP is to visualize high-dimensional data in 2D or 3D. This can reveal patterns, clusters, or outliers that might not be apparent in the high-dimensional space.
+
+Noise Reduction and Feature Selection: By focusing on the structure of the data, UMAP can help to identify and reduce noise. It also assists in selecting features that are most relevant for further analysis or machine learning tasks.
+
+UMAP has gained popularity in various fields, particularly in bioinformatics, text analysis, and image processing, where understanding the structure and relationships within complex datasets is crucial.
 \subsection{Introduction}
 \subsection{Introduction}
 \subsubsection{Introduction}
@@ -53,15 +126,14 @@ blabla
 
 \begin{figure}[H]
   \centering
-  \includegraphics[width=0.6\textwidth]{Images/umap.png}
+  \includegraphics[width=0.2\textwidth]{Images/model.png}
 \end{figure}
 
 
 \begin{figure}[H]
   \centering
-  \includegraphics[width=0.2\textwidth]{Images/model.png}
+  \includegraphics[width=0.6\textwidth]{Images/umap.png}
 \end{figure}
-
 
 \begin{figure}[H]
   \centering
