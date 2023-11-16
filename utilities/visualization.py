@@ -2,10 +2,8 @@ import numpy as np
 from mpl_toolkits.axes_grid1 import make_axes_locatable
 from astropy import visualization as aviz
 from astropy.nddata.blocks import block_reduce
-from astropy.io import fits
-from pathlib import Path
-
-import matplotlib
+import pandas as pd
+from sklearn.metrics import auc
 
 #matplotlib.rcParams['font.family'] = 'sans-serif'
 ## matplotlib.rcParams['font.sans-serif'] = ['tgheros']
@@ -45,100 +43,197 @@ def discrete_cmap(N, base_cmap=None):
     cmap_name = base.name + str(N)
     return base.from_list(cmap_name, color_list, N)
 
-def plot_image(data,figsize=(10, 4)):
+def plot_images(data_list, figsize_per_row=(20, 4)):
     """
-    Plots a cloud image alongside its binary mask.
+    Plots a list of cloud images alongside their binary masks.
 
     Args:
-    - data (tuple): Tuple containing cloud image and binary mask.
-    - figsize (tuple, optional): Size of the figure. Defaults to (10, 4).
+    - data_list (list of tuples): List containing tuples of cloud image and binary mask.
+    - figsize_per_row (tuple, optional): Size of each row in the figure. Defaults to (20, 4).
     """
-    cloud_image, binary_mask = data
-    fig, axes = plt.subplots(1, 2, figsize=figsize)
-    N = 2
+    num_images = len(data_list)
+    fig, axes = plt.subplots(num_images, 2, figsize=(figsize_per_row[0], figsize_per_row[1] * num_images))
 
-    ax1 = axes[0]
-    #ax1.set_title('Cloud image')
-    ax1.set_xticks([])
-    ax1.set_yticks([])
-    ax1.set_xticklabels([])
-    ax1.set_yticklabels([])
-    im1 = ax1.imshow(cloud_image, cmap='jet')
-    divider = make_axes_locatable(ax1)
-    cax = divider.append_axes('right', size='5%', pad=0.05)
-    cbar1 = fig.colorbar(im1, cax=cax, orientation='vertical')
-    cbar1.ax.set_ylabel('ADU')
+    if num_images == 1:
+        axes = [axes]
 
-    ax2 = axes[1]
-    #ax2.set_title('Binary mask')
-    ax2.set_xticks([])
-    ax2.set_yticks([])
-    ax2.set_xticklabels([])
-    ax2.set_yticklabels([])
-    im2 = ax2.imshow(binary_mask, cmap=discrete_cmap(N, 'gray'))
-    divider = make_axes_locatable(ax2)
-    cax = divider.append_axes('right', size='5%', pad=0.05)
-    cbar = fig.colorbar(im2, cax=cax, orientation='vertical', ticks=range(N))
-    cbar.ax.set_yticklabels(['', ''], rotation=90)  # vertically oriented colorbar
-    cbar.ax.set_ylabel('0 = Sky         1 = Cloud')
+    for i, (cloud_image, binary_mask) in enumerate(data_list):
+        ax1, ax2 = axes[i]
+
+        # Plot cloud image
+        im1 = ax1.imshow(cloud_image, cmap='jet')
+        divider = make_axes_locatable(ax1)
+        cax1 = divider.append_axes('right', size='5%', pad=0.05)
+        cbar1 = fig.colorbar(im1, cax=cax1, orientation='vertical')
+        cbar1.ax.set_ylabel('ADU')
+
+        # Plot binary mask
+        im2 = ax2.imshow(binary_mask, cmap=discrete_cmap(2, 'gray'))
+        divider = make_axes_locatable(ax2)
+        cax2 = divider.append_axes('right', size='5%', pad=0.05)
+        cbar2 = fig.colorbar(im2, cax=cax2, orientation='vertical', ticks=range(2))
+        cbar2.ax.set_yticklabels(['Sky', 'Cloud'])
 
     plt.tight_layout()
     plt.show()
 
-def plot_image_pred(cloud_image, binary_mask, y_pred , figsize=(8,4),predmask_cmap='jet'):
+def save_images(data_list, output_path, figsize_per_row=(20, 4)):
     """
-    Plots a cloud image, its binary mask, and the predicted binary mask.
+    Saves a list of cloud images alongside their binary masks to a PDF file, with no axis ticks or titles.
 
     Args:
-    - cloud_image (array): Cloud image.
-    - binary_mask (array): Binary mask.
-    - y_pred (array): Predicted binary mask.
-    - figsize (tuple, optional): Size of the figure. Defaults to (8,4).
-    - predmask_cmap (str, optional): Colormap for the predicted mask. Defaults to 'grayscale'.
+    - data_list (list of tuples): List containing tuples of cloud image and binary mask.
+    - output_path (str): Path to save the output PDF.
+    - figsize_per_row (tuple, optional): Size of each row in the figure. Defaults to (20, 4).
     """
-    fig, axes = plt.subplots(1, 3, figsize=figsize)
-    N = 2
+    num_images = len(data_list)
+    fig, axes = plt.subplots(num_images, 2, figsize=(figsize_per_row[0], figsize_per_row[1] * num_images))
 
-    ax1 = axes[0]
-    #ax1.set_title('Cloud image')
-    ax1.set_xticks([])
-    ax1.set_yticks([])
-    ax1.set_xticklabels([])
-    ax1.set_yticklabels([])
-    im1 = ax1.imshow(cloud_image, cmap='jet')
-    divider = make_axes_locatable(ax1)
-    cax = divider.append_axes('right', size='5%', pad=0.05)
-    cbar1 = fig.colorbar(im1, cax=cax, orientation='vertical')
-    cbar1.ax.set_ylabel('ADU')
+    if num_images == 1:
+        axes = [axes]
 
-    ax2 = axes[1]
-    #ax2.set_title('Binary mask')
-    ax2.set_xticks([])
-    ax2.set_yticks([])
-    ax2.set_xticklabels([])
-    ax2.set_yticklabels([])
-    im2 = ax2.imshow(binary_mask, cmap=discrete_cmap(N, 'gray'))
-    divider = make_axes_locatable(ax2)
-    cax = divider.append_axes('right', size='5%', pad=0.05)
-    cbar2 = fig.colorbar(im2, cax=cax, orientation='vertical', ticks=range(N))
-    cbar2.ax.set_yticklabels(['', ''], rotation=90)  # vertically oriented colorbar
-    cbar2.ax.set_ylabel('0 = Sky         1 = Cloud')
+    for i, (cloud_image, binary_mask) in enumerate(data_list):
+        ax1, ax2 = axes[i]
 
-    ax3 = axes[2]
-    #ax3.set_title('Predicted Binary mask')
-    ax3.set_xticks([])
-    ax3.set_yticks([])
-    ax3.set_xticklabels([])
-    ax3.set_yticklabels([])
-    im3 = ax3.imshow(y_pred, cmap=predmask_cmap)
-    divider = make_axes_locatable(ax3)
-    cax = divider.append_axes('right', size='5%', pad=0.05)
-    cbar3 = fig.colorbar(im3, cax=cax, orientation='vertical', ticks=range(N))
-    cbar3.ax.set_ylabel('0 = Sky         1 = Cloud')
+        # Plot cloud image
+        im1 = ax1.imshow(cloud_image, cmap='jet')
+        ax1.set_xticks([])
+        ax1.set_yticks([])
+        ax1.set_xticklabels([])
+        ax1.set_yticklabels([])
+        divider = make_axes_locatable(ax1)
+        cax1 = divider.append_axes('right', size='5%', pad=0.05)
+        cbar1 = fig.colorbar(im1, cax=cax1, orientation='vertical')
+        cbar1.ax.set_ylabel('ADU')
+
+        # Plot binary mask
+        im2 = ax2.imshow(binary_mask, cmap=discrete_cmap(2, 'gray'))
+        ax2.set_xticks([])
+        ax2.set_yticks([])
+        ax2.set_xticklabels([])
+        ax2.set_yticklabels([])
+        divider = make_axes_locatable(ax2)
+        cax2 = divider.append_axes('right', size='5%', pad=0.05)
+        cbar2 = fig.colorbar(im2, cax=cax2, orientation='vertical', ticks=range(2))
+        cbar2.ax.set_yticklabels(['Sky', 'Cloud'])
+
+    plt.tight_layout()
+    plt.savefig(output_path, dpi=300, format='pdf')
+    plt.close(fig)
+
+def plot_image_preds(data_list, figsize_per_row=(24, 8), predmask_cmap='jet'):
+    """
+    Plots a list of cloud images, their binary masks, and the predicted binary masks.
+
+    Args:
+    - data_list (list of tuples): List containing triples of cloud image, binary mask, and predicted binary mask.
+    - figsize_per_row (tuple, optional): Size of each row in the figure. Defaults to (24, 8).
+    - predmask_cmap (str, optional): Colormap for the predicted mask. Defaults to 'gray'.
+    """
+    num_images = len(data_list)
+    fig, axes = plt.subplots(num_images, 3, figsize=(figsize_per_row[0], figsize_per_row[1] * num_images))
+
+    if num_images == 1:
+        axes = [axes]
+
+    for i, (cloud_image, binary_mask, y_pred) in enumerate(data_list):
+        ax1, ax2, ax3 = axes[i]
+
+        # Plot cloud image
+        im1 = ax1.imshow(cloud_image, cmap='jet')
+        divider = make_axes_locatable(ax1)
+        cax1 = divider.append_axes('right', size='5%', pad=0.05)
+        cbar1 = fig.colorbar(im1, cax=cax1, orientation='vertical')
+        cbar1.ax.set_ylabel('ADU')
+
+        # Plot binary mask
+        im2 = ax2.imshow(binary_mask, cmap=discrete_cmap(2, 'gray'))
+        divider = make_axes_locatable(ax2)
+        cax2 = divider.append_axes('right', size='5%', pad=0.05)
+        cbar2 = fig.colorbar(im2, cax=cax2, orientation='vertical', ticks=range(2))
+        cbar2.ax.set_yticklabels(['Sky', 'Cloud'])
+
+        # Plot predicted binary mask
+        im3 = ax3.imshow(y_pred, cmap=predmask_cmap)
+        divider = make_axes_locatable(ax3)
+        cax3 = divider.append_axes('right', size='5%', pad=0.05)
+        cbar3 = fig.colorbar(im3, cax=cax3, orientation='vertical', ticks=range(2))
+        cbar3.ax.set_ylabel('0 = Sky         1 = Cloud')
 
     plt.tight_layout()
     plt.show()
 
+def plot_training_data(csv_path, output_path=None):
+    # Read the CSV file
+    data = pd.read_csv(csv_path)
+
+    # Plot for Loss
+    fig, ax = plt.subplots()
+    ax.plot(data['Epoch'], data['Avg_Train_Loss'], label='Train Loss', color='blue')
+    ax.plot(data['Epoch'], data['Avg_Val_Loss'], label='Validation Loss', color='red')
+    ax.set_xlabel('Epoch')
+    ax.set_ylabel('Loss')
+    ax.set_title('Training and Validation Loss')
+    ax.legend()
+    ax.grid(alpha=0.25, ls='dashed')
+    ax.tick_params(axis='both', which='major', direction='in', labelsize='x-large', length=5.0, width=2.0)
+    ax.tick_params(axis='both', which='minor', direction='in', labelsize='x-large', length=3.0, width=1.0)
+
+    if output_path:
+        plt.savefig(f'{output_path}_loss.pdf', format='pdf')
+        plt.close(fig)
+    else:
+        plt.show()
+
+    # Plot for Accuracy
+    fig, ax = plt.subplots()
+    ax.plot(data['Epoch'], data['Avg_Train_Accuracy'], label='Train Accuracy', color='blue')
+    ax.plot(data['Epoch'], data['Avg_Val_Accuracy'], label='Validation Accuracy', color='red')
+    ax.set_xlabel('Epoch')
+    ax.set_ylabel('Accuracy')
+    ax.set_title('Training and Validation Accuracy')
+    ax.legend()
+    ax.grid(alpha=0.25, ls='dashed')
+    ax.tick_params(axis='both', which='major', direction='in', labelsize='x-large', length=5.0, width=2.0)
+    ax.tick_params(axis='both', which='minor', direction='in', labelsize='x-large', length=3.0, width=1.0)
+
+    if output_path:
+        plt.savefig(f'{output_path}_acc.pdf', format='pdf')
+        plt.close(fig)
+    else:
+        plt.show()
+
+def plot_roc_from_csv(csv_path, output_path=None):
+    """
+    Plots the ROC curve from a CSV file containing FPR and TPR, and includes the AUC value.
+
+    Args:
+    - csv_path (str): Path to the CSV file containing FPR and TPR.
+    - output_path (str): Path to save the output plot. If None, the plot is shown.
+    """
+    roc_data = pd.read_csv(csv_path)
+    auc_value = auc(roc_data['FPR'], roc_data['TPR'])
+
+    plt.figure(figsize=(10, 8))
+    ax = plt.gca()
+    ax.plot(roc_data['FPR'], roc_data['TPR'], label=f'ROC Curve (AUC = {auc_value:.2f})')
+    ax.plot([0, 1], [0, 1], 'r--')
+    ax.set_xlabel('False Positive Rate')
+    ax.set_ylabel('True Positive Rate')
+    ax.set_title('Receiver Operating Characteristic (ROC) Curve')
+    ax.legend(loc='best')
+    ax.grid(alpha=0.25, ls='dashed')
+    ax.tick_params(axis='both', which='major', direction='in', labelsize='x-large', length=5.0, width=2.0)
+    ax.tick_params(axis='both', which='minor', direction='in', labelsize='x-large', length=3.0, width=1.0)
+
+    if output_path:
+        plt.savefig(output_path, format='pdf')
+        plt.close()
+    else:
+        plt.show()
+
+# Example usage
+# plot_roc_from_csv('roc_data.csv', output_path='roc_curve.pdf')
 
 
 def save_image_preds(image_triples, output_path, figsize_per_row=(24,8), predmask_cmap='jet'):

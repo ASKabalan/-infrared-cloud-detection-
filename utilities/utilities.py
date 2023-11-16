@@ -1,6 +1,5 @@
-import matplotlib.pyplot as plt
 import numpy as np
-from sklearn.metrics import accuracy_score, precision_score, recall_score, roc_auc_score, roc_curve
+import pandas as pd
 from keras.losses import BinaryCrossentropy
 import cv2
 import os
@@ -78,14 +77,16 @@ def rebin_samping(image, new_shape):
     """
     return resize(image, new_shape, anti_aliasing=True)
 
-def evaluate_model(y_true, y_pred_proba, threshold=0.5, output_file=None, plot_file=None):
+def evaluate_model(y_true, y_pred_proba, threshold=0.5, output_file=None, roc_data_file=None):
     """
-        Evaluates the performance of a model using various metrics and plots the ROC curve.
-        
-        Args:
-        - y_true (array): Ground truth labels.
-        - y_pred_proba (array): Predicted probabilities.
-        - threshhold (float): Threshold for classifying probabilities. Default is 0.5.
+    Evaluates the performance of a model using various metrics and saves the ROC data to a CSV file.
+    
+    Args:
+    - y_true (array): Ground truth labels.
+    - y_pred_proba (array): Predicted probabilities.
+    - threshold (float): Threshold for classifying probabilities. Default is 0.5.
+    - output_file (str): File to save the evaluation results text. If None, the results are printed.
+    - roc_data_file (str): File to save the ROC data (FPR, TPR). If None, the data is not saved.
     """
     
     y_pred = (y_pred_proba > threshold).astype(int)
@@ -141,20 +142,10 @@ def evaluate_model(y_true, y_pred_proba, threshold=0.5, output_file=None, plot_f
         with open(output_file, 'w') as file:
             file.write(results_text)
     
-    # Plot the AUC curve
-    plt.figure(figsize=(10, 8))
-    plt.plot(fpr, tpr, label=f'Mean AUC: {auc_value:.4f}')
-    plt.plot([0, 1], [0, 1], 'r--')
-    plt.xlabel('False Positive Rate')
-    plt.ylabel('True Positive Rate')
-    plt.title('Receiver Operating Characteristic (ROC) Curve')
-    plt.legend(loc='best')
-    
-    # Save the ROC plot to a file
-    if plot_file is not None:
-        plt.savefig(plot_file)
-    else:
-        plt.show()
+    # Save the ROC data to a CSV file
+    if roc_data_file is not None:
+        roc_data = pd.DataFrame({'FPR': fpr, 'TPR': tpr})
+        roc_data.to_csv(roc_data_file, index=False)
 
 def rgb_to_gray(image_path, output_path, save_to_fits=True):
     """
