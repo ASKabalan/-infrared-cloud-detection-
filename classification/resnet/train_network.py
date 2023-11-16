@@ -4,9 +4,8 @@
 # pylint: disable=E1102
 
 import jax
-from tqdm import tqdm
-
 from data_loader import DataLoader, chosen_datasets
+from flax.training.early_stopping import EarlyStopping
 from model import (
     create_train_state,
     eval_function,
@@ -16,6 +15,7 @@ from model import (
     update_model,
 )
 from plots import plot_confusion_matrix, plot_loss_and_accuracy, roc_plots
+from tqdm import tqdm
 from utils import (
     check_slurm_mode,
     get_folders,
@@ -51,6 +51,7 @@ print(f"TEST_IMGS {len(test_images_files)} & NB CLEAR/CLOUD IMAGES", number_clea
 print(f"PERCENTAGE train/test : {PERCENTAGE} & NB of BATCH_TRAIN {NB_BATCH_TRAIN} NB of BATCH_TEST {NB_BATCH_TEST}")
 
 # SPECIFICS NN
+early_stop = EarlyStopping(min_delta=1e-8, patience=EARLY_STOPPING)
 state, schedule = create_train_state(TYPE_RESNET, TYPE_OPTIMIZER, NB_EPOCHS, NB_BATCH_TRAIN, DYNAMIC)
 data_loader_training = DataLoader(
     image_files=training_images_files,
@@ -76,7 +77,6 @@ data_loader_test = DataLoader(
 
 # TRAINING
 TQDM_DISABLE = check_slurm_mode()
-BEST_LOSS = 100
 list_avg_losses, list_avg_accuracies, list_avg_test_losses, list_avg_test_accuracies = [], [], [], []
 
 for epoch in range(NB_EPOCHS):
@@ -111,15 +111,12 @@ for epoch in range(NB_EPOCHS):
     list_avg_test_accuracies.append(jax.numpy.mean(jax.numpy.stack(list_test_accuracies)))
 
     # Early-Stopping
-    if avg_losses < BEST_LOSS:
-        BEST_LOSS = avg_losses
+    has_improved, early_stop = early_stop.update(metric=avg_losses)
+    if has_improved:
         save_model(state, FOLDER_MODELS / case)
-        PATIENCE_COUNTER = 0
-    else:
-        PATIENCE_COUNTER += 1
-        if PATIENCE_COUNTER == EARLY_STOPPING:
-            print("early stopping")
-            break
+    if early_stop.should_stop:
+        print(f"Met early stopping criteria, breaking at epoch {epoch}")
+        break
 
 # PLOTS
 list_preds = []
