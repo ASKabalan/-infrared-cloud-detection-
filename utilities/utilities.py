@@ -116,8 +116,10 @@ def evaluate_model(y_true, y_pred_proba, threshold=0.5, output_file=None, plot_f
     union = np.sum(y_true_flat) + np.sum(y_pred_flat) - intersection
     iou = intersection / (union + 1e-10)
     
-     # Prepare the evaluation results text
-    fpr, tpr, thresholds = roc_curve(y_true_flat, y_pred_flat)
+    y_true_np = np.array(y_true.ravel())
+    y_pred_proba_np = np.array(y_pred_proba.ravel())
+    # Prepare the evaluation results text
+    fpr, tpr, thresholds = roc_curve(y_true_np, y_pred_proba_np)
     auc_value = auc(fpr, tpr)
     
     results_text = (

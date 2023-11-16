@@ -7,20 +7,20 @@ from pathlib import Path
 
 import matplotlib
 
-matplotlib.rcParams['font.family'] = 'sans-serif'
-# matplotlib.rcParams['font.sans-serif'] = ['tgheros']
-matplotlib.rcParams['font.sans-serif'] = ['helvet']
-# matplotlib.rcParams['font.serif'] = ['cm10']
-matplotlib.rcParams['text.usetex'] = True
-matplotlib.rcParams['text.latex.preamble'] = r"""
-\usepackage[T1]{fontenc}
-\usepackage{amsmath}
-\usepackage{amsfonts}
-\usepackage{amssymb}
-\usepackage{tgheros}
-\usepackage[helvet]{sfmath}
-
-"""
+#matplotlib.rcParams['font.family'] = 'sans-serif'
+## matplotlib.rcParams['font.sans-serif'] = ['tgheros']
+#matplotlib.rcParams['font.sans-serif'] = ['helvet']
+## matplotlib.rcParams['font.serif'] = ['cm10']
+#matplotlib.rcParams['text.usetex'] = True
+#matplotlib.rcParams['text.latex.preamble'] = r"""
+#\usepackage[T1]{fontenc}
+#\usepackage{amsmath}
+#\usepackage{amsfonts}
+#\usepackage{amssymb}
+#\usepackage{tgheros}
+#\usepackage[helvet]{sfmath}
+#
+#"""
 import matplotlib.pyplot as plt
 
 
@@ -85,7 +85,7 @@ def plot_image(data,figsize=(10, 4)):
     plt.tight_layout()
     plt.show()
 
-def plot_image_pred(cloud_image, binary_mask, y_pred , figsize=(8,4),predmask_cmap='grayscale'):
+def plot_image_pred(cloud_image, binary_mask, y_pred , figsize=(8,4),predmask_cmap='jet'):
     """
     Plots a cloud image, its binary mask, and the predicted binary mask.
 
@@ -139,62 +139,45 @@ def plot_image_pred(cloud_image, binary_mask, y_pred , figsize=(8,4),predmask_cm
     plt.tight_layout()
     plt.show()
 
-def save_image_pred(cloud_image, binary_mask, y_pred, output_path, figsize=(8,4), predmask_cmap='grayscale'):
+
+
+def save_image_preds(image_triples, output_path, figsize_per_row=(24,8), predmask_cmap='jet'):
     """
-    Saves a cloud image, its binary mask, and the predicted binary mask to the specified output path.
+    Saves a set of cloud images, their binary masks, and the predicted binary masks to the specified output path in a PDF file.
 
     Args:
-    - cloud_image (array): Cloud image.
-    - binary_mask (array): Binary mask.
-    - y_pred (array): Predicted binary mask.
-    - output_path (str): Path to save the output image.
-    - figsize (tuple, optional): Size of the figure. Defaults to (8,4).
-    - predmask_cmap (str, optional): Colormap for the predicted mask. Defaults to 'grayscale'.
+    - image_triples (list of tuples): List of triples (cloud_image, binary_mask, y_pred).
+    - output_path (str): Path to save the output PDF.
+    - figsize_per_row (tuple, optional): Size of each row in the figure. Defaults to (24,8).
+    - predmask_cmap (str, optional): Colormap for the predicted mask. Defaults to 'jet'.
     """
-    fig, axes = plt.subplots(1, 3, figsize=figsize)
-    N = 2
+    num_images = len(image_triples)
+    fig, axes = plt.subplots(num_images, 3, figsize=(figsize_per_row[0], figsize_per_row[1] * num_images))
+    
+    if num_images == 1:
+        axes = [axes]
 
-    ax1 = axes[0]
-    #ax1.set_title('Cloud image')
-    ax1.set_xticks([])
-    ax1.set_yticks([])
-    ax1.set_xticklabels([])
-    ax1.set_yticklabels([])
-    im1 = ax1.imshow(cloud_image, cmap='jet')
-    divider = make_axes_locatable(ax1)
-    cax = divider.append_axes('right', size='5%', pad=0.05)
-    cbar1 = fig.colorbar(im1, cax=cax, orientation='vertical')
-    cbar1.ax.set_ylabel('ADU')
-
-    ax2 = axes[1]
-    #ax2.set_title('Binary mask')
-    ax2.set_xticks([])
-    ax2.set_yticks([])
-    ax2.set_xticklabels([])
-    ax2.set_yticklabels([])
-    im2 = ax2.imshow(binary_mask, cmap=discrete_cmap(N, 'gray'))
-    divider = make_axes_locatable(ax2)
-    cax = divider.append_axes('right', size='5%', pad=0.05)
-    cbar2 = fig.colorbar(im2, cax=cax, orientation='vertical', ticks=range(N))
-    cbar2.ax.set_yticklabels(['', ''], rotation=90)  # vertically oriented colorbar
-    cbar2.ax.set_ylabel('0 = Sky         1 = Cloud')
-
-    ax3 = axes[2]
-    #ax3.set_title('Probabilistic output map')
-    ax3.set_xticks([])
-    ax3.set_yticks([])
-    ax3.set_xticklabels([])
-    ax3.set_yticklabels([])
-    im3 = ax3.imshow(y_pred, cmap=predmask_cmap)
-    divider = make_axes_locatable(ax3)
-    cax = divider.append_axes('right', size='5%', pad=0.05)
-    cbar3 = fig.colorbar(im3, cax=cax, orientation='vertical', ticks=range(N))
-    cbar3.ax.set_ylabel('0 = Sky         1 = Cloud')
+    for i, (cloud_image, binary_mask, y_pred) in enumerate(image_triples):
+        for ax, img, cmap, cbar_label in zip(axes[i], 
+                                             [cloud_image, binary_mask, y_pred], 
+                                             ['jet', discrete_cmap(2, 'gray'), predmask_cmap], 
+                                             ['ADU', '0 = Sky         1 = Cloud', '0 = Sky         1 = Cloud']):
+            ax.set_xticks([])
+            ax.set_yticks([])
+            ax.set_xticklabels([])
+            ax.set_yticklabels([])
+            im = ax.imshow(img, cmap=cmap)
+            divider = make_axes_locatable(ax)
+            cax = divider.append_axes('right', size='5%', pad=0.05)
+            if cmap == 'jet':
+                cbar = fig.colorbar(im, cax=cax, orientation='vertical')
+            else:
+                cbar = fig.colorbar(im, cax=cax, orientation='vertical', ticks=range(2))
+            cbar.ax.set_ylabel(cbar_label)
 
     plt.tight_layout()
-    plt.savefig(output_path, dpi=300)
+    plt.savefig(output_path, dpi=300, format='pdf')
     plt.close(fig)
-
 
 def show_image(image,
                percl=99, percu=None, is_mask=False,
