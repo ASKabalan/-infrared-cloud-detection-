@@ -2,7 +2,8 @@ import numpy as np
 from astropy.visualization import LogStretch,ZScaleInterval
 import matplotlib.pyplot as plt
 import skimage.filters
-from utilities import discrete_cmap,rebin
+from utilities import rebin
+from visualization import discrete_cmap
 from mpl_toolkits.axes_grid1 import make_axes_locatable
 from pathlib import Path
 from astropy.io import fits
