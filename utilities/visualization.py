@@ -5,22 +5,31 @@ from astropy.nddata.blocks import block_reduce
 import pandas as pd
 from sklearn.metrics import auc
 
-#matplotlib.rcParams['font.family'] = 'sans-serif'
-## matplotlib.rcParams['font.sans-serif'] = ['tgheros']
-#matplotlib.rcParams['font.sans-serif'] = ['helvet']
-## matplotlib.rcParams['font.serif'] = ['cm10']
-#matplotlib.rcParams['text.usetex'] = True
-#matplotlib.rcParams['text.latex.preamble'] = r"""
-#\usepackage[T1]{fontenc}
-#\usepackage{amsmath}
-#\usepackage{amsfonts}
-#\usepackage{amssymb}
-#\usepackage{tgheros}
-#\usepackage[helvet]{sfmath}
-#
-#"""
-import matplotlib.pyplot as plt
+import matplotlib
+matplotlib.rcParams['font.family'] = 'sans-serif'
+# matplotlib.rcParams['font.sans-serif'] = ['tgheros']
+matplotlib.rcParams['font.sans-serif'] = ['helvet']
+# matplotlib.rcParams['font.serif'] = ['cm10']
+matplotlib.rcParams['text.usetex'] = True
+matplotlib.rcParams['text.latex.preamble'] = r"""
+\usepackage[T1]{fontenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{tgheros}
+\usepackage[helvet]{sfmath}
 
+"""
+import matplotlib.pyplot as plt
+from matplotlib.ticker import MaxNLocator
+# Define a custom colormap for binary values
+from matplotlib.colors import ListedColormap
+from matplotlib.colors import Normalize
+
+def binary_cmap():
+    # Define colors for 'Sky' and 'Cloud'
+    colors = ['black', 'white']
+    return ListedColormap(colors)
 
 def discrete_cmap(N, base_cmap=None):
     """
@@ -121,7 +130,8 @@ def save_images(data_list, output_path, figsize_per_row=(20, 4)):
     plt.savefig(output_path, dpi=300, format='pdf')
     plt.close(fig)
 
-def plot_image_preds(data_list, figsize_per_row=(24, 8), predmask_cmap='jet'):
+
+def plot_image_preds(data_list, figsize_per_row=(24, 8), predmask_cmap='jet', save=False):
     """
     Plots a list of cloud images, their binary masks, and the predicted binary masks.
 
@@ -131,7 +141,7 @@ def plot_image_preds(data_list, figsize_per_row=(24, 8), predmask_cmap='jet'):
     - predmask_cmap (str, optional): Colormap for the predicted mask. Defaults to 'gray'.
     """
     num_images = len(data_list)
-    fig, axes = plt.subplots(num_images, 3, figsize=(figsize_per_row[0], figsize_per_row[1] * num_images))
+    fig, axes = plt.subplots(num_images, 3, figsize=(figsize_per_row[0], figsize_per_row[1] * num_images), gridspec_kw={'wspace': 0.2})
 
     if num_images == 1:
         axes = [axes]
@@ -140,27 +150,46 @@ def plot_image_preds(data_list, figsize_per_row=(24, 8), predmask_cmap='jet'):
         ax1, ax2, ax3 = axes[i]
 
         # Plot cloud image
-        im1 = ax1.imshow(cloud_image, cmap='jet')
+        im1 = ax1.imshow(cloud_image, cmap='coolwarm')
         divider = make_axes_locatable(ax1)
         cax1 = divider.append_axes('right', size='5%', pad=0.05)
-        cbar1 = fig.colorbar(im1, cax=cax1, orientation='vertical')
-        cbar1.ax.set_ylabel('ADU')
+        cbar1 = fig.colorbar(im1, cax=cax1, orientation='vertical', ticks=range(5))
+        cbar1.locator = MaxNLocator(nbins=5)
+        cbar1.update_ticks()
+        cbar1.ax.set_ylabel('Normalized ADU')
+        ax1.set_xticks([])  # Hide x ticks
+        ax1.set_yticks([])  # Hide y ticks
+        cbar1.ax.set_yticks([])
 
         # Plot binary mask
-        im2 = ax2.imshow(binary_mask, cmap=discrete_cmap(2, 'gray'))
+        im2 = ax2.imshow(binary_mask, cmap=binary_cmap())
         divider = make_axes_locatable(ax2)
         cax2 = divider.append_axes('right', size='5%', pad=0.05)
-        cbar2 = fig.colorbar(im2, cax=cax2, orientation='vertical', ticks=range(2))
-        cbar2.ax.set_yticklabels(['Sky', 'Cloud'])
+        # Define a Normalize object to manually set the colorbar ticks at the midpoint of the colors
+        norm = Normalize(vmin=0, vmax=1)
+        cbar2 = fig.colorbar(im2, cax=cax2, orientation='vertical', ticks=[0, 1], boundaries=[-0.5, 0.5, 1.5], format='%1i')
+        # Centered horizontal labels
+        cbar2.set_ticklabels(['\tSky', '\tCloud'])
+
+        cbar2.ax.yaxis.set_tick_params(rotation=90, length=0)
+        # Hide x and y ticks for the subplot
+        ax2.set_xticks([])
+        ax2.set_yticks([])
 
         # Plot predicted binary mask
-        im3 = ax3.imshow(y_pred, cmap=predmask_cmap)
+        im3 = ax3.imshow(y_pred, cmap=predmask_cmap, vmin=0, vmax=1)
         divider = make_axes_locatable(ax3)
         cax3 = divider.append_axes('right', size='5%', pad=0.05)
-        cbar3 = fig.colorbar(im3, cax=cax3, orientation='vertical', ticks=range(2))
-        cbar3.ax.set_ylabel('0 = Sky         1 = Cloud')
+        cbar3 = fig.colorbar(im3, cax=cax3, orientation='vertical', ticks=range(5))
+        cbar3.locator = MaxNLocator(nbins=5)
+        cbar3.update_ticks()
+        cbar3.ax.set_ylabel('Cloud probability')
+        ax3.set_xticks([])  # Hide x ticks
+        ax3.set_yticks([])  # Hide y ticks
 
     plt.tight_layout()
+    if save:
+        plt.savefig(fname='../paper/figures/sample_prediction.pdf', bbox_inches='tight', dpi=600)
     plt.show()
 
 def plot_training_data(csv_path, output_path=None):
@@ -168,40 +197,40 @@ def plot_training_data(csv_path, output_path=None):
     data = pd.read_csv(csv_path)
 
     # Plot for Loss
-    fig, ax = plt.subplots()
-    ax.plot(data['Epoch'], data['Avg_Train_Loss'], label='Train Loss', color='blue')
-    ax.plot(data['Epoch'], data['Avg_Val_Loss'], label='Validation Loss', color='red')
-    ax.set_xlabel('Epoch')
-    ax.set_ylabel('Loss')
-    ax.set_title('Training and Validation Loss')
-    ax.legend()
-    ax.grid(alpha=0.25, ls='dashed')
-    ax.tick_params(axis='both', which='major', direction='in', labelsize='x-large', length=5.0, width=2.0)
+    fig, ax = plt.subplots(figsize=(7, 4))
+    ax.plot(data['Epoch'], data['Avg_Train_Loss'], label='Training set', color='blue')
+    ax.plot(data['Epoch'], data['Avg_Val_Loss'], label='Validation set', color='red')
+    ax.set_xlabel('Number of epochs', fontsize='x-large')
+    ax.set_ylabel('Log-loss', fontsize='x-large')
+    ax.legend(frameon=True, loc='best', fontsize='x-large')
+    ax.grid(alpha=0.25, lw=1, ls='dashed')
+    ax.tick_params(axis='both', which='major', direction='in', labelsize='x-large', length=5.0, width=1.0)
     ax.tick_params(axis='both', which='minor', direction='in', labelsize='x-large', length=3.0, width=1.0)
+    ax.set_xlim(0, data['Epoch'].max())
 
     if output_path:
-        plt.savefig(f'{output_path}_loss.pdf', format='pdf')
+        plt.savefig(fname=output_path, bbox_inches='tight', dpi=600)
         plt.close(fig)
     else:
         plt.show()
 
-    # Plot for Accuracy
-    fig, ax = plt.subplots()
-    ax.plot(data['Epoch'], data['Avg_Train_Accuracy'], label='Train Accuracy', color='blue')
-    ax.plot(data['Epoch'], data['Avg_Val_Accuracy'], label='Validation Accuracy', color='red')
-    ax.set_xlabel('Epoch')
-    ax.set_ylabel('Accuracy')
-    ax.set_title('Training and Validation Accuracy')
-    ax.legend()
-    ax.grid(alpha=0.25, ls='dashed')
-    ax.tick_params(axis='both', which='major', direction='in', labelsize='x-large', length=5.0, width=2.0)
-    ax.tick_params(axis='both', which='minor', direction='in', labelsize='x-large', length=3.0, width=1.0)
+    # # Plot for Accuracy
+    # fig, ax = plt.subplots()
+    # ax.plot(data['Epoch'], data['Avg_Train_Accuracy'], label='Train Accuracy', color='blue')
+    # ax.plot(data['Epoch'], data['Avg_Val_Accuracy'], label='Validation Accuracy', color='red')
+    # ax.set_xlabel('Epoch')
+    # ax.set_ylabel('Accuracy')
+    # ax.set_title('Training and Validation Accuracy')
+    # ax.legend()
+    # ax.grid(alpha=0.25, ls='dashed')
+    # ax.tick_params(axis='both', which='major', direction='in', labelsize='x-large', length=5.0, width=2.0)
+    # ax.tick_params(axis='both', which='minor', direction='in', labelsize='x-large', length=3.0, width=1.0)
 
-    if output_path:
-        plt.savefig(f'{output_path}_acc.pdf', format='pdf')
-        plt.close(fig)
-    else:
-        plt.show()
+    # if output_path:
+    #     plt.savefig(f'{output_path}_acc.pdf', format='pdf')
+    #     plt.close(fig)
+    # else:
+    #     plt.show()
 
 def plot_roc_from_csv(csv_path, output_path=None):
     """
@@ -214,20 +243,22 @@ def plot_roc_from_csv(csv_path, output_path=None):
     roc_data = pd.read_csv(csv_path)
     auc_value = auc(roc_data['FPR'], roc_data['TPR'])
 
-    plt.figure(figsize=(10, 8))
+    plt.figure(figsize=(7, 5))
     ax = plt.gca()
-    ax.plot(roc_data['FPR'], roc_data['TPR'], label=f'ROC Curve (AUC = {auc_value:.2f})')
+    ax.plot(roc_data['FPR'], roc_data['TPR'], color='blue', label=f'Segmentation model (AUC = {auc_value:.2f})')
     ax.plot([0, 1], [0, 1], 'r--')
-    ax.set_xlabel('False Positive Rate')
-    ax.set_ylabel('True Positive Rate')
-    ax.set_title('Receiver Operating Characteristic (ROC) Curve')
-    ax.legend(loc='best')
-    ax.grid(alpha=0.25, ls='dashed')
-    ax.tick_params(axis='both', which='major', direction='in', labelsize='x-large', length=5.0, width=2.0)
+    ax.set_xlabel('False Positive Rate (FPR)', fontsize='x-large')
+    ax.set_ylabel('True Positive Rate (TPR)', fontsize='x-large')
+    # ax.set_title('Receiver Operating Characteristic (ROC) Curve')
+    ax.legend(frameon=True, loc='best', fontsize='x-large')
+    ax.grid(alpha=0.25, lw=1, ls='dashed')
+    ax.tick_params(axis='both', which='major', direction='in', labelsize='x-large', length=5.0, width=1.0)
     ax.tick_params(axis='both', which='minor', direction='in', labelsize='x-large', length=3.0, width=1.0)
+    # ax.set_xlim(0, 1)
+    # ax.set_ylim(0, 1)
 
     if output_path:
-        plt.savefig(output_path, format='pdf')
+        plt.savefig(fname=output_path, bbox_inches='tight', dpi=600)
         plt.close()
     else:
         plt.show()
