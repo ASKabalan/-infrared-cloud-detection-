@@ -3,6 +3,7 @@
 # pylint: disable=C0115
 # pylint: disable=C0116
 # pylint: disable=W0223
+# pylint: disable=R0913
 # pylint: disable=R0914
 
 import functools
@@ -14,21 +15,16 @@ import optax
 import orbax.checkpoint
 from flax.training import dynamic_scale as dynamic_scale_lib
 from flax.training import orbax_utils, train_state
-from flaxmodels import ResNet18, ResNet34, ResNet50
+
+from architecture import ResNet18, ResNet34
 
 print("devices used for jax and xla => " + f"{jax.default_backend()} / {jax.lib.xla_bridge.get_backend().platform}")
 
 # ---------------------------------------------------------------------------------------------------------------------
 
-RESNET_TYPES = {
-    1: ResNet18(num_classes=1, pretrained=None, normalize=False, output=None),
-    2: ResNet34(num_classes=1, pretrained=None, normalize=False, output=None),
-    3: ResNet50(num_classes=1, pretrained=None, normalize=False, output=None),
-}
-
 
 @jax.jit
-def update_model(state, batches_images, batches_labels, reg_l2=False):
+def update_model(state, batches_images, batches_labels, reg_l2=True):
     def loss_fn(params):
         logits, updates = state.apply_fn(
             {"params": params, "batch_stats": state.batch_stats}, batches_images, mutable=["batch_stats"]
@@ -68,7 +64,8 @@ def update_model(state, batches_images, batches_labels, reg_l2=False):
 
 @jax.jit
 def eval_function(state, batch_imgs_test, batch_labels):
-    logits = state.apply_fn({"params": state.params, "batch_stats": state.batch_stats}, batch_imgs_test, train=False)
+    logits = state.apply_fn({"params": state.params, "batch_stats": state.batch_stats}, batch_imgs_test)
+
     loss = jax.numpy.mean(optax.sigmoid_binary_cross_entropy(logits=logits, labels=batch_labels))
     preds = jax.numpy.round(jax.nn.sigmoid(logits))
     accuracy = jax.numpy.mean(preds == batch_labels)
@@ -78,9 +75,9 @@ def eval_function(state, batch_imgs_test, batch_labels):
 
 @jax.jit
 def pred_function(state, batch_imgs_test):
-    logits = state.apply_fn({"params": state.params, "batch_stats": state.batch_stats}, batch_imgs_test, train=False)
+    logits = state.apply_fn({"params": state.params, "batch_stats": state.batch_stats}, batch_imgs_test)
 
-    return jax.nn.sigmoid(logits), jax.numpy.round(jax.nn.sigmoid(logits)).astype(int)
+    return jax.numpy.round(jax.nn.sigmoid(logits)).astype(int)
 
 
 # ---------------------------------------------------------------------------------------------------------------------
@@ -92,9 +89,12 @@ class TrainState(train_state.TrainState):
     dynamic_scale: dynamic_scale_lib.DynamicScale
 
 
-def create_train_state(type_resnet, type_optimizer, nb_epochs, num_steps_per_epoch, dynamic):
-    model = RESNET_TYPES[type_resnet]
-    variables = model.init(jax.random.PRNGKey(0), jax.numpy.ones([1, 512, 640, 1]), train=False)
+RESNET_TYPES = {1: ResNet18, 2: ResNet34}
+
+
+def create_train_state(type_resnet, type_optimizer, nb_epochs, num_steps_per_epoch, dynamic, momentum, style_reduce):
+    model = RESNET_TYPES[type_resnet](momentum=momentum, style_reduce=style_reduce, output=None, n_classes=1)
+    variables = model.init(jax.random.PRNGKey(0), jax.numpy.ones([1, 512, 640, 1]))
     schedule, optimizer = choice_of_optimiser(
         choice=type_optimizer, nb_epochs=nb_epochs, num_steps_per_epoch=num_steps_per_epoch
     )
@@ -109,7 +109,7 @@ def create_train_state(type_resnet, type_optimizer, nb_epochs, num_steps_per_epo
             params=variables["params"],
             batch_stats=variables["batch_stats"],
             tx=optimizer,
-            model_config={"TYPE_RESNET": type_resnet},
+            model_config={"TYPE_RESNET": type_resnet, "MOMENTUM": momentum, "STYLE_REDUCE": style_reduce},
             dynamic_scale=dynamic_scale,
         ),
         schedule,
@@ -129,8 +129,11 @@ def load_model(model_path: Path):
     restored_data = orbax.checkpoint.PyTreeCheckpointer().restore(model_path)
     state = restored_data["model"]
     type_resnet = int(state["model_config"]["TYPE_RESNET"])
-    model = RESNET_TYPES[type_resnet]
-    model.init(jax.random.PRNGKey(0), jax.numpy.ones([1, 512, 640, 1]), train=False)
+    momentum = int(state["model_config"]["MOMENTUM"])
+    style_reduce = int(state["model_config"]["STYLE_REDUCE"])
+
+    model = RESNET_TYPES[type_resnet](momentum=momentum, style_reduce=style_reduce, output=None, n_classes=1)
+    model.init(jax.random.PRNGKey(0), jax.numpy.ones([1, 512, 640, 1]))
     _, optimizer = choice_of_optimiser(choice="piecewise_constant", nb_epochs=0, num_steps_per_epoch=0)
 
     return TrainState.create(
@@ -165,5 +168,4 @@ def choice_of_optimiser(choice: str, nb_epochs: int, num_steps_per_epoch: int):
             decay_rate=0.8,
         )
 
-    return schedule, optax.adamw(learning_rate=schedule)
-    # return schedule, optax.sgd(learning_rate=schedule)
+    return schedule, optax.sgd(learning_rate=schedule)

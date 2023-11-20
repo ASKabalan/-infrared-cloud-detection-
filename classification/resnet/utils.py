@@ -39,6 +39,8 @@ def get_user_data_network():
         parameters["early_stopping"],
         parameters["type_optimizer"],
         bool(parameters["dynamic_scale"]),
+        parameters["momentum"],
+        parameters["style"],
     )
 
 

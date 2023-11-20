@@ -1,6 +1,6 @@
 \documentclass[a4paper,12pt]{article}
 
-\usepackage[left=1cm,right=1cm,top=1cm,bottom=1cm]{geometry}
+\usepackage[left=1.5cm,right=1.5cm,top=1.5cm,bottom=1.5cm]{geometry}
 \usepackage[pdftex]{graphicx}
 \usepackage{amstext,amsmath,amssymb,amsfonts,multirow,colortbl,xspace,varioref,lmodern,hyperref,mathrsfs,wasysym,graphicx,appendix,lastpage,float,ifpdf,palatino}
 
@@ -14,6 +14,9 @@ R.Brunet, Aix-Marseille Univ, CNRS, CNES, LAM, Marseille, France
 
 \section{Introduction}
 \section{Introduction}
+
+Implementation of the ResNet18 by He et al.
+    Reference: https://arxiv.org/abs/1512.03385
 \section{Introduction}
 \subsection{Introduction}
 WK : WIP
@@ -118,42 +121,24 @@ UMAP has gained popularity in various fields, particularly in bioinformatics, te
 \subsubsection{Introduction}
 blabla
 
-\begin{figure}[H]
-  \centering
-  \includegraphics[width=0.6\textwidth]{Images/para1.png}
-\end{figure}
 
 
 \begin{figure}[H]
   \centering
-  \includegraphics[width=0.2\textwidth]{Images/model.png}
+  \includegraphics[width=0.5\textwidth]{Images/pca3.png} \qquad
+  \includegraphics[width=0.4\textwidth]{Images/umap.png}
+  \caption{lol}
 \end{figure}
+
+
 
 
 \begin{figure}[H]
   \centering
-  \includegraphics[width=0.6\textwidth]{Images/umap.png}
+  \includegraphics[width=0.6\textwidth]{Images/hiplot.png}
 \end{figure}
 
-\begin{figure}[H]
-  \centering
-  \includegraphics[width=0.6\textwidth]{Images/para2.png}
-\end{figure}
 
-\begin{figure}[H]
-  \centering
-  \includegraphics[width=0.6\textwidth]{Images/pca.png}
-\end{figure}
-
-\begin{figure}[H]
-  \centering
-  \includegraphics[width=0.6\textwidth]{Images/pca2.png}
-\end{figure}
-
-\begin{figure}[H]
-  \centering
-  \includegraphics[width=0.6\textwidth]{Images/pca3.png}
-\end{figure}
 
 \begin{figure}[H]
   \centering
@@ -161,48 +146,25 @@ blabla
 \end{figure}
 
 
-\begin{figure}[H]
-  \centering
-  \includegraphics[width=0.38\textwidth]{Images/MODEL1_ratio80_acc95_confusion_matrix.png} \qquad
-  \includegraphics[width=0.38\textwidth]{Images/MODEL1_ratio80_acc95_roc_plot.png}
-  \caption{model 1}
-  \label{Fig1}
-\end{figure}
 
 \begin{figure}[H]
   \centering
-  \includegraphics[width=0.38\textwidth]{Images/MODEL2_ratio80_acc95_confusion_matrix.png} \qquad
-  \includegraphics[width=0.38\textwidth]{Images/MODEL2_ratio80_acc95_roc_plot.png}
-  \caption{model 2}
-  \label{Fig2}
-\end{figure}
-
-
-\begin{figure}[H]
-  \centering
-  \includegraphics[width=0.38\textwidth]{Images/MODEL3_ratio80_acc95_confusion_matrix.png} \qquad
-  \includegraphics[width=0.38\textwidth]{Images/MODEL3_ratio80_acc95_roc_plot.png}
-  \caption{model3}
+  \includegraphics[width=0.45\textwidth]{Images/MODEL3_ratio80_acc95_confusion_matrix.png} \qquad
+  \includegraphics[width=0.45\textwidth]{Images/MODEL3_ratio80_acc95_roc_plot.png}
+  \caption{best linear model}
   \label{Fig3}
 \end{figure}
 
 
 \begin{figure}[H]
   \centering
-  \includegraphics[width=0.38\textwidth]{Images/ResNetType1_batch32_epoch50_confusion_matrix.png} \qquad
+  \includegraphics[width=0.38\textwidth]{Images/ResNetType1_batch32_epoch50_preds_roc_plot.png} \qquad
   \includegraphics[width=0.38\textwidth]{Images/ResNetType1_batch32_epoch50_loss_and_accuracy.png}
   \caption{Modulus of the eigenvalues of the iteration matrix for the 
   classical Schwarz method. Left: for $\omega=1$. Right: for $\omega=5$.}
 \end{figure}
 
 
-\begin{figure}[H]
-  \centering
-  \includegraphics[width=0.38\textwidth]{Images/ResNetType1_batch32_epoch50_preds_roc_plot.png} \qquad
-  \includegraphics[width=0.38\textwidth]{Images/ResNetType1_batch32_epoch50_probs_roc_plot.png}
-  \caption{Modulus of the eigenvalues of the iteration matrix for the 
-  classical Schwarz method. Left: for $\omega=1$. Right: for $\omega=5$.}
-\end{figure}
 
 
 \end{document}

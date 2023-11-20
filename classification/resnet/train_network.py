@@ -4,8 +4,10 @@
 # pylint: disable=E1102
 
 import jax
-from data_loader import DataLoader, chosen_datasets
 from flax.training.early_stopping import EarlyStopping
+from tqdm import tqdm
+
+from data_loader import DataLoader, chosen_datasets
 from model import (
     create_train_state,
     eval_function,
@@ -15,7 +17,6 @@ from model import (
     update_model,
 )
 from plots import plot_confusion_matrix, plot_loss_and_accuracy, roc_plots
-from tqdm import tqdm
 from utils import (
     check_slurm_mode,
     get_folders,
@@ -29,7 +30,7 @@ from utils import (
 
 
 # USER PARAMETERS
-TYPE_RESNET, BATCH_SIZE, NB_EPOCHS, EARLY_STOPPING, TYPE_OPTIMIZER, DYNAMIC = get_user_data_network()
+TYPE_RESNET, BATCH_SIZE, NB_EPOCHS, EARLY_STOPPING, TYPE_OPTIMIZER, DYNAMIC, MOMENTUM, STYLE = get_user_data_network()
 NAME_DB, PATH_FOLDERS, DIRECTORIES, PERCENTAGE, NORMA = get_user_data_general()
 FOLDERS = get_folders(PATH_FOLDERS, NAME_DB, DIRECTORIES)
 FOLDER_DATABASE, FOLDER_PLOTS, FOLDER_MODELS = FOLDERS[0], FOLDERS[1], FOLDERS[2]
@@ -52,7 +53,7 @@ print(f"PERCENTAGE train/test : {PERCENTAGE} & NB of BATCH_TRAIN {NB_BATCH_TRAIN
 
 # SPECIFICS NN
 early_stop = EarlyStopping(min_delta=1e-8, patience=EARLY_STOPPING)
-state, schedule = create_train_state(TYPE_RESNET, TYPE_OPTIMIZER, NB_EPOCHS, NB_BATCH_TRAIN, DYNAMIC)
+state, schedule = create_train_state(TYPE_RESNET, TYPE_OPTIMIZER, NB_EPOCHS, NB_BATCH_TRAIN, DYNAMIC, MOMENTUM, STYLE)
 data_loader_training = DataLoader(
     image_files=training_images_files,
     labels_files=training_labels_files,
@@ -120,22 +121,18 @@ for epoch in range(NB_EPOCHS):
 
 # PLOTS
 list_preds = []
-list_probs = []
 list_truths = []
 best_state_model = load_model(FOLDER_MODELS / case)
 for batch_images_test, batch_labels_test in tqdm(data_loader_test.generate_batches(), total=NB_BATCH_TEST):
-    batch_probs, batch_preds = pred_function(best_state_model, batch_images_test)
-    list_probs.append(batch_probs)
+    batch_preds = pred_function(best_state_model, batch_images_test)
     list_preds.append(batch_preds)
     list_truths.append(batch_labels_test)
 
 concatenated_preds = jax.numpy.concatenate(list_preds, axis=0)
-concatenated_probs = jax.numpy.concatenate(list_probs, axis=0)
 concatenated_truth = jax.numpy.concatenate(list_truths, axis=0)
 
 plot_confusion_matrix(concatenated_truth, concatenated_preds, FOLDER_PLOTS, case)
 roc_plots(concatenated_preds, concatenated_truth, FOLDER_PLOTS, case=f"{case}_preds")
-roc_plots(concatenated_probs, concatenated_truth, FOLDER_PLOTS, case=f"{case}_probs")
 plot_loss_and_accuracy(
     list_avg_losses, list_avg_test_losses, list_avg_accuracies, list_avg_test_accuracies, FOLDER_PLOTS, case
 )
