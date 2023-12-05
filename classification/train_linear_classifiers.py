@@ -6,11 +6,10 @@
 
 import numpy
 from astropy.io import fits
+from plots import plot_confusion_matrix, roc_plots
 from sklearn.linear_model import SGDClassifier
 from sklearn.metrics import accuracy_score
 from sklearn.model_selection import train_test_split
-
-from plots import plot_confusion_matrix, roc_plots
 from utils import get_folders, get_user_data_general, parallel_style_w_one_arg
 
 # ---------------------------------------------------------------------------------------------------------------------
@@ -27,25 +26,7 @@ common_args = {
     "early_stopping": True,
     "n_iter_no_change": 100,
 }
-MODELS = [
-    SGDClassifier(loss="hinge", **common_args),
-    SGDClassifier(loss="log_loss", **common_args),
-    SGDClassifier(loss="perceptron", **common_args),
-]
-
-
-# ---------------------------------------------------------------------------------------------------------------------
-
-
-def train_and_eval_model(ongoing_model, x_train, x_test, y_train, y_test, plotsdir, name):
-    ongoing_model.fit(x_train, x_test)
-    predictions = ongoing_model.predict(y_train)
-    accuracy = numpy.round(
-        accuracy_score(y_test, predictions, normalize=True),
-        decimals=2,
-    )
-    plot_confusion_matrix(y_test, predictions, plotsdir, f"{name}_acc{int(accuracy*100)}")
-    roc_plots(predictions, y_test, plotsdir, f"{name}_acc{int(accuracy*100)}")
+MODELS = [SGDClassifier(loss="hinge", **common_args), SGDClassifier(loss="log_loss", **common_args), SGDClassifier(loss="perceptron", **common_args)]
 
 
 # ---------------------------------------------------------------------------------------------------------------------
@@ -91,12 +72,8 @@ del training_images_data, test_images_data
 # TRAINING
 for num_model, model in enumerate(MODELS):
     case = f"MODEL{num_model+1}_ratio{int(PERCENTAGE_TRAIN*100)}"
-    train_and_eval_model(
-        model,
-        reshaped_training_images_data,
-        training_labels_data,
-        reshaped_test_images_data,
-        test_labels_data,
-        FOLDER_PLOTS,
-        case,
-    )
+    model.fit(reshaped_training_images_data, training_labels_data)
+    predictions = model.predict(reshaped_test_images_data)
+    accuracy = numpy.round(accuracy_score(test_labels_data, predictions, normalize=True), decimals=2)
+    plot_confusion_matrix(test_labels_data, predictions, FOLDER_PLOTS, f"{case}_acc{int(accuracy*100)}", "LINEAR CLASSIFIER")
+    roc_plots(predictions, test_labels_data, FOLDER_PLOTS, f"{case}_acc{int(accuracy*100)}")
