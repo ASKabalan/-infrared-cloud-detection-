@@ -4,7 +4,7 @@
 import numpy
 from astropy.io import fits
 from plots import plot_confusion_matrix, roc_plots
-from sklearn.linear_model import SGDClassifier
+from sklearn.linear_model import RidgeClassifier, SGDClassifier
 from sklearn.metrics import accuracy_score
 from sklearn.model_selection import train_test_split
 from utils import get_folders, get_user_data_general, parallel_style_w_one_arg
@@ -14,7 +14,7 @@ from utils import get_folders, get_user_data_general, parallel_style_w_one_arg
 
 common_args = {
     "verbose": 0,
-    "max_iter": 1000,
+    "max_iter": 5000,
     "tol": 1e-4,
     "penalty": "l2",
     "random_state": None,  # int or None
@@ -23,7 +23,12 @@ common_args = {
     "early_stopping": True,
     "n_iter_no_change": 100,
 }
-MODELS = [SGDClassifier(loss="hinge", **common_args), SGDClassifier(loss="log_loss", **common_args), SGDClassifier(loss="perceptron", **common_args)]
+MODELS = [
+    SGDClassifier(loss="hinge", **common_args),
+    SGDClassifier(loss="log_loss", **common_args),
+    SGDClassifier(loss="perceptron", **common_args),
+    RidgeClassifier(max_iter=5000, tol=1e-4, solver="svd"),
+]
 
 
 # ---------------------------------------------------------------------------------------------------------------------
