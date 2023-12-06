@@ -15,7 +15,7 @@ def matrix_confusion(y_true, y_pred, plotsdir, case, title):
     pyplot.xlabel("Predicted")
     pyplot.ylabel("True")
     pyplot.title(title)
-    pyplot.savefig(plotsdir / f"{case}_confusion_matrix.png")
+    pyplot.savefig(plotsdir / f"{case}_confusion_matrix.pdf", dpi=300)
     pyplot.close()
 
 
@@ -32,7 +32,7 @@ def roc(preds, truth, plotsdir, case):
     pyplot.title("Receiver Operating Characteristic (ROC) Curve")
     pyplot.legend(loc="lower right")
     pyplot.grid(alpha=0.75, ls="dashed")
-    pyplot.savefig(plotsdir / f"{case}_roc_plot.png")
+    pyplot.savefig(plotsdir / f"{case}_roc_plot.pdf", dpi=300)
     pyplot.close()
 
 
@@ -52,5 +52,5 @@ def curves_loss_and_accuracy(loss, val_loss, acc, val_acc, plotsdir, case):
     ax1.legend(loc="upper left")
     ax2.legend(loc="upper right")
     fig.tight_layout()
-    pyplot.savefig(plotsdir / f"{case}_loss_and_accuracy.png")
+    pyplot.savefig(plotsdir / f"{case}_loss_and_accuracy.pdf", dpi=300)
     pyplot.close()
