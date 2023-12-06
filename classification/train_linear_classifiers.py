@@ -1,8 +1,5 @@
 # -*- coding: utf-8 -*-
 # pylint: disable=W0108
-# pylint: disable=C0114
-# pylint: disable=C0116
-# pylint: disable=R0913
 
 import numpy
 from astropy.io import fits

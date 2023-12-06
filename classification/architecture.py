@@ -1,8 +1,5 @@
 # -*- coding: utf-8 -*-
 # pylint: disable=C0103
-# pylint: disable=C0114
-# pylint: disable=C0115
-# pylint: disable=C0116
 # pylint: disable=E1121
 
 from functools import partial
@@ -61,30 +58,26 @@ class PoolSize(nn.Module):
 
     @nn.compact
     def __call__(self, x):
-        return nn.max_pool(
-            x, window_shape=(self.kernel, self.kernel), strides=(self.stride, self.stride), padding=self.padding
-        )
+        return nn.max_pool(x, window_shape=(self.kernel, self.kernel), strides=(self.stride, self.stride), padding=self.padding)
 
 
 class ResNetStem(nn.Module):
-    style_reduce: int
     conv_block_cls: ModuleDef = ConvBlock
 
     @nn.compact
     def __call__(self, x):
-        if self.style_reduce == 1:
-            x = self.conv_block_cls(64, kernel_size=(7, 7), strides=(2, 2), padding=[(3, 3), (3, 3)])(x)
-            x = PoolSize(kernel=3, stride=2, padding=((1, 1), (1, 1)))(x)
-        elif self.style_reduce == 2:
-            x = self.conv_block_cls(16, kernel_size=(3, 3), strides=(1, 1))(x)
-            x = PoolSize(kernel=2, stride=2)(x)
-            x = self.conv_block_cls(32, kernel_size=(3, 3), strides=(1, 1))(x)
-            x = PoolSize(kernel=2, stride=2)(x)
-            x = self.conv_block_cls(64, kernel_size=(3, 3), strides=(1, 1))(x)
-            x = PoolSize(kernel=2, stride=2)(x)
-        elif self.style_reduce == 3:
-            x = self.conv_block_cls(64, kernel_size=(3, 3), strides=(1, 1))(x)
-            x = PoolSize(kernel=2, stride=2)(x)
+        x = self.conv_block_cls(64, kernel_size=(7, 7), strides=(2, 2), padding=[(3, 3), (3, 3)])(x)
+        x = PoolSize(kernel=3, stride=2, padding=((1, 1), (1, 1)))(x)
+        # elif self.style_reduce == 2:
+        #     x = self.conv_block_cls(16, kernel_size=(3, 3), strides=(1, 1))(x)
+        #     x = PoolSize(kernel=2, stride=2)(x)
+        #     x = self.conv_block_cls(32, kernel_size=(3, 3), strides=(1, 1))(x)
+        #     x = PoolSize(kernel=2, stride=2)(x)
+        #     x = self.conv_block_cls(64, kernel_size=(3, 3), strides=(1, 1))(x)
+        #     x = PoolSize(kernel=2, stride=2)(x)
+        # elif self.style_reduce == 3:
+        #     x = self.conv_block_cls(64, kernel_size=(3, 3), strides=(1, 1))(x)
+        #     x = PoolSize(kernel=2, stride=2)(x)
         return x
 
 
@@ -146,7 +139,6 @@ def ResNet(
     stage_sizes: Sequence[int],
     momentum: float,
     output: str,
-    style_reduce: int,
     n_classes: int,
     hidden_sizes: Sequence[int] = (64, 128, 256, 512),
     conv_cls: ModuleDef = nn.Conv,
@@ -158,7 +150,7 @@ def ResNet(
     stem_cls = partial(stem_cls, conv_block_cls=conv_block_cls)
     block_cls = partial(block_cls, conv_block_cls=conv_block_cls)
 
-    layers = [stem_cls(style_reduce=style_reduce)]
+    layers = [stem_cls()]
     for i, (hsize, n_blocks) in enumerate(zip(hidden_sizes, stage_sizes)):
         for b in range(n_blocks):
             strides = (1, 1) if i == 0 or b != 0 else (2, 2)

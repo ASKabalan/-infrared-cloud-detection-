@@ -1,16 +1,9 @@
 # -*- coding: utf-8 -*-
-# pylint: disable=C0114
-# pylint: disable=C0115
-# pylint: disable=C0116
 # pylint: disable=R0902
-# pylint: disable=R0913
-# pylint: disable=R0914
 
 import jax
 import numpy
 from astropy.io import fits
-
-# ---------------------------------------------------------------------------------------------------------------------
 
 
 def chosen_datasets(percentage, path_image_files, path_labels_files, reproductible=True):
@@ -38,16 +31,7 @@ def chosen_datasets(percentage, path_image_files, path_labels_files, reproductib
 
 class DataLoader:
     def __init__(
-        self,
-        image_files,
-        labels_files,
-        batch_size: int,
-        mean_global: float = None,
-        std_global: float = None,
-        min_global: float = None,
-        max_global: float = None,
-        shuffle: bool = False,
-        normalisation="mean_std",
+        self, image_files, labels_files, batch_size, mean_global=None, std_global=None, min_global=None, max_global=None, shuffle=True, normalisation="mean_std"
     ):
         self.image_files = image_files
         self.labels_files = labels_files

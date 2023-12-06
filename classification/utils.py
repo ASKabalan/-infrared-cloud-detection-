@@ -1,7 +1,4 @@
 # -*- coding: utf-8 -*-
-# pylint: disable=C0114
-# pylint: disable=C0116
-# pylint: disable=R0914
 # pylint: disable=W0108
 
 import multiprocessing
@@ -13,8 +10,6 @@ import commentjson
 import numpy
 from astropy.io import fits
 from joblib import Parallel, delayed, parallel_backend
-
-# ---------------------------------------------------------------------------------------------------------------------
 
 
 def get_folders(name_folder: str, name_database: str, directories):
@@ -30,30 +25,14 @@ def get_folders(name_folder: str, name_database: str, directories):
 
 
 def get_user_data_network():
-    parameters = get_json_file_parameters()["network"]
+    params = get_json_file_parameters()["network"]
 
-    return (
-        parameters["type_resnet"],
-        parameters["batch_size"],
-        parameters["num_epochs"],
-        parameters["early_stopping"],
-        parameters["type_optimizer"],
-        bool(parameters["dynamic_scale"]),
-        parameters["momentum"],
-        parameters["style"],
-    )
+    return params["type_resnet"], params["batch_size"], params["num_epochs"], params["early_stopping"], params["type_optimizer"], params["momentum"]
 
 
 def get_user_data_general():
-    parameters = get_json_file_parameters()["general"]
-
-    return (
-        parameters["NAME_DB"],
-        parameters["path_folders"],
-        parameters["directories"],
-        parameters["percentage"],
-        parameters["normalisation"],
-    )
+    params = get_json_file_parameters()["general"]
+    return params["NAME_DB"], params["path_folders"], params["directories"], params["percentage"], params["normalisation"]
 
 
 def check_slurm_mode():
