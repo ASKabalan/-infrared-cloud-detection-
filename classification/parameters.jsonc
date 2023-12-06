@@ -2,17 +2,14 @@
     "general":{
         "NAME_DB" : "TOTAL_2800",
         "path_folders" : "pisco/CLOUD",
-        "directories" : [
-            "/home",
-            "/net/GECO"
-        ],
-        "percentage" : 0.6,                         // train/test ratio
+        "directories" : ["/home", "/net/GECO"],
+        "percentage" : 0.5,                         // train/test ratio
         "normalisation" : "min_max"                 // mean_std or min_max
     },
     "network": {
         "type_resnet" : 1,
-        "batch_size" : 64,
-        "num_epochs" : 5,
+        "batch_size" : 4,
+        "num_epochs" : 3,
         "early_stopping" : 100,
         "type_optimizer" : "piecewise_constant",    // exponential_decay or piecewise_constant
         "momentum" : 0.1                           // ]0;1[

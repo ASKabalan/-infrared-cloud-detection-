@@ -17,7 +17,7 @@ common_args = {
     "max_iter": 1000,
     "tol": 1e-4,
     "penalty": "l2",
-    "random_state": 10,  # int or None
+    "random_state": None,  # int or None
     "shuffle": True,
     "learning_rate": "optimal",
     "early_stopping": True,
