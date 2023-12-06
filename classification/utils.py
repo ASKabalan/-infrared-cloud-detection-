@@ -27,7 +27,7 @@ def get_folders(name_folder: str, name_database: str, directories):
 def get_user_data_network():
     params = get_json_file_parameters()["network"]
 
-    return params["type_resnet"], params["batch_size"], params["num_epochs"], params["early_stopping"], params["type_optimizer"], params["momentum"]
+    return params["batch_size"], params["num_epochs"], params["early_stopping"], params["type_optimizer"], params["momentum"]
 
 
 def get_user_data_general():

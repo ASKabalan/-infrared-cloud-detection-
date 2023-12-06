@@ -68,16 +68,13 @@ class ResNetStem(nn.Module):
     def __call__(self, x):
         x = self.conv_block_cls(64, kernel_size=(7, 7), strides=(2, 2), padding=[(3, 3), (3, 3)])(x)
         x = PoolSize(kernel=3, stride=2, padding=((1, 1), (1, 1)))(x)
-        # elif self.style_reduce == 2:
-        #     x = self.conv_block_cls(16, kernel_size=(3, 3), strides=(1, 1))(x)
-        #     x = PoolSize(kernel=2, stride=2)(x)
-        #     x = self.conv_block_cls(32, kernel_size=(3, 3), strides=(1, 1))(x)
-        #     x = PoolSize(kernel=2, stride=2)(x)
-        #     x = self.conv_block_cls(64, kernel_size=(3, 3), strides=(1, 1))(x)
-        #     x = PoolSize(kernel=2, stride=2)(x)
-        # elif self.style_reduce == 3:
-        #     x = self.conv_block_cls(64, kernel_size=(3, 3), strides=(1, 1))(x)
-        #     x = PoolSize(kernel=2, stride=2)(x)
+
+        # x = self.conv_block_cls(16, kernel_size=(3, 3), strides=(1, 1))(x)
+        # x = PoolSize(kernel=2, stride=2)(x)
+        # x = self.conv_block_cls(32, kernel_size=(3, 3), strides=(1, 1))(x)
+        # x = PoolSize(kernel=2, stride=2)(x)
+        # x = self.conv_block_cls(64, kernel_size=(3, 3), strides=(1, 1))(x)
+        # x = PoolSize(kernel=2, stride=2)(x)
         return x
 
 
@@ -159,6 +156,4 @@ def ResNet(
     return Sequential(layers, output)
 
 
-STAGE_SIZES = {18: [2, 2, 2, 2], 34: [3, 4, 6, 3]}
-ResNet18 = partial(ResNet, stage_sizes=STAGE_SIZES[18], stem_cls=ResNetStem, block_cls=ResNetBlock)
-ResNet34 = partial(ResNet, stage_sizes=STAGE_SIZES[34], stem_cls=ResNetStem, block_cls=ResNetBlock)
+ResNet18 = partial(ResNet, stage_sizes=[2, 2, 2, 2], stem_cls=ResNetStem, block_cls=ResNetBlock)

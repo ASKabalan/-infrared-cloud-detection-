@@ -13,11 +13,11 @@ from utils import check_slurm_mode, get_folders, get_statistics, get_user_data_g
 
 
 # USER PARAMETERS
-TYPE_RESNET, BATCH_SIZE, NB_EPOCHS, EARLY_STOP, TYPE_OPTIMIZER, MOMENTUM = get_user_data_network()
+BATCH_SIZE, NB_EPOCHS, EARLY_STOP, TYPE_OPTIMIZER, MOMENTUM = get_user_data_network()
 NAME_DB, PATH_FOLDERS, DIRECTORIES, PERCENTAGE, NORMA = get_user_data_general()
 FOLDERS = get_folders(PATH_FOLDERS, NAME_DB, DIRECTORIES)
 FOLDER_DATABASE, FOLDER_PLOTS, FOLDER_MODELS = FOLDERS[0], FOLDERS[1], FOLDERS[2]
-case = f"ResNetType{TYPE_RESNET}_batch{str(BATCH_SIZE)}_epoch{str(NB_EPOCHS)}"
+case = f"ResNet_batch{str(BATCH_SIZE)}_epoch{str(NB_EPOCHS)}"
 
 # CREATE DATASETS
 path_image_files = sorted(FOLDER_DATABASE.glob("*.fits"))
@@ -34,7 +34,7 @@ print(f"PERCENTAGE train/test : {PERCENTAGE} & NB of BATCH_TRAIN {NB_BATCH_TRAIN
 
 # SPECIFICS NN
 early_stopping = EarlyStopping(min_delta=1e-9, patience=EARLY_STOP)
-state, schedule = create_train_state(TYPE_RESNET, TYPE_OPTIMIZER, NB_EPOCHS, NB_BATCH_TRAIN, MOMENTUM)
+state, schedule = create_train_state(TYPE_OPTIMIZER, NB_EPOCHS, NB_BATCH_TRAIN, MOMENTUM)
 dataloader_train = DataLoader(train_images_files, train_labels_files, BATCH_SIZE, MEAN_GLOBAL, STD_GLOBAL, MIN_GLOBAL, MAX_GLOBAL, normalisation=NORMA)
 dataloader_test = DataLoader(test_images_files, test_labels_files, BATCH_SIZE, MEAN_GLOBAL, STD_GLOBAL, MIN_GLOBAL, MAX_GLOBAL, shuffle=False, normalisation=NORMA)
 
@@ -45,31 +45,31 @@ list_avg_losses, list_avg_accuracies, list_avg_test_losses, list_avg_test_accura
 for epoch in range(NB_EPOCHS):
     list_losses, list_accuracies, list_test_losses, list_test_accuracies = [], [], [], []
 
-    # LOOP OVER ALL BATCHES
+    # LOOP OVER ALL TRAIN BATCHES
     for batch_images_train, batch_labels_train in tqdm(dataloader_train.generate_batches(), total=NB_BATCH_TRAIN, desc=f"epoch {epoch+1}", disable=TQDM_DISABLE):
         state, loss, accuracy = update_model(state, batch_images_train, batch_labels_train)
         list_losses.append(loss)
         list_accuracies.append(accuracy)
 
-    # SAVE RES FOR PLOTS
-    avg_losses = jax.numpy.mean(jax.numpy.stack(list_losses))
-    avg_accuracies = jax.numpy.mean(jax.numpy.stack(list_accuracies))
-    list_avg_losses.append(avg_losses)
-    list_avg_accuracies.append(avg_accuracies)
-    step, lr = state.step.item(), schedule(state.step).item()
-    print(f"loss : {avg_losses}  accuracy {avg_accuracies}  lr {step, lr}")
-
-    # TEST LOSS
+    # LOOP OVER ALL TEST BATCHES
     for batch_images_test, batch_labels_test in tqdm(dataloader_test.generate_batches(), total=NB_BATCH_TEST, desc="test batches", disable=TQDM_DISABLE):
         test_loss, test_accuracies = eval_function(state, batch_images_test, batch_labels_test)
         list_test_losses.append(test_loss)
         list_test_accuracies.append(test_accuracies)
 
-    # SAVE RES FOR PLOTS
-    list_avg_test_losses.append(jax.numpy.mean(jax.numpy.stack(list_test_losses)))
-    list_avg_test_accuracies.append(jax.numpy.mean(jax.numpy.stack(list_test_accuracies)))
+    # SAVE RESULTS FOR PLOTS
+    avg_losses = jax.numpy.mean(jax.numpy.stack(list_losses))
+    list_avg_losses.append(avg_losses)
+    avg_accuracies = jax.numpy.mean(jax.numpy.stack(list_accuracies))
+    list_avg_accuracies.append(avg_accuracies)
+    avg_test_losses = jax.numpy.mean(jax.numpy.stack(list_test_losses))
+    list_avg_test_losses.append(avg_test_losses)
+    avg_test_accuracies = jax.numpy.mean(jax.numpy.stack(list_test_accuracies))
+    list_avg_test_accuracies.append(avg_test_accuracies)
+    lr = schedule(state.step).item()
+    print(f"loss train {avg_losses:.1e} / loss val {avg_test_losses:.1e} / acc train {avg_accuracies} / acc val {avg_test_accuracies}  / lr {lr:.1e}")
 
-    # Early-Stopping
+    # EARLY-STOPPING
     has_improved, early_stopping = early_stopping.update(metric=avg_losses)
     if has_improved:
         save_model(state, FOLDER_MODELS / case)
