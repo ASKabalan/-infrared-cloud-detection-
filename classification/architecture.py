@@ -110,8 +110,6 @@ class ResNetBlock(nn.Module):
 
 # ---------------------------------------------------------------------------------------------------------------------
 
-STAGE_SIZES = {18: [2, 2, 2, 2], 34: [3, 4, 6, 3]}
-
 
 class Sequential(nn.Module):
     layers: Sequence[Union[nn.Module, Callable[[jnp.ndarray], jnp.ndarray]]]
@@ -161,5 +159,6 @@ def ResNet(
     return Sequential(layers, output)
 
 
+STAGE_SIZES = {18: [2, 2, 2, 2], 34: [3, 4, 6, 3]}
 ResNet18 = partial(ResNet, stage_sizes=STAGE_SIZES[18], stem_cls=ResNetStem, block_cls=ResNetBlock)
 ResNet34 = partial(ResNet, stage_sizes=STAGE_SIZES[34], stem_cls=ResNetStem, block_cls=ResNetBlock)

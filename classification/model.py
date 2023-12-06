@@ -42,19 +42,17 @@ def update_model(state, batches_images, batches_labels, reg_l2=True):
 @jax.jit
 def eval_function(state, batch_imgs_test, batch_labels):
     logits = state.apply_fn({"params": state.params, "batch_stats": state.batch_stats}, batch_imgs_test)
-
     loss = jax.numpy.mean(optax.sigmoid_binary_cross_entropy(logits=logits, labels=batch_labels))
     preds = jax.numpy.round(jax.nn.sigmoid(logits))
     accuracy = jax.numpy.mean(preds == batch_labels)
-
     return loss, accuracy
 
 
 @jax.jit
 def pred_function(state, batch_imgs_test):
     logits = state.apply_fn({"params": state.params, "batch_stats": state.batch_stats}, batch_imgs_test)
-
-    return jax.numpy.round(jax.nn.sigmoid(logits)).astype(int)
+    preds = jax.numpy.round(jax.nn.sigmoid(logits))
+    return preds.astype(int)
 
 
 # ------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -99,7 +97,7 @@ def load_model(model_path: Path):
 
     model = RESNET_TYPES[type_resnet](momentum=momentum, output=None, n_classes=NB_CLASSES)
     model.init(jax.random.PRNGKey(0), jax.numpy.ones([1, *IMAGE_SHAPE, 1]))
-    _, optimizer = choice_of_optimiser(choice="piecewise_constant", nb_epochs=0, num_steps_per_epoch=0)
+    _, optimizer = choice_of_optimiser(choice="piecewise", nb_epochs=0, num_steps_per_epoch=0)
 
     return TrainState.create(apply_fn=model.apply, params=state["params"], batch_stats=state["batch_stats"], tx=optimizer, model_config={"TYPE_RESNET": type_resnet})
 
@@ -110,7 +108,7 @@ INIT_VALUE = 1e-2
 
 
 def choice_of_optimiser(choice: str, nb_epochs: int, num_steps_per_epoch: int):
-    if choice == "piecewise_constant":
+    if choice == "piecewise":
         schedule = optax.piecewise_constant_schedule(
             init_value=INIT_VALUE,
             boundaries_and_scales={
@@ -119,7 +117,7 @@ def choice_of_optimiser(choice: str, nb_epochs: int, num_steps_per_epoch: int):
                 int(num_steps_per_epoch * nb_epochs * 0.85): 0.1,
             },
         )
-    elif choice == "exponential_decay":
-        schedule = optax.exponential_decay(init_value=INIT_VALUE, transition_steps=100, decay_rate=0.8)
+    elif choice == "exponential":
+        schedule = optax.exponential_decay(init_value=INIT_VALUE, transition_steps=50, decay_rate=0.8)
 
     return schedule, optax.sgd(learning_rate=schedule)
