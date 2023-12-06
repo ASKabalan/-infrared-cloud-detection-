@@ -1,0 +1,31 @@
+name: CLASSIFIER
+channels:
+- conda-forge
+- nvidia
+dependencies:
+- python=3.11.6
+- pip
+- commentjson
+- tqdm
+- ipython
+- ipykernel
+- joblib
+- jupyter
+- astropy
+- numpy
+- pandas
+- scikit-learn
+- umap-learn
+- cuda-nvcc
+- jax=0.4.16
+- jaxlib=0.4.14=*cuda*
+- optax
+- matplotlib
+- seaborn
+- hiplot
+- plotly
+- panel
+- pip:
+  - flax
+  - orbax
+  - jax==0.4.16
