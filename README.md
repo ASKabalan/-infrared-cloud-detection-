@@ -13,7 +13,7 @@ Deep-learning architecture classify and identify cloud structure on sky infrared
   - ~~args : (Flax ou keras) chemin model, dossier_image_cible, batch_size, output_save_image_prediction~~
 - ~~push les dataset IRIS/CIRRUS/SkyNet~~
 - ~~finish preprocess des public datasets et push github ~~
-- ~~verifier intro~~ 
+- ~~verifier intro~~
 - ~~Faire un tikz de l'UNET et double CONV UNET pour le papier~~
 - ~~mettre les resultat dans le papier~~
 - Remetre le resultats SWIMSEG
@@ -28,11 +28,6 @@ Deep-learning architecture classify and identify cloud structure on sky infrared
 - Transformer les datasets publics en noir et blanc avec opencv
 - Mettre en place le styling de plots pour le papier
 - Plot de matrice de confusion (https://www.w3schools.com/python/python_ml_confusion_matrix.asp)
-
-### Romain
-
-- Classification des image en keras
-- (peut-être) faire un script pour l'entrainement from scratch et la classification depuis un model.h5
 
 ## Datasets
 
@@ -69,10 +64,29 @@ with parallel_backend('threading', n_jobs=num_cores):
 
 ### Classification
 
-1. Création d'images synthétiques avec le code *synthetic_image.py*
-2. Normalisation des images brutes (ADU) pour accélérer les calculs
-3. Split les données en train + test + validation
-4. Entraîner le modèle VGG8
+1. micromamba env create -f ENV_LINUX_CLASSIFIER.yml
+2. change the .jsonc file to your conveniance:
+
+   ```
+   	{
+       "general":{
+           "NAME_DB" : "TOTAL_2800",		    // name of the database
+           "path_folders" : "pisco/CLOUD",		    // subfolder of the database
+           "directories" : ["/home", "/net/GECO"],     // folder of the database
+           "percentage" : 0.7,                         // train percentage
+           "normalisation" : "min_max"                 // mean_std or min_max
+       },
+       "network": {
+           "batch_size" : 64,
+           "num_epochs" : 10,
+           "early_stopping" : 10,
+           "type_optimizer" : "piecewise",    	   // exponential or piecewise
+           "momentum" : 0.5                           // ]0;1[
+       }
+   }
+   ```
+3. python train_linear_classifiers.py
+4. python train_neural_network.py
 
 ### Segmentation
 
@@ -85,8 +99,8 @@ with parallel_backend('threading', n_jobs=num_cores):
 
 ## References
 
-[CloudSegNet code](https://github.com/Soumyabrata/CloudSegNet) <br>
-[arXiv paper](https://arxiv.org/pdf/1904.07979.pdf) <br>
-[DeepL4Astro](https://github.com/ASKabalan/deeplearning4astro_tools/blob/master/dltools/batch.py) <br>
-[Day and Night Clouds Detection Using a Thermal-Infrared All-Sky-View Camera](https://doi.org/10.3390/rs13091852) <br>
-[Cloud Detection and Classification with the Use of Whole-Sky Ground-Based Images]( https://www.researchgate.net/publication/227860342) <br>
+[CloudSegNet code](https://github.com/Soumyabrata/CloudSegNet) `<br>`
+[arXiv paper](https://arxiv.org/pdf/1904.07979.pdf) `<br>`
+[DeepL4Astro](https://github.com/ASKabalan/deeplearning4astro_tools/blob/master/dltools/batch.py) `<br>`
+[Day and Night Clouds Detection Using a Thermal-Infrared All-Sky-View Camera](https://doi.org/10.3390/rs13091852) `<br>`
+[Cloud Detection and Classification with the Use of Whole-Sky Ground-Based Images](https://www.researchgate.net/publication/227860342) `<br>`

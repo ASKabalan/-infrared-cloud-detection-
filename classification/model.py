@@ -59,7 +59,7 @@ IMAGE_SHAPE = (512, 640)
 
 
 def create_train_state(type_optimizer, nb_epochs, nb_batch_train, momentum):
-    model = ResNet18(momentum=momentum, output=None, n_classes=NB_CLASSES)
+    model = ResNet18(momentum=momentum, n_classes=NB_CLASSES)
     variables = model.init(jax.random.PRNGKey(0), jax.numpy.ones([1, *IMAGE_SHAPE, 1]))
     schedule, optimizer = choice_of_optimiser(choice=type_optimizer, nb_epochs=nb_epochs, nb_batch_train=nb_batch_train)
     return (
@@ -76,7 +76,7 @@ def load_model(model_path: Path):
     restored_data = orbax.checkpoint.PyTreeCheckpointer().restore(model_path)
     state = restored_data["model"]
     momentum = state["model_config"]["MOMENTUM"]
-    model = ResNet18(momentum=momentum, output=None, n_classes=NB_CLASSES)
+    model = ResNet18(momentum=momentum, n_classes=NB_CLASSES)
     model.init(jax.random.PRNGKey(0), jax.numpy.ones([1, *IMAGE_SHAPE, 1]))
     _, optimizer = choice_of_optimiser(choice="piecewise", nb_epochs=0, nb_batch_train=0)
     return TrainState.create(apply_fn=model.apply, params=state["params"], batch_stats=state["batch_stats"], tx=optimizer, model_config={"MOMENTUM": momentum})

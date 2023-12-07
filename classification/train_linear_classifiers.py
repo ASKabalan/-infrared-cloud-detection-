@@ -3,26 +3,15 @@
 
 import numpy
 from astropy.io import fits
-from plots import matrix_confusion, roc
+from plots import matrix_confusion, report, roc
 from sklearn.linear_model import RidgeClassifier, SGDClassifier
-from sklearn.metrics import accuracy_score
 from sklearn.model_selection import train_test_split
 from utils import get_folders, get_user_data_general, parallel_style_w_one_arg
 
-# ---------------------------------------------------------------------------------------------------------------------
+# ------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 
-common_args = {
-    "verbose": 0,
-    "max_iter": 5000,
-    "tol": 1e-4,
-    "penalty": "l2",
-    "random_state": None,  # int or None
-    "shuffle": True,
-    "learning_rate": "optimal",
-    "early_stopping": True,
-    "n_iter_no_change": 100,
-}
+common_args = {"max_iter": 5000, "tol": 1e-4, "learning_rate": "optimal", "early_stopping": True, "n_iter_no_change": 50}
 
 MODELS = [
     SGDClassifier(loss="hinge", **common_args),
@@ -31,8 +20,10 @@ MODELS = [
     RidgeClassifier(max_iter=5000, solver="svd"),
 ]
 
+NAMES = ["SVM", "LOGISTIC_REGRESSION", "PERCEPTRON", "RIDGE_REGRESSION"]
 
-# ---------------------------------------------------------------------------------------------------------------------
+
+# ------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 
 # USER DATA
@@ -66,9 +57,10 @@ del train_images_data, test_images_data
 
 # TRAINING
 for num_model, model in enumerate(MODELS):
-    case = f"MODEL{num_model+1}_ratio{int(PERCENTAGE_TRAIN*100)}"
+    case = f"Model{NAMES[num_model]}_Ratio{int(PERCENTAGE_TRAIN*100)}"
+    print(case)
     model.fit(reshaped_train_images_data, training_labels_data)
     predictions = model.predict(reshaped_test_images_data)
-    accuracy = numpy.round(accuracy_score(test_labels_data, predictions), decimals=2)
-    matrix_confusion(test_labels_data, predictions, FOLDER_PLOTS, f"{case}_acc{int(accuracy*100)}", "LINEAR CLASSIFIER")
-    roc(predictions, test_labels_data, FOLDER_PLOTS, f"{case}_acc{int(accuracy*100)}")
+    matrix_confusion(test_labels_data, predictions, FOLDER_PLOTS, case, title=NAMES[num_model])
+    roc(predictions, test_labels_data, FOLDER_PLOTS, case)
+    report(test_labels_data, predictions, FOLDER_PLOTS, case)

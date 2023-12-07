@@ -8,7 +8,7 @@
     },
     "network": {
         "batch_size" : 64,
-        "num_epochs" : 30,
+        "num_epochs" : 10,
         "early_stopping" : 10,
         "type_optimizer" : "piecewise",    // exponential or piecewise
         "momentum" : 0.5                           // ]0;1[

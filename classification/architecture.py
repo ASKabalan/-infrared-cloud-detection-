@@ -12,7 +12,7 @@ ModuleDef = Callable[..., Callable]
 InitFn = Callable[[Any, Iterable[int], Any], Any]
 
 
-# ---------------------------------------------------------------------------------------------------------------------
+# ------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 
 class ConvBlock(nn.Module):
@@ -22,29 +22,19 @@ class ConvBlock(nn.Module):
     activation: Callable = nn.relu
     padding: Union[str, Iterable[Tuple[int, int]]] = ((0, 0), (0, 0))
     is_last: bool = False
-    groups: int = 1
     kernel_init: InitFn = nn.initializers.kaiming_normal()
     bias_init: InitFn = nn.initializers.zeros
-
     conv_cls: ModuleDef = nn.Conv
     norm_cls: Optional[ModuleDef] = partial(nn.BatchNorm, momentum=0.9)
 
     @nn.compact
     def __call__(self, x):
         x = self.conv_cls(
-            self.n_filters,
-            self.kernel_size,
-            self.strides,
-            use_bias=not self.norm_cls,
-            padding=self.padding,
-            feature_group_count=self.groups,
-            kernel_init=self.kernel_init,
-            bias_init=self.bias_init,
+            self.n_filters, self.kernel_size, self.strides, use_bias=not self.norm_cls, padding=self.padding, kernel_init=self.kernel_init, bias_init=self.bias_init
         )(x)
-        if self.norm_cls:
-            scale_init = nn.initializers.zeros if self.is_last else nn.initializers.ones
-            mutable = self.is_mutable_collection("batch_stats")
-            x = self.norm_cls(use_running_average=not mutable, scale_init=scale_init)(x)
+        scale_init = nn.initializers.zeros if self.is_last else nn.initializers.ones
+        mutable = self.is_mutable_collection("batch_stats")
+        x = self.norm_cls(use_running_average=not mutable, scale_init=scale_init)(x)
 
         if not self.is_last:
             x = self.activation(x)
@@ -68,13 +58,6 @@ class ResNetStem(nn.Module):
     def __call__(self, x):
         x = self.conv_block_cls(64, kernel_size=(7, 7), strides=(2, 2), padding=[(3, 3), (3, 3)])(x)
         x = PoolSize(kernel=3, stride=2, padding=((1, 1), (1, 1)))(x)
-
-        # x = self.conv_block_cls(16, kernel_size=(3, 3), strides=(1, 1))(x)
-        # x = PoolSize(kernel=2, stride=2)(x)
-        # x = self.conv_block_cls(32, kernel_size=(3, 3), strides=(1, 1))(x)
-        # x = PoolSize(kernel=2, stride=2)(x)
-        # x = self.conv_block_cls(64, kernel_size=(3, 3), strides=(1, 1))(x)
-        # x = PoolSize(kernel=2, stride=2)(x)
         return x
 
 
@@ -105,37 +88,25 @@ class ResNetBlock(nn.Module):
         return self.activation(y + skip_cls(self.strides)(x, y.shape))
 
 
-# ---------------------------------------------------------------------------------------------------------------------
+# ------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 
 class Sequential(nn.Module):
     layers: Sequence[Union[nn.Module, Callable[[jnp.ndarray], jnp.ndarray]]]
-    output: str
 
     @nn.compact
     def __call__(self, x):
-        act = {}
-        for idx, layer in enumerate(self.layers):
-            if idx == 0:
-                act["input layer"] = x
-            else:
-                act[f"lay{idx+1}"] = x
+        for _, layer in enumerate(self.layers):
             x = layer(x)
-            act[f"lay{idx+1}"] = x
-
-        if self.output == "activations":
-            return act
         return x
 
 
 def ResNet(
     block_cls: ModuleDef,
-    *,
     stage_sizes: Sequence[int],
     momentum: float,
-    output: str,
     n_classes: int,
-    hidden_sizes: Sequence[int] = (64, 128, 256, 512),
+    hidden_sizes: Sequence[int],
     conv_cls: ModuleDef = nn.Conv,
     conv_block_cls: ModuleDef = ConvBlock,
     stem_cls: ModuleDef = ResNetStem,
@@ -153,7 +124,7 @@ def ResNet(
 
     layers.append(partial(jnp.mean, axis=(1, 2)))
     layers.append(nn.Dense(n_classes))
-    return Sequential(layers, output)
+    return Sequential(layers)
 
 
-ResNet18 = partial(ResNet, stage_sizes=[2, 2, 2, 2], stem_cls=ResNetStem, block_cls=ResNetBlock)
+ResNet18 = partial(ResNet, stage_sizes=[2, 2, 2, 2], stem_cls=ResNetStem, block_cls=ResNetBlock, hidden_sizes=(64, 128, 256, 512))
