@@ -53,9 +53,6 @@ def loss_and_accuracy(loss, val_loss, plotsdir, case):
     pyplot.savefig(plotsdir / f"{case}_log_losses.pdf", dpi=DPI)
     pyplot.close()
 
-
-def loss_and_accuracy2(loss, val_loss, plotsdir, case):
-    nb_epochs = numpy.arange(1, len(loss) + 1)
     fig, ax1 = pyplot.subplots(figsize=(10, 5))
     ax1.set_xlabel("Epoch")
     ax1.set_ylabel("Loss", color="tab:red")

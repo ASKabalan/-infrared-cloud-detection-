@@ -5,7 +5,7 @@ import jax
 from dataloader import DataLoader, chosen_datasets
 from flax.training.early_stopping import EarlyStopping
 from model import create_train_state, eval_function, load_model, pred_function, save_model, update_model
-from plots import loss_and_accuracy, loss_and_accuracy2, matrix_confusion, roc
+from plots import loss_and_accuracy, matrix_confusion, roc
 from tqdm import tqdm
 from utils import check_slurm_mode, get_folders, get_statistics, get_user_data_general, get_user_data_network, number_clear_cloud
 
@@ -80,7 +80,7 @@ for epoch in range(NB_EPOCHS):
 # PLOTS
 list_preds, list_truths = [], []
 best_state_model = load_model(FOLDER_MODELS / case)
-for batch_images_test, batch_labels_test in tqdm(dataloader_test.generate_batches(), total=NB_BATCH_TEST):
+for batch_images_test, batch_labels_test in tqdm(dataloader_test.generate_batches(), total=NB_BATCH_TEST, desc="PLOTS COMPUTATIONS"):
     list_preds.append(pred_function(best_state_model, batch_images_test))
     list_truths.append(batch_labels_test)
 
@@ -88,4 +88,3 @@ concatenated_preds, concatenated_truth = jax.numpy.concatenate(list_preds, axis=
 matrix_confusion(concatenated_truth, concatenated_preds, FOLDER_PLOTS, case, title="RESNET")
 roc(concatenated_preds, concatenated_truth, FOLDER_PLOTS, case=f"{case}_preds")
 loss_and_accuracy(list_avg_losses, list_avg_test_losses, FOLDER_PLOTS, case)
-loss_and_accuracy2(list_avg_losses, list_avg_test_losses, FOLDER_PLOTS, case)
