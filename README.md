@@ -64,11 +64,12 @@ with parallel_backend('threading', n_jobs=num_cores):
 
 ### Classification
 
-1. micromamba env create -f ENV_LINUX_CLASSIFIER.yml
-2. change the .jsonc file to your conveniance:
+1. Generation of the dataset ?????
+2. micromamba env create -f ENV_LINUX_CLASSIFIER.yml
+3. change the .jsonc file to your conveniance:
 
    ```
-   	{
+   {
        "general":{
            "NAME_DB" : "TOTAL_2800",		    // name of the database
            "path_folders" : "pisco/CLOUD",		    // subfolder of the database
@@ -85,8 +86,8 @@ with parallel_backend('threading', n_jobs=num_cores):
        }
    }
    ```
-3. python train_linear_classifiers.py
-4. python train_neural_network.py
+4. python train_linear_classifiers.py
+5. python train_neural_network.py
 
 ### Segmentation
 

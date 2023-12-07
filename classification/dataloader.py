@@ -6,7 +6,7 @@ import numpy
 from astropy.io import fits
 
 
-def chosen_datasets(percentage, path_image_files, path_labels_files, reproductible=True):
+def chosen_datasets(percentage, path_image_files, path_labels_files, reproductible=False):
     nb_imgs = len(path_image_files)
     if reproductible:
         key = jax.random.PRNGKey(10)

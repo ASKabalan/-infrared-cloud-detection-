@@ -5,7 +5,7 @@ import jax
 from dataloader import DataLoader, chosen_datasets
 from flax.training.early_stopping import EarlyStopping
 from model import create_train_state, eval_function, load_model, pred_function, save_model, update_model
-from plots import curves_loss_and_accuracy, matrix_confusion, roc
+from plots import loss_and_accuracy, loss_and_accuracy2, matrix_confusion, roc
 from tqdm import tqdm
 from utils import check_slurm_mode, get_folders, get_statistics, get_user_data_general, get_user_data_network, number_clear_cloud
 
@@ -85,6 +85,7 @@ for batch_images_test, batch_labels_test in tqdm(dataloader_test.generate_batche
     list_truths.append(batch_labels_test)
 
 concatenated_preds, concatenated_truth = jax.numpy.concatenate(list_preds, axis=0), jax.numpy.concatenate(list_truths, axis=0)
-matrix_confusion(concatenated_truth, concatenated_preds, FOLDER_PLOTS, case, title="NON-LINEAR CLASSIFIER")
+matrix_confusion(concatenated_truth, concatenated_preds, FOLDER_PLOTS, case, title="RESNET")
 roc(concatenated_preds, concatenated_truth, FOLDER_PLOTS, case=f"{case}_preds")
-curves_loss_and_accuracy(list_avg_losses, list_avg_test_losses, list_avg_accuracies, list_avg_test_accuracies, FOLDER_PLOTS, case)
+loss_and_accuracy(list_avg_losses, list_avg_test_losses, FOLDER_PLOTS, case)
+loss_and_accuracy2(list_avg_losses, list_avg_test_losses, FOLDER_PLOTS, case)
