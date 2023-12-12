@@ -1,4 +1,4 @@
-name: CLASSIFIER
+name: CLOUDSIFIER
 channels:
 - conda-forge
 - nvidia
