@@ -123,6 +123,8 @@ def ResNet(
             layers.append(block_cls(n_hidden=hsize, strides=strides))
 
     layers.append(partial(jnp.mean, axis=(1, 2)))
+    layers.append(nn.Dense(100))
+    layers.append(nn.Dense(50))
     layers.append(nn.Dense(n_classes))
     return Sequential(layers)
 

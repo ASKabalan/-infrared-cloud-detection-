@@ -7,8 +7,8 @@
         "normalisation" : "mean_std"                 // mean_std or min_max
     },
     "network": {
-        "batch_size" : 64,
-        "num_epochs" : 50,
+        "batch_size" : 96,
+        "num_epochs" : 45,
         "early_stopping" : 200,
         "type_optimizer" : "piecewise",    // exponential or piecewise
         "momentum" : 0.9                           // ]0;1[

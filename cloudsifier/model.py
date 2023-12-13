@@ -7,8 +7,9 @@ from typing import Dict
 import jax
 import optax
 import orbax.checkpoint
-from architecture import ResNet18
 from flax.training import orbax_utils, train_state
+
+from architecture import ResNet18
 
 # ------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -97,4 +98,4 @@ def choice_of_optimiser(choice: str, nb_epochs: int, nb_batch_train: int):
     elif choice == "exponential":
         schedule = optax.exponential_decay(init_value=INIT_VALUE, transition_steps=nb_steps, decay_rate=0.8)
 
-    return schedule, optax.sgd(learning_rate=schedule)
+    return schedule, optax.adam(learning_rate=schedule)

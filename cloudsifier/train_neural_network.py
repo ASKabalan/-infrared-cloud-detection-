@@ -2,11 +2,12 @@
 # pylint: disable=E1102
 
 import jax
-from dataloader import DataLoader, chosen_datasets
 from flax.training.early_stopping import EarlyStopping
+from tqdm import tqdm
+
+from dataloader import DataLoader, chosen_datasets
 from model import create_train_state, eval_function, load_model, pred_function, save_model, update_model
 from plots import loss_and_accuracy, matrix_confusion, roc
-from tqdm import tqdm
 from utils import check_slurm_mode, get_folders, get_statistics, get_user_data_general, get_user_data_network, number_clear_cloud
 
 # ---------------------------------------------------------------------------------------------------------------------
