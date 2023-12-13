@@ -5,6 +5,7 @@ import numpy
 import pandas
 import seaborn
 from matplotlib import pyplot
+from matplotlib.ticker import FuncFormatter
 from sklearn.metrics import auc, classification_report, confusion_matrix, roc_curve
 
 DPI = 300
@@ -14,11 +15,18 @@ def matrix_confusion(y_true, y_pred, plotsdir, case, title):
     class_names = ["Negative", "Positive"]
     cm = confusion_matrix(y_true, y_pred)
     cm_normalized = cm.astype("float") / cm.sum(axis=1)[:, numpy.newaxis]
-    seaborn.heatmap(cm_normalized, annot=True, fmt=".3", cmap="Blues", xticklabels=class_names, yticklabels=class_names, annot_kws={"fontsize": 15})
+    pyplot.figure(figsize=(8, 6))
+    ax = seaborn.heatmap(cm_normalized, annot=True, fmt=".2%", cmap="Blues", xticklabels=class_names, yticklabels=class_names, annot_kws={"fontsize": 15}, cbar=True)
     pyplot.xlabel("Predicted")
     pyplot.ylabel("True")
+    cbar = ax.collections[0].colorbar
+
+    def decimal_formatter(x, pos):
+        return f"{x*100:.2f}"
+
+    cbar.ax.yaxis.set_major_formatter(FuncFormatter(decimal_formatter))
+
     pyplot.title(title)
-    pyplot.show()
     pyplot.savefig(plotsdir / f"{case}_confusion_matrix.pdf", dpi=DPI)
     pyplot.close()
 

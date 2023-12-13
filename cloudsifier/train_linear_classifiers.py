@@ -3,9 +3,10 @@
 
 import numpy
 from astropy.io import fits
-from plots import matrix_confusion, report, roc
 from sklearn.linear_model import RidgeClassifier, SGDClassifier
 from sklearn.model_selection import train_test_split
+
+from plots import matrix_confusion, report, roc
 from utils import get_folders, get_user_data_general, parallel_style_w_one_arg
 
 # ------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -13,15 +14,20 @@ from utils import get_folders, get_user_data_general, parallel_style_w_one_arg
 
 common_args = {"max_iter": 5000, "tol": 1e-4, "learning_rate": "optimal", "early_stopping": True, "n_iter_no_change": 50}
 
+# MODELS = [
+#     SGDClassifier(loss="hinge", **common_args),
+#     SGDClassifier(loss="log_loss", **common_args),
+#     SGDClassifier(loss="perceptron", **common_args),
+#     RidgeClassifier(max_iter=5000, solver="svd"),
+# ]
+
+# NAMES = ["SVM", "LOGISTIC_REGRESSION", "PERCEPTRON", "RIDGE_REGRESSION"]
+
 MODELS = [
-    SGDClassifier(loss="hinge", **common_args),
-    SGDClassifier(loss="log_loss", **common_args),
-    SGDClassifier(loss="perceptron", **common_args),
     RidgeClassifier(max_iter=5000, solver="svd"),
 ]
 
-NAMES = ["SVM", "LOGISTIC_REGRESSION", "PERCEPTRON", "RIDGE_REGRESSION"]
-
+NAMES = ["RIDGE_REGRESSION"]
 
 # ------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
