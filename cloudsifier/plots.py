@@ -40,7 +40,7 @@ def roc(preds, truth, plotsdir, case):
     pyplot.close()
 
 
-def loss_and_accuracy(loss, val_loss, plotsdir, case):
+def loss_and_accuracy(loss, val_loss, acc, val_acc, plotsdir, case):
     nb_epochs = numpy.arange(1, len(loss) + 1)
     fig, ax1 = pyplot.subplots(figsize=(10, 5))
     ax1.set_xlabel("Epoch")
@@ -62,6 +62,17 @@ def loss_and_accuracy(loss, val_loss, plotsdir, case):
     ax1.legend(loc="upper left")
     fig.tight_layout()
     pyplot.savefig(plotsdir / f"{case}_losses.pdf", dpi=DPI)
+    pyplot.close()
+
+    fig, ax1 = pyplot.subplots(figsize=(10, 5))
+    ax1.set_xlabel("Epoch")
+    ax1.set_ylabel("Accuracy", color="tab:red")
+    ax1.plot(nb_epochs, acc, label="Training Acc", color="tab:red")
+    ax1.plot(nb_epochs, val_acc, label="Validation Acc", color="tab:orange", linestyle="dashed")
+    ax1.tick_params(axis="y", labelcolor="tab:red")
+    ax1.legend(loc="upper left")
+    fig.tight_layout()
+    pyplot.savefig(plotsdir / f"{case}_acc.pdf", dpi=DPI)
     pyplot.close()
 
 

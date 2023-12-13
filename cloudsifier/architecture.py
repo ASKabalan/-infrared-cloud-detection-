@@ -51,6 +51,19 @@ class PoolSize(nn.Module):
         return nn.max_pool(x, window_shape=(self.kernel, self.kernel), strides=(self.stride, self.stride), padding=self.padding)
 
 
+DROP = 0.2
+
+
+class FCDense(nn.Module):
+    @nn.compact
+    def __call__(self, x):
+        x = nn.Dense(100)(x)
+        has_dense_rng = self.has_rng("dropout")
+        x = nn.Dropout(rate=DROP, deterministic=not has_dense_rng)(x)
+        x = nn.Dense(50)(x)
+        return x
+
+
 class ResNetStem(nn.Module):
     conv_block_cls: ModuleDef = ConvBlock
 
@@ -85,6 +98,8 @@ class ResNetBlock(nn.Module):
         skip_cls = partial(self.skip_cls, conv_block_cls=self.conv_block_cls)
         y = self.conv_block_cls(self.n_hidden, padding=[(1, 1), (1, 1)], strides=self.strides)(x)
         y = self.conv_block_cls(self.n_hidden, padding=[(1, 1), (1, 1)], is_last=True)(y)
+        # has_res_rng = self.has_rng("dropout")
+        # y = nn.Dropout(rate=DROP, deterministic=not has_res_rng)(y)
         return self.activation(y + skip_cls(self.strides)(x, y.shape))
 
 
@@ -123,8 +138,7 @@ def ResNet(
             layers.append(block_cls(n_hidden=hsize, strides=strides))
 
     layers.append(partial(jnp.mean, axis=(1, 2)))
-    layers.append(nn.Dense(100))
-    layers.append(nn.Dense(50))
+    layers.append(FCDense())
     layers.append(nn.Dense(n_classes))
     return Sequential(layers)
 

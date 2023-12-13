@@ -2,12 +2,11 @@
 # pylint: disable=E1102
 
 import jax
-from flax.training.early_stopping import EarlyStopping
-from tqdm import tqdm
-
 from dataloader import DataLoader, chosen_datasets
+from flax.training.early_stopping import EarlyStopping
 from model import create_train_state, eval_function, load_model, pred_function, save_model, update_model
 from plots import loss_and_accuracy, matrix_confusion, roc
+from tqdm import tqdm
 from utils import check_slurm_mode, get_folders, get_statistics, get_user_data_general, get_user_data_network, number_clear_cloud
 
 # ---------------------------------------------------------------------------------------------------------------------
@@ -35,7 +34,7 @@ print(f"PERCENTAGE train/test : {PERCENTAGE} & NB of BATCH_TRAIN {NB_BATCH_TRAIN
 
 # SPECIFICS NN
 early_stopping = EarlyStopping(min_delta=1e-9, patience=EARLY_STOP)
-state, schedule = create_train_state(TYPE_OPTIMIZER, NB_EPOCHS, NB_BATCH_TRAIN, MOMENTUM)
+state, dropout_key, schedule = create_train_state(TYPE_OPTIMIZER, NB_EPOCHS, NB_BATCH_TRAIN, MOMENTUM)
 dataloader_train = DataLoader(train_images_files, train_labels_files, BATCH_SIZE, MEAN_GLOBAL, STD_GLOBAL, MIN_GLOBAL, MAX_GLOBAL, normalisation=NORMA)
 dataloader_test = DataLoader(test_images_files, test_labels_files, BATCH_SIZE, MEAN_GLOBAL, STD_GLOBAL, MIN_GLOBAL, MAX_GLOBAL, shuffle=False, normalisation=NORMA)
 
@@ -48,7 +47,7 @@ for epoch in range(NB_EPOCHS):
 
     # LOOP OVER ALL TRAIN BATCHES
     for batch_images_train, batch_labels_train in tqdm(dataloader_train.generate_batches(), total=NB_BATCH_TRAIN, desc=f"epoch {epoch+1}", disable=TQDM_DISABLE):
-        state, loss, accuracy = update_model(state, batch_images_train, batch_labels_train)
+        state, loss, accuracy = update_model(state, batch_images_train, batch_labels_train, dropout_key)
         list_losses.append(loss)
         list_accuracies.append(accuracy)
 
@@ -88,4 +87,4 @@ for batch_images_test, batch_labels_test in tqdm(dataloader_test.generate_batche
 concatenated_preds, concatenated_truth = jax.numpy.concatenate(list_preds, axis=0), jax.numpy.concatenate(list_truths, axis=0)
 matrix_confusion(concatenated_truth, concatenated_preds, FOLDER_PLOTS, case, title="RESNET")
 roc(concatenated_preds, concatenated_truth, FOLDER_PLOTS, case=f"{case}_preds")
-loss_and_accuracy(list_avg_losses, list_avg_test_losses, FOLDER_PLOTS, case)
+loss_and_accuracy(list_avg_losses, list_avg_test_losses, list_avg_accuracies, list_avg_test_accuracies, FOLDER_PLOTS, case)
