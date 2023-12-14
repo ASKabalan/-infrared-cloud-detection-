@@ -131,7 +131,7 @@ def save_images(data_list, output_path, figsize_per_row=(20, 4)):
     plt.close(fig)
 
 
-def plot_image_preds(data_list, figsize_per_row=(24, 8), predmask_cmap='jet', save=False):
+def plot_image_preds(data_list, figsize_per_row=(24, 8), predmask_cmap='viridis', save=False):
     """
     Plots a list of cloud images, their binary masks, and the predicted binary masks.
 
@@ -150,7 +150,7 @@ def plot_image_preds(data_list, figsize_per_row=(24, 8), predmask_cmap='jet', sa
         ax1, ax2, ax3 = axes[i]
 
         # Plot cloud image
-        im1 = ax1.imshow(cloud_image, cmap='coolwarm')
+        im1 = ax1.imshow(cloud_image, cmap='Greys_r')
         divider = make_axes_locatable(ax1)
         cax1 = divider.append_axes('right', size='5%', pad=0.05)
         cbar1 = fig.colorbar(im1, cax=cax1, orientation='vertical', ticks=range(5))
@@ -267,7 +267,7 @@ def plot_roc_from_csv(csv_path, output_path=None):
 # plot_roc_from_csv('roc_data.csv', output_path='roc_curve.pdf')
 
 
-def save_image_preds(image_triples, output_path, figsize_per_row=(24,8), predmask_cmap='jet'):
+def save_image_preds(image_triples, output_path, figsize_per_row=(24,8), predmask_cmap='viridis'):
     """
     Saves a set of cloud images, their binary masks, and the predicted binary masks to the specified output path in a PDF file.
 
@@ -275,7 +275,7 @@ def save_image_preds(image_triples, output_path, figsize_per_row=(24,8), predmas
     - image_triples (list of tuples): List of triples (cloud_image, binary_mask, y_pred).
     - output_path (str): Path to save the output PDF.
     - figsize_per_row (tuple, optional): Size of each row in the figure. Defaults to (24,8).
-    - predmask_cmap (str, optional): Colormap for the predicted mask. Defaults to 'jet'.
+    - predmask_cmap (str, optional): Colormap for the predicted mask. Defaults to 'viridis'.
     """
     num_images = len(image_triples)
     fig, axes = plt.subplots(num_images, 3, figsize=(figsize_per_row[0], figsize_per_row[1] * num_images))
@@ -284,26 +284,39 @@ def save_image_preds(image_triples, output_path, figsize_per_row=(24,8), predmas
         axes = [axes]
 
     for i, (cloud_image, binary_mask, y_pred) in enumerate(image_triples):
-        for ax, img, cmap, cbar_label in zip(axes[i], 
-                                             [cloud_image, binary_mask, y_pred], 
-                                             ['jet', discrete_cmap(2, 'gray'), predmask_cmap], 
-                                             ['ADU', '0 = Sky         1 = Cloud', '0 = Sky         1 = Cloud']):
+        for j, (ax, img, cmap) in enumerate(zip(axes[i], [cloud_image, binary_mask, y_pred], ['Greys_r', discrete_cmap(2, 'gray'), predmask_cmap])):
             ax.set_xticks([])
             ax.set_yticks([])
             ax.set_xticklabels([])
             ax.set_yticklabels([])
-            im = ax.imshow(img, cmap=cmap)
-            divider = make_axes_locatable(ax)
-            cax = divider.append_axes('right', size='5%', pad=0.05)
-            if cmap == 'jet':
+            if j != 2:
+                im = ax.imshow(img, cmap=cmap)
+                divider = make_axes_locatable(ax)
+                cax = divider.append_axes('right', size='5%', pad=0.05)
+
+            if j == 1:
+                # Binary mask with "Sky" and "Cloud" labels
+                cbar = fig.colorbar(im, cax=cax, orientation='vertical', ticks=[0, 1])
+                cbar.ax.set_yticklabels(['Sky', 'Cloud'])
+                cbar.ax.set_ylabel('')
+            elif j == 2:
+                # Predicted mask with 5 ticks from 0 to 1
+                im = ax.imshow(img, cmap=cmap,vmin=0,vmax=1)
+                divider = make_axes_locatable(ax)
+                cax = divider.append_axes('right', size='5%', pad=0.05)
                 cbar = fig.colorbar(im, cax=cax, orientation='vertical')
+                cbar.set_ticks(np.linspace(0, 1, 5))
+                cbar.ax.set_ylabel('Cloud probability')
             else:
-                cbar = fig.colorbar(im, cax=cax, orientation='vertical', ticks=range(2))
-            cbar.ax.set_ylabel(cbar_label)
+                # Original setup for the first image
+                cbar = fig.colorbar(im, cax=cax, orientation='vertical',ticks=[])
+                cbar.ax.set_ylabel('Normalized ADU')
 
     plt.tight_layout()
     plt.savefig(output_path, dpi=300, format='pdf')
     plt.close(fig)
+
+
 
 def show_image(image,
                percl=99, percu=None, is_mask=False,
