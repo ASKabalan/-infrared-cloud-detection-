@@ -131,23 +131,26 @@ def save_images(data_list, output_path, figsize_per_row=(20, 4)):
     plt.close(fig)
 
 
-def plot_image_preds(data_list, figsize_per_row=(24, 8), predmask_cmap='viridis', save=False):
+def plot_image_preds(data_list, figsize_per_row=(24, 16), predmask_cmap='viridis', save=False):
     """
-    Plots a list of cloud images, their binary masks, and the predicted binary masks.
+    Plots a list of cloud images, their binary masks, and the predicted binary masks, 
+    along with a histogram for each predicted binary mask.
 
     Args:
     - data_list (list of tuples): List containing triples of cloud image, binary mask, and predicted binary mask.
-    - figsize_per_row (tuple, optional): Size of each row in the figure. Defaults to (24, 8).
-    - predmask_cmap (str, optional): Colormap for the predicted mask. Defaults to 'gray'.
+    - figsize_per_row (tuple, optional): Size of each row in the figure. Defaults to (32, 16).
+    - predmask_cmap (str, optional): Colormap for the predicted mask. Defaults to 'viridis'.
+    - save (bool, optional): If True, saves the plot to a PDF. Defaults to False.
     """
     num_images = len(data_list)
-    fig, axes = plt.subplots(num_images, 3, figsize=(figsize_per_row[0], figsize_per_row[1] * num_images), gridspec_kw={'wspace': 0.2})
+    fig, axes = plt.subplots(num_images, 4, figsize=figsize_per_row, 
+                             gridspec_kw={'width_ratios': [1, 1, 1, 1], 'wspace': 0.4})
 
     if num_images == 1:
-        axes = [axes]
+        axes = np.array([axes])
 
     for i, (cloud_image, binary_mask, y_pred) in enumerate(data_list):
-        ax1, ax2, ax3 = axes[i]
+        ax1, ax2, ax3, ax4 = axes[i]  # Added ax4 for the histogram
 
         # Plot cloud image
         im1 = ax1.imshow(cloud_image, cmap='Greys_r')
@@ -159,22 +162,17 @@ def plot_image_preds(data_list, figsize_per_row=(24, 8), predmask_cmap='viridis'
         cbar1.ax.set_ylabel('Normalized ADU')
         ax1.set_xticks([])  # Hide x ticks
         ax1.set_yticks([])  # Hide y ticks
-        cbar1.ax.set_yticks([])
 
         # Plot binary mask
         im2 = ax2.imshow(binary_mask, cmap=binary_cmap())
         divider = make_axes_locatable(ax2)
         cax2 = divider.append_axes('right', size='5%', pad=0.05)
-        # Define a Normalize object to manually set the colorbar ticks at the midpoint of the colors
         norm = Normalize(vmin=0, vmax=1)
         cbar2 = fig.colorbar(im2, cax=cax2, orientation='vertical', ticks=[0, 1], boundaries=[-0.5, 0.5, 1.5], format='%1i')
-        # Centered horizontal labels
         cbar2.set_ticklabels(['\tSky', '\tCloud'])
-
         cbar2.ax.yaxis.set_tick_params(rotation=90, length=0)
-        # Hide x and y ticks for the subplot
-        ax2.set_xticks([])
-        ax2.set_yticks([])
+        ax2.set_xticks([])  # Hide x ticks
+        ax2.set_yticks([])  # Hide y ticks
 
         # Plot predicted binary mask
         im3 = ax3.imshow(y_pred, cmap=predmask_cmap, vmin=0, vmax=1)
@@ -186,6 +184,12 @@ def plot_image_preds(data_list, figsize_per_row=(24, 8), predmask_cmap='viridis'
         cbar3.ax.set_ylabel('Cloud probability')
         ax3.set_xticks([])  # Hide x ticks
         ax3.set_yticks([])  # Hide y ticks
+
+        # Plot histogram for the predicted binary mask
+        hist, bin_edges = np.histogram(y_pred.flatten(), bins=50, range=[0, 1])
+        ax4.bar(bin_edges[:-1], hist, width=np.diff(bin_edges), color='blue', edgecolor='black', align='edge')
+        ax4.set_xlabel('Value')
+        ax4.set_ylabel('Frequency')
 
     plt.tight_layout()
     if save:
