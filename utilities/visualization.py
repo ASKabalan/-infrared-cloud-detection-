@@ -4,6 +4,7 @@ from astropy import visualization as aviz
 from astropy.nddata.blocks import block_reduce
 import pandas as pd
 from sklearn.metrics import auc
+from astropy.io import fits
 
 import matplotlib
 matplotlib.rcParams['font.family'] = 'sans-serif'
@@ -52,12 +53,13 @@ def discrete_cmap(N, base_cmap=None):
     cmap_name = base.name + str(N)
     return base.from_list(cmap_name, color_list, N)
 
-def plot_images(data_list, figsize_per_row=(20, 4)):
+def plot_images(data_list, output_path=None, figsize_per_row=(20, 4)):
     """
-    Plots a list of cloud images alongside their binary masks.
+    Plots a list of cloud images alongside their binary masks and either shows the plot or saves it to a PDF file.
 
     Args:
     - data_list (list of tuples): List containing tuples of cloud image and binary mask.
+    - output_path (str, optional): Path to save the output PDF. If None, displays the plot. Defaults to None.
     - figsize_per_row (tuple, optional): Size of each row in the figure. Defaults to (20, 4).
     """
     num_images = len(data_list)
@@ -70,42 +72,7 @@ def plot_images(data_list, figsize_per_row=(20, 4)):
         ax1, ax2 = axes[i]
 
         # Plot cloud image
-        im1 = ax1.imshow(cloud_image, cmap='jet')
-        divider = make_axes_locatable(ax1)
-        cax1 = divider.append_axes('right', size='5%', pad=0.05)
-        cbar1 = fig.colorbar(im1, cax=cax1, orientation='vertical')
-        cbar1.ax.set_ylabel('ADU')
-
-        # Plot binary mask
-        im2 = ax2.imshow(binary_mask, cmap=discrete_cmap(2, 'gray'))
-        divider = make_axes_locatable(ax2)
-        cax2 = divider.append_axes('right', size='5%', pad=0.05)
-        cbar2 = fig.colorbar(im2, cax=cax2, orientation='vertical', ticks=range(2))
-        cbar2.ax.set_yticklabels(['Sky', 'Cloud'])
-
-    plt.tight_layout()
-    plt.show()
-
-def save_images(data_list, output_path, figsize_per_row=(20, 4)):
-    """
-    Saves a list of cloud images alongside their binary masks to a PDF file, with no axis ticks or titles.
-
-    Args:
-    - data_list (list of tuples): List containing tuples of cloud image and binary mask.
-    - output_path (str): Path to save the output PDF.
-    - figsize_per_row (tuple, optional): Size of each row in the figure. Defaults to (20, 4).
-    """
-    num_images = len(data_list)
-    fig, axes = plt.subplots(num_images, 2, figsize=(figsize_per_row[0], figsize_per_row[1] * num_images))
-
-    if num_images == 1:
-        axes = [axes]
-
-    for i, (cloud_image, binary_mask) in enumerate(data_list):
-        ax1, ax2 = axes[i]
-
-        # Plot cloud image
-        im1 = ax1.imshow(cloud_image, cmap='jet')
+        im1 = ax1.imshow(cloud_image, cmap='Greys_r')
         ax1.set_xticks([])
         ax1.set_yticks([])
         ax1.set_xticklabels([])
@@ -127,11 +94,14 @@ def save_images(data_list, output_path, figsize_per_row=(20, 4)):
         cbar2.ax.set_yticklabels(['Sky', 'Cloud'])
 
     plt.tight_layout()
-    plt.savefig(output_path, dpi=300, format='pdf')
-    plt.close(fig)
 
+    if output_path is None:
+        plt.show()
+    else:
+        plt.savefig(output_path, dpi=600, format='pdf')
+        plt.close(fig)
 
-def plot_image_preds(data_list, figsize_per_row=(24, 16), predmask_cmap='viridis', save=False):
+def plot_image_preds(data_list, figsize_per_row=(24, 16), predmask_cmap='viridis', output_path=None, include_histogram=False):
     """
     Plots a list of cloud images, their binary masks, and the predicted binary masks, 
     along with a histogram for each predicted binary mask.
@@ -143,31 +113,31 @@ def plot_image_preds(data_list, figsize_per_row=(24, 16), predmask_cmap='viridis
     - save (bool, optional): If True, saves the plot to a PDF. Defaults to False.
     """
     num_images = len(data_list)
-    fig, axes = plt.subplots(num_images, 4, figsize=figsize_per_row, 
-                             gridspec_kw={'width_ratios': [1, 1, 1, 1], 'wspace': 0.4})
+    num_of_subplots = 4 if include_histogram else 3
+    fig, axes = plt.subplots(num_images, num_of_subplots, figsize=figsize_per_row, 
+                             gridspec_kw={'width_ratios': np.ones(num_of_subplots), 'wspace': 0.4})
 
     if num_images == 1:
         axes = np.array([axes])
 
     for i, (cloud_image, binary_mask, y_pred) in enumerate(data_list):
-        ax1, ax2, ax3, ax4 = axes[i]  # Added ax4 for the histogram
-
+        ax1, ax2, ax3 = axes[i, :3]  # Get the first three axes for image, mask, and prediction
         # Plot cloud image
         im1 = ax1.imshow(cloud_image, cmap='Greys_r')
         divider = make_axes_locatable(ax1)
         cax1 = divider.append_axes('right', size='5%', pad=0.05)
-        cbar1 = fig.colorbar(im1, cax=cax1, orientation='vertical', ticks=range(5))
-        cbar1.locator = MaxNLocator(nbins=5)
+        #ax1.set_xticklabels([])
+        #ax1.set_yticklabels([])
+        cbar1 = fig.colorbar(im1, cax=cax1, orientation='vertical', ticks=[])
+        #cbar1.locator = MaxNLocator(nbins=5)
         cbar1.update_ticks()
         cbar1.ax.set_ylabel('Normalized ADU')
-        ax1.set_xticks([])  # Hide x ticks
-        ax1.set_yticks([])  # Hide y ticks
 
         # Plot binary mask
         im2 = ax2.imshow(binary_mask, cmap=binary_cmap())
         divider = make_axes_locatable(ax2)
         cax2 = divider.append_axes('right', size='5%', pad=0.05)
-        norm = Normalize(vmin=0, vmax=1)
+        #norm = Normalize(vmin=0, vmax=1)
         cbar2 = fig.colorbar(im2, cax=cax2, orientation='vertical', ticks=[0, 1], boundaries=[-0.5, 0.5, 1.5], format='%1i')
         cbar2.set_ticklabels(['\tSky', '\tCloud'])
         cbar2.ax.yaxis.set_tick_params(rotation=90, length=0)
@@ -185,18 +155,20 @@ def plot_image_preds(data_list, figsize_per_row=(24, 16), predmask_cmap='viridis
         ax3.set_xticks([])  # Hide x ticks
         ax3.set_yticks([])  # Hide y ticks
 
-        # Plot histogram for the predicted binary mask
-        hist, bin_edges = np.histogram(y_pred.flatten(), bins=50, range=[0, 1])
-        ax4.bar(bin_edges[:-1], hist, width=np.diff(bin_edges), color='blue', edgecolor='black', align='edge')
-        ax4.set_xlabel('Value')
-        ax4.set_ylabel('Frequency')
+        if include_histogram:
+            ax4 = axes[i, 3]  # Get the fourth axis for histogram if included
+            # Plot histogram for the predicted binary mask
+            hist, bin_edges = np.histogram(y_pred.flatten(), bins=50, range=[0, 1])
+            ax4.bar(bin_edges[:-1], hist, width=np.diff(bin_edges), color='blue', edgecolor='black', align='edge')
+            ax4.set_xlabel('Value')
+            ax4.set_ylabel('Frequency')
 
     plt.tight_layout()
-    if save:
-        plt.savefig(fname='../paper/figures/sample_prediction.pdf', bbox_inches='tight', dpi=600)
+    if output_path:
+        plt.savefig(fname=output_path, bbox_inches='tight', dpi=600, format='pdf')
     plt.show()
 
-def plot_training_data(csv_path, output_path=None):
+def plot_training_data(csv_path, output_path=None,plot_acc=False):
     # Read the CSV file
     data = pd.read_csv(csv_path)
 
@@ -218,25 +190,26 @@ def plot_training_data(csv_path, output_path=None):
     else:
         plt.show()
 
-    # # Plot for Accuracy
-    # fig, ax = plt.subplots()
-    # ax.plot(data['Epoch'], data['Avg_Train_Accuracy'], label='Train Accuracy', color='blue')
-    # ax.plot(data['Epoch'], data['Avg_Val_Accuracy'], label='Validation Accuracy', color='red')
-    # ax.set_xlabel('Epoch')
-    # ax.set_ylabel('Accuracy')
-    # ax.set_title('Training and Validation Accuracy')
-    # ax.legend()
-    # ax.grid(alpha=0.25, ls='dashed')
-    # ax.tick_params(axis='both', which='major', direction='in', labelsize='x-large', length=5.0, width=2.0)
-    # ax.tick_params(axis='both', which='minor', direction='in', labelsize='x-large', length=3.0, width=1.0)
+    if plot_acc:
+        # Plot for Accuracy
+        fig, ax = plt.subplots()
+        ax.plot(data['Epoch'], data['Avg_Train_Accuracy'], label='Train Accuracy', color='blue')
+        ax.plot(data['Epoch'], data['Avg_Val_Accuracy'], label='Validation Accuracy', color='red')
+        ax.set_xlabel('Epoch')
+        ax.set_ylabel('Accuracy')
+        ax.set_title('Training and Validation Accuracy')
+        ax.legend()
+        ax.grid(alpha=0.25, ls='dashed')
+        ax.tick_params(axis='both', which='major', direction='in', labelsize='x-large', length=5.0, width=2.0)
+        ax.tick_params(axis='both', which='minor', direction='in', labelsize='x-large', length=3.0, width=1.0)
 
-    # if output_path:
-    #     plt.savefig(f'{output_path}_acc.pdf', format='pdf')
-    #     plt.close(fig)
-    # else:
-    #     plt.show()
+        if output_path:
+            plt.savefig(f'{output_path}_acc.pdf',bbox_inches='tight', dpi=600, format='pdf')
+            plt.close(fig)
+        else:
+            plt.show()
 
-def plot_roc_from_csv(csv_path, output_path=None):
+def plot_roc_from_csv(csv_path,csv2_path=None, output_path=None):
     """
     Plots the ROC curve from a CSV file containing FPR and TPR, and includes the AUC value.
 
@@ -250,6 +223,10 @@ def plot_roc_from_csv(csv_path, output_path=None):
     plt.figure(figsize=(7, 5))
     ax = plt.gca()
     ax.plot(roc_data['FPR'], roc_data['TPR'], color='blue', label=f'Segmentation model (AUC = {auc_value:.2f})')
+    if csv2_path:
+        roc_data2 = pd.read_csv(csv2_path)
+        auc_value2 = auc(roc_data2['FPR'], roc_data2['TPR'])
+        ax.plot(roc_data2['FPR'], roc_data2['TPR'], color='cyan', label=f'Classification model (AUC = {auc_value2:.2f})')
     ax.plot([0, 1], [0, 1], 'r--')
     ax.set_xlabel('False Positive Rate (FPR)', fontsize='x-large')
     ax.set_ylabel('True Positive Rate (TPR)', fontsize='x-large')
@@ -270,56 +247,26 @@ def plot_roc_from_csv(csv_path, output_path=None):
 # Example usage
 # plot_roc_from_csv('roc_data.csv', output_path='roc_curve.pdf')
 
-
-def save_image_preds(image_triples, output_path, figsize_per_row=(24,8), predmask_cmap='viridis'):
+def save_image_pred(cloud_image, binary_mask, y_pred, output_path):
     """
-    Saves a set of cloud images, their binary masks, and the predicted binary masks to the specified output path in a PDF file.
-
-    Args:
-    - image_triples (list of tuples): List of triples (cloud_image, binary_mask, y_pred).
-    - output_path (str): Path to save the output PDF.
-    - figsize_per_row (tuple, optional): Size of each row in the figure. Defaults to (24,8).
-    - predmask_cmap (str, optional): Colormap for the predicted mask. Defaults to 'viridis'.
-    """
-    num_images = len(image_triples)
-    fig, axes = plt.subplots(num_images, 3, figsize=(figsize_per_row[0], figsize_per_row[1] * num_images))
+    Save the three images (cloud_image, binary_mask, y_pred) to a FITS file.
     
-    if num_images == 1:
-        axes = [axes]
+    Parameters:
+    cloud_image (array-like): The first image data.
+    binary_mask (array-like): The second image data.
+    y_pred (array-like): The third image data.
+    output_path (str): The path where the FITS file will be saved.
+    """
+    # Create a PrimaryHDU object for each image
+    hdu1 = fits.PrimaryHDU(cloud_image)
+    hdu2 = fits.ImageHDU(binary_mask)
+    hdu3 = fits.ImageHDU(y_pred)
 
-    for i, (cloud_image, binary_mask, y_pred) in enumerate(image_triples):
-        for j, (ax, img, cmap) in enumerate(zip(axes[i], [cloud_image, binary_mask, y_pred], ['Greys_r', discrete_cmap(2, 'gray'), predmask_cmap])):
-            ax.set_xticks([])
-            ax.set_yticks([])
-            ax.set_xticklabels([])
-            ax.set_yticklabels([])
-            if j != 2:
-                im = ax.imshow(img, cmap=cmap)
-                divider = make_axes_locatable(ax)
-                cax = divider.append_axes('right', size='5%', pad=0.05)
+    # Create an HDUList to hold them
+    hdulist = fits.HDUList([hdu1, hdu2, hdu3])
 
-            if j == 1:
-                # Binary mask with "Sky" and "Cloud" labels
-                cbar = fig.colorbar(im, cax=cax, orientation='vertical', ticks=[0, 1])
-                cbar.ax.set_yticklabels(['Sky', 'Cloud'])
-                cbar.ax.set_ylabel('')
-            elif j == 2:
-                # Predicted mask with 5 ticks from 0 to 1
-                im = ax.imshow(img, cmap=cmap,vmin=0,vmax=1)
-                divider = make_axes_locatable(ax)
-                cax = divider.append_axes('right', size='5%', pad=0.05)
-                cbar = fig.colorbar(im, cax=cax, orientation='vertical')
-                cbar.set_ticks(np.linspace(0, 1, 5))
-                cbar.ax.set_ylabel('Cloud probability')
-            else:
-                # Original setup for the first image
-                cbar = fig.colorbar(im, cax=cax, orientation='vertical',ticks=[])
-                cbar.ax.set_ylabel('Normalized ADU')
-
-    plt.tight_layout()
-    plt.savefig(output_path, dpi=300, format='pdf')
-    plt.close(fig)
-
+    # Write to a new FITS file
+    hdulist.writeto(f'{output_path}.fits', overwrite=True)
 
 
 def show_image(image,

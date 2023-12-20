@@ -7,7 +7,9 @@ from pathlib import Path
 from astropy.io import fits
 from skimage.transform import resize
 from sklearn.metrics import roc_curve, auc,f1_score
-import jax.numpy as jnp
+import multiprocessing
+num_cores = multiprocessing.cpu_count()
+from joblib import parallel_backend, Parallel, delayed
 
 
 def rebin_fits(filename, bin=(128, 160)):
@@ -30,27 +32,6 @@ def rebin_fits(filename, bin=(128, 160)):
     except:
         print(f"Fail : {target_file}")
         
-def save_image_pred(cloud_image, binary_mask, y_pred, output_path):
-    """
-    Save the three images (cloud_image, binary_mask, y_pred) to a FITS file.
-    
-    Parameters:
-    cloud_image (array-like): The first image data.
-    binary_mask (array-like): The second image data.
-    y_pred (array-like): The third image data.
-    output_path (str): The path where the FITS file will be saved.
-    """
-    # Create a PrimaryHDU object for each image
-    hdu1 = fits.PrimaryHDU(cloud_image)
-    hdu2 = fits.ImageHDU(binary_mask)
-    hdu3 = fits.ImageHDU(y_pred)
-
-    # Create an HDUList to hold them
-    hdulist = fits.HDUList([hdu1, hdu2, hdu3])
-
-    # Write to a new FITS file
-    hdulist.writeto(f'{output_path}.fits', overwrite=True)
-
 
 def rebin(arr, new_shape):
     """
@@ -190,82 +171,34 @@ def rgb_to_gray(image_path, output_path, save_to_fits=True):
 
     return gray_image
 
+def open_fits_with_mask(filename,DR = 2**14):
+    image = fits.open(filename)
+    cloud = image[0].data
+    mask = image[1].data
+    del image
 
-def process_data_and_create_histogram(data_tuple, image_index=2, bins=50):
-    """
-    Processes a tuple of JAX arrays to create a histogram of a specified image.
+    # Normalize image
+    cloud  = cloud / DR
+    return cloud , mask
 
-    Args:
-    - data_tuple (tuple): A tuple of JAX arrays.
-    - image_index (int, optional): Index of the image in the tuple to create a histogram for. Defaults to 2.
-    - bins (int, optional): Number of bins for the histogram. Defaults to 50.
+def open_fits_with_mask_and_pred(filename,DR = 2**14):
+    image = fits.open(filename)
+    cloud = image[0].data
+    mask = image[1].data
+    pred = image[2].data
+    del image
 
-    Returns:
-    Tuple (data_tuple, hist, bin_edges): The data tuple, histogram values, and bin edges.
-    """
-    # Ensure the image index is within the range of the tuple
-    if image_index >= len(data_tuple):
-        raise IndexError("Image index is out of range for the provided data tuple.")
+    # Normalize image
+    cloud  = cloud / DR
+    return cloud , mask, pred
 
-    image_data = data_tuple[image_index]
-    hist, bin_edges = jnp.histogram(image_data.flatten(), bins=bins)
+def p_open_fits_with_mask(filenames,DR = 2**14):
+    with parallel_backend('threading', n_jobs=num_cores):
+        l_fits = Parallel(verbose=5)(delayed(open_fits_with_mask)(filename = filename, DR=DR) for filename in filenames)
+    return l_fits
 
-    return (data_tuple, hist, bin_edges)
+def p_open_fits_with_mask_and_pred(filenames,DR = 2**14):
+    with parallel_backend('threading', n_jobs=num_cores):
+        l_fits = Parallel(verbose=5)(delayed(open_fits_with_mask_and_pred)(filename = filename, DR=DR) for filename in filenames)
+    return l_fits
 
-
-from scipy.stats import pearsonr
-
-def compute_correlation_matrix(fits_histogram_tuples):
-    """
-    Computes the Pearson correlation matrix between histograms from a list of tuples.
-
-    Args:
-    - fits_histogram_tuples (list of tuples): Each tuple contains a FITS file, histogram, and bin edges.
-
-    Returns:
-    - np.ndarray: Correlation matrix.
-    """
-    num_files = len(fits_histogram_tuples)
-    correlation_matrix = np.zeros((num_files, num_files))
-
-    for i in range(num_files):
-        for j in range(num_files):
-            if i != j:
-                # Calculate correlation only for different histograms
-                correlation, _ = pearsonr(fits_histogram_tuples[i][1], fits_histogram_tuples[j][1])
-                correlation_matrix[i, j] = correlation
-
-    return correlation_matrix
-
-
-def find_correlated_fits(correlation_matrix, index, fits_data, N=3):
-    """
-    Finds the N most and least correlated FITS files to a given FITS file, identified by index.
-
-    Args:
-    - correlation_matrix (np.ndarray): The correlation matrix.
-    - index (int): The index of the FITS file in question.
-    - fits_data (list): The list of FITS data corresponding to the indices.
-    - N (int, optional): Number of most and least correlated files to find. Defaults to 3.
-
-    Returns:
-    - dict: Dictionary with keys 'most_correlated' and 'least_correlated', each containing a list of tuples (index, FITS file).
-    """
-    # Exclude the index itself and get correlations
-    correlations = correlation_matrix[index, :]
-    correlations[index] = np.nan  # Ignore self-correlation
-
-    # Find the indices of the N most and least correlated
-    most_correlated_indices = np.argsort(-correlations)[:N]  # Negative for descending order
-    least_correlated_indices = np.argsort(correlations)[:N]
-
-    # Retrieve the corresponding FITS files
-    original_fits = fits_data[index]
-    most_correlated = [fits_data[idx] for idx in most_correlated_indices if not np.isnan(correlations[idx])]
-    least_correlated = [fits_data[idx] for idx in least_correlated_indices if not np.isnan(correlations[idx])]
-
-    return {
-        'original'  : original_fits,
-        'most_correlated': most_correlated,
-        'least_correlated': least_correlated
-    }
