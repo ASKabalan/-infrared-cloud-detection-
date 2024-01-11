@@ -7,6 +7,10 @@ from pathlib import Path
 from astropy.io import fits
 from skimage.transform import resize
 from sklearn.metrics import roc_curve, auc,f1_score
+import multiprocessing
+num_cores = multiprocessing.cpu_count()
+from joblib import parallel_backend, Parallel, delayed
+
 
 def rebin_fits(filename, bin=(128, 160)):
     """
@@ -28,27 +32,6 @@ def rebin_fits(filename, bin=(128, 160)):
     except:
         print(f"Fail : {target_file}")
         
-def save_image_pred(cloud_image, binary_mask, y_pred, output_path):
-    """
-    Save the three images (cloud_image, binary_mask, y_pred) to a FITS file.
-    
-    Parameters:
-    cloud_image (array-like): The first image data.
-    binary_mask (array-like): The second image data.
-    y_pred (array-like): The third image data.
-    output_path (str): The path where the FITS file will be saved.
-    """
-    # Create a PrimaryHDU object for each image
-    hdu1 = fits.PrimaryHDU(cloud_image)
-    hdu2 = fits.ImageHDU(binary_mask)
-    hdu3 = fits.ImageHDU(y_pred)
-
-    # Create an HDUList to hold them
-    hdulist = fits.HDUList([hdu1, hdu2, hdu3])
-
-    # Write to a new FITS file
-    hdulist.writeto(f'{output_path}.fits', overwrite=True)
-
 
 def rebin(arr, new_shape):
     """
@@ -187,3 +170,35 @@ def rgb_to_gray(image_path, output_path, save_to_fits=True):
         hdul.writeto(new_file_path.replace(file_extension, '.fits'), overwrite=True)
 
     return gray_image
+
+def open_fits_with_mask(filename,DR = 2**14):
+    image = fits.open(filename)
+    cloud = image[0].data
+    mask = image[1].data
+    del image
+
+    # Normalize image
+    cloud  = cloud / DR
+    return cloud , mask
+
+def open_fits_with_mask_and_pred(filename,DR = 2**14):
+    image = fits.open(filename)
+    cloud = image[0].data
+    mask = image[1].data
+    pred = image[2].data
+    del image
+
+    # Normalize image
+    cloud  = cloud / DR
+    return cloud , mask, pred
+
+def p_open_fits_with_mask(filenames,DR = 2**14):
+    with parallel_backend('threading', n_jobs=num_cores):
+        l_fits = Parallel(verbose=5)(delayed(open_fits_with_mask)(filename = filename, DR=DR) for filename in filenames)
+    return l_fits
+
+def p_open_fits_with_mask_and_pred(filenames,DR = 2**14):
+    with parallel_backend('threading', n_jobs=num_cores):
+        l_fits = Parallel(verbose=5)(delayed(open_fits_with_mask_and_pred)(filename = filename, DR=DR) for filename in filenames)
+    return l_fits
+

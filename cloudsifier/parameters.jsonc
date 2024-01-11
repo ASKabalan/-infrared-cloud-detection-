@@ -1,8 +1,8 @@
 {
     "general":{
         "NAME_DB" : "TOTAL_2800",
-        "path_folders" : "pisco/CLOUD",
-        "directories" : ["/home", "/net/GECO"],
+        "path_folders" : "romain/",
+        "directories" : ["/home/wassim/Data/CIRRUS/"],
         "percentage" : 0.6,                         // train percentage
         "normalisation" : "mean_std"                 // mean_std or min_max
     },

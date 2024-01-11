@@ -7,6 +7,7 @@ import seaborn
 from matplotlib import pyplot
 from matplotlib.ticker import FuncFormatter
 from sklearn.metrics import auc, classification_report, confusion_matrix, roc_curve
+import pandas as pd
 
 DPI = 300
 
@@ -31,17 +32,21 @@ def matrix_confusion(y_true, y_pred, plotsdir, case, title):
     pyplot.close()
 
 
-def roc(preds, truth, plotsdir, case):
+def roc(preds, truth, plotsdir, case,roc_data_file=None):
     fpr, tpr, _ = roc_curve(truth, preds)
     roc_auc = auc(fpr, tpr)
+    if roc_data_file:
+        roc_data = pd.DataFrame({'FPR': fpr, 'TPR': tpr})
+        roc_data.to_csv(roc_data_file, index=False)
+    
     pyplot.figure(figsize=(6, 4), dpi=DPI)
-    pyplot.plot(fpr, tpr, color="darkorange", lw=2, label=f"ROC curve (area = {roc_auc})")
+    pyplot.plot(fpr, tpr, color="darkorange", lw=2, label=f"ROC curve (area = {roc_auc:.2f})")
     pyplot.plot([0, 1], [0, 1], color="navy", lw=2, linestyle="--")
     pyplot.xlim([0.0, 1.0])
     pyplot.ylim([0.0, 1.05])
-    pyplot.xlabel("False Positive Rate")
-    pyplot.ylabel("True Positive Rate")
-    pyplot.title("Receiver Operating Characteristic (ROC) Curve")
+    pyplot.xlabel("False Positive Rate (FPR)")
+    pyplot.ylabel("True Positive Rate (TPR)")
+    #pyplot.title("Receiver Operating Characteristic (ROC) Curve")
     pyplot.legend(loc="lower right")
     pyplot.grid(alpha=0.75, ls="dashed")
     pyplot.savefig(plotsdir / f"{case}_roc_plot.pdf", dpi=DPI)
