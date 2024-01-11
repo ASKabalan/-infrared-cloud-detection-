@@ -132,6 +132,8 @@ def plot_image_preds(data_list, figsize_per_row=(24, 16), predmask_cmap='viridis
         #cbar1.locator = MaxNLocator(nbins=5)
         cbar1.update_ticks()
         cbar1.ax.set_ylabel('Normalized ADU')
+        ax1.set_xticks([])  # Hide x ticks
+        ax1.set_yticks([])  # Hide y ticks
 
         # Plot binary mask
         im2 = ax2.imshow(binary_mask, cmap=binary_cmap())
@@ -167,6 +169,84 @@ def plot_image_preds(data_list, figsize_per_row=(24, 16), predmask_cmap='viridis
     if output_path:
         plt.savefig(fname=output_path, bbox_inches='tight', dpi=600, format='pdf')
     plt.show()
+
+def plot_image_preds2(data_list, figsize_per_row=(24, 16), predmask_cmap='viridis', output_path=None):
+    """
+    Plots a list of cloud images, their binary masks, and the predicted binary masks, 
+    along with a histogram for each predicted binary mask.
+
+    Args:
+    - data_list (list of tuples): List containing triples of cloud image, binary mask, and predicted binary mask.
+    - figsize_per_row (tuple, optional): Size of each row in the figure. Defaults to (32, 16).
+    - predmask_cmap (str, optional): Colormap for the predicted mask. Defaults to 'viridis'.
+    - save (bool, optional): If True, saves the plot to a PDF. Defaults to False.
+    """
+    num_images = len(data_list)
+    num_of_subplots = 4
+    fig, axes = plt.subplots(num_images, num_of_subplots, figsize=figsize_per_row, 
+                             gridspec_kw={'width_ratios': np.ones(num_of_subplots), 'wspace': 0.3})
+
+    if num_images == 1:
+        axes = np.array([axes])
+
+    for i, (cloud_image, binary_mask, y_pred, otsu_pred) in enumerate(data_list):
+        ax1, ax2, ax3, ax4 = axes[i, :4]  # Get the first three axes for image, mask, and prediction
+        # Plot cloud image
+        im1 = ax1.imshow(cloud_image.reshape((128, 160)), cmap='Greys_r')
+        divider = make_axes_locatable(ax1)
+        cax1 = divider.append_axes('right', size='5%', pad=0.05)
+        ax1.set_xticklabels([])
+        ax1.set_yticklabels([])
+        cbar1 = fig.colorbar(im1, cax=cax1, orientation='vertical', ticks=[])
+        #cbar1.locator = MaxNLocator(nbins=5)
+        cbar1.update_ticks()
+        cbar1.ax.set_ylabel('Normalized ADU')
+        ax1.set_xticks([])  # Hide x ticks
+        ax1.set_yticks([])  # Hide y ticks
+
+        # Plot binary mask
+        im2 = ax2.imshow(binary_mask.reshape((128, 160)), cmap=binary_cmap())
+        divider = make_axes_locatable(ax2)
+        cax2 = divider.append_axes('right', size='5%', pad=0.05)
+        #norm = Normalize(vmin=0, vmax=1)
+        cbar2 = fig.colorbar(im2, cax=cax2, orientation='vertical', ticks=[0, 1], boundaries=[-0.5, 0.5, 1.5], format='%1i')
+        cbar2.set_ticklabels(['\tSky', '\tCloud'])
+        cbar2.ax.yaxis.set_tick_params(rotation=90, length=0)
+        ax2.set_xticks([])  # Hide x ticks
+        ax2.set_yticks([])  # Hide y ticks
+
+        # Plot predicted binary mask
+        im3 = ax3.imshow(y_pred.reshape((128, 160)), cmap=predmask_cmap, vmin=0, vmax=1)
+        divider = make_axes_locatable(ax3)
+        cax3 = divider.append_axes('right', size='5%', pad=0.05)
+        cbar3 = fig.colorbar(im3, cax=cax3, orientation='vertical', ticks=range(5))
+        cbar3.locator = MaxNLocator(nbins=5)
+        cbar3.update_ticks()
+        cbar3.ax.set_ylabel('Cloud probability')
+        ax3.set_xticks([])  # Hide x ticks
+        ax3.set_yticks([])  # Hide y ticks
+
+        # Plot predicted binary mask
+        im4 = ax4.imshow(otsu_pred.reshape((128, 160)), cmap='Greys_r', vmin=0, vmax=1)
+        divider = make_axes_locatable(ax4)
+        cax4 = divider.append_axes('right', size='5%', pad=0.05)
+        cbar4 = fig.colorbar(im4, cax=cax4, orientation='vertical', ticks=[0, 1], boundaries=[-0.5, 0.5, 1.5], format='%1i')
+        cbar4.set_ticklabels(['\tSky', '\tCloud'])
+        cbar4.ax.yaxis.set_tick_params(rotation=90, length=0)
+        ax4.set_xticks([])  # Hide x ticks
+        ax4.set_yticks([])  # Hide y ticks
+
+        if i==0:
+            ax1.set_title('Original image')
+            ax2.set_title('Ground-truth mask')
+            ax3.set_title('LWIRISEG prediction')
+            ax4.set_title("Otsu's algorithm")
+
+    # plt.tight_layout()
+    if output_path:
+        plt.savefig(fname=output_path, bbox_inches='tight', dpi=600, format='pdf')
+    plt.show()
+
 
 def plot_training_data(csv_path, output_path=None,plot_acc=False):
     # Read the CSV file
