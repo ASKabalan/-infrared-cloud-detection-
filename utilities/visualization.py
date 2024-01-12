@@ -101,7 +101,7 @@ def plot_images(data_list, output_path=None, figsize_per_row=(20, 4)):
         plt.savefig(output_path, dpi=600, format='pdf')
         plt.close(fig)
 
-def plot_image_preds(data_list, figsize_per_row=(24, 16), predmask_cmap='viridis', output_path=None, include_histogram=False):
+def plot_image_preds(data_list, figsize_per_row=(24, 16), predmask_cmap='viridis', output_path=None, include_histogram=False,blob_tuple_list=None):
     """
     Plots a list of cloud images, their binary masks, and the predicted binary masks, 
     along with a histogram for each predicted binary mask.
@@ -134,6 +134,8 @@ def plot_image_preds(data_list, figsize_per_row=(24, 16), predmask_cmap='viridis
         cbar1.ax.set_ylabel('Normalized ADU')
         ax1.set_xticks([])  # Hide x ticks
         ax1.set_yticks([])  # Hide y ticks
+        if blob_tuple_list != None:
+            ax1.text(0.02, 0.98, f'{blob_tuple_list[i][0]}', ha='left', va='top', color='dodgerblue', transform=ax1.transAxes,fontsize='x-large')
 
         # Plot binary mask
         im2 = ax2.imshow(binary_mask, cmap=binary_cmap())
@@ -145,7 +147,8 @@ def plot_image_preds(data_list, figsize_per_row=(24, 16), predmask_cmap='viridis
         cbar2.ax.yaxis.set_tick_params(rotation=90, length=0)
         ax2.set_xticks([])  # Hide x ticks
         ax2.set_yticks([])  # Hide y ticks
-
+        if blob_tuple_list != None:
+            ax2.text(0.02, 0.98, f'{blob_tuple_list[i][1]}', ha='left', va='top', color='dodgerblue', transform=ax2.transAxes,fontsize='x-large')
         # Plot predicted binary mask
         im3 = ax3.imshow(y_pred, cmap=predmask_cmap, vmin=0, vmax=1)
         divider = make_axes_locatable(ax3)
@@ -156,6 +159,8 @@ def plot_image_preds(data_list, figsize_per_row=(24, 16), predmask_cmap='viridis
         cbar3.ax.set_ylabel('Cloud probability')
         ax3.set_xticks([])  # Hide x ticks
         ax3.set_yticks([])  # Hide y ticks
+        if blob_tuple_list != None:
+            ax3.text(0.02, 0.98, f'{blob_tuple_list[i][2]}', ha='left', va='top', color='green', transform=ax3.transAxes,fontsize='x-large')
 
         if include_histogram:
             ax4 = axes[i, 3]  # Get the fourth axis for histogram if included
