@@ -76,9 +76,9 @@ The notebook `notebooks/blob_counter.ipynb` shows how to use the model for post-
 
 ## References
 
-[CloudSegNet code](https://github.com/Soumyabrata/CloudSegNet) `<br>`
-[CloudSegNet arXiv paper](https://arxiv.org/pdf/1904.07979.pdf) `<br>`
-[DeepL4Astro](https://github.com/ASKabalan/deeplearning4astro_tools/blob/master/dltools/batch.py) `<br>`
-[Day and Night Clouds Detection Using a Thermal-Infrared All-Sky-View Camera](https://doi.org/10.3390/rs13091852) `<br>`
+ - [CloudSegNet code](https://github.com/Soumyabrata/CloudSegNet)
+ - [CloudSegNet arXiv paper](https://arxiv.org/pdf/1904.07979.pdf)
+ - [DeepL4Astro](https://github.com/ASKabalan/deeplearning4astro_tools/blob/master/dltools/batch.py)
+ - [Day and Night Clouds Detection Using a Thermal-Infrared All-Sky-View Camera](https://doi.org/10.3390/rs13091852)
 
 This GitHub repo accompanies the paper.
