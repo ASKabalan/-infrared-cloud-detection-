@@ -1,14 +1,6 @@
-## **IRIS-CloudDeep**: Infrared Radiometric Image classification and Segmentation of Cloud structure using Deep-learning framework for ground-based long-wave infrared thermal camera observation
+## **IRIS-CloudDeep**: Infrared Radiometric Image Classification and Segmentation of Cloud Structure using a Deep-learning Framework for Ground-based Long-wave Infrared Thermal Camera Observation
 
-Deep-learning architecture classify and identify cloud structure on sky infrared images. Standard Convolutional Neural Network (CNN) distinguishes clear sky images from cloud images. An UNet-based segmentation model detects cloud structure onto pre-identified cloudy images and outputs a probabilistic map for each pixel.
-
-## Datasets
-
-- raw image Seg : https://filesender.renater.fr/?s=download&token=2bd01943-b173-4bb3-b0fa-41e6528ecbb9
-- raw image classification : https://filesender.renater.fr/?s=download&token=6277e8d4-3fde-4903-84fa-fa44db669ef4
-- preprocess image by wass : https://filesender.renater.fr/?s=download&token=8035173f-b7a1-4549-a24d-b210527d20d6
-
-__Note:__ Attention pour les Raw image il faut les binner
+Deep-learning architecture classifies and identifies cloud structure in sky infrared images. A standard Convolutional Neural Network (CNN) distinguishes clear sky images from cloud images. A UNet-based segmentation model detects cloud structure in pre-identified cloudy images and outputs a probabilistic map for each pixel.
 
 **Example:**
 
@@ -20,32 +12,31 @@ num_cores = multiprocessing.cpu_count()
 dataset_directory = ''
 images_list = glob.glob(dataset_directory+'/*.fits')
 
-# Pou binner (Classification)
+# To bin (Classification)
 
 with parallel_backend('threading', n_jobs=num_cores):
-    l_plots = Parallel(verbose=5)(delayed(rebin_fits)(filename = filename,bin_size=(128, 160)) for filename in images_list)
+    l_plots = Parallel(verbose=5)(delayed(rebin_fits)(filename = filename, bin_size=(128, 160)) for filename in images_list)
 
-# Pour Generer les mask et binner en même temps (Segmentation)
+# To generate the mask and bin at the same time (Segmentation)
 
 with parallel_backend('threading', n_jobs=num_cores):
     l_plots = Parallel(verbose=5)(delayed(generate_mask)(filename = filename,
     bin_size=(128, 160), a_log = 100000, contrast = 0.9, display = False, return_mask = False, write_to_fits = True) for filename in images_list)
-
 ```
 
 ## Process
 
 ### Classification
 
-1. Generation of the dataset 
-2. micromamba env create -f ENV_LINUX_CLASSIFIER.yml
-3. change the .jsonc file to your conveniance:
+1. Generation of the dataset
+2. Create environment: `micromamba env create -f ENV_LINUX_CLASSIFIER.yml`
+3. Change the `.jsonc` file to your convenience:
 
-   ```
+   ```json
    {
        "general":{
-           "NAME_DB" : "TOTAL_2800",		    // name of the database
-           "path_folders" : "pisco/CLOUD",		    // subfolder of the database
+           "NAME_DB" : "TOTAL_2800",        // name of the database
+           "path_folders" : "pisco/CLOUD",  // subfolder of the database
            "directories" : ["/home", "/net/GECO"],     // folder of the database
            "percentage" : 0.7,                         // train percentage
            "normalisation" : "min_max"                 // mean_std or min_max
@@ -59,17 +50,17 @@ with parallel_backend('threading', n_jobs=num_cores):
        }
    }
    ```
-4. python train_linear_classifiers.py
-5. python train_neural_network.py
+4. Train linear classifiers: `python train_linear_classifiers.py`
+5. Train neural network: `python train_neural_network.py`
 
 ### Segmentation
 
-1. Génération des masques "ground-truth" avec les outils de strech de astropy
-2. Augmentation des données (rotate, flip, shear, zoom)
-3. Normalisation des images brutes (ADU) pour accélérer les calculs
-4. Sélectionner N = 1,000 images random pour l'entrainement. Étape importante, il ne faut pas prendre des images consécutives pour éviter la ressemblance entre elles.
-5. Split les données en train + test + validation
-6. Entraîner le modèle UNet
+1. Generate "ground-truth" masks using astropy stretch tools.
+2. Data augmentation (rotate, flip, shear, zoom).
+3. Normalize raw images (ADU) to accelerate calculations.
+4. Select 1,000 random images for training. It is important not to take consecutive images to avoid resemblance.
+5. Split the data into training, testing, and validation sets.
+6. Train the UNet model.
 
 Training for segmentation is done in the notebook `segmentation/CloudSegmentation_Jax.ipynb`, which uses a UNet model implemented in Flax.
 
@@ -90,4 +81,4 @@ The notebook `notebooks/blob_counter.ipynb` shows how to use the model for post-
 [DeepL4Astro](https://github.com/ASKabalan/deeplearning4astro_tools/blob/master/dltools/batch.py) `<br>`
 [Day and Night Clouds Detection Using a Thermal-Infrared All-Sky-View Camera](https://doi.org/10.3390/rs13091852) `<br>`
 
-This github repo is accompaniying the paper
+This GitHub repo accompanies the paper.
