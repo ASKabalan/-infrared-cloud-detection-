@@ -2,33 +2,6 @@
 
 Deep-learning architecture classify and identify cloud structure on sky infrared images. Standard Convolutional Neural Network (CNN) distinguishes clear sky images from cloud images. An UNet-based segmentation model detects cloud structure onto pre-identified cloudy images and outputs a probabilistic map for each pixel.
 
-## Tasks
-
-### Wassim
-
-- ~~Mettre le modèle Flax en propre et finir le markdown du notebook~~
-- ~~Faire un script python pour creer un model et l'entrainer~~
-  - ~~args : (Flax ou Keras) Dossier image, channel list, nombre epoch, batch_size, val_batch_size, aug_batch_size, (bool)evaluate,  output save model, output_save_image_prediction~~
-- ~~Faire un script python inference ~~
-  - ~~args : (Flax ou keras) chemin model, dossier_image_cible, batch_size, output_save_image_prediction~~
-- ~~push les dataset IRIS/CIRRUS/SkyNet~~
-- ~~finish preprocess des public datasets et push github ~~
-- ~~verifier intro~~
-- ~~Faire un tikz de l'UNET et double CONV UNET pour le papier~~
-- ~~mettre les resultat dans le papier~~
-- Remetre le resultats SWIMSEG
-- Mettre avec color bar
-- enleve coordonnee X Y
-
-### Kelian
-
-- ~~Faire tourner keras sur le cluster avec un exemple standard + s'assurer de l'utilisation du GPU~~
-- ~~Transférer le dataset de segmentation sur le cluster~~
-- Récupérer les données des datasets publics (SWINSEG, SWIMSEG...)
-- Transformer les datasets publics en noir et blanc avec opencv
-- Mettre en place le styling de plots pour le papier
-- Plot de matrice de confusion (https://www.w3schools.com/python/python_ml_confusion_matrix.asp)
-
 ## Datasets
 
 - raw image Seg : https://filesender.renater.fr/?s=download&token=2bd01943-b173-4bb3-b0fa-41e6528ecbb9
@@ -64,7 +37,7 @@ with parallel_backend('threading', n_jobs=num_cores):
 
 ### Classification
 
-1. Generation of the dataset ?????
+1. Generation of the dataset 
 2. micromamba env create -f ENV_LINUX_CLASSIFIER.yml
 3. change the .jsonc file to your conveniance:
 
@@ -98,10 +71,23 @@ with parallel_backend('threading', n_jobs=num_cores):
 5. Split les données en train + test + validation
 6. Entraîner le modèle UNet
 
+Training for segmentation is done in the notebook `segmentation/CloudSegmentation_Jax.ipynb`, which uses a UNet model implemented in Flax.
+
+## Usage Notebooks
+
+### Cloud Classification and Segmentation
+
+The notebook `notebooks/Cloud_classification_segmentation.ipynb` demonstrates how to use the classification and segmentation models together. The classifier first identifies if an image contains clouds, and if clouds are detected, the image is passed through the segmentation model. The final output includes the original sky images and the segmented images with ground truth.
+
+### Blob Counter
+
+The notebook `notebooks/blob_counter.ipynb` shows how to use the model for post-processing. It includes functions to binarize images, count blobs (connected regions), and quantify sky quality. This notebook demonstrates how the segmentation results can be utilized for further analysis and processing.
+
 ## References
 
 [CloudSegNet code](https://github.com/Soumyabrata/CloudSegNet) `<br>`
-[arXiv paper](https://arxiv.org/pdf/1904.07979.pdf) `<br>`
+[CloudSegNet arXiv paper](https://arxiv.org/pdf/1904.07979.pdf) `<br>`
 [DeepL4Astro](https://github.com/ASKabalan/deeplearning4astro_tools/blob/master/dltools/batch.py) `<br>`
 [Day and Night Clouds Detection Using a Thermal-Infrared All-Sky-View Camera](https://doi.org/10.3390/rs13091852) `<br>`
-[Cloud Detection and Classification with the Use of Whole-Sky Ground-Based Images](https://www.researchgate.net/publication/227860342) `<br>`
+
+This github repo is accompaniying the paper
